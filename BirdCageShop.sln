@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BirdCageShop", "BirdCageShop\BirdCageShop.csproj", "{DEFE2438-5BFB-46BF-ABDB-1C631E0BA432}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BirdCageShop", "BirdCageShop\BirdCageShop.csproj", "{DEFE2438-5BFB-46BF-ABDB-1C631E0BA432}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BirdCageShopOther", "BirdCageShopOther\BirdCageShopOther.csproj", "{5B3229D8-9324-4AAD-8D7B-D8E082355FF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BirdCageShopInterface", "BirdCageShopInterface\BirdCageShopInterface.csproj", "{D27BEA16-90E0-47BC-B205-F84B9691DAFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BirdCageShopReposiory", "BirdCageShopReposiory\BirdCageShopReposiory.csproj", "{AB6405EE-3050-4CC7-ADA0-ED1623CDC5F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BirdCageShopService", "BirdCageShopService\BirdCageShopService.csproj", "{3A987949-3BDB-439B-AC2E-E5C06305D71B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,22 @@ Global
 		{DEFE2438-5BFB-46BF-ABDB-1C631E0BA432}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEFE2438-5BFB-46BF-ABDB-1C631E0BA432}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEFE2438-5BFB-46BF-ABDB-1C631E0BA432}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B3229D8-9324-4AAD-8D7B-D8E082355FF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B3229D8-9324-4AAD-8D7B-D8E082355FF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B3229D8-9324-4AAD-8D7B-D8E082355FF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B3229D8-9324-4AAD-8D7B-D8E082355FF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D27BEA16-90E0-47BC-B205-F84B9691DAFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D27BEA16-90E0-47BC-B205-F84B9691DAFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D27BEA16-90E0-47BC-B205-F84B9691DAFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D27BEA16-90E0-47BC-B205-F84B9691DAFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB6405EE-3050-4CC7-ADA0-ED1623CDC5F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB6405EE-3050-4CC7-ADA0-ED1623CDC5F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB6405EE-3050-4CC7-ADA0-ED1623CDC5F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB6405EE-3050-4CC7-ADA0-ED1623CDC5F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A987949-3BDB-439B-AC2E-E5C06305D71B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A987949-3BDB-439B-AC2E-E5C06305D71B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A987949-3BDB-439B-AC2E-E5C06305D71B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A987949-3BDB-439B-AC2E-E5C06305D71B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
