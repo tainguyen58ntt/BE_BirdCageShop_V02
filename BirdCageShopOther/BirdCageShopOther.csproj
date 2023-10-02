@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BirdCageShopDomain\BirdCageShopDomain.csproj" />
+    <ProjectReference Include="..\BirdCageShopInterface\BirdCageShopInterface.csproj" />
     <ProjectReference Include="..\BirdCageShopViewModel\BirdCageShopViewModel.csproj" />
   </ItemGroup>
 

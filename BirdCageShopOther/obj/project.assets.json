@@ -18,6 +18,19 @@
           }
         }
       },
+      "FluentValidation/11.7.1": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/FluentValidation.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/FluentValidation.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.CSharp/4.7.0": {
         "type": "package",
         "compile": {
@@ -37,9 +50,26 @@
           "bin/placeholder/BirdCageShopDomain.dll": {}
         }
       },
+      "BirdCageShopInterface/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "BirdCageShopDomain": "1.0.0",
+          "BirdCageShopViewModel": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/BirdCageShopInterface.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BirdCageShopInterface.dll": {}
+        }
+      },
       "BirdCageShopViewModel/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "FluentValidation": "11.7.1"
+        },
         "compile": {
           "bin/placeholder/BirdCageShopViewModel.dll": {}
         },
@@ -63,6 +93,29 @@
         "icon.png",
         "lib/netstandard2.1/AutoMapper.dll",
         "lib/netstandard2.1/AutoMapper.xml"
+      ]
+    },
+    "FluentValidation/11.7.1": {
+      "sha512": "w9Al4gls6iVGFbTd/NPOPlwzqDTghH+ntL4c4FYUatc+LeybpIwhYArLykZJP/VjF2n3ihj3ws+1yd7KR5lQlg==",
+      "type": "package",
+      "path": "fluentvalidation/11.7.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "fluent-validation-icon.png",
+        "fluentvalidation.11.7.1.nupkg.sha512",
+        "fluentvalidation.nuspec",
+        "lib/net5.0/FluentValidation.dll",
+        "lib/net5.0/FluentValidation.xml",
+        "lib/net6.0/FluentValidation.dll",
+        "lib/net6.0/FluentValidation.xml",
+        "lib/net7.0/FluentValidation.dll",
+        "lib/net7.0/FluentValidation.xml",
+        "lib/netstandard2.0/FluentValidation.dll",
+        "lib/netstandard2.0/FluentValidation.xml",
+        "lib/netstandard2.1/FluentValidation.dll",
+        "lib/netstandard2.1/FluentValidation.xml"
       ]
     },
     "Microsoft.CSharp/4.7.0": {
@@ -139,6 +192,11 @@
       "path": "../BirdCageShopDomain/BirdCageShopDomain.csproj",
       "msbuildProject": "../BirdCageShopDomain/BirdCageShopDomain.csproj"
     },
+    "BirdCageShopInterface/1.0.0": {
+      "type": "project",
+      "path": "../BirdCageShopInterface/BirdCageShopInterface.csproj",
+      "msbuildProject": "../BirdCageShopInterface/BirdCageShopInterface.csproj"
+    },
     "BirdCageShopViewModel/1.0.0": {
       "type": "project",
       "path": "../BirdCageShopViewModel/BirdCageShopViewModel.csproj",
@@ -149,6 +207,7 @@
     "net6.0": [
       "AutoMapper >= 12.0.1",
       "BirdCageShopDomain >= 1.0.0",
+      "BirdCageShopInterface >= 1.0.0",
       "BirdCageShopViewModel >= 1.0.0"
     ]
   },
@@ -181,6 +240,9 @@
           "projectReferences": {
             "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj": {
               "projectPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj"
+            },
+            "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopInterface\\BirdCageShopInterface.csproj": {
+              "projectPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopInterface\\BirdCageShopInterface.csproj"
             },
             "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopViewModel\\BirdCageShopViewModel.csproj": {
               "projectPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopViewModel\\BirdCageShopViewModel.csproj"

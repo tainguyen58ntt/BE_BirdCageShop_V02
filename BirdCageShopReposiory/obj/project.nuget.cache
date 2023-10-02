@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "n5iTVD9jMXLldBfLhtXDzAX+RUcYDpYoMkvyxNaFBBuKhnf5WkLptLWSDHR8H0v0RdMopBtOgeCmjDHLt0PSrg==",
+  "dgSpecHash": "VvxFZJExX18tDMINA6BWNzVhruEyOgX4DF1o8yjaj0Z+CN7LeVQzKIyD6S69mYlZQ+dL7GnPWGHFdKuie2d7Gw==",
   "success": true,
   "projectFilePath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopReposiory\\BirdCageShopReposiory.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\ASUS\\.nuget\\packages\\fluentvalidation\\11.7.1\\fluentvalidation.11.7.1.nupkg.sha512",
     "C:\\Users\\ASUS\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\ASUS\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\ASUS\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",

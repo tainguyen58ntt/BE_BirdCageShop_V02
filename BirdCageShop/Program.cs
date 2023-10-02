@@ -10,6 +10,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using AutoMapper;
 using BirdCageShopOther.Mapper;
+using BirdCageShopInterface.IValidator;
+using BirdCageShopOther.Validator;
+using BirdCageShopViewModel.Role;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,6 +47,12 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 //
 builder.Services.AddAutoMapper(typeof(AutoMapperConfig).Assembly);
+
+// Validator
+builder.Services.AddScoped<IRoleValidator, RoleValidator>();
+builder.Services.AddScoped<RoleAddRule>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
