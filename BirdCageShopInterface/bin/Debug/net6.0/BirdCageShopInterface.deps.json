@@ -1,0 +1,47 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "BirdCageShopInterface/1.0.0": {
+        "dependencies": {
+          "BirdCageShopDomain": "1.0.0",
+          "BirdCageShopViewModel": "1.0.0"
+        },
+        "runtime": {
+          "BirdCageShopInterface.dll": {}
+        }
+      },
+      "BirdCageShopDomain/1.0.0": {
+        "runtime": {
+          "BirdCageShopDomain.dll": {}
+        }
+      },
+      "BirdCageShopViewModel/1.0.0": {
+        "runtime": {
+          "BirdCageShopViewModel.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "BirdCageShopInterface/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BirdCageShopDomain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BirdCageShopViewModel/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

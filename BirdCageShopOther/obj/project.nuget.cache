@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "h/fS5Ymhb63n2UWYq1nsKPjbs9Dbrfeg2gost4C7zQPZSGc8yqfeEcLSDQNlqUQIpPeAtr2Dk2cVGiCKBu7OBw==",
+  "dgSpecHash": "07G2t6AXcGyvWvUC7ur+wUv3Fj+3X+vKmP09LYfWKlZWr4ZQ23S+n6H7eYVMM//741A5zuxKgpTMpuQDU+FsXA==",
   "success": true,
   "projectFilePath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopOther\\BirdCageShopOther.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\ASUS\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\ASUS\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512"
+  ],
   "logs": []
 }

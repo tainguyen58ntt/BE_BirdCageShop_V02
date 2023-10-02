@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BirdCageShopDomain\BirdCageShopDomain.csproj" />
+    <ProjectReference Include="..\BirdCageShopViewModel\BirdCageShopViewModel.csproj" />
+  </ItemGroup>
+
 </Project>

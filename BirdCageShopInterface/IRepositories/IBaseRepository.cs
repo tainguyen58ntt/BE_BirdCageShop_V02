@@ -8,11 +8,11 @@ namespace BirdCageShopInterface.IRepositories
 {
     public interface IBaseRepository<TModel> where TModel : class
     {
-        //Task<IEnumerable<TModel>> GetAllAsync();
-        //Task<TModel?> GetByIdAsync(int id);
-        ////Task<Pagination<TModel>> GetPaginationAsync(int pageIndex, int pageSize);
-        //Task AddAsync(TModel entity);
-        //void Update(TModel entity);
-        //void Delete(TModel entity);
+        Task<IEnumerable<TModel>> GetAllAsync();
+        Task<TModel?> GetByIdAsync(int id);
+        //Task<Pagination<TModel>> GetPaginationAsync(int pageIndex, int pageSize);
+        Task AddAsync(TModel entity);
+        void Update(TModel entity);
+        void Delete(TModel entity);
     }
 }
