@@ -13,14 +13,18 @@ namespace BirdCageShopReposiory
     {
         private readonly BirdCageShopContext _context;
         private IRoleRepository _roleRepository;
+        private IUserRepository _userRepository;
 
-        public UnitOfWork(BirdCageShopContext context, IRoleRepository roleRepository)
+        public UnitOfWork(BirdCageShopContext context, IRoleRepository roleRepository, IUserRepository userRepository)
         {
             _context = context;
             _roleRepository = roleRepository;
+            _userRepository = userRepository;   
         }
 
         public IRoleRepository RoleRepository => _roleRepository;
+
+        public IUserRepository UserRepository => _userRepository;
 
         public async Task<bool> SaveChangesAsync()
         {

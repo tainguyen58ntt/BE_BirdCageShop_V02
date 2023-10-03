@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BirdCageShopDbContext.Models;
 using BirdCageShopViewModel.Role;
+using BirdCageShopViewModel.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,10 @@ namespace BirdCageShopOther.Mapper
         {
             CreateMap<RoleViewModel, Role>().ReverseMap();
             CreateMap<RoleAddViewModel, Role>().ReverseMap();
-            
+
+            //
+            CreateMap<UserViewModel, User>().ReverseMap();
+
         }   
     }
 }

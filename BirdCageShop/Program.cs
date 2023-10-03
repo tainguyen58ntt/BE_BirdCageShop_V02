@@ -37,9 +37,11 @@ builder.Services.AddDbContext<BirdCageShopContext>(
 // Repo
 
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 // Service 
 builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 
 //

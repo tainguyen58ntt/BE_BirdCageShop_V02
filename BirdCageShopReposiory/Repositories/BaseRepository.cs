@@ -26,7 +26,7 @@ namespace BirdCageShopReposiory.Repositories
             _context.Set<TModel>().Remove(entity);
         }
 
-        public async Task<IEnumerable<TModel>> GetAllAsync()
+        public virtual async Task<IEnumerable<TModel>> GetAllAsync()
         {
             return await _context.Set<TModel>().ToListAsync();
         }
