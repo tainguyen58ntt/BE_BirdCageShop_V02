@@ -1,4 +1,5 @@
 ﻿using BirdCageShopDbContext;
+using BirdCageShopDbContext.Models;
 using BirdCageShopInterface.IRepositories;
 using BirdCageShopUtils.Pagination;
 using Microsoft.EntityFrameworkCore;

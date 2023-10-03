@@ -17,16 +17,17 @@ namespace BirdCageShopService.Service
     {
         private readonly IRoleValidator _roleValidator;
 
-        public RoleService(IUnitOfWork unitOfWork, IMapper mapper, IRoleValidator roleValidator) : base(unitOfWork,mapper){
-            _roleValidator = roleValidator; 
+        public RoleService(IUnitOfWork unitOfWork, IMapper mapper, IRoleValidator roleValidator) : base(unitOfWork, mapper)
+        {
+            _roleValidator = roleValidator;
         }
 
         public async Task<bool> CreateAsync(RoleAddViewModel vm)
         {
-            var role = _mapper.Map<Role>(vm);   
-            role.CreateAt = DateTime.Now;   
+            var role = _mapper.Map<Role>(vm);
+            role.CreateAt = DateTime.Now;
             await _unitOfWork.RoleRepository.AddAsync(role);
-            return await _unitOfWork.SaveChangesAsync();   
+            return await _unitOfWork.SaveChangesAsync();
 
 
 
@@ -41,7 +42,7 @@ namespace BirdCageShopService.Service
         public async Task<bool> isExistNameRole(string name)
         {
             var isExists = await _unitOfWork.RoleRepository.GetByNameAsync(name);
-            if(isExists != null)
+            if (isExists != null)
             {
                 return true;
             }

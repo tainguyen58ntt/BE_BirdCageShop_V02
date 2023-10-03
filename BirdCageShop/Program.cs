@@ -13,6 +13,7 @@ using BirdCageShopOther.Mapper;
 using BirdCageShopInterface.IValidator;
 using BirdCageShopOther.Validator;
 using BirdCageShopViewModel.Role;
+using BirdCageShopDbContext.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

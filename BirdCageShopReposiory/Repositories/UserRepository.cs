@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BirdCageShopReposiory.Repositories
 {
-    public class UserRepository: BaseRepository<User>, IUserRepository
+    public class UserRepository : BaseRepository<User>, IUserRepository
     {
         public UserRepository(BirdCageShopContext context) : base(context)
         {

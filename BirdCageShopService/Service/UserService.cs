@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using BirdCageShopDbContext.Models;
+
 using BirdCageShopInterface;
 using BirdCageShopInterface.IServices;
 using BirdCageShopInterface.IValidator;
@@ -16,7 +16,7 @@ namespace BirdCageShopService.Service
 {
     public class UserService : BaseService, IUserService
     {
-        //private readonly IRoleValidator _roleValidator;
+        private readonly IRoleValidator _roleValidator;
 
         public UserService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
         {

@@ -14,8 +14,8 @@ namespace BirdCageShopService.Service
         protected readonly IUnitOfWork _unitOfWork;
         public BaseService(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _unitOfWork = unitOfWork;   
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
-        }   
+        }
     }
 }

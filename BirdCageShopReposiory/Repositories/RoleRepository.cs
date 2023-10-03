@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BirdCageShopReposiory.Repositories
 {
-    public class RoleRepository: BaseRepository<Role>, IRoleRepository
+    public class RoleRepository : BaseRepository<Role>, IRoleRepository
     {
 
         public RoleRepository(BirdCageShopContext context) : base(context)

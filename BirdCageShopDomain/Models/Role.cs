@@ -12,7 +12,7 @@ namespace BirdCageShopDbContext.Models
 
         public int Id { get; set; }
         public string RoleName { get; set; } = null!;
-        public DateTime CreateAt { get; set; }
+        public DateTime? CreateAt { get; set; }
         public DateTime? DeleteAt { get; set; }
         public bool IsDelete { get; set; }
         public string? Description { get; set; }

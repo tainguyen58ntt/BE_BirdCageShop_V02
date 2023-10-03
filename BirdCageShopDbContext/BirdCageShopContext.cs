@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using BirdCageShopDbContext.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Configuration;
 
-namespace BirdCageShopDbContext
+namespace BirdCageShopDbContext.Models
 {
     public partial class BirdCageShopContext : DbContext
     {
@@ -37,15 +35,8 @@ namespace BirdCageShopDbContext
         {
             if (!optionsBuilder.IsConfigured)
             {
-                IConfigurationRoot configuration = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json")
-                    .Build();
-
-                string connectionString = configuration.GetConnectionString("DefaultConnection");
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                //optionsBuilder.UseSqlServer("Server=DESKTOP-58QEGCF;Database=FUFlowerBouquetManagement;Trusted_Connection=True;Encrypt=False");
-                optionsBuilder.UseSqlServer(connectionString);
+                optionsBuilder.UseSqlServer("server =DESKTOP-58QEGCF; database = BirdCageShop;uid=sa2;pwd=1;");
             }
         }
 

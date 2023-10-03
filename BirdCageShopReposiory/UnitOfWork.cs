@@ -1,4 +1,5 @@
 ﻿using BirdCageShopDbContext;
+using BirdCageShopDbContext.Models;
 using BirdCageShopInterface;
 using BirdCageShopInterface.IRepositories;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BirdCageShopReposiory
 {
-    public class UnitOfWork  : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly BirdCageShopContext _context;
         private IRoleRepository _roleRepository;
@@ -19,7 +20,7 @@ namespace BirdCageShopReposiory
         {
             _context = context;
             _roleRepository = roleRepository;
-            _userRepository = userRepository;   
+            _userRepository = userRepository;
         }
 
         public IRoleRepository RoleRepository => _roleRepository;

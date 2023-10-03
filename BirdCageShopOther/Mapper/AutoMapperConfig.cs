@@ -25,6 +25,6 @@ namespace BirdCageShopOther.Mapper
             CreateMap(typeof(Pagination<>), typeof(Pagination<>));
 
 
-        }   
+        }
     }
 }
