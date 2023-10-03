@@ -33,11 +33,19 @@ namespace BirdCageShop.Controllers
                 return BadRequest(errors);
             }
             //
+            var isExistNameRole = await _roleService.isExistNameRole(vm.RoleName);
+            if (isExistNameRole) return StatusCode(StatusCodes.Status409Conflict, new { message = "That role name already exists" });
+
             var isCreated = await _roleService.CreateAsync(vm);
             if (isCreated == true) return Ok(vm);
             return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Create failed. Server Error" });
 
             
         }
+        //[HttpPut]
+        //public async Task<IActionResult> CreateAsync([FromBody] RoleAddViewModel vm)
+        //{
+
+        //}
     }
 }

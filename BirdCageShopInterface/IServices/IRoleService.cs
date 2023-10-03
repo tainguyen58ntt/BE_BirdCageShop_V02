@@ -13,6 +13,8 @@ namespace BirdCageShopInterface.IServices
         Task<IEnumerable<RoleViewModel>> GetRolesAsync();
         Task<bool> CreateAsync(RoleAddViewModel vm);
 
+        Task<bool> isExistNameRole(string name);
+
         Task<ValidationResult> ValidateRoleAddAsync(RoleAddViewModel vm);
     }
 }

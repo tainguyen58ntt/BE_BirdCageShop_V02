@@ -9,5 +9,6 @@ namespace BirdCageShopInterface.IRepositories
 {
     public interface IRoleRepository: IBaseRepository<Role>
     {
+        Task<Role?> GetByNameAsync(string name);
     }
 }

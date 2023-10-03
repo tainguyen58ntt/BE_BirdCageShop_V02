@@ -38,6 +38,16 @@ namespace BirdCageShopService.Service
             return _mapper.Map<List<RoleViewModel>>(roles);
         }
 
+        public async Task<bool> isExistNameRole(string name)
+        {
+            var isExists = await _unitOfWork.RoleRepository.GetByNameAsync(name);
+            if(isExists != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public Task<ValidationResult> ValidateRoleAddAsync(RoleAddViewModel vm)
         {
             return _roleValidator.RoleAddValidator.ValidateAsync(vm);

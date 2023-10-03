@@ -1,6 +1,7 @@
 ﻿using BirdCageShopDbContext;
 using BirdCageShopDbContext.Models;
 using BirdCageShopInterface.IRepositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +17,10 @@ namespace BirdCageShopReposiory.Repositories
         {
         }
 
+        public async Task<Role?> GetByNameAsync(string name)
+        {
+            return await _context.Set<Role>()
+               .FirstOrDefaultAsync(x => x.RoleName.Equals(name));
+        }
     }
 }
