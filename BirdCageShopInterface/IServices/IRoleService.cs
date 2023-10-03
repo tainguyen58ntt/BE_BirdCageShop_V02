@@ -11,6 +11,7 @@ namespace BirdCageShopInterface.IServices
     public interface IRoleService: IBaseService
     {
         Task<IEnumerable<RoleViewModel>> GetRolesAsync();
+        Task<bool> CreateAsync(RoleAddViewModel vm);
 
         Task<ValidationResult> ValidateRoleAddAsync(RoleAddViewModel vm);
     }

@@ -14,6 +14,8 @@ namespace BirdCageShopOther.Mapper
         public AutoMapperConfig()
         {
             CreateMap<RoleViewModel, Role>().ReverseMap();
+            CreateMap<RoleAddViewModel, Role>().ReverseMap();
+            
         }   
     }
 }

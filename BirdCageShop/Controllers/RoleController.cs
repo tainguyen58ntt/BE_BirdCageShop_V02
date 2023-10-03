@@ -27,14 +27,17 @@ namespace BirdCageShop.Controllers
         {
             var validateResult = await _roleService.ValidateRoleAddAsync(vm);
             //
-            
             if (!validateResult.IsValid)
             {
                 var errors = validateResult.Errors.Select(x => new { property = x.PropertyName, message = x.ErrorMessage });
                 return BadRequest(errors);
             }
+            //
+            var isCreated = await _roleService.CreateAsync(vm);
+            if (isCreated == true) return Ok(vm);
+            return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Create failed. Server Error" });
 
-            return Ok(vm);  
+            
         }
     }
 }

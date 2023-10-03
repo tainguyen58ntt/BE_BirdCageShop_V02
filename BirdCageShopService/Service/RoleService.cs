@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BirdCageShopDbContext.Models;
 using BirdCageShopInterface;
 using BirdCageShopInterface.IServices;
 using BirdCageShopInterface.IValidator;
@@ -19,6 +20,18 @@ namespace BirdCageShopService.Service
         public RoleService(IUnitOfWork unitOfWork, IMapper mapper, IRoleValidator roleValidator) : base(unitOfWork,mapper){
             _roleValidator = roleValidator; 
         }
+
+        public async Task<bool> CreateAsync(RoleAddViewModel vm)
+        {
+            var role = _mapper.Map<Role>(vm);   
+            role.CreateAt = DateTime.Now;   
+            await _unitOfWork.RoleRepository.AddAsync(role);
+            return await _unitOfWork.SaveChangesAsync();   
+
+
+
+        }
+
         public async Task<IEnumerable<RoleViewModel>> GetRolesAsync()
         {
             var roles = await _unitOfWork.RoleRepository.GetAllAsync();
