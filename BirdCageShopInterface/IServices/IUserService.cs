@@ -1,4 +1,5 @@
-﻿using BirdCageShopViewModel.Role;
+﻿using BirdCageShopUtils.Pagination;
+using BirdCageShopViewModel.Role;
 using BirdCageShopViewModel.User;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,6 @@ namespace BirdCageShopInterface.IServices
     {
 
         Task<IEnumerable<UserViewModel>> GetUserAsync();
+        Task<Pagination<UserViewModel>> GetPageAsync(int pageIndex, int pageSizes);
     }
 }

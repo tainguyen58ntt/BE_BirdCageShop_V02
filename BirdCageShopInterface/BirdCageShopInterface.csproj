@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BirdCageShopDomain\BirdCageShopDomain.csproj" />
+    <ProjectReference Include="..\BirdCageShopUtils\BirdCageShopUtils.csproj" />
     <ProjectReference Include="..\BirdCageShopViewModel\BirdCageShopViewModel.csproj" />
   </ItemGroup>
 

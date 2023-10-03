@@ -593,6 +593,7 @@
       "BirdCageShopInterface/1.0.0": {
         "dependencies": {
           "BirdCageShopDomain": "1.0.0",
+          "BirdCageShopUtils": "1.0.0",
           "BirdCageShopViewModel": "1.0.0"
         },
         "runtime": {
@@ -630,6 +631,11 @@
         },
         "runtime": {
           "BirdCageShopService.dll": {}
+        }
+      },
+      "BirdCageShopUtils/1.0.0": {
+        "runtime": {
+          "BirdCageShopUtils.dll": {}
         }
       },
       "BirdCageShopViewModel/1.0.0": {
@@ -1073,6 +1079,11 @@
       "sha512": ""
     },
     "BirdCageShopService/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BirdCageShopUtils/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

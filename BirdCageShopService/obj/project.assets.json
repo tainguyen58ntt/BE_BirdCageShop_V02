@@ -962,6 +962,7 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "BirdCageShopDomain": "1.0.0",
+          "BirdCageShopUtils": "1.0.0",
           "BirdCageShopViewModel": "1.0.0"
         },
         "compile": {
@@ -983,6 +984,16 @@
         },
         "runtime": {
           "bin/placeholder/BirdCageShopReposiory.dll": {}
+        }
+      },
+      "BirdCageShopUtils/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/BirdCageShopUtils.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BirdCageShopUtils.dll": {}
         }
       },
       "BirdCageShopViewModel/1.0.0": {
@@ -2452,6 +2463,11 @@
       "type": "project",
       "path": "../BirdCageShopReposiory/BirdCageShopReposiory.csproj",
       "msbuildProject": "../BirdCageShopReposiory/BirdCageShopReposiory.csproj"
+    },
+    "BirdCageShopUtils/1.0.0": {
+      "type": "project",
+      "path": "../BirdCageShopUtils/BirdCageShopUtils.csproj",
+      "msbuildProject": "../BirdCageShopUtils/BirdCageShopUtils.csproj"
     },
     "BirdCageShopViewModel/1.0.0": {
       "type": "project",

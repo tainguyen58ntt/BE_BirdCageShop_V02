@@ -21,3 +21,5 @@ D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShopService
 D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShopService\bin\Debug\net6.0\BirdCageShopViewModel.pdb
 D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShopService\bin\Debug\net6.0\BirdCageShopReposiory.dll
 D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShopService\bin\Debug\net6.0\BirdCageShopReposiory.pdb
+D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShopService\bin\Debug\net6.0\BirdCageShopUtils.dll
+D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShopService\bin\Debug\net6.0\BirdCageShopUtils.pdb

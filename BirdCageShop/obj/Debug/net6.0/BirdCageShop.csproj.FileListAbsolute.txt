@@ -85,3 +85,5 @@ D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\bin\De
 D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\bin\Debug\net6.0\BirdCageShopOther.dll
 D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\bin\Debug\net6.0\BirdCageShopOther.pdb
 D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\bin\Debug\net6.0\FluentValidation.dll
+D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\bin\Debug\net6.0\BirdCageShopUtils.dll
+D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\bin\Debug\net6.0\BirdCageShopUtils.pdb

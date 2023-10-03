@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BirdCageShopDbContext.Models;
+using BirdCageShopUtils.Pagination;
 using BirdCageShopViewModel.Role;
 using BirdCageShopViewModel.User;
 using System;
@@ -19,6 +20,10 @@ namespace BirdCageShopOther.Mapper
 
             //
             CreateMap<UserViewModel, User>().ReverseMap();
+
+            //
+            CreateMap(typeof(Pagination<>), typeof(Pagination<>));
+
 
         }   
     }

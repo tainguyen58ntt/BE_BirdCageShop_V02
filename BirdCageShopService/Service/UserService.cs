@@ -3,6 +3,7 @@ using BirdCageShopDbContext.Models;
 using BirdCageShopInterface;
 using BirdCageShopInterface.IServices;
 using BirdCageShopInterface.IValidator;
+using BirdCageShopUtils.Pagination;
 using BirdCageShopViewModel.Role;
 using BirdCageShopViewModel.User;
 using System;
@@ -21,6 +22,13 @@ namespace BirdCageShopService.Service
         {
             //_roleValidator = roleValidator;
         }
+
+        public async Task<Pagination<UserViewModel>> GetPageAsync(int pageIndex, int pageSizes)
+        {
+            var result = await _unitOfWork.UserRepository.GetPaginationAsync(pageIndex, pageSizes);
+            return _mapper.Map<Pagination<UserViewModel>>(result);
+        }
+
         public async Task<IEnumerable<UserViewModel>> GetUserAsync()
         {
             var users = await _unitOfWork.UserRepository.GetAllAsync();

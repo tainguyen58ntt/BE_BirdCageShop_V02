@@ -1,5 +1,6 @@
 ﻿using BirdCageShopDbContext;
 using BirdCageShopInterface.IRepositories;
+using BirdCageShopUtils.Pagination;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,25 @@ namespace BirdCageShopReposiory.Repositories
         public async Task<TModel?> GetByIdAsync(int id)
         {
             return await _context.Set<TModel>().FindAsync(id);
+        }
+
+        public virtual async Task<Pagination<TModel>> GetPaginationAsync(int pageIndex, int pageSize)
+        {
+            var totalCount = await _context.Set<TModel>().CountAsync();
+            var items = await _context.Set<TModel>()
+                .AsNoTracking()
+                .Skip(pageSize * pageIndex)
+                .Take(pageSize)
+                .ToListAsync();
+            var result = new Pagination<TModel>()
+            {
+                Items = items,
+                PageIndex = pageIndex,
+                PageSize = pageSize,
+                TotalItemsCount = totalCount
+            };
+
+            return result;
         }
 
         public void Update(TModel entity)
