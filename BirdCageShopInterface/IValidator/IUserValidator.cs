@@ -12,5 +12,6 @@ namespace BirdCageShopInterface.IValidator
     public interface IUserValidator
     {
         IValidator<UserSignUpViewModel> UserSignUpValidator { get; }
+        IValidator<UserChangePasswordViewModel> UserChangePasswordValidator { get; }
     }
 }

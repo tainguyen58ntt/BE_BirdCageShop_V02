@@ -1,4 +1,5 @@
 ﻿
+using BirdCageShopDbContext.Models;
 using BirdCageShopInterface.IServices;
 using BirdCageShopService.Service;
 using BirdCageShopUtils.UtilMethod;
@@ -77,6 +78,21 @@ namespace BirdCageShop.Controllers
 
 
 
+        [HttpPut("change-password")]
+        
+        public async Task<IActionResult> ChangePasswordAsync([FromBody] UserChangePasswordViewModel vm)
+        {
+            var validateResult = await _userService.ValidateChangePasswordAsync(vm);
+            if (!validateResult.IsValid)
+            {
+                var errors = validateResult.Errors.Select(e => new { property = e.PropertyName, message = e.ErrorMessage });
+                return BadRequest(errors);
+            }
+            var result = await _userService.ChangePasswordAsync(vm);
+
+            if (result is true) return Ok();
+            return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Change Password Failed. Error Server." });
+        }
 
     }
 }

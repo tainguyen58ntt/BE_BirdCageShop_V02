@@ -61,6 +61,7 @@ builder.Services.AddScoped<IRoleValidator, RoleValidator>();
 builder.Services.AddScoped<RoleAddRule>();
 builder.Services.AddScoped<IUserValidator, UserValidator>();
 builder.Services.AddScoped<UserSignUpRule>();
+builder.Services.AddScoped<UserChangePasswordRule>();
 
 builder.Services.AddScoped<IVoucherValidator, VoucherValidator>();
 builder.Services.AddScoped<VourcherAddRule>();

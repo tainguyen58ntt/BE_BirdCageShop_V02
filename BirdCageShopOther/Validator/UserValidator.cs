@@ -13,10 +13,15 @@ namespace BirdCageShopOther.Validator
     public class UserValidator : IUserValidator
     {
         private readonly UserSignUpRule _userSignUpValidator;
+        private readonly UserChangePasswordRule _userChangePassswordValidator;
 
-        public UserValidator(UserSignUpRule userSignUpValidator) {
+        public UserValidator(UserSignUpRule userSignUpValidator, UserChangePasswordRule userChangePassswordValidator)
+        {
             _userSignUpValidator = userSignUpValidator;
+            _userChangePassswordValidator = userChangePassswordValidator;   
         }
         public IValidator<UserSignUpViewModel> UserSignUpValidator => _userSignUpValidator;
+
+        public IValidator<UserChangePasswordViewModel> UserChangePasswordValidator => _userChangePassswordValidator;
     }
 }

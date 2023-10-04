@@ -26,6 +26,22 @@ namespace BirdCageShopService.Service
             _userValidator = userValidator;
         }
 
+        public async Task<bool> ChangePasswordAsync(UserChangePasswordViewModel vm)
+        {
+            //var currentUserId = _claimService.GetCurrentUserId();
+            //if (currentUserId == -1) return false;
+            //test
+            int currentUserId = 5;
+            //test
+
+            var user = await _unitOfWork.UserRepository.GetByIdAsync(currentUserId);
+            if (user == null) return false;
+            user.PasswordHash = vm.NewPassword.BCryptSaltAndHash();
+            //
+            _unitOfWork.UserRepository.Update(user);
+            return await _unitOfWork.SaveChangesAsync();
+        }
+
         public async Task<bool> DeleteAsync(User user)
         {
             user.IsDelete = true;
@@ -75,6 +91,11 @@ namespace BirdCageShopService.Service
             return await _unitOfWork.SaveChangesAsync();
             
 
+        }
+
+        public  Task<ValidationResult> ValidateChangePasswordAsync(UserChangePasswordViewModel vm)
+        {
+            return  _userValidator.UserChangePasswordValidator.ValidateAsync(vm);
         }
 
         public Task<ValidationResult> ValidateUserSignUpAsync(UserSignUpViewModel vm)
