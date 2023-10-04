@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BirdCageShopDbContext.Models;
 using BirdCageShopUtils.Pagination;
+using BirdCageShopViewModel.Category;
 using BirdCageShopViewModel.Role;
 using BirdCageShopViewModel.User;
 using BirdCageShopViewModel.Voucher;
@@ -30,6 +31,9 @@ namespace BirdCageShopOther.Mapper
             //
             CreateMap<VourcherViewModel, Voucher>().ReverseMap();
             CreateMap<VourcherAddViewModel, Voucher>().ReverseMap();
+
+            //
+            CreateMap<CategoryViewModel, Category>().ReverseMap();
 
 
 

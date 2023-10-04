@@ -10,6 +10,7 @@ namespace BirdCageShopInterface
     public interface IUnitOfWork
     {
         IRoleRepository RoleRepository { get; }
+        ICategoryRepository CategoryRepository { get; }
         IUserRepository UserRepository { get; }
         IVoucherRepository VoucherRepository { get; }
         Task<bool> SaveChangesAsync();
