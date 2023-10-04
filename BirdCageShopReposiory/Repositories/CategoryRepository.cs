@@ -23,5 +23,10 @@ namespace BirdCageShopReposiory.Repositories
               .ToListAsync();
         }
 
+        public async Task<Category?> GetByNameAsync(string name)
+        {
+            return await _context.Set<Category>()
+               .FirstOrDefaultAsync(x => x.CategoryName.Equals(name));
+        }
     }
 }

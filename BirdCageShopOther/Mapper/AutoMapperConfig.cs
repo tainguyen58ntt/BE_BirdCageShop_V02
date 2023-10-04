@@ -34,6 +34,7 @@ namespace BirdCageShopOther.Mapper
 
             //
             CreateMap<CategoryViewModel, Category>().ReverseMap();
+            CreateMap<CategoryCreateViewModel, Category>().ReverseMap();
 
 
 
