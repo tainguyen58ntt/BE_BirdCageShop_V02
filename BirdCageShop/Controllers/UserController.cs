@@ -1,6 +1,9 @@
 ﻿
 using BirdCageShopInterface.IServices;
 using BirdCageShopService.Service;
+using BirdCageShopUtils.UtilMethod;
+using BirdCageShopViewModel.User;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -44,6 +47,34 @@ namespace BirdCageShop.Controllers
             return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Delete Fail. Error server" });
 
         }
+
+        //[HttpPost("register")]
+        //public async Task<IActionResult> RegisterAsync([FromBody] UserSignUpViewModel vm) 
+        //{
+
+        //    var isExistEmail = await _userService.IsExistsEmailAsync(vm.Email);
+        //    var validateResult = await _userService.ValidateUserSignUpAsync(vm);
+        //    //
+        //    if(isExistEmail) 
+        //    {
+        //        validateResult.Errors.Add(new ValidationFailure("Email", "Already exist that email"));
+        //    }
+
+
+        //    //
+        //    if (!validateResult.IsValid)
+        //    {
+        //        var errors = validateResult.Errors.Select(x => new { property = x.PropertyName, message = x.ErrorMessage });
+        //        return BadRequest(errors);
+        //    }
+        //    //
+
+        //    await _userService.
+        //    return null;
+        //}
+
+
+    
 
     }
 }

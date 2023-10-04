@@ -6,6 +6,7 @@ using BirdCageShopInterface.IValidator;
 using BirdCageShopUtils.Pagination;
 using BirdCageShopViewModel.Role;
 using BirdCageShopViewModel.User;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +17,12 @@ namespace BirdCageShopService.Service
 {
     public class UserService : BaseService, IUserService
     {
-        private readonly IRoleValidator _roleValidator;
+        private readonly IUserValidator _userValidator;
 
-        public UserService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
+        public UserService(IUnitOfWork unitOfWork, IMapper mapper, IUserValidator userValidator) : base(unitOfWork, mapper)
         {
             //_roleValidator = roleValidator;
+            _userValidator = userValidator;
         }
 
         public async Task<bool> DeleteAsync(User user)
@@ -49,6 +51,27 @@ namespace BirdCageShopService.Service
         {
             var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
             return user;
+        }
+
+        public async Task<bool> IsExistsEmailAsync(string email)
+        {
+            var user = await _unitOfWork.UserRepository.GetUserByEmailAsync(email); 
+
+            return user != null;    
+
+        }
+
+        public async Task<bool> RegisterAsync(UserSignUpViewModel vm)
+        {
+            //   var user = _mapper.Map<User>(vm);
+            //user.PasswordHash  = vm.Password.BCryptSaltAndHash
+            return true;
+
+        }
+
+        public Task<ValidationResult> ValidateUserSignUpAsync(UserSignUpViewModel vm)
+        {
+            return _userValidator.UserSignUpValidator.ValidateAsync(vm);
         }
     }
 }

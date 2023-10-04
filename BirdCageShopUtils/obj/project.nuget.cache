@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "NuoR3A1p0NGLKlyPixjmGmIRA/elmU/vcgdn0HewjoMh4viPMDpHpB+lD+lQbNIxmkgFbx6U7LoMDW/QuOHIVw==",
+  "dgSpecHash": "IO0gVCL4t/HQ03IiIgHZQYd7ZQDhy0d10HUqlZzeOvc8FdSj9sFzV+aST4OKiubSTVaBdmf8JFVmRs5fC71FNQ==",
   "success": true,
   "projectFilePath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopUtils\\BirdCageShopUtils.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\ASUS\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

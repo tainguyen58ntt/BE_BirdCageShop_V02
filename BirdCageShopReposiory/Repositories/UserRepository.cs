@@ -46,5 +46,12 @@ namespace BirdCageShopReposiory.Repositories
 
             return result;
         }
+
+        public async Task<User?> GetUserByEmailAsync(string email)
+        {
+            var user = await _context.Set<User>().FirstOrDefaultAsync(x => x.Email.Equals(email) && x.IsDelete == false);
+
+            return user;
+        }
     }
 }

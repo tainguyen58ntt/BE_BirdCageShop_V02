@@ -14,6 +14,8 @@ using BirdCageShopInterface.IValidator;
 using BirdCageShopOther.Validator;
 using BirdCageShopViewModel.Role;
 using BirdCageShopDbContext.Models;
+using Microsoft.AspNetCore.Identity;
+using BirdCageShopViewModel.User;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,7 +56,8 @@ builder.Services.AddAutoMapper(typeof(AutoMapperConfig).Assembly);
 // Validator
 builder.Services.AddScoped<IRoleValidator, RoleValidator>();
 builder.Services.AddScoped<RoleAddRule>();
-
+builder.Services.AddScoped<IUserValidator, UserValidator>();
+builder.Services.AddScoped<UserSignUpRule>();
 
 //
 
