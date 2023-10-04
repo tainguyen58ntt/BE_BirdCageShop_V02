@@ -11,6 +11,7 @@ namespace BirdCageShopInterface
     {
         IRoleRepository RoleRepository { get; }
         IUserRepository UserRepository { get; }
+        IVoucherRepository VoucherRepository { get; }
         Task<bool> SaveChangesAsync();
     }
 }

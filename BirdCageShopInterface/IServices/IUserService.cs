@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BirdCageShopInterface.IServices
 {
-    public interface IUserService: IBaseService
+    public interface IUserService : IBaseService
     {
 
         Task<IEnumerable<UserViewModel>> GetUserAsync();

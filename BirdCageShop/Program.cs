@@ -41,10 +41,12 @@ builder.Services.AddDbContext<BirdCageShopContext>(
 
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IVoucherRepository, VoucherRepository>();
 
 // Service 
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IVourcherService, VourcherService>();
 
 
 //

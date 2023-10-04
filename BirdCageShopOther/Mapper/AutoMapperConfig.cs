@@ -3,6 +3,7 @@ using BirdCageShopDbContext.Models;
 using BirdCageShopUtils.Pagination;
 using BirdCageShopViewModel.Role;
 using BirdCageShopViewModel.User;
+using BirdCageShopViewModel.Voucher;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,10 @@ namespace BirdCageShopOther.Mapper
 
             //
             CreateMap(typeof(Pagination<>), typeof(Pagination<>));
+
+            //
+            CreateMap<VourcherViewModel, Voucher>().ReverseMap();
+
 
 
         }
