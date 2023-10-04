@@ -15,9 +15,12 @@ namespace BirdCageShopDbContext.Models
         public int Id { get; set; }
         public string? Title { get; set; }
         public int CategoryId { get; set; }
+      
 
         public virtual ICollection<ProductImage> ProductImages { get; set; }
         public virtual ICollection<ProductReview> ProductReviews { get; set; }
         public virtual ICollection<WishlistItem> WishlistItems { get; set; }
+        public virtual ICollection<ProductFeature> ProductFeatures { get; set; }
+        public virtual ICollection<ProductSpecification> ProductSpecifications { get; set; }
     }
 }

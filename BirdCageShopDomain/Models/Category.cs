@@ -11,5 +11,9 @@ namespace BirdCageShopDbContext.Models
         public DateTime? CreateAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
         public bool IsDelete { get; set; }
+
+
+
+        public IEnumerable<Product> Products { get; set; }
     }
 }

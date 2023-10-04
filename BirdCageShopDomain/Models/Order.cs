@@ -21,5 +21,6 @@ namespace BirdCageShopDbContext.Models
 
         public virtual User? User { get; set; }
         public virtual Voucher? Voucher { get; set; }
+        public IEnumerable<OrderDetail> Details { get; set; }
     }
 }
