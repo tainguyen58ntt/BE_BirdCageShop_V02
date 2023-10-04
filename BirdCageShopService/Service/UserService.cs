@@ -4,6 +4,7 @@ using BirdCageShopInterface;
 using BirdCageShopInterface.IServices;
 using BirdCageShopInterface.IValidator;
 using BirdCageShopUtils.Pagination;
+using BirdCageShopUtils.UtilMethod;
 using BirdCageShopViewModel.Role;
 using BirdCageShopViewModel.User;
 using FluentValidation.Results;
@@ -63,9 +64,16 @@ namespace BirdCageShopService.Service
 
         public async Task<bool> RegisterAsync(UserSignUpViewModel vm)
         {
-            //   var user = _mapper.Map<User>(vm);
-            //user.PasswordHash  = vm.Password.BCryptSaltAndHash
-            return true;
+            var user = _mapper.Map<User>(vm);
+            user.PasswordHash = vm.Password.BCryptSaltAndHash();
+            var role = await _unitOfWork.RoleRepository.GetByNameAsync("Customer");
+            if(role != null) { 
+                user.RoleId  = role.Id;
+            }
+
+            await _unitOfWork.UserRepository.AddAsync(user);
+            return await _unitOfWork.SaveChangesAsync();
+            
 
         }
 

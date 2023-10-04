@@ -20,6 +20,7 @@ namespace BirdCageShopOther.Mapper
 
             //
             CreateMap<UserViewModel, User>().ReverseMap();
+            CreateMap<UserSignUpViewModel, User>().ReverseMap();
 
             //
             CreateMap(typeof(Pagination<>), typeof(Pagination<>));

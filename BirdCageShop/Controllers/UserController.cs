@@ -48,33 +48,35 @@ namespace BirdCageShop.Controllers
 
         }
 
-        //[HttpPost("register")]
-        //public async Task<IActionResult> RegisterAsync([FromBody] UserSignUpViewModel vm) 
-        //{
+        [HttpPost("register")]
+        public async Task<IActionResult> RegisterAsync([FromBody] UserSignUpViewModel vm)
+        {
 
-        //    var isExistEmail = await _userService.IsExistsEmailAsync(vm.Email);
-        //    var validateResult = await _userService.ValidateUserSignUpAsync(vm);
-        //    //
-        //    if(isExistEmail) 
-        //    {
-        //        validateResult.Errors.Add(new ValidationFailure("Email", "Already exist that email"));
-        //    }
-
-
-        //    //
-        //    if (!validateResult.IsValid)
-        //    {
-        //        var errors = validateResult.Errors.Select(x => new { property = x.PropertyName, message = x.ErrorMessage });
-        //        return BadRequest(errors);
-        //    }
-        //    //
-
-        //    await _userService.
-        //    return null;
-        //}
+            var isExistEmail = await _userService.IsExistsEmailAsync(vm.Email);
+            var validateResult = await _userService.ValidateUserSignUpAsync(vm);
+            //
+            if (isExistEmail)
+            {
+                validateResult.Errors.Add(new ValidationFailure("Email", "Already exist that email"));
+            }
 
 
-    
+            //
+            if (!validateResult.IsValid)
+            {
+                var errors = validateResult.Errors.Select(x => new { property = x.PropertyName, message = x.ErrorMessage });
+                return BadRequest(errors);
+            }
+            //
+
+            var result = await _userService.RegisterAsync(vm);
+
+            if (result is true) return Created("/api/user/register", new { message = "Register Succeed." });
+            return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Register Failed. Error Server." });
+        }
+
+
+
 
     }
 }

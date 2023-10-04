@@ -22,15 +22,15 @@ namespace BirdCageShopViewModel.User
 
             RuleFor(x => x.FirstName)
                 .NotEmpty()
-                .WithMessage("User first name must not be empty")
-                .Length(10)
-                .WithMessage("User first name must between 1..10 characters.");
+                .WithMessage("User first name must not be empty");
+
+
+
 
             RuleFor(x => x.LastName)
               .NotEmpty()
-              .WithMessage("User last name must not be empty")
-              .Length(10)
-              .WithMessage("User last name must between 1..10 characters.");
+              .WithMessage("User last name must not be empty");
+            
 
             RuleFor(x => x.Email)
                .NotNull()
