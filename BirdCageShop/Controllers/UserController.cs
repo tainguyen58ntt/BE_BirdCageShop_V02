@@ -33,5 +33,17 @@ namespace BirdCageShop.Controllers
             return Ok(result);
         }
 
+        [HttpDelete("delete/{userId}")]
+        public async Task<IActionResult> DeleteAsync([FromRoute] int userId)
+        {
+            var user = await _userService.GetUserByIdAsync(userId);
+            if (user == null) return BadRequest("User not exist");
+
+            var result = await _userService.DeleteAsync(user);
+            if (result is true) return Ok();
+            return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Delete Fail. Error server" });
+
+        }
+
     }
 }

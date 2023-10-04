@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-
+using BirdCageShopDbContext.Models;
 using BirdCageShopInterface;
 using BirdCageShopInterface.IServices;
 using BirdCageShopInterface.IValidator;
@@ -23,6 +23,16 @@ namespace BirdCageShopService.Service
             //_roleValidator = roleValidator;
         }
 
+        public async Task<bool> DeleteAsync(User user)
+        {
+            user.IsDelete = true;
+            _unitOfWork.UserRepository.Update(user);
+            return await _unitOfWork.SaveChangesAsync();
+        }
+
+
+
+
         public async Task<Pagination<UserViewModel>> GetPageAsync(int pageIndex, int pageSizes)
         {
             var result = await _unitOfWork.UserRepository.GetPaginationAsync(pageIndex, pageSizes);
@@ -33,6 +43,12 @@ namespace BirdCageShopService.Service
         {
             var users = await _unitOfWork.UserRepository.GetAllAsync();
             return _mapper.Map<List<UserViewModel>>(users);
+        }
+
+        public async Task<User?> GetUserByIdAsync(int id)
+        {
+            var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
+            return user;
         }
     }
 }
