@@ -16,6 +16,7 @@ using BirdCageShopViewModel.Role;
 using BirdCageShopDbContext.Models;
 using Microsoft.AspNetCore.Identity;
 using BirdCageShopViewModel.User;
+using BirdCageShopViewModel.Voucher;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -61,6 +62,8 @@ builder.Services.AddScoped<RoleAddRule>();
 builder.Services.AddScoped<IUserValidator, UserValidator>();
 builder.Services.AddScoped<UserSignUpRule>();
 
+builder.Services.AddScoped<IVoucherValidator, VoucherValidator>();
+builder.Services.AddScoped<VourcherAddRule>();
 //
 
 

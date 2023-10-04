@@ -28,6 +28,7 @@ namespace BirdCageShopOther.Mapper
 
             //
             CreateMap<VourcherViewModel, Voucher>().ReverseMap();
+            CreateMap<VourcherAddViewModel, Voucher>().ReverseMap();
 
 
 

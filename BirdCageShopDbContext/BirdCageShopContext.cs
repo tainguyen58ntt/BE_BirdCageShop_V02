@@ -52,6 +52,11 @@ namespace BirdCageShopDbContext.Models
             modelBuilder.Entity<Voucher>()
                 .Property(v => v.DiscountPercent)
                 .HasColumnType("decimal(18, 2)");
+
+            // Configure the Voucher entity
+            modelBuilder.Entity<Voucher>()
+                .HasIndex(v => v.VoucherCode)
+                .IsUnique();
         }
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{

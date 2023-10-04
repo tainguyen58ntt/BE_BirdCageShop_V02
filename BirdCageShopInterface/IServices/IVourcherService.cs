@@ -1,6 +1,7 @@
 ﻿
 using BirdCageShopViewModel.User;
 using BirdCageShopViewModel.Voucher;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,7 @@ namespace BirdCageShopInterface.IServices
     public interface IVourcherService : IBaseService
     {
         Task<IEnumerable<VourcherViewModel>> GetVourcherAsync();
+        Task<ValidationResult> ValidateVourcherAdddpAsync(VourcherAddViewModel vm);
+        Task<bool> CreateNewAsync(VourcherAddViewModel vm);
     }
 }

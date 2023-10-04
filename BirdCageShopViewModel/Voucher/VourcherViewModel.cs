@@ -10,7 +10,7 @@ namespace BirdCageShopViewModel.Voucher
     {
         public decimal? DiscountPercent { get; set; }
         public string VoucherCode { get; set; } = null!;
-        public DateTime? ExpirationDate { get; set; }
+        public DateTime ExpirationDate { get; set; }
         public DateTime StartDate { get; set; }
     }
 }
