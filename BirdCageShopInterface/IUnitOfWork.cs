@@ -13,6 +13,7 @@ namespace BirdCageShopInterface
         ICategoryRepository CategoryRepository { get; }
         IUserRepository UserRepository { get; }
         IVoucherRepository VoucherRepository { get; }
+        IOrderRepository OrderRepository { get; }
         Task<bool> SaveChangesAsync();
     }
 }

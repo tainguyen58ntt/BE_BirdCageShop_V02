@@ -2,6 +2,7 @@
 using BirdCageShopDbContext.Models;
 using BirdCageShopUtils.Pagination;
 using BirdCageShopViewModel.Category;
+using BirdCageShopViewModel.Order;
 using BirdCageShopViewModel.Role;
 using BirdCageShopViewModel.User;
 using BirdCageShopViewModel.Voucher;
@@ -17,6 +18,8 @@ namespace BirdCageShopOther.Mapper
     {
         public AutoMapperConfig()
         {
+            CreateMap(typeof(Pagination<>), typeof(Pagination<>));
+            //
             CreateMap<RoleViewModel, Role>().ReverseMap();
             CreateMap<RoleAddViewModel, Role>().ReverseMap();
 
@@ -26,7 +29,7 @@ namespace BirdCageShopOther.Mapper
             CreateMap<UserChangePasswordViewModel, User>().ReverseMap();
 
             //
-            CreateMap(typeof(Pagination<>), typeof(Pagination<>));
+            
 
             //
             CreateMap<VourcherViewModel, Voucher>().ReverseMap();
@@ -36,6 +39,11 @@ namespace BirdCageShopOther.Mapper
             CreateMap<CategoryViewModel, Category>().ReverseMap();
             CreateMap<CategoryCreateViewModel, Category>().ReverseMap();
 
+
+			//
+			CreateMap<OrderDetailViewModel, OrderDetail>().ReverseMap();
+			//
+			CreateMap<OrderWithDetailViewModel, Order>().ReverseMap();
 
 
         }
