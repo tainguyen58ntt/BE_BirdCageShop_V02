@@ -25,12 +25,7 @@ namespace BirdCageShop.Controllers
 
 		}
 
-  //      [HttpGet("testClaim")]
-  //      public int Test()
-  //      {
-		//	return _claimService.GetCurrentUserId();
 
-		//}
 
         [HttpGet]
       

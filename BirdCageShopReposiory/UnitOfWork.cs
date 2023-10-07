@@ -18,10 +18,10 @@ namespace BirdCageShopReposiory
         private IUserRepository _userRepository;
         private IVoucherRepository _voucherRepository;
         private IOrderRepository _orderRepository;
-
+        private IProductRepository _productRepository;
         public UnitOfWork(BirdCageShopContext context, IRoleRepository roleRepository, IUserRepository userRepository, IVoucherRepository voucherRepository,
             IOrderRepository orderRepository,
-            ICategoryRepository categoryRepository)
+            ICategoryRepository categoryRepository, IProductRepository productRepository)
         {
             _context = context;
             _roleRepository = roleRepository;
@@ -29,12 +29,15 @@ namespace BirdCageShopReposiory
             _voucherRepository = voucherRepository;
             _categoryRepository = categoryRepository;  
             _orderRepository = orderRepository; 
+            _productRepository = productRepository; 
+            
         }
 
         public IRoleRepository RoleRepository => _roleRepository;
 
         public IUserRepository UserRepository => _userRepository;
         public ICategoryRepository CategoryRepository => _categoryRepository;
+        public IProductRepository ProductRepository => _productRepository;
 
         public IVoucherRepository VoucherRepository => _voucherRepository;
 

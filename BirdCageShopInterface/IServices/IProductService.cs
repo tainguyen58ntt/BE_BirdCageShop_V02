@@ -1,4 +1,5 @@
-﻿using BirdCageShopViewModel.Role;
+﻿using BirdCageShopViewModel.Product;
+using BirdCageShopViewModel.Role;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace BirdCageShopInterface.IServices
 {
 	public interface IProductService : IBaseService
 	{
-		//Task<IEnumerable<RoleViewModel>> GetRolesAsync();
+		Task<IEnumerable<ProductViewModel>> GetProductsAsync();
 	}
 }

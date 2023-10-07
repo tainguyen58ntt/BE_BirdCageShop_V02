@@ -2,6 +2,8 @@
 using BirdCageShopInterface;
 using BirdCageShopInterface.IServices;
 using BirdCageShopInterface.IValidator;
+using BirdCageShopViewModel.Product;
+using BirdCageShopViewModel.Role;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -19,5 +21,10 @@ namespace BirdCageShopService.Service
 			
 		}
 
+		public async Task<IEnumerable<ProductViewModel>> GetProductsAsync()
+		{
+			var products = await _unitOfWork.ProductRepository.GetAllAsync();
+			return _mapper.Map<List<ProductViewModel>>(products);
+		}
 	}
 }
