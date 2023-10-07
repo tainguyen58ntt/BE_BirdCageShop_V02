@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BirdCageShopDbContext.Models;
 using BirdCageShopInterface;
 using BirdCageShopInterface.IServices;
 using BirdCageShopInterface.IValidator;
@@ -40,10 +41,22 @@ namespace BirdCageShopService.Service
 			return _mapper.Map<List<ProductViewModel>>(result);
 		}
 
+		public async Task<Product?> GetProductByIdAsync(int id)
+		{
+			return await _unitOfWork.ProductRepository.GetByIdAsync(id);
+		}
+
 		public async Task<IEnumerable<ProductViewModel>> GetProductsAsync()
 		{
 			var products = await _unitOfWork.ProductRepository.GetAllAsync();
 			return _mapper.Map<List<ProductViewModel>>(products);
+		}
+
+		public async Task<bool> RemoveAsync(Product product)
+		{
+			product.isDelete = true;
+			_unitOfWork.ProductRepository.Update(product);
+			return await _unitOfWork.SaveChangesAsync();
 		}
 	}
 }

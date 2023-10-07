@@ -1,4 +1,5 @@
-﻿using BirdCageShopInterface.IServices;
+﻿using BirdCageShopDbContext.Models;
+using BirdCageShopInterface.IServices;
 using BirdCageShopService.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -47,6 +48,16 @@ namespace BirdCageShop.Controllers
 		{
 			var result = await _productService.GetProductByCategoryAsync(categoryId);
 			return Ok(result);
+		}
+
+		[HttpDelete("{id}")]
+		public async Task<IActionResult> RemoveAsync(int id)
+		{
+			var product = await _productService.GetProductByIdAsync(id);
+			if (product is null) return NotFound();
+			var result = await _productService.RemoveAsync(product);
+			if (result is true) return Ok();
+			return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Delete product failed. Server Error." });
 		}
 	}
 }
