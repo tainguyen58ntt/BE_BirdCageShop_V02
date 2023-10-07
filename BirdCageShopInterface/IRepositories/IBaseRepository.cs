@@ -1,4 +1,5 @@
-﻿using BirdCageShopUtils.Pagination;
+﻿using BirdCageShopDbContext.Models;
+using BirdCageShopUtils.Pagination;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,8 @@ namespace BirdCageShopInterface.IRepositories
         Task<IEnumerable<TModel>> GetAllAsync();
         Task<TModel?> GetByIdAsync(int id);
         Task<Pagination<TModel>> GetPaginationAsync(int pageIndex, int pageSize);
-        Task AddAsync(TModel entity);
+	
+		Task AddAsync(TModel entity);
         void Update(TModel entity);
         void Delete(TModel entity);
     }

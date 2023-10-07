@@ -34,6 +34,12 @@ namespace BirdCageShopService.Service
 			return _mapper.Map<Pagination<ProductViewModel>>(result);
 		}
 
+		public async Task<IEnumerable<ProductViewModel>> GetProductByCategoryAsync(int categoryId)
+		{
+			var result = await _unitOfWork.ProductRepository.GetProductsByCategoryAsync(categoryId);
+			return _mapper.Map<List<ProductViewModel>>(result);
+		}
+
 		public async Task<IEnumerable<ProductViewModel>> GetProductsAsync()
 		{
 			var products = await _unitOfWork.ProductRepository.GetAllAsync();

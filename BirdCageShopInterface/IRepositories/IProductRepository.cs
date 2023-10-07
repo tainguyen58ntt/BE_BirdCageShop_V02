@@ -9,5 +9,6 @@ namespace BirdCageShopInterface.IRepositories
 {
 	public interface IProductRepository : IBaseRepository<Product>
 	{
+		Task<IEnumerable<Product>> GetProductsByCategoryAsync(int categoryId);
 	}
 }

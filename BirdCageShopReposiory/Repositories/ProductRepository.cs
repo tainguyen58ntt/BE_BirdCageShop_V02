@@ -24,5 +24,14 @@ namespace BirdCageShopReposiory.Repositories
 				.ToListAsync();
 		}
 
+		public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(int categoryId)
+		{
+			return await _context.Set<Product>()
+				   .AsNoTracking()
+				   .Include(x => x.Category)
+				   //.Include(x => x.ProductWishlist)
+				   .Where(x => !x.isDelete && x.CategoryId == categoryId)
+				   .ToListAsync();
+		}
 	}
 }
