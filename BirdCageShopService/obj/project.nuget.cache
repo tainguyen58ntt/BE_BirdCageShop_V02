@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "yexNXxWkDW6Gi87llO0ZAfGfkn+XQLCrUZ0F6qXYjT5m9jswJhgXa1iS+lNcIvyaZv1dDp8mu309JECcbNc/0g==",
+  "dgSpecHash": "knjgz1EerfsPq4lTvPl4xWABmLcbqB1dhwS1pUt6fmLFsxhRYxlljMuw4j71h34fM0xINOZVzjX0t+xvLuUynA==",
   "success": true,
   "projectFilePath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopService\\BirdCageShopService.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,8 @@
     "C:\\Users\\ASUS\\.nuget\\packages\\fluentvalidation\\11.7.1\\fluentvalidation.11.7.1.nupkg.sha512",
     "C:\\Users\\ASUS\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.22\\microsoft.aspnetcore.cryptography.internal.6.0.22.nupkg.sha512",
     "C:\\Users\\ASUS\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.22\\microsoft.aspnetcore.cryptography.keyderivation.6.0.22.nupkg.sha512",
+    "C:\\Users\\ASUS\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
+    "C:\\Users\\ASUS\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
     "C:\\Users\\ASUS\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\6.0.22\\microsoft.aspnetcore.identity.entityframeworkcore.6.0.22.nupkg.sha512",
     "C:\\Users\\ASUS\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\ASUS\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",

@@ -88,6 +88,8 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IVourcherService, VourcherService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+//
+builder.Services.AddScoped<IClaimService, ClaimService>();
 
 
 //
@@ -109,6 +111,8 @@ builder.Services.AddScoped<VourcherAddRule>();
 
 builder.Services.AddScoped<ICategoryValidator, CategoryValidator>();
 builder.Services.AddScoped<CategoryCreateRule>();
+
+builder.Services.AddHttpContextAccessor();
 //
 
 //
@@ -136,6 +140,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 
 app.UseHttpsRedirection();
 app.UseAuthentication();

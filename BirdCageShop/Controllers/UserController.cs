@@ -17,14 +17,23 @@ namespace BirdCageShop.Controllers
     {
 
         private readonly IUserService _userService;
-        public UserController(IUserService userService)
+		private readonly IClaimService _claimService;
+		public UserController(IUserService userService, IClaimService claimService)
         {
             _userService = userService;
-        }
+			_claimService = claimService;
+
+		}
+
+  //      [HttpGet("testClaim")]
+  //      public int Test()
+  //      {
+		//	return _claimService.GetCurrentUserId();
+
+		//}
 
         [HttpGet]
-        //test
-        //[Authorize(Roles = "Customer")]
+      
         public async Task<IActionResult> Get()
         {
             var rs = await _userService.GetUserAsync();
