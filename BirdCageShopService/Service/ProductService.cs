@@ -2,6 +2,7 @@
 using BirdCageShopInterface;
 using BirdCageShopInterface.IServices;
 using BirdCageShopInterface.IValidator;
+using BirdCageShopUtils.Pagination;
 using BirdCageShopViewModel.Product;
 using BirdCageShopViewModel.Role;
 using Microsoft.Extensions.Configuration;
@@ -19,6 +20,12 @@ namespace BirdCageShopService.Service
 		public ProductService(ITimeService timeService, IUnitOfWork unitOfWork, IMapper mapper, IConfiguration configuration) : base(timeService, unitOfWork, mapper, configuration)
 		{
 			
+		}
+
+		public async Task<Pagination<ProductViewModel>> GetPageAsync(int pageIndex, int pageSize)
+		{
+			var result = await _unitOfWork.ProductRepository.GetPaginationAsync(pageIndex, pageSize);
+			return _mapper.Map<Pagination<ProductViewModel>>(result);
 		}
 
 		public async Task<IEnumerable<ProductViewModel>> GetProductsAsync()

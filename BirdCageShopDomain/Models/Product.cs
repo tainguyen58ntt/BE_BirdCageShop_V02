@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BirdCageShopDbContext.Models
 {
@@ -15,6 +16,7 @@ namespace BirdCageShopDbContext.Models
         public int Id { get; set; }
         public string? Title { get; set; }
 		public string? Description { get; set; }
+		
 		public int CategoryId { get; set; }
         public DateTime? CreatedAt { get; set; } 
         public DateTime? ModifieldAt { get; set; }
@@ -28,6 +30,8 @@ namespace BirdCageShopDbContext.Models
 		public decimal? PriceAfterDiscount { get; set; }
 
 
+		public Category Category { get; set; }
+        //
 		public virtual ICollection<ProductImage> ProductImages { get; set; }
         public virtual ICollection<ProductReview> ProductReviews { get; set; }
         public virtual ICollection<WishlistItem> WishlistItems { get; set; }

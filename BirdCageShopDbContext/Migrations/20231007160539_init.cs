@@ -50,8 +50,8 @@ namespace BirdCageShopDbContext.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DiscountPercent = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    VoucherCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    VoucherCode = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -66,7 +66,18 @@ namespace BirdCageShopDbContext.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifieldAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    isDelete = table.Column<bool>(type: "bit", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    SKU = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    QuantityInStock = table.Column<int>(type: "int", nullable: false),
+                    EditedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PercentDiscount = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    PriceAfterDiscount = table.Column<decimal>(type: "decimal(18,2)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -398,6 +409,12 @@ namespace BirdCageShopDbContext.Migrations
                 name: "IX_Users_RoleId",
                 table: "Users",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Vouchers_VoucherCode",
+                table: "Vouchers",
+                column: "VoucherCode",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_WishlistItems_ProductId",

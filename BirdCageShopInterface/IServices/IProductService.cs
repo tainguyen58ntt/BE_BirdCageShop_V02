@@ -1,4 +1,5 @@
-﻿using BirdCageShopViewModel.Product;
+﻿using BirdCageShopUtils.Pagination;
+using BirdCageShopViewModel.Product;
 using BirdCageShopViewModel.Role;
 using System;
 using System.Collections.Generic;
@@ -11,5 +12,6 @@ namespace BirdCageShopInterface.IServices
 	public interface IProductService : IBaseService
 	{
 		Task<IEnumerable<ProductViewModel>> GetProductsAsync();
+		Task<Pagination<ProductViewModel>> GetPageAsync(int pageIndex, int pageSize);
 	}
 }

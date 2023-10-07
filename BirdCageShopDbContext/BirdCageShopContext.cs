@@ -57,7 +57,12 @@ namespace BirdCageShopDbContext.Models
             modelBuilder.Entity<Voucher>()
                 .HasIndex(v => v.VoucherCode)
                 .IsUnique();
-        }
+
+			modelBuilder.Entity<Product>()
+		   .HasOne(p => p.Category)
+		   .WithMany(c => c.Products)
+		   .HasForeignKey(p => p.CategoryId);
+		}
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
         //    modelBuilder.Entity<BankAccount>(entity =>

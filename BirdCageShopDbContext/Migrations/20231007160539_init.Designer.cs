@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BirdCageShopDbContext.Migrations
 {
     [DbContext(typeof(BirdCageShopContext))]
-    [Migration("20231004062238_add-notnull-expDate-vourcher")]
-    partial class addnotnullexpDatevourcher
+    [Migration("20231007160539_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -176,8 +176,42 @@ namespace BirdCageShopDbContext.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EditedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifieldAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal?>("PercentDiscount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("PriceAfterDiscount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("QuantityInStock")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SKU")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isDelete")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -435,9 +469,12 @@ namespace BirdCageShopDbContext.Migrations
 
                     b.Property<string>("VoucherCode")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("VoucherCode")
+                        .IsUnique();
 
                     b.ToTable("Vouchers");
                 });
@@ -533,11 +570,13 @@ namespace BirdCageShopDbContext.Migrations
 
             modelBuilder.Entity("BirdCageShopDbContext.Models.Product", b =>
                 {
-                    b.HasOne("BirdCageShopDbContext.Models.Category", null)
+                    b.HasOne("BirdCageShopDbContext.Models.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("BirdCageShopDbContext.Models.ProductFeature", b =>

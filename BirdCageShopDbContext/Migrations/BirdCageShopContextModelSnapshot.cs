@@ -568,11 +568,13 @@ namespace BirdCageShopDbContext.Migrations
 
             modelBuilder.Entity("BirdCageShopDbContext.Models.Product", b =>
                 {
-                    b.HasOne("BirdCageShopDbContext.Models.Category", null)
+                    b.HasOne("BirdCageShopDbContext.Models.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("BirdCageShopDbContext.Models.ProductFeature", b =>
