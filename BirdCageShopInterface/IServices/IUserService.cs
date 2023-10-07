@@ -1,5 +1,6 @@
 ﻿using BirdCageShopDbContext.Models;
 using BirdCageShopUtils.Pagination;
+using BirdCageShopViewModel.Auth;
 using BirdCageShopViewModel.Role;
 using BirdCageShopViewModel.User;
 using FluentValidation.Results;
@@ -13,8 +14,10 @@ namespace BirdCageShopInterface.IServices
 {
     public interface IUserService : IBaseService
     {
+		 Task<string?> AuthorizeAsync(SignInViewModel vm);
 
-        Task<IEnumerable<UserViewModel>> GetUserAsync();
+        //
+		Task<IEnumerable<UserViewModel>> GetUserAsync();
         Task<User?> GetUserByIdAsync(int id);
         Task<bool> DeleteAsync(User user);
         Task<Pagination<UserViewModel>> GetPageAsync(int pageIndex, int pageSizes);

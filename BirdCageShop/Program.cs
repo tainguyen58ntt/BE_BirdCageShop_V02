@@ -18,6 +18,10 @@ using Microsoft.AspNetCore.Identity;
 using BirdCageShopViewModel.User;
 using BirdCageShopViewModel.Voucher;
 using BirdCageShopViewModel.Category;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,7 +41,8 @@ builder.Services.AddDbContext<BirdCageShopContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
-
+//
+builder.Services.AddSingleton<ITimeService, TimeService>();
 
 // Repo
 
@@ -76,8 +81,24 @@ builder.Services.AddScoped<ICategoryValidator, CategoryValidator>();
 builder.Services.AddScoped<CategoryCreateRule>();
 //
 
-
-var app = builder.Build();
+//
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+	  .AddJwtBearer(options =>
+	  {
+		  options.RequireHttpsMetadata = false;
+		  options.SaveToken = true;
+		  options.TokenValidationParameters = new TokenValidationParameters()
+		  {
+			  ValidAudience = builder.Configuration["Jwt:Audience"],
+			  ValidIssuer = builder.Configuration["Jwt:Issuer"],
+			  ValidateIssuerSigningKey = true,
+			  ValidateLifetime = true,
+			  ClockSkew = TimeSpan.Zero,
+			  IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+			  //RoleClaimType = "role"
+		  };
+	  });
+var app = builder.Build(); 
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -87,7 +108,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -44,6 +44,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.22, )"
+            },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -452,7 +456,11 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj": {
+                "projectPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -468,6 +476,18 @@
             "BCrypt.Net-Next": {
               "target": "Package",
               "version": "[4.0.3, )"
+            },
+            "Microsoft.Extensions.Configuration.Abstractions": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[6.33.0, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.33.0, )"
             }
           },
           "imports": [
@@ -605,6 +625,10 @@
               "target": "Package",
               "version": "[12.0.1, )"
             },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.22, )"
+            },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -617,9 +641,17 @@
               "target": "Package",
               "version": "[6.0.22, )"
             },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[6.33.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.33.0, )"
             }
           },
           "imports": [

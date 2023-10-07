@@ -11,6 +11,8 @@ namespace BirdCageShopInterface.IRepositories
     public interface IUserRepository : IBaseRepository<User>
     {
         Task<User?> GetUserByEmailAsync(string email);
-    }
+		Task<string?> GetRoleNameByUserIdAsync(int id);
+		Task<User?> AuthorizeAsync(string email, string password);
+	}
 }
 

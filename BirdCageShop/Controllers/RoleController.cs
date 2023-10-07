@@ -1,6 +1,7 @@
 ﻿using BirdCageShopInterface.IServices;
 using BirdCageShopViewModel.Role;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ namespace BirdCageShop.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class RoleController : ControllerBase
     {
         private readonly IRoleService _roleService;
@@ -15,7 +17,8 @@ namespace BirdCageShop.Controllers
             _roleService = roleService; 
         }
 
-        [HttpGet]   
+        [HttpGet]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> Get()
         {
             var rs = await _roleService.GetRolesAsync();

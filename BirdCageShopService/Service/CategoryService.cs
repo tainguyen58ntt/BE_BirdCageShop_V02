@@ -6,6 +6,7 @@ using BirdCageShopInterface.IValidator;
 using BirdCageShopViewModel.Category;
 using BirdCageShopViewModel.Role;
 using FluentValidation.Results;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +19,8 @@ namespace BirdCageShopService.Service
     {
 
         private readonly ICategoryValidator _categoryValidator;
-        public CategoryService(IUnitOfWork unitOfWork, IMapper mapper, ICategoryValidator categoryValidator) : base(unitOfWork, mapper)
-        {
+		public CategoryService(ICategoryValidator categoryValidator, IUnitOfWork unitOfWork, IMapper mapper, IUserValidator userValidator, IConfiguration configuration,ITimeService timeService) : base( timeService,unitOfWork, mapper, configuration)
+		{
             _categoryValidator = categoryValidator; 
         }
 

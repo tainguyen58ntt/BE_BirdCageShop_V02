@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace BirdCageShopReposiory.Repositories
 {
@@ -22,5 +23,7 @@ namespace BirdCageShopReposiory.Repositories
             return await _context.Set<Role>()
                .FirstOrDefaultAsync(x => x.RoleName.Equals(name));
         }
-    }
+
+	
+	}
 }

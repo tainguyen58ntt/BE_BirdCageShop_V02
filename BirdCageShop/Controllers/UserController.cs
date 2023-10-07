@@ -5,6 +5,7 @@ using BirdCageShopService.Service;
 using BirdCageShopUtils.UtilMethod;
 using BirdCageShopViewModel.User;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,6 +23,8 @@ namespace BirdCageShop.Controllers
         }
 
         [HttpGet]
+        //test
+        //[Authorize(Roles = "Customer")]
         public async Task<IActionResult> Get()
         {
             var rs = await _userService.GetUserAsync();

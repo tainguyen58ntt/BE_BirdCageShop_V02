@@ -5,6 +5,7 @@ using BirdCageShopInterface.IValidator;
 using BirdCageShopUtils.Pagination;
 using BirdCageShopViewModel.Order;
 using BirdCageShopViewModel.User;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,8 +17,8 @@ namespace BirdCageShopService.Service
     public class OrderService:BaseService, IOrderService 
     {
 
-        public OrderService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
-        {
+		public OrderService(IUnitOfWork unitOfWork, IMapper mapper, IUserValidator userValidator, IConfiguration configuration, ITimeService timeService) : base(timeService,unitOfWork, mapper, configuration)
+		{
             
         }
 

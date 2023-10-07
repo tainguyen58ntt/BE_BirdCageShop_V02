@@ -5,9 +5,11 @@ using BirdCageShopInterface.IServices;
 using BirdCageShopInterface.IValidator;
 using BirdCageShopUtils.Pagination;
 using BirdCageShopUtils.UtilMethod;
+using BirdCageShopViewModel.Auth;
 using BirdCageShopViewModel.Role;
 using BirdCageShopViewModel.User;
 using FluentValidation.Results;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,13 +22,27 @@ namespace BirdCageShopService.Service
     {
         private readonly IUserValidator _userValidator;
 
-        public UserService(IUnitOfWork unitOfWork, IMapper mapper, IUserValidator userValidator) : base(unitOfWork, mapper)
+        public UserService(ITimeService timeService, IUnitOfWork unitOfWork, IMapper mapper, IUserValidator userValidator, IConfiguration configuration) : base(timeService,unitOfWork, mapper,configuration)
         {
             //_roleValidator = roleValidator;
             _userValidator = userValidator;
         }
 
-        public async Task<bool> ChangePasswordAsync(UserChangePasswordViewModel vm)
+		public async Task<string?> AuthorizeAsync(SignInViewModel vm)
+		{
+			var user = await _unitOfWork.UserRepository.AuthorizeAsync(vm.Email, vm.Password);
+            if (user is null) return null;
+            //if (_configuration == null) return null;
+            //if (_timeService == null) return null;
+            //if (user.Role.RoleName == null) return null;
+            var roleName = await _unitOfWork.UserRepository.GetRoleNameByUserIdAsync(user.Id);
+            var accessToken = user.GenerateToken(user.Id, _configuration, _timeService.GetCurrentTime(), 60 * 24 * 30, roleName);
+
+
+			return accessToken;
+		}
+
+		public async Task<bool> ChangePasswordAsync(UserChangePasswordViewModel vm)
         {
             //var currentUserId = _claimService.GetCurrentUserId();
             //if (currentUserId == -1) return false;

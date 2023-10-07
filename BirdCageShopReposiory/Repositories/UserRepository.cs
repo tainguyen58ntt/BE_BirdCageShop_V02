@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BirdCageShopUtils.UtilMethod;
 
 namespace BirdCageShopReposiory.Repositories
 {
@@ -17,7 +18,18 @@ namespace BirdCageShopReposiory.Repositories
         {
         }
 
-        public override async Task<IEnumerable<User>> GetAllAsync()
+		public async Task<User?> AuthorizeAsync(string email, string password)
+		{
+			var admin = await _context.Set<User>()
+			  .AsNoTracking()
+              .Include(u => u.Role)
+			  .FirstOrDefaultAsync(x => x.Email == email && !x.IsDelete);
+			if (admin == null) return null;
+			if (password.IsCorrectHashSource(admin.PasswordHash)) return admin;
+			return null;
+		}
+
+		public override async Task<IEnumerable<User>> GetAllAsync()
         {
             return await _context.Set<User>()
                 .AsNoTracking()
@@ -47,11 +59,18 @@ namespace BirdCageShopReposiory.Repositories
             return result;
         }
 
-        public async Task<User?> GetUserByEmailAsync(string email)
+		public async Task<string?> GetRoleNameByUserIdAsync(int id)
+		{
+			var user = await _context.Set<User>().Include(u => u.Role).FirstOrDefaultAsync(x => x.Id == id && x.IsDelete == false);
+            var rs = user.Role.RoleName;
+			return rs;
+		}
+
+		public async Task<User?> GetUserByEmailAsync(string email)
         {
             var user = await _context.Set<User>().FirstOrDefaultAsync(x => x.Email.Equals(email) && x.IsDelete == false);
-
-            return user;
+			
+			return user;
         }
     }
 }

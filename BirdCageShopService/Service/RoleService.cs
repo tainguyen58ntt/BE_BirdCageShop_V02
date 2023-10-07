@@ -5,6 +5,7 @@ using BirdCageShopInterface.IServices;
 using BirdCageShopInterface.IValidator;
 using BirdCageShopViewModel.Role;
 using FluentValidation.Results;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +18,8 @@ namespace BirdCageShopService.Service
     {
         private readonly IRoleValidator _roleValidator;
 
-        public RoleService(IUnitOfWork unitOfWork, IMapper mapper, IRoleValidator roleValidator) : base(unitOfWork, mapper)
-        {
+		public RoleService(ITimeService timeService,IRoleValidator roleValidator, ICategoryValidator categoryValidator, IUnitOfWork unitOfWork, IMapper mapper, IUserValidator userValidator, IConfiguration configuration) : base(timeService,unitOfWork, mapper, configuration)
+		{
             _roleValidator = roleValidator;
         }
 

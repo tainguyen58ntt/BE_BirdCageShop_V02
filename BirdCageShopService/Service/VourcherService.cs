@@ -7,6 +7,7 @@ using BirdCageShopUtils.UtilMethod;
 using BirdCageShopViewModel.User;
 using BirdCageShopViewModel.Voucher;
 using FluentValidation.Results;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,8 +20,8 @@ namespace BirdCageShopService.Service
     {
 
         private readonly IVoucherValidator _voucherValidator;
-        public VourcherService(IUnitOfWork unitOfWork, IMapper mapper, IVoucherValidator voucherValidator) : base(unitOfWork, mapper)
-        {
+		public VourcherService(ITimeService timeService,IVoucherValidator voucherValidator, IUnitOfWork unitOfWork, IMapper mapper, IUserValidator userValidator, IConfiguration configuration) : base(timeService,unitOfWork, mapper, configuration)
+		{
             _voucherValidator = voucherValidator;
         }
 
