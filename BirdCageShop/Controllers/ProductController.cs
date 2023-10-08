@@ -74,5 +74,15 @@ namespace BirdCageShop.Controllers
 		}
 
 
+
+		//
+		[HttpGet("from-wishlist")]
+		public async Task<IActionResult> GetFromWishlistAsync()
+		{
+			var result = await _productService.GetProductsFromWishlistAsync();
+			return Ok(result);
+		}
+
+
 	}
 }

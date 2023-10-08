@@ -11,8 +11,9 @@ namespace BirdCageShopInterface.IRepositories
 	{
 		Task<IEnumerable<Product>> GetProductsByCategoryAsync(int categoryId);
 		Task<Product> GetProductWithReviewByProIdAsync(int productID);
+		Task<IEnumerable<Product>> GetProductsFromWishlistAsync(int customerId);
 
-		
+
 
 	}
 }

@@ -53,7 +53,8 @@ namespace BirdCageShopOther.Mapper
 			//
 			CreateMap<ProductViewModel, Product>().ReverseMap();
 			CreateMap<ProductWithReviewViewModel, Product>().ReverseMap();
-
+	//		CreateMap<ProductFromWishlist, Product>().ForMember(dest => des, opt => opt.MapFrom(src => src.Pr))
+	//.ReverseMap();
 
 			//
 			//CreateMap<ProductReviewsViewModel, ProductReview>().ReverseMap();

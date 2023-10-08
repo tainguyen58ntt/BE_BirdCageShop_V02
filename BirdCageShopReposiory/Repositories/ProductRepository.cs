@@ -43,6 +43,18 @@ namespace BirdCageShopReposiory.Repositories
 				   .ToListAsync();
 		}
 
+		public async Task<IEnumerable<Product>> GetProductsFromWishlistAsync(int customerId)
+		{
+			return await _context.Set<Product>()
+			  .AsNoTracking()
+			  .Include(p => p.Category)
+			  .Include(p => p.WishlistItems)
+			  .Include(p => p.ProductImages)
+			  .Where(x => !x.isDelete &&
+			  x.WishlistItems.Any(pw => pw.WishList.UserId == customerId))
+			  .ToListAsync();
+		}
+
 		public async Task<Product> GetProductWithReviewByProIdAsync(int productID)
 		{
 			return await _context.Set<Product>()

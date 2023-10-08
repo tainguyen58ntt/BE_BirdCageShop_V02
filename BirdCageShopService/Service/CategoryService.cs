@@ -19,12 +19,17 @@ namespace BirdCageShopService.Service
     {
 
         private readonly ICategoryValidator _categoryValidator;
-		public CategoryService(ICategoryValidator categoryValidator, IUnitOfWork unitOfWork, IMapper mapper, IUserValidator userValidator, IConfiguration configuration,ITimeService timeService) : base( timeService,unitOfWork, mapper, configuration)
-		{
-            _categoryValidator = categoryValidator; 
-        }
 
-        public async Task<bool> CreateAsync(CategoryCreateViewModel vm)
+		public CategoryService(IClaimService claimService, ITimeService timeService, IUnitOfWork unitOfWork, IMapper mapper, IConfiguration configuration) : base(claimService, timeService, unitOfWork, mapper, configuration)
+		{
+		}
+
+		//public CategoryService(ICategoryValidator categoryValidator, IUnitOfWork unitOfWork, IMapper mapper, IUserValidator userValidator, IConfiguration configuration,ITimeService timeService) : base( timeService,unitOfWork, mapper, configuration)
+		//{
+		//          _categoryValidator = categoryValidator; 
+		//      }
+
+		public async Task<bool> CreateAsync(CategoryCreateViewModel vm)
         {
             var category = _mapper.Map<Category>(vm);
             category.CreateAt = DateTime.Now;

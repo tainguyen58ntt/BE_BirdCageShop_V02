@@ -22,5 +22,8 @@ namespace BirdCageShopInterface.IServices
 
 		//
 		Task<ProductWithReviewViewModel?> GetFeedBackByProductId(int productId);
+
+		//
+		Task<IEnumerable<ProductFromWishlist>> GetProductsFromWishlistAsync();
 	}
 }

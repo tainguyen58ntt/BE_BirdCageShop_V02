@@ -22,11 +22,16 @@ namespace BirdCageShopService.Service
     {
         private readonly IUserValidator _userValidator;
 
-        public UserService(ITimeService timeService, IUnitOfWork unitOfWork, IMapper mapper, IUserValidator userValidator, IConfiguration configuration) : base(timeService,unitOfWork, mapper,configuration)
-        {
-            //_roleValidator = roleValidator;
+		public UserService (IUserValidator userValidator,IClaimService claimService, ITimeService timeService, IUnitOfWork unitOfWork, IMapper mapper, IConfiguration configuration) : base(claimService, timeService, unitOfWork, mapper, configuration)
+		{
             _userValidator = userValidator;
-        }
+		}
+
+		//public UserService(ITimeService timeService, IUnitOfWork unitOfWork, IMapper mapper, IUserValidator userValidator, IConfiguration configuration) : base(timeService,unitOfWork, mapper,configuration)
+		//{
+		//    //_roleValidator = roleValidator;
+		//    _userValidator = userValidator;
+		//}
 
 		public async Task<string?> AuthorizeAsync(SignInViewModel vm)
 		{

@@ -18,12 +18,16 @@ namespace BirdCageShopService.Service
     {
         private readonly IRoleValidator _roleValidator;
 
-		public RoleService(ITimeService timeService,IRoleValidator roleValidator, ICategoryValidator categoryValidator, IUnitOfWork unitOfWork, IMapper mapper, IUserValidator userValidator, IConfiguration configuration) : base(timeService,unitOfWork, mapper, configuration)
+		public RoleService(IClaimService claimService, ITimeService timeService, IUnitOfWork unitOfWork, IMapper mapper, IConfiguration configuration) : base(claimService, timeService, unitOfWork, mapper, configuration)
 		{
-            _roleValidator = roleValidator;
-        }
+		}
 
-        public async Task<bool> CreateAsync(RoleAddViewModel vm)
+		//public RoleService(ITimeService timeService,IRoleValidator roleValidator, ICategoryValidator categoryValidator, IUnitOfWork unitOfWork, IMapper mapper, IUserValidator userValidator, IConfiguration configuration) : base(timeService,unitOfWork, mapper, configuration)
+		//{
+		//          _roleValidator = roleValidator;
+		//      }
+
+		public async Task<bool> CreateAsync(RoleAddViewModel vm)
         {
             var role = _mapper.Map<Role>(vm);
             role.CreateAt = DateTime.Now;
