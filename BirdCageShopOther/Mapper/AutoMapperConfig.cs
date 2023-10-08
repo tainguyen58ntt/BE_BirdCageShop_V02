@@ -4,6 +4,9 @@ using BirdCageShopUtils.Pagination;
 using BirdCageShopViewModel.Category;
 using BirdCageShopViewModel.Order;
 using BirdCageShopViewModel.Product;
+using BirdCageShopViewModel.ProductFeature;
+using BirdCageShopViewModel.ProductImage;
+using BirdCageShopViewModel.ProductSpecifications;
 using BirdCageShopViewModel.Role;
 using BirdCageShopViewModel.User;
 using BirdCageShopViewModel.Voucher;
@@ -48,6 +51,11 @@ namespace BirdCageShopOther.Mapper
 
 			//
 			CreateMap<ProductViewModel, Product>().ReverseMap();
+
+			//
+			CreateMap<ProductFeatureViewModel, ProductFeature>().ReverseMap();
+			CreateMap<ProductSpecificationsViewModel, ProductSpecification>().ReverseMap();
+			CreateMap<ProductImageViewModel, ProductImage>().ReverseMap();
 
 
 		}

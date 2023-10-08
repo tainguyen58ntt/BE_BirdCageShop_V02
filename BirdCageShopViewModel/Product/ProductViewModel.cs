@@ -1,4 +1,8 @@
 ﻿using BirdCageShopViewModel.Category;
+using BirdCageShopViewModel.Order;
+using BirdCageShopViewModel.ProductFeature;
+using BirdCageShopViewModel.ProductImage;
+using BirdCageShopViewModel.ProductSpecifications;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,5 +28,8 @@ namespace BirdCageShopViewModel.Product
 		public decimal? PriceAfterDiscount { get; set; }
 
 		public CategoryViewModel Category { get; set; }
+		public IEnumerable<ProductFeatureViewModel> ProductFeatures { get; set; }
+		public IEnumerable<ProductSpecificationsViewModel> ProductSpecifications { get; set; }
+		public IEnumerable<ProductImageViewModel> ProductImages { get; set; }
 	}
 }

@@ -20,6 +20,10 @@ namespace BirdCageShopReposiory.Repositories
 		{
 			return await _context.Set<Product>()
 				.AsNoTracking()
+				.Include(p => p.ProductFeatures)
+				.Include(p => p.ProductSpecifications)
+				.Include(p => p.ProductImages)
+				.Include(p => p.Category)
 				.Where(x => !x.isDelete)
 				.ToListAsync();
 		}
