@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "viS5iok989hYkjwj5PENY3KsJ2i0amuj+6HdL5DzgikWZLL2lzE89ciPgOa25KE06+1+oYqcsQkMEkzke9unGw==",
+  "dgSpecHash": "rFw8T4m0NxK7eM+dDwoWPwgbwXpDM+b3qu3S3LMWsyBzD/35qVilrIW9DG7JsXhjhIz/vwCSWYJTLu+7rmoodA==",
   "success": true,
-  "projectFilePath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopOther\\BirdCageShopOther.csproj",
+  "projectFilePath": "E:\\SWP-Project\\BE_BirdCageShop_V02\\BirdCageShopOther\\BirdCageShopOther.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\ASUS\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
-    "C:\\Users\\ASUS\\.nuget\\packages\\fluentvalidation\\11.7.1\\fluentvalidation.11.7.1.nupkg.sha512",
-    "C:\\Users\\ASUS\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512"
+    "C:\\Users\\T480\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\T480\\.nuget\\packages\\fluentvalidation\\11.7.1\\fluentvalidation.11.7.1.nupkg.sha512",
+    "C:\\Users\\T480\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512"
   ],
   "logs": []
 }
