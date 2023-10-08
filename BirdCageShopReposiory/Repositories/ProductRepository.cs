@@ -31,8 +31,13 @@ namespace BirdCageShopReposiory.Repositories
 		public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(int categoryId)
 		{
 			return await _context.Set<Product>()
+				   //.AsNoTracking()
+				   //.Include(x => x.Category)
 				   .AsNoTracking()
-				   .Include(x => x.Category)
+				.Include(p => p.ProductFeatures)
+				.Include(p => p.ProductSpecifications)
+				.Include(p => p.ProductImages)
+				.Include(p => p.Category)
 				   //.Include(x => x.ProductWishlist)
 				   .Where(x => !x.isDelete && x.CategoryId == categoryId)
 				   .ToListAsync();

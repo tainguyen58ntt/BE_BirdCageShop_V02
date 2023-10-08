@@ -46,6 +46,7 @@ namespace BirdCageShop.Controllers
 		[HttpGet("by-category/{categoryId}")]
 		public async Task<IActionResult> GetByCategoryAsync([FromRoute] int categoryId)
 		{
+		
 			var result = await _productService.GetProductByCategoryAsync(categoryId);
 			return Ok(result);
 		}

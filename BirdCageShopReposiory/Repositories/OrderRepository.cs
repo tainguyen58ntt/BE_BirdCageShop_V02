@@ -15,7 +15,7 @@ namespace BirdCageShopReposiory.Repositories
 
         public OrderRepository(BirdCageShopContext context) : base(context)
         {
-        }
+        }   
         public override async Task<Pagination<Order>> GetPaginationAsync(int pageIndex, int pageSize)
         {
             var source = _context.Set<Order>()
