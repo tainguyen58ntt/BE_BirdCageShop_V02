@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BirdCageShopDbContext.Migrations
 {
     [DbContext(typeof(BirdCageShopContext))]
-    [Migration("20231008082735_add-shoppingcart-table")]
-    partial class addshoppingcarttable
+    [Migration("20231008090508_add-shoppingcart")]
+    partial class addshoppingcart
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -541,7 +541,7 @@ namespace BirdCageShopDbContext.Migrations
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("ExpDate")
+                    b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("ProductId")

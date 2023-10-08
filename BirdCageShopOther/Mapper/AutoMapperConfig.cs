@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BirdCageShopDbContext.Models;
+using BirdCageShopDomain.Models;
 using BirdCageShopUtils.Pagination;
 using BirdCageShopViewModel.Category;
 using BirdCageShopViewModel.Order;
@@ -9,6 +10,7 @@ using BirdCageShopViewModel.ProductImage;
 using BirdCageShopViewModel.ProductReviews;
 using BirdCageShopViewModel.ProductSpecifications;
 using BirdCageShopViewModel.Role;
+using BirdCageShopViewModel.ShoppingCart;
 using BirdCageShopViewModel.User;
 using BirdCageShopViewModel.Voucher;
 using System;
@@ -65,7 +67,11 @@ namespace BirdCageShopOther.Mapper
 			CreateMap<ProductSpecificationsViewModel, ProductSpecification>().ReverseMap();
 			CreateMap<ProductImageViewModel, ProductImage>().ReverseMap();
 
-
+			//
+			CreateMap<ShoppingCart, ShoppingCartViewModel>()
+                .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Product.Title))
+				.ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Product.Description))
+				.ReverseMap();
 
 		}
     }
