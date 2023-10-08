@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BirdCageShopDomain.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -36,6 +37,7 @@ namespace BirdCageShopDbContext.Models
         public virtual ICollection<ProductReview> ProductReviews { get; set; }
         public virtual ICollection<WishlistItem> WishlistItems { get; set; }
         public virtual ICollection<ProductFeature> ProductFeatures { get; set; }
-        public virtual ICollection<ProductSpecification> ProductSpecifications { get; set; }
+		public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
+		public virtual ICollection<ProductSpecification> ProductSpecifications { get; set; }
     }
 }

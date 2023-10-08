@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BirdCageShopDomain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
@@ -29,9 +30,10 @@ namespace BirdCageShopDbContext.Models
         public virtual DbSet<Voucher> Vouchers { get; set; } = null!;
         public virtual DbSet<Wishlist> Wishlists { get; set; } = null!;
         public virtual DbSet<WishlistItem> WishlistItems { get; set; } = null!;
+		public virtual DbSet<ShoppingCart> ShoppingCarts { get; set; } = null!;
 
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Order>()
                 .Property(o => o.TotalPrice)
@@ -62,6 +64,21 @@ namespace BirdCageShopDbContext.Models
 		   .HasOne(p => p.Category)
 		   .WithMany(c => c.Products)
 		   .HasForeignKey(p => p.CategoryId);
+
+			modelBuilder.Entity<Product>()
+	   .HasMany(p => p.ShoppingCarts)
+	   .WithOne(sc => sc.Product)
+	   .HasForeignKey(sc => sc.ProductId);
+
+			modelBuilder.Entity<ShoppingCart>()
+				.HasOne(sc => sc.Product)
+				.WithMany(p => p.ShoppingCarts)
+				.HasForeignKey(sc => sc.ProductId);
+
+			modelBuilder.Entity<User>()
+	.HasMany(u => u.ShoppingCarts)
+	.WithOne(sc => sc.User)
+	.HasForeignKey(sc => sc.UserId);
 		}
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{

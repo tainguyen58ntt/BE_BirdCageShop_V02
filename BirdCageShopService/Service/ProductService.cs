@@ -111,5 +111,7 @@ namespace BirdCageShopService.Service
 			_unitOfWork.ProductRepository.Update(product);
 			return await _unitOfWork.SaveChangesAsync();
 		}
+
+	
 	}
 }

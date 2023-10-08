@@ -25,5 +25,6 @@ namespace BirdCageShopInterface.IServices
 
 		//
 		Task<IEnumerable<ProductFromWishlist>> GetProductsFromWishlistAsync();
+		//Task<bool> AddToWishlistAsync(int productId);
 	}
 }

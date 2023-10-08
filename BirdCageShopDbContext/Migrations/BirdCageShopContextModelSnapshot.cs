@@ -525,6 +525,38 @@ namespace BirdCageShopDbContext.Migrations
                     b.ToTable("WishlistItems");
                 });
 
+            modelBuilder.Entity("BirdCageShopDomain.Models.ShoppingCart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ExpDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ShoppingCarts");
+                });
+
             modelBuilder.Entity("BirdCageShopDbContext.Models.BankAccount", b =>
                 {
                     b.HasOne("BirdCageShopDbContext.Models.User", "User")
@@ -662,6 +694,25 @@ namespace BirdCageShopDbContext.Migrations
                     b.Navigation("WishList");
                 });
 
+            modelBuilder.Entity("BirdCageShopDomain.Models.ShoppingCart", b =>
+                {
+                    b.HasOne("BirdCageShopDbContext.Models.Product", "Product")
+                        .WithMany("ShoppingCarts")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BirdCageShopDbContext.Models.User", "User")
+                        .WithMany("ShoppingCarts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("BirdCageShopDbContext.Models.Category", b =>
                 {
                     b.Navigation("Products");
@@ -682,6 +733,8 @@ namespace BirdCageShopDbContext.Migrations
 
                     b.Navigation("ProductSpecifications");
 
+                    b.Navigation("ShoppingCarts");
+
                     b.Navigation("WishlistItems");
                 });
 
@@ -697,6 +750,8 @@ namespace BirdCageShopDbContext.Migrations
                     b.Navigation("Orders");
 
                     b.Navigation("ProductReviews");
+
+                    b.Navigation("ShoppingCarts");
 
                     b.Navigation("Wishlist");
                 });

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BirdCageShopDomain.Models;
+using System;
 using System.Collections.Generic;
 
 namespace BirdCageShopDbContext.Models
@@ -31,6 +32,7 @@ namespace BirdCageShopDbContext.Models
         public virtual Wishlist? Wishlist { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<ProductReview> ProductReviews { get; set; }
-        public IEnumerable<BankAccount> BankAccounts { get; set; }  
+		public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
+		public IEnumerable<BankAccount> BankAccounts { get; set; }  
     }
 }
