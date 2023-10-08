@@ -50,6 +50,18 @@ namespace BirdCageShop.Controllers
 			return Ok(result);
 		}
 
+
+		[HttpGet("view-feedback/{productId}")]
+		public async Task<IActionResult> GetFeedBackByIdAsync([FromRoute] int productId)
+		{
+			var product = await _productService.GetProductByIdAsync(productId);
+			if (product is null) return NotFound();
+			var result = await _productService.GetFeedBackByProductId(productId);
+			return Ok(result);
+		}
+
+
+
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> RemoveAsync(int id)
 		{
@@ -59,5 +71,7 @@ namespace BirdCageShop.Controllers
 			if (result is true) return Ok();
 			return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Delete product failed. Server Error." });
 		}
+
+
 	}
 }

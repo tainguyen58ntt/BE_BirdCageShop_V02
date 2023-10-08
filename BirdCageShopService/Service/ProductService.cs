@@ -5,6 +5,7 @@ using BirdCageShopInterface.IServices;
 using BirdCageShopInterface.IValidator;
 using BirdCageShopUtils.Pagination;
 using BirdCageShopViewModel.Product;
+using BirdCageShopViewModel.ProductReviews;
 using BirdCageShopViewModel.Role;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -27,6 +28,13 @@ namespace BirdCageShopService.Service
 		{
 			var result = await _unitOfWork.ProductRepository.GetByIdAsync(id);
 			return _mapper.Map<ProductViewModel>(result);
+		}
+
+		public async Task<ProductWithReviewViewModel?> GetFeedBackByProductId(int productId)
+		{
+			
+			var result = await _unitOfWork.ProductRepository.GetProductWithReviewByProIdAsync(productId);
+			return _mapper.Map<ProductWithReviewViewModel>(result);
 		}
 
 		public async Task<Pagination<ProductViewModel>> GetPageAsync(int pageIndex, int pageSize)

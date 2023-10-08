@@ -37,5 +37,14 @@ namespace BirdCageShopReposiory.Repositories
 				   .Where(x => !x.isDelete && x.CategoryId == categoryId)
 				   .ToListAsync();
 		}
+
+		public async Task<Product> GetProductWithReviewByProIdAsync(int productID)
+		{
+			return await _context.Set<Product>()
+				.AsNoTracking()
+				.Include(p => p.ProductReviews)
+				.ThenInclude(pr => pr.User)
+				.FirstOrDefaultAsync(x => !x.isDelete);
+		}
 	}
 }

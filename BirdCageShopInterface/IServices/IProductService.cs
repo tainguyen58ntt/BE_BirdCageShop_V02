@@ -1,6 +1,7 @@
 ﻿using BirdCageShopDbContext.Models;
 using BirdCageShopUtils.Pagination;
 using BirdCageShopViewModel.Product;
+using BirdCageShopViewModel.ProductReviews;
 using BirdCageShopViewModel.Role;
 using System;
 using System.Collections.Generic;
@@ -18,5 +19,8 @@ namespace BirdCageShopInterface.IServices
 		Task<Product?> GetProductByIdAsync(int id);
 		Task<IEnumerable<ProductViewModel>> GetProductByCategoryAsync(int categoryId);
 		Task<bool> RemoveAsync(Product product);
+
+		//
+		Task<ProductWithReviewViewModel?> GetFeedBackByProductId(int productId);
 	}
 }
