@@ -38,7 +38,9 @@ namespace BirdCageShopOther.Mapper
             CreateMap<UserChangePasswordViewModel, User>().ReverseMap();
 
             //
-            
+            CreateMap<CreateFeature,Feature>().ReverseMap();
+            CreateMap<GetFeature, Feature>().ReverseMap();
+            CreateMap<UpdateFeature, Feature>().ReverseMap();
 
             //
             CreateMap<VourcherViewModel, Voucher>().ReverseMap();
@@ -71,7 +73,7 @@ namespace BirdCageShopOther.Mapper
             CreateMap<ProductReview, ProductReviewsViewModel>()
 	.ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.User.LastName))
 	.ReverseMap();
-			CreateMap<ProductFeatureViewModel, ProductFeature>().ReverseMap();
+			/*CreateMap<ProductFeatureViewModel, ProductFeature>().ReverseMap();*/
 			CreateMap<ProductSpecificationsViewModel, ProductSpecification>().ReverseMap();
 			CreateMap<ProductImageViewModel, ProductImage>().ReverseMap();
 

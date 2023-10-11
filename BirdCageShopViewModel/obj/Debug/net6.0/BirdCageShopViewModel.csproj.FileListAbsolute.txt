@@ -10,3 +10,15 @@ D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShopViewMod
 D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShopViewModel\obj\Debug\net6.0\refint\BirdCageShopViewModel.dll
 D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShopViewModel\obj\Debug\net6.0\BirdCageShopViewModel.pdb
 D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShopViewModel\obj\Debug\net6.0\ref\BirdCageShopViewModel.dll
+E:\SWP-2023\BE_BirdCageShop_V02\BirdCageShopViewModel\bin\Debug\net6.0\BirdCageShopViewModel.deps.json
+E:\SWP-2023\BE_BirdCageShop_V02\BirdCageShopViewModel\bin\Debug\net6.0\BirdCageShopViewModel.dll
+E:\SWP-2023\BE_BirdCageShop_V02\BirdCageShopViewModel\bin\Debug\net6.0\BirdCageShopViewModel.pdb
+E:\SWP-2023\BE_BirdCageShop_V02\BirdCageShopViewModel\obj\Debug\net6.0\BirdCageShopViewModel.csproj.AssemblyReference.cache
+E:\SWP-2023\BE_BirdCageShop_V02\BirdCageShopViewModel\obj\Debug\net6.0\BirdCageShopViewModel.GeneratedMSBuildEditorConfig.editorconfig
+E:\SWP-2023\BE_BirdCageShop_V02\BirdCageShopViewModel\obj\Debug\net6.0\BirdCageShopViewModel.AssemblyInfoInputs.cache
+E:\SWP-2023\BE_BirdCageShop_V02\BirdCageShopViewModel\obj\Debug\net6.0\BirdCageShopViewModel.AssemblyInfo.cs
+E:\SWP-2023\BE_BirdCageShop_V02\BirdCageShopViewModel\obj\Debug\net6.0\BirdCageShopViewModel.csproj.CoreCompileInputs.cache
+E:\SWP-2023\BE_BirdCageShop_V02\BirdCageShopViewModel\obj\Debug\net6.0\BirdCageShopViewModel.dll
+E:\SWP-2023\BE_BirdCageShop_V02\BirdCageShopViewModel\obj\Debug\net6.0\refint\BirdCageShopViewModel.dll
+E:\SWP-2023\BE_BirdCageShop_V02\BirdCageShopViewModel\obj\Debug\net6.0\BirdCageShopViewModel.pdb
+E:\SWP-2023\BE_BirdCageShop_V02\BirdCageShopViewModel\obj\Debug\net6.0\ref\BirdCageShopViewModel.dll

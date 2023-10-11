@@ -12,3 +12,17 @@ D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShopDomain\
 D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShopDomain\obj\Debug\net6.0\ref\BirdCageShopDomain.dll
 D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShopDomain\bin\Debug\net6.0\BirdCageShopDomain.runtimeconfig.json
 D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShopDomain\obj\Debug\net6.0\BirdCageShopDomain.genruntimeconfig.cache
+E:\SWP-2023\BE_BirdCageShop_V02\BirdCageShopDomain\bin\Debug\net6.0\BirdCageShopDomain.deps.json
+E:\SWP-2023\BE_BirdCageShop_V02\BirdCageShopDomain\bin\Debug\net6.0\BirdCageShopDomain.runtimeconfig.json
+E:\SWP-2023\BE_BirdCageShop_V02\BirdCageShopDomain\bin\Debug\net6.0\BirdCageShopDomain.dll
+E:\SWP-2023\BE_BirdCageShop_V02\BirdCageShopDomain\bin\Debug\net6.0\BirdCageShopDomain.pdb
+E:\SWP-2023\BE_BirdCageShop_V02\BirdCageShopDomain\obj\Debug\net6.0\BirdCageShopDomain.csproj.AssemblyReference.cache
+E:\SWP-2023\BE_BirdCageShop_V02\BirdCageShopDomain\obj\Debug\net6.0\BirdCageShopDomain.GeneratedMSBuildEditorConfig.editorconfig
+E:\SWP-2023\BE_BirdCageShop_V02\BirdCageShopDomain\obj\Debug\net6.0\BirdCageShopDomain.AssemblyInfoInputs.cache
+E:\SWP-2023\BE_BirdCageShop_V02\BirdCageShopDomain\obj\Debug\net6.0\BirdCageShopDomain.AssemblyInfo.cs
+E:\SWP-2023\BE_BirdCageShop_V02\BirdCageShopDomain\obj\Debug\net6.0\BirdCageShopDomain.csproj.CoreCompileInputs.cache
+E:\SWP-2023\BE_BirdCageShop_V02\BirdCageShopDomain\obj\Debug\net6.0\BirdCageShopDomain.dll
+E:\SWP-2023\BE_BirdCageShop_V02\BirdCageShopDomain\obj\Debug\net6.0\refint\BirdCageShopDomain.dll
+E:\SWP-2023\BE_BirdCageShop_V02\BirdCageShopDomain\obj\Debug\net6.0\BirdCageShopDomain.pdb
+E:\SWP-2023\BE_BirdCageShop_V02\BirdCageShopDomain\obj\Debug\net6.0\BirdCageShopDomain.genruntimeconfig.cache
+E:\SWP-2023\BE_BirdCageShop_V02\BirdCageShopDomain\obj\Debug\net6.0\ref\BirdCageShopDomain.dll

@@ -23,6 +23,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using BirdCageShopViewModel.ProductFeature;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -84,6 +85,8 @@ builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
 builder.Services.AddScoped<IWishlistRepository, WishlistRepository>();
+builder.Services.AddScoped<IFeatureRepository, FeatureRepository>();
+
 
 // Service 
 builder.Services.AddScoped<IRoleService, RoleService>();
@@ -93,6 +96,8 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
+builder.Services.AddScoped<IFeatureService, FeatureService>();
+
 
 builder.Services.AddScoped<IClaimService, ClaimService>();
 
@@ -104,6 +109,9 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddAutoMapper(typeof(AutoMapperConfig).Assembly);
 
 // Validator
+builder.Services.AddScoped<IFeatureValidator, FeatureValidator>();
+builder.Services.AddScoped<FeatureAddRule>();
+
 builder.Services.AddScoped<IRoleValidator, RoleValidator>();
 builder.Services.AddScoped<RoleAddRule>();
 

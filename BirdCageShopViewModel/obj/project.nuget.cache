@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "79wcsC1w3ottbNwECDqzOA0WoqiOaR7YETOTHPrF+BmUljjmuZ89zT+FF+Jx5SOg3RR/UO9yjAkhCLgYfaTv3w==",
+  "dgSpecHash": "c7Cax9iyLc3jcJVNuv9tQwNtrXooljLcyCCAOSholZGaV3oKnlXbgzC63D2x4Octtc8db/mNOTyzyXv8zlIaRw==",
   "success": true,
-  "projectFilePath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopViewModel\\BirdCageShopViewModel.csproj",
+  "projectFilePath": "E:\\SWP-2023\\BE_BirdCageShop_V02\\BirdCageShopViewModel\\BirdCageShopViewModel.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\ASUS\\.nuget\\packages\\fluentvalidation\\11.7.1\\fluentvalidation.11.7.1.nupkg.sha512"
+    "C:\\Users\\T480\\.nuget\\packages\\fluentvalidation\\11.7.1\\fluentvalidation.11.7.1.nupkg.sha512"
   ],
   "logs": []
 }
