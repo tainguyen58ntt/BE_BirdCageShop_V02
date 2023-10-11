@@ -16,6 +16,8 @@ namespace BirdCageShopDbContext.Models
         public DateTime ExpirationDate { get; set; }
         public DateTime StartDate { get; set; }
 
+        public bool IsDelete { get; set; }  
+
         public virtual ICollection<Order> Orders { get; set; }
     }
 }

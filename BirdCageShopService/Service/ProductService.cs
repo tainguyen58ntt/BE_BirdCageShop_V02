@@ -128,6 +128,44 @@ namespace BirdCageShopService.Service
 			return await _unitOfWork.SaveChangesAsync();
 		}
 
-      
+        //public async Task<bool> AddToWishlistAsync(int productId)
+        //{
+        //    var currentUserId = _claimService.GetRoleId();
+        //    if (currentUserId == -1) return false;
+
+
+        //    var wishlist = await _unitOfWork.WishlistRepository.GetWishlistByCustomerIdAsync(currentUserId);
+        //    if (wishlist is null)
+        //    {
+        //        wishlist = new Wishlist
+        //        {
+        //            CustomerId = currentUserId,
+        //            ProductWishlists = new List<ProductWishlist>
+        //        {
+        //            new ProductWishlist
+        //            {
+        //                ProductId = productId
+        //            }
+        //        }
+        //        };
+        //        await _unitOfWork.WishlistRepository.AddAsync(wishlist);
+        //    }
+        //    //
+        //    else
+        //    {
+        //        var product = await _unitOfWork.ProductRepository.GetProductByWishlistIdAndCustomerIdAsync(wishlist.Id, currentUserId);
+        //        if (product is not null)
+        //        {
+        //            return false;
+        //        }
+        //        wishlist.ProductWishlists.Append(new ProductWishlist
+        //        {
+        //            ProductId = productId
+        //        });
+        //        _unitOfWork.WishlistRepository.Update(wishlist);
+        //    }
+        //    //
+        //    return await _unitOfWork.SaveChangesAsync();
+        //}
     }
 }

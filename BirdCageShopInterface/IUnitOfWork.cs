@@ -16,6 +16,7 @@ namespace BirdCageShopInterface
         IOrderRepository OrderRepository { get; }
         IProductRepository ProductRepository { get; }
 		IShoppingCartRepository ShoppingCartRepository { get; }
-		Task<bool> SaveChangesAsync();
+        IWishlistRepository WishlistRepository { get; }
+        Task<bool> SaveChangesAsync();
     }
 }

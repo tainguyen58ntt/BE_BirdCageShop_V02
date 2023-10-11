@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BirdCageShopDbContext.Migrations
 {
     [DbContext(typeof(BirdCageShopContext))]
-    [Migration("20231011074847_init")]
+    [Migration("20231011090516_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -97,6 +97,9 @@ namespace BirdCageShopDbContext.Migrations
                     b.Property<string>("FeatureName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("ModiedAt")
                         .HasColumnType("datetime2");
@@ -367,6 +370,9 @@ namespace BirdCageShopDbContext.Migrations
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("ModiedAt")
                         .HasColumnType("datetime2");
 
@@ -459,6 +465,9 @@ namespace BirdCageShopDbContext.Migrations
 
                     b.Property<DateTime>("ExpirationDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");

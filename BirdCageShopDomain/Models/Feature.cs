@@ -15,7 +15,7 @@ namespace BirdCageShopDbContext.Models
         //public int? ProductId { get; set; }
 
         //public virtual Product? Product { get; set; }
-        
+        public bool IsDelete { get; set; }
         public virtual ICollection<ProductFeature> ProductFeatures { get; set; }
     }
 }

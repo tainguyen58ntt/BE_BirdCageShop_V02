@@ -71,6 +71,8 @@ namespace BirdCageShop.Controllers
         }
 
 
+
+
         [HttpGet("view-feedback/{productId}")]
         public async Task<IActionResult> GetFeedBackByIdAsync([FromRoute] int productId)
         {
@@ -80,16 +82,15 @@ namespace BirdCageShop.Controllers
             return Ok(result);
         }
 
-        //[HttpGet]
-
-        //public async Task<IActionResult> Get()
+        //[HttpPost("add-to-wishlist/{productId}")]
+        //public async Task<IActionResult> AddToWishlistAsync([FromRoute] int productId)
         //{
-        //    var pr = await _productService.GetProductsAsync();
-        //    return Ok(pr);
+        //    var product = await _productService.GetProductByIdAsync(productId);
+        //    if (product is null) return BadRequest(new { property = "Product ID", message = "Product doesn't exist." });
+        //    var result = await _productService.AddToWishlistAsync(productId);
+        //    if (result is true) return Ok();
+        //    return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Add to wishlist failed. Server Error." });
         //}
-
-
-
 
 
 

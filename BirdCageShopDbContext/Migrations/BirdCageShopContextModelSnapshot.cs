@@ -96,6 +96,9 @@ namespace BirdCageShopDbContext.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("ModiedAt")
                         .HasColumnType("datetime2");
 
@@ -365,6 +368,9 @@ namespace BirdCageShopDbContext.Migrations
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("ModiedAt")
                         .HasColumnType("datetime2");
 
@@ -457,6 +463,9 @@ namespace BirdCageShopDbContext.Migrations
 
                     b.Property<DateTime>("ExpirationDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");

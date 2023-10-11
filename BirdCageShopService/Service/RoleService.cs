@@ -18,8 +18,9 @@ namespace BirdCageShopService.Service
     {
         private readonly IRoleValidator _roleValidator;
 
-		public RoleService(IClaimService claimService, ITimeService timeService, IUnitOfWork unitOfWork, IMapper mapper, IConfiguration configuration) : base(claimService, timeService, unitOfWork, mapper, configuration)
+		public RoleService(IRoleValidator roleValidator,IClaimService claimService, ITimeService timeService, IUnitOfWork unitOfWork, IMapper mapper, IConfiguration configuration) : base(claimService, timeService, unitOfWork, mapper, configuration)
 		{
+            _roleValidator = roleValidator;
 		}
 
 		//public RoleService(ITimeService timeService,IRoleValidator roleValidator, ICategoryValidator categoryValidator, IUnitOfWork unitOfWork, IMapper mapper, IUserValidator userValidator, IConfiguration configuration) : base(timeService,unitOfWork, mapper, configuration)
