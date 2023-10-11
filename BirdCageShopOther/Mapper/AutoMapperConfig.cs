@@ -2,6 +2,7 @@
 using BirdCageShopDbContext.Models;
 using BirdCageShopDomain.Models;
 using BirdCageShopUtils.Pagination;
+using BirdCageShopViewModel.BirdCageType;
 using BirdCageShopViewModel.Category;
 using BirdCageShopViewModel.Feature;
 using BirdCageShopViewModel.Order;
@@ -41,6 +42,10 @@ namespace BirdCageShopOther.Mapper
             CreateMap<CreateFeature,Feature>().ReverseMap();
             CreateMap<GetFeature, Feature>().ReverseMap();
             CreateMap<UpdateFeature, Feature>().ReverseMap();
+            //
+            CreateMap<CreateBirdCageType, BirdCageType>().ReverseMap();
+            CreateMap<GetBirdCageType, BirdCageType>().ReverseMap();
+            CreateMap<UpdateBirdCageType, BirdCageType>().ReverseMap();
 
             //
             CreateMap<VourcherViewModel, Voucher>().ReverseMap();
@@ -70,8 +75,9 @@ namespace BirdCageShopOther.Mapper
 
             //
             //CreateMap<ProductReviewsViewModel, ProductReview>().ReverseMap();
-            CreateMap<ProductReview, ProductReviewsViewModel>()
-	.ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.User.LastName))
+            //Cho nay ko hieu vi sao no loi o lastname, t cmt lai r doi sang userId, ban dau no la lastnam
+            CreateMap<ProductReview, CreateReview>()
+	.ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.User.LastName))
 	.ReverseMap();
 			/*CreateMap<ProductFeatureViewModel, ProductFeature>().ReverseMap();*/
 			CreateMap<ProductSpecificationsViewModel, ProductSpecification>().ReverseMap();

@@ -22,10 +22,11 @@ namespace BirdCageShopReposiory
 		private IShoppingCartRepository _shoppingCartRepository;
         private IWishlistRepository _wishlistRepository;
         private IFeatureRepository _featureRepository;
+        private IBirdCageTypeRepository _birdCageTypeRepository;
         public UnitOfWork(BirdCageShopContext context, IRoleRepository roleRepository, IUserRepository userRepository, IVoucherRepository voucherRepository,
             IWishlistRepository wishlistRepository, IOrderRepository orderRepository,
             ICategoryRepository categoryRepository, IProductRepository productRepository, IShoppingCartRepository shoppingCartRepository,
-            IFeatureRepository featureRepository)
+            IFeatureRepository featureRepository, IBirdCageTypeRepository birdCageTypeRepository)
         {
             _context = context;
             _roleRepository = roleRepository;
@@ -37,6 +38,7 @@ namespace BirdCageShopReposiory
             _shoppingCartRepository = shoppingCartRepository;   
             _wishlistRepository = wishlistRepository;   
             _featureRepository = featureRepository;
+            _birdCageTypeRepository = birdCageTypeRepository;
             
         }
 
@@ -52,6 +54,7 @@ namespace BirdCageShopReposiory
 		public IShoppingCartRepository ShoppingCartRepository => _shoppingCartRepository;
         public IWishlistRepository WishlistRepository => _wishlistRepository;
         public IFeatureRepository FeatureRepository => _featureRepository;
+        public IBirdCageTypeRepository BirdCageTypeRepository => _birdCageTypeRepository;
         public async Task<bool> SaveChangesAsync()
         {
             try
