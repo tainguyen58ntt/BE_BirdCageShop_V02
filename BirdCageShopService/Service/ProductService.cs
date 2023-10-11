@@ -44,7 +44,17 @@ namespace BirdCageShopService.Service
 			return _mapper.Map<Pagination<ProductViewModel>>(result);
 		}
 
-		public async Task<IEnumerable<ProductViewModel>> GetProductByCategoryAsync(int categoryId)
+		public async Task<Pagination<ProductViewModel>> GetByBirdCageTypePageAsync(int birdCageTypeId, int pageIndex, int pageSize)
+		{
+
+			var result = await _unitOfWork.ProductRepository.GetAllByConditionAsync(c => c.BirdCageTypeId == birdCageTypeId, pageIndex, pageSize);
+			return _mapper.Map<Pagination<ProductViewModel>>(result);
+
+			//var result = await _unitOfWork.ProductRepository.GetAllByConditionAsync(pageIndex, pageSize);
+			//return _mapper.Map<Pagination<ProductViewModel>>(result);
+		}
+
+        public async Task<IEnumerable<ProductViewModel>> GetProductByCategoryAsync(int categoryId)
 		{
 			var result = await _unitOfWork.ProductRepository.GetProductsByCategoryAsync(categoryId);
 			return _mapper.Map<List<ProductViewModel>>(result);
@@ -112,6 +122,6 @@ namespace BirdCageShopService.Service
 			return await _unitOfWork.SaveChangesAsync();
 		}
 
-	
-	}
+     
+    }
 }

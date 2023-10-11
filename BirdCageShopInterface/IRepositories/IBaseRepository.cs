@@ -3,6 +3,7 @@ using BirdCageShopUtils.Pagination;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,8 +14,12 @@ namespace BirdCageShopInterface.IRepositories
         Task<IEnumerable<TModel>> GetAllAsync();
         Task<TModel?> GetByIdAsync(int id);
         Task<Pagination<TModel>> GetPaginationAsync(int pageIndex, int pageSize);
-	
-		Task AddAsync(TModel entity);
+        Task<Pagination<TModel>> GetAllByConditionAsync(
+           Expression<Func<TModel, bool>> filters,
+         
+           int pageIndex, int pageSize);
+
+        Task AddAsync(TModel entity);
         void Update(TModel entity);
         void Delete(TModel entity);
     }

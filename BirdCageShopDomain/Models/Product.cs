@@ -17,8 +17,9 @@ namespace BirdCageShopDbContext.Models
         public int Id { get; set; }
         public string? Title { get; set; }
 		public string? Description { get; set; }
-		
-		public int CategoryId { get; set; }
+
+        public int CategoryId { get; set; }
+        public int BirdCageTypeId { get; set; }
         public DateTime? CreatedAt { get; set; } 
         public DateTime? ModifieldAt { get; set; }
 		public DateTime? DeletedAt { get; set; }
@@ -32,12 +33,16 @@ namespace BirdCageShopDbContext.Models
 
 
 		public Category Category { get; set; }
+        public BirdCageType BirdCageType { get; set; }
         //
-		public virtual ICollection<ProductImage> ProductImages { get; set; }
+        public virtual ICollection<ProductImage> ProductImages { get; set; }
         public virtual ICollection<ProductReview> ProductReviews { get; set; }
         public virtual ICollection<WishlistItem> WishlistItems { get; set; }
-        public virtual ICollection<ProductFeature> ProductFeatures { get; set; }
+        //public virtual ICollection<Feature> Features { get; set; }
 		public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
-		public virtual ICollection<ProductSpecification> ProductSpecifications { get; set; }
+        public virtual ICollection<ProductSpecification> ProductSpecifications { get; set; }
+        public virtual ICollection<ProductFeature> ProductFeatures { get; set; }
+
+
     }
 }

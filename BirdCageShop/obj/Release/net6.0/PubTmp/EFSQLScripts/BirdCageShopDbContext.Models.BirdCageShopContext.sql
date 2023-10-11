@@ -11,7 +11,7 @@ GO
 BEGIN TRANSACTION;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE TABLE [Categories] (
         [Id] int NOT NULL IDENTITY,
@@ -25,7 +25,7 @@ BEGIN
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE TABLE [Roles] (
         [Id] int NOT NULL IDENTITY,
@@ -39,7 +39,7 @@ BEGIN
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE TABLE [Vouchers] (
         [Id] int NOT NULL IDENTITY,
@@ -52,7 +52,7 @@ BEGIN
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE TABLE [Products] (
         [Id] int NOT NULL IDENTITY,
@@ -75,7 +75,7 @@ BEGIN
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE TABLE [Users] (
         [Id] int NOT NULL IDENTITY,
@@ -99,7 +99,7 @@ BEGIN
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE TABLE [ProductFeatures] (
         [Id] int NOT NULL IDENTITY,
@@ -115,7 +115,7 @@ BEGIN
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE TABLE [ProductImages] (
         [Id] int NOT NULL IDENTITY,
@@ -130,7 +130,7 @@ BEGIN
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE TABLE [ProductSpecifications] (
         [Id] int NOT NULL IDENTITY,
@@ -146,7 +146,7 @@ BEGIN
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE TABLE [BankAccounts] (
         [Id] int NOT NULL IDENTITY,
@@ -160,7 +160,7 @@ BEGIN
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE TABLE [Orders] (
         [Id] int NOT NULL IDENTITY,
@@ -183,7 +183,7 @@ BEGIN
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE TABLE [ProductReviews] (
         [Id] int NOT NULL IDENTITY,
@@ -202,7 +202,23 @@ BEGIN
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
+BEGIN
+    CREATE TABLE [ShoppingCarts] (
+        [Id] int NOT NULL IDENTITY,
+        [Count] int NOT NULL,
+        [CreatedAt] datetime2 NULL,
+        [ModifiedAt] datetime2 NULL,
+        [ProductId] int NOT NULL,
+        [UserId] int NOT NULL,
+        CONSTRAINT [PK_ShoppingCarts] PRIMARY KEY ([Id]),
+        CONSTRAINT [FK_ShoppingCarts_Products_ProductId] FOREIGN KEY ([ProductId]) REFERENCES [Products] ([Id]) ON DELETE CASCADE,
+        CONSTRAINT [FK_ShoppingCarts_Users_UserId] FOREIGN KEY ([UserId]) REFERENCES [Users] ([Id]) ON DELETE CASCADE
+    );
+END;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE TABLE [Wishlists] (
         [Id] int NOT NULL IDENTITY,
@@ -215,7 +231,7 @@ BEGIN
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE TABLE [OrderDetails] (
         [Id] int NOT NULL IDENTITY,
@@ -230,7 +246,7 @@ BEGIN
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE TABLE [WishlistItems] (
         [Id] int NOT NULL IDENTITY,
@@ -243,106 +259,118 @@ BEGIN
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE INDEX [IX_BankAccounts_UserId] ON [BankAccounts] ([UserId]);
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE INDEX [IX_OrderDetails_OrderId] ON [OrderDetails] ([OrderId]);
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE INDEX [IX_OrderDetails_ProductId] ON [OrderDetails] ([ProductId]);
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE INDEX [IX_Orders_UserId] ON [Orders] ([UserId]);
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE INDEX [IX_Orders_VoucherId] ON [Orders] ([VoucherId]);
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE INDEX [IX_ProductFeatures_ProductId] ON [ProductFeatures] ([ProductId]);
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE INDEX [IX_ProductImages_ProductId] ON [ProductImages] ([ProductId]);
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE INDEX [IX_ProductReviews_ProductId] ON [ProductReviews] ([ProductId]);
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE INDEX [IX_ProductReviews_UserId] ON [ProductReviews] ([UserId]);
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE INDEX [IX_Products_CategoryId] ON [Products] ([CategoryId]);
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE INDEX [IX_ProductSpecifications_ProductId] ON [ProductSpecifications] ([ProductId]);
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
+BEGIN
+    CREATE INDEX [IX_ShoppingCarts_ProductId] ON [ShoppingCarts] ([ProductId]);
+END;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
+BEGIN
+    CREATE INDEX [IX_ShoppingCarts_UserId] ON [ShoppingCarts] ([UserId]);
+END;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE INDEX [IX_Users_RoleId] ON [Users] ([RoleId]);
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE UNIQUE INDEX [IX_Vouchers_VoucherCode] ON [Vouchers] ([VoucherCode]);
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE INDEX [IX_WishlistItems_ProductId] ON [WishlistItems] ([ProductId]);
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE INDEX [IX_WishlistItems_WishListId] ON [WishlistItems] ([WishListId]);
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     CREATE UNIQUE INDEX [IX_Wishlists_UserId] ON [Wishlists] ([UserId]);
 END;
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231007160539_init')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20231008111956_init')
 BEGIN
     INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-    VALUES (N'20231007160539_init', N'6.0.22');
+    VALUES (N'20231008111956_init', N'6.0.22');
 END;
 GO
 

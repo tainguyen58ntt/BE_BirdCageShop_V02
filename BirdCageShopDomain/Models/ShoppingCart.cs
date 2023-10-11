@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BirdCageShopDomain.Models
 {
-	public class ShoppingCart
+	public partial class ShoppingCart
 	{
 		public int Id { get; set; }
 		public int Count { get; set; }
