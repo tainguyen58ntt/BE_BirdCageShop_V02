@@ -27,6 +27,16 @@ namespace BirdCageShop.Controllers
             return Ok(pr);
         }
 
+        [HttpGet("by-category/{categoryId}")]
+        public async Task<IActionResult> GetByCategoryAsync([FromRoute] int categoryId, [FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
+        {
+            if (pageIndex < 0) return BadRequest("Page index cannot be negative");
+            if (pageSize <= 0) return BadRequest("Page size must greater than 0");
+            var result = await _productService.GetByCagegoryTypePageAsync(categoryId, pageIndex, pageSize);
+            return Ok(result);
+        }
+
+
 
 
         //[HttpGet]

@@ -11,6 +11,7 @@ using BirdCageShopViewModel.ProductReviews;
 using BirdCageShopViewModel.ProductSpecifications;
 using BirdCageShopViewModel.Role;
 using BirdCageShopViewModel.ShoppingCart;
+using BirdCageShopViewModel.Specification;
 using BirdCageShopViewModel.User;
 using BirdCageShopViewModel.Voucher;
 using System;
@@ -52,15 +53,19 @@ namespace BirdCageShopOther.Mapper
 			//
 			CreateMap<OrderWithDetailViewModel, Order>().ReverseMap();
 
-			//
-			CreateMap<ProductViewModel, Product>().ReverseMap();
-			CreateMap<ProductWithReviewViewModel, Product>().ReverseMap();
-	//		CreateMap<ProductFromWishlist, Product>().ForMember(dest => des, opt => opt.MapFrom(src => src.Pr))
-	//.ReverseMap();
+            //
+            CreateMap<ProductViewModel, Product>().ReverseMap();
+           
+            CreateMap<ProductWithReviewViewModel, Product>().ReverseMap();
+            CreateMap<Product, ProductViewModel>()
+      .ForMember(dest => dest.Specifications, opt => opt.MapFrom(src => src.ProductSpecifications.Select(ps => ps.Specification)))
+      .ReverseMap();
+            CreateMap<Specification, SpecificationViewModel>().ReverseMap();
 
-			//
-			//CreateMap<ProductReviewsViewModel, ProductReview>().ReverseMap();
-			CreateMap<ProductReview, ProductReviewsViewModel>()
+
+            //
+            //CreateMap<ProductReviewsViewModel, ProductReview>().ReverseMap();
+            CreateMap<ProductReview, ProductReviewsViewModel>()
 	.ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.User.LastName))
 	.ReverseMap();
 			CreateMap<ProductFeatureViewModel, Feature>().ReverseMap();

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BirdCageShopDbContext.Models;
+using BirdCageShopDomain.Models;
 using BirdCageShopInterface;
 using BirdCageShopInterface.IServices;
 using BirdCageShopInterface.IValidator;
@@ -53,6 +54,11 @@ namespace BirdCageShopService.Service
 			//var result = await _unitOfWork.ProductRepository.GetAllByConditionAsync(pageIndex, pageSize);
 			//return _mapper.Map<Pagination<ProductViewModel>>(result);
 		}
+        public async Task<Pagination<ProductViewModel>> GetByCagegoryTypePageAsync(int categoryId, int pageIndex, int pageSize)
+        {
+            var result = await _unitOfWork.ProductRepository.GetAllByConditionAsync(c => c.CategoryId == categoryId, pageIndex, pageSize);
+            return _mapper.Map<Pagination<ProductViewModel>>(result);
+        }
 
         public async Task<IEnumerable<ProductViewModel>> GetProductByCategoryAsync(int categoryId)
 		{
@@ -122,6 +128,6 @@ namespace BirdCageShopService.Service
 			return await _unitOfWork.SaveChangesAsync();
 		}
 
-     
+      
     }
 }

@@ -201,7 +201,7 @@ namespace BirdCageShopDbContext.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("BirdCageTypeId")
+                    b.Property<int?>("BirdCageTypeId")
                         .HasColumnType("int");
 
                     b.Property<int>("CategoryId")
@@ -672,9 +672,7 @@ namespace BirdCageShopDbContext.Migrations
                 {
                     b.HasOne("BirdCageShopDomain.Models.BirdCageType", "BirdCageType")
                         .WithMany("Products")
-                        .HasForeignKey("BirdCageTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BirdCageTypeId");
 
                     b.HasOne("BirdCageShopDbContext.Models.Category", "Category")
                         .WithMany("Products")

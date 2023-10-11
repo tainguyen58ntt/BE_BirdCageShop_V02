@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BirdCageShopViewModel.Specification;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,7 @@ namespace BirdCageShopViewModel.ProductSpecifications
 		public string SpecificationName { get; set; } = null!;
 		public string SpecificationValue { get; set; } = null!;
 		public decimal? Price { get; set; }
-	}
+
+        public SpecificationViewModel Specification { get; set; }
+    }
 }

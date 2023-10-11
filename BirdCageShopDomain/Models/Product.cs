@@ -19,7 +19,7 @@ namespace BirdCageShopDbContext.Models
 		public string? Description { get; set; }
 
         public int CategoryId { get; set; }
-        public int BirdCageTypeId { get; set; }
+        public int? BirdCageTypeId { get; set; }
         public DateTime? CreatedAt { get; set; } 
         public DateTime? ModifieldAt { get; set; }
 		public DateTime? DeletedAt { get; set; }

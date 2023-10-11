@@ -1,67 +1,92 @@
 ﻿using BirdCageShopDbContext.Models;
 using BirdCageShopInterface.IRepositories;
+using BirdCageShopUtils.Pagination;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BirdCageShopReposiory.Repositories
 {
-	public class ProductRepository : BaseRepository<Product>, IProductRepository
-	{
+    public class ProductRepository : BaseRepository<Product>, IProductRepository
+    {
 
-		public ProductRepository(BirdCageShopContext context) : base(context)
-		{
-		}
+        public ProductRepository(BirdCageShopContext context) : base(context)
+        {
+        }
 
-		public override async Task<IEnumerable<Product>> GetAllAsync()
-		{
-			return await _context.Set<Product>()
-				.AsNoTracking()
-				.Include(p => p.ProductFeatures)
-				.Include(p => p.ProductSpecifications)
-				.Include(p => p.ProductImages)
-				.Include(p => p.Category)
-				.Where(x => !x.isDelete)
-				.ToListAsync();
-		}
+        public override async Task<IEnumerable<Product>> GetAllAsync()
+        {
+            return await _context.Set<Product>()
+                .AsNoTracking()
+                .Include(p => p.ProductFeatures)
+                .Include(p => p.ProductSpecifications)
+                .Include(p => p.ProductImages)
+                .Include(p => p.Category)
+                .Where(x => !x.isDelete)
+                .ToListAsync();
+        }
 
-		public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(int categoryId)
-		{
-			return await _context.Set<Product>()
-				   //.AsNoTracking()
-				   //.Include(x => x.Category)
-				   .AsNoTracking()
-				.Include(p => p.ProductFeatures)
-				.Include(p => p.ProductSpecifications)
-				.Include(p => p.ProductImages)
-				.Include(p => p.Category)
-				   //.Include(x => x.ProductWishlist)
-				   .Where(x => !x.isDelete && x.CategoryId == categoryId)
-				   .ToListAsync();
-		}
+        public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(int categoryId)
+        {
+            return await _context.Set<Product>()
+                   //.AsNoTracking()
+                   //.Include(x => x.Category)
+                   .AsNoTracking()
+                .Include(p => p.ProductFeatures)
+                .Include(p => p.ProductSpecifications)
+                .Include(p => p.ProductImages)
+                .Include(p => p.Category)
+                   //.Include(x => x.ProductWishlist)
+                   .Where(x => !x.isDelete && x.CategoryId == categoryId)
+                   .ToListAsync();
+        }
 
-		public async Task<IEnumerable<Product>> GetProductsFromWishlistAsync(int customerId)
-		{
-			return await _context.Set<Product>()
-			  .AsNoTracking()
-			  .Include(p => p.Category)
-			  .Include(p => p.WishlistItems)
-			  .Include(p => p.ProductImages)
-			  .Where(x => !x.isDelete &&
-			  x.WishlistItems.Any(pw => pw.WishList.UserId == customerId))
-			  .ToListAsync();
-		}
 
-		public async Task<Product> GetProductWithReviewByProIdAsync(int productID)
-		{
-			return await _context.Set<Product>()
-				.AsNoTracking()
-				.Include(p => p.ProductReviews)
-				.ThenInclude(pr => pr.User)
-				.FirstOrDefaultAsync(x => !x.isDelete);
-		}
-	}
+        public virtual async Task<Pagination<Product>> GetAllByConditionAsync(Expression<Func<Product, bool>> filters, int pageIndex, int pageSize)
+        {
+            var totalCount = await _context.Set<Product>().CountAsync();
+            var items = await _context.Set<Product>()
+                .AsNoTracking()
+                .Where(filters)
+                   .Include(p => p.ProductSpecifications)
+            .ThenInclude(ps => ps.Specification)
+                .Skip(pageSize * pageIndex)
+                .Take(pageSize)
+                .ToListAsync();
+            var result = new Pagination<Product>()
+            {
+                Items = items,
+                PageIndex = pageIndex,
+                PageSize = pageSize,
+                TotalItemsCount = totalCount
+            };
+
+            return result;
+        }
+
+        public async Task<IEnumerable<Product>> GetProductsFromWishlistAsync(int customerId)
+        {
+            return await _context.Set<Product>()
+              .AsNoTracking()
+              .Include(p => p.Category)
+              .Include(p => p.WishlistItems)
+              .Include(p => p.ProductImages)
+              .Where(x => !x.isDelete &&
+              x.WishlistItems.Any(pw => pw.WishList.UserId == customerId))
+              .ToListAsync();
+        }
+
+        public async Task<Product> GetProductWithReviewByProIdAsync(int productID)
+        {
+            return await _context.Set<Product>()
+                .AsNoTracking()
+                .Include(p => p.ProductReviews)
+                .ThenInclude(pr => pr.User)
+                .FirstOrDefaultAsync(x => !x.isDelete);
+        }
+    }
 }
