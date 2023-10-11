@@ -8,7 +8,7 @@ namespace BirdCageShopDbContext.Models
     {
         public int Id { get; set; }
         public string FeatureName { get; set; } = null!;
-        public string FeatureValue { get; set; } = null!;
+        //public string FeatureValue { get; set; } = null!;
         public DateTime? CreatedAt { get; set; }
         public DateTime? ModiedAt { get; set; }
         public decimal? Price { get; set; }

@@ -8,6 +8,7 @@ namespace BirdCageShopViewModel.Voucher
 {
     public class VourcherViewModel
     {
+        public int Id { get; set; }
         public decimal? DiscountPercent { get; set; }
         public string VoucherCode { get; set; } = null!;
         public DateTime ExpirationDate { get; set; }

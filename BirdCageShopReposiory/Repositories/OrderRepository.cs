@@ -37,5 +37,16 @@ namespace BirdCageShopReposiory.Repositories
 
             return result;
         }
+
+        public override async Task<Order?> GetByIdAsync(int id)
+        {
+
+            return await _context.Set<Order>()
+                .AsNoTracking()
+                .AsNoTrackingWithIdentityResolution()
+                .Include(x => x.Details)
+                .Include(x => x.User)
+               .FirstOrDefaultAsync(x => x.Id == id);
+        }
     }
 }

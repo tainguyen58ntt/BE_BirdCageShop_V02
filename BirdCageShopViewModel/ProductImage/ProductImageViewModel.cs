@@ -8,7 +8,8 @@ namespace BirdCageShopViewModel.ProductImage
 {
 	public class ProductImageViewModel
 	{
-		public string? ImageUrl { get; set; }
+        public int Id { get; set; }
+        public string? ImageUrl { get; set; }
 		public bool IsMainImage { get; set; }
 	}
 }

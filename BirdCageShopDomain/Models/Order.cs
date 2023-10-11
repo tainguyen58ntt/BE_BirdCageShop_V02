@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BirdCageShopDomain.Models;
+using System;
 using System.Collections.Generic;
 
 namespace BirdCageShopDbContext.Models
@@ -18,9 +19,11 @@ namespace BirdCageShopDbContext.Models
         public DateTime? PaymentDate { get; set; }
         public DateTime? ModifiedAt { get; set; }
         public int? VoucherId { get; set; }
-
         public virtual User? User { get; set; }
         public virtual Voucher? Voucher { get; set; }
+        public virtual Status? Status { get; set; } = null!;
         public IEnumerable<OrderDetail> Details { get; set; }
+
+
     }
 }

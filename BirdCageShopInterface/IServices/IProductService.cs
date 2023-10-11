@@ -18,6 +18,7 @@ namespace BirdCageShopInterface.IServices
 		Task<Pagination<ProductViewModel>> GetPageAsync(int pageIndex, int pageSize);
 		Task<Pagination<ProductViewModel>> GetByBirdCageTypePageAsync(int birdCageTypeId, int pageIndex, int pageSize);
         Task<Pagination<ProductViewModel>> GetByCagegoryTypePageAsync(int categoryId, int pageIndex, int pageSize);
+        
         Task<ProductViewModel?> GetByIdAsync(int id);
 		Task<Product?> GetProductByIdAsync(int id);
 		Task<IEnumerable<ProductViewModel>> GetProductByCategoryAsync(int categoryId);

@@ -9,7 +9,8 @@ namespace BirdCageShopViewModel.ProductReviews
 {
 	public class ProductReviewsViewModel
 	{
-		public int? Rating { get; set; }
+        public int Id { get; set; }
+        public int? Rating { get; set; }
 		public string? ReviewText { get; set; }
 		public DateTime? ReviewDate { get; set; }
 

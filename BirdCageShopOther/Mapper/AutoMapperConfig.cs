@@ -3,6 +3,7 @@ using BirdCageShopDbContext.Models;
 using BirdCageShopDomain.Models;
 using BirdCageShopUtils.Pagination;
 using BirdCageShopViewModel.Category;
+using BirdCageShopViewModel.Feature;
 using BirdCageShopViewModel.Order;
 using BirdCageShopViewModel.Product;
 using BirdCageShopViewModel.ProductFeature;
@@ -59,16 +60,18 @@ namespace BirdCageShopOther.Mapper
             CreateMap<ProductWithReviewViewModel, Product>().ReverseMap();
             CreateMap<Product, ProductViewModel>()
       .ForMember(dest => dest.Specifications, opt => opt.MapFrom(src => src.ProductSpecifications.Select(ps => ps.Specification)))
+      .ForMember(dest => dest.Features, opt => opt.MapFrom(src => src.ProductFeatures.Select(ps => ps.Feature)))
+       .ForMember(dest => dest.ProductImages, opt => opt.MapFrom(src => src.ProductImages))
       .ReverseMap();
             CreateMap<Specification, SpecificationViewModel>().ReverseMap();
-
+            CreateMap<Feature, FeatureViewModel>().ReverseMap();
 
             //
             //CreateMap<ProductReviewsViewModel, ProductReview>().ReverseMap();
             CreateMap<ProductReview, ProductReviewsViewModel>()
 	.ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.User.LastName))
 	.ReverseMap();
-			CreateMap<ProductFeatureViewModel, Feature>().ReverseMap();
+			CreateMap<ProductFeatureViewModel, ProductFeature>().ReverseMap();
 			CreateMap<ProductSpecificationsViewModel, ProductSpecification>().ReverseMap();
 			CreateMap<ProductImageViewModel, ProductImage>().ReverseMap();
 

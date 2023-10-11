@@ -58,7 +58,7 @@ namespace BirdCageShopReposiory.Repositories
             return result;
         }
 
-        public async Task<TModel?> GetByIdAsync(int id)
+        public virtual async Task<TModel?> GetByIdAsync(int id)
         {
             return await _context.Set<TModel>().FindAsync(id);
         }

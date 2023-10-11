@@ -12,5 +12,6 @@ namespace BirdCageShopInterface.IServices
 	{
     
         Task<Pagination<OrderWithDetailViewModel>> GetPaginationAsync(int pageIndex, int pageSize);
+        Task<OrderWithDetailViewModel?> GetByIdAsync(int id);
     }
 }

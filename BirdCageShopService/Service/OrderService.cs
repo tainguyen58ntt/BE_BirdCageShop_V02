@@ -20,12 +20,18 @@ namespace BirdCageShopService.Service
 		{
 		}
 
-		//public OrderService(IUnitOfWork unitOfWork, IMapper mapper, IUserValidator userValidator, IConfiguration configuration, ITimeService timeService) : base(timeService,unitOfWork, mapper, configuration)
-		//{
+        public async Task<OrderWithDetailViewModel?> GetByIdAsync(int id)
+        {
+            var result = await _unitOfWork.OrderRepository.GetByIdAsync(id);
+            return _mapper.Map<OrderWithDetailViewModel>(result);
+        }
 
-		//      }
+        //public OrderService(IUnitOfWork unitOfWork, IMapper mapper, IUserValidator userValidator, IConfiguration configuration, ITimeService timeService) : base(timeService,unitOfWork, mapper, configuration)
+        //{
 
-		public async Task<Pagination<OrderWithDetailViewModel>> GetPaginationAsync(int pageIndex, int pageSize)
+        //      }
+
+        public async Task<Pagination<OrderWithDetailViewModel>> GetPaginationAsync(int pageIndex, int pageSize)
         {
             var result = await _unitOfWork.OrderRepository.GetPaginationAsync(pageIndex, pageSize);
             return _mapper.Map<Pagination<OrderWithDetailViewModel>>(result);

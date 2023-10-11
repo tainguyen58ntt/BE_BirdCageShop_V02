@@ -1,4 +1,5 @@
 ﻿using BirdCageShopViewModel.Category;
+using BirdCageShopViewModel.Feature;
 using BirdCageShopViewModel.Order;
 using BirdCageShopViewModel.ProductFeature;
 using BirdCageShopViewModel.ProductImage;
@@ -14,7 +15,8 @@ namespace BirdCageShopViewModel.Product
 {
 	public class ProductViewModel
 	{
-		public string? Title { get; set; }
+        public int Id { get; set; }
+        public string? Title { get; set; }
 		public string? Description { get; set; }
 		public int CategoryId { get; set; }
 		public DateTime? CreatedAt { get; set; }
@@ -29,10 +31,12 @@ namespace BirdCageShopViewModel.Product
 		public decimal? PriceAfterDiscount { get; set; }
 
 		public CategoryViewModel Category { get; set; }
-		public IEnumerable<ProductFeatureViewModel> ProductFeatures { get; set; }
+		//public IEnumerable<ProductFeatureViewModel> ProductFeatures { get; set; }
 		//public IEnumerable<ProductSpecificationsViewModel> ProductSpecifications { get; set; }
 
 		public IEnumerable<SpecificationViewModel> Specifications { get; set; }
-		public IEnumerable<ProductImageViewModel> ProductImages { get; set; }
+        public IEnumerable<FeatureViewModel> Features { get; set; }
+
+        public IEnumerable<ProductImageViewModel> ProductImages { get; set; }
 	}
 }

@@ -34,7 +34,7 @@ namespace BirdCageShopDbContext.Models
         public virtual DbSet<BirdCageType> BirdCageTypes { get; set; } = null!;
         public virtual DbSet<ProductSpecification> ProductSpecifications { get; set; } = null!;
         public virtual DbSet<ProductFeature> ProductFeature { get; set; } = null!;
-
+        public virtual DbSet<Status> Statuses { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

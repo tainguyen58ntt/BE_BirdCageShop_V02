@@ -23,5 +23,15 @@ namespace BirdCageShop.Controllers
             var result = await _orderService.GetPaginationAsync(pageIndex, pageSize);
             return Ok(result);
         }
+
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
+        {
+            var result = await _orderService.GetByIdAsync(id);
+            if (result is null) return NotFound();
+            return Ok(result);
+        }
+
     }
 }

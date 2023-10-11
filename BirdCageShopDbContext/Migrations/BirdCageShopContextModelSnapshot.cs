@@ -96,10 +96,6 @@ namespace BirdCageShopDbContext.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FeatureValue")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("ModiedAt")
                         .HasColumnType("datetime2");
 
@@ -143,6 +139,9 @@ namespace BirdCageShopDbContext.Migrations
                     b.Property<DateTime?>("ShippingDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("StatusId")
+                        .HasColumnType("int");
+
                     b.Property<string>("StreetAddress")
                         .HasColumnType("nvarchar(max)");
 
@@ -156,6 +155,8 @@ namespace BirdCageShopDbContext.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("StatusId");
 
                     b.HasIndex("UserId");
 
@@ -627,6 +628,23 @@ namespace BirdCageShopDbContext.Migrations
                     b.ToTable("ShoppingCarts");
                 });
 
+            modelBuilder.Entity("BirdCageShopDomain.Models.Status", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("StatusState")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Statuses");
+                });
+
             modelBuilder.Entity("BirdCageShopDbContext.Models.BankAccount", b =>
                 {
                     b.HasOne("BirdCageShopDbContext.Models.User", "User")
@@ -640,6 +658,10 @@ namespace BirdCageShopDbContext.Migrations
 
             modelBuilder.Entity("BirdCageShopDbContext.Models.Order", b =>
                 {
+                    b.HasOne("BirdCageShopDomain.Models.Status", "Status")
+                        .WithMany("Orders")
+                        .HasForeignKey("StatusId");
+
                     b.HasOne("BirdCageShopDbContext.Models.User", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId");
@@ -647,6 +669,8 @@ namespace BirdCageShopDbContext.Migrations
                     b.HasOne("BirdCageShopDbContext.Models.Voucher", "Voucher")
                         .WithMany("Orders")
                         .HasForeignKey("VoucherId");
+
+                    b.Navigation("Status");
 
                     b.Navigation("User");
 
@@ -875,6 +899,11 @@ namespace BirdCageShopDbContext.Migrations
             modelBuilder.Entity("BirdCageShopDomain.Models.BirdCageType", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("BirdCageShopDomain.Models.Status", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

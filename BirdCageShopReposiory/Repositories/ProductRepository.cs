@@ -30,6 +30,44 @@ namespace BirdCageShopReposiory.Repositories
                 .ToListAsync();
         }
 
+        public virtual async Task<Product?> GetByIdAsync(int id)
+        {
+            return await _context.Set<Product>()
+                .AsNoTracking()
+                 .Where(x => x.Id == id)
+                 .Include(p => p.ProductSpecifications)
+            .ThenInclude(ps => ps.Specification)
+                .Include(p => p.ProductFeatures)
+            .ThenInclude(ps => ps.Feature)
+            .Include(p => p.ProductImages).FirstOrDefaultAsync();
+              
+        }
+        public override async Task<Pagination<Product>> GetPaginationAsync(int pageIndex, int pageSize)
+        {
+            var totalCount = await _context.Set<Product>().CountAsync();
+            var items = await _context.Set<Product>()
+                .AsNoTracking()
+             
+                   .Include(p => p.ProductSpecifications)
+            .ThenInclude(ps => ps.Specification)
+                .Include(p => p.ProductFeatures)
+            .ThenInclude(ps => ps.Feature)
+            .Include(p => p.ProductImages)
+
+                .Skip(pageSize * pageIndex)
+                .Take(pageSize)
+                .ToListAsync();
+            var result = new Pagination<Product>()
+            {
+                Items = items,
+                PageIndex = pageIndex,
+                PageSize = pageSize,
+                TotalItemsCount = totalCount
+            };
+
+            return result;
+        }
+
         public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(int categoryId)
         {
             return await _context.Set<Product>()
@@ -54,6 +92,10 @@ namespace BirdCageShopReposiory.Repositories
                 .Where(filters)
                    .Include(p => p.ProductSpecifications)
             .ThenInclude(ps => ps.Specification)
+                .Include(p => p.ProductFeatures)
+            .ThenInclude(ps => ps.Feature)
+            .Include(p => p.ProductImages)
+            
                 .Skip(pageSize * pageIndex)
                 .Take(pageSize)
                 .ToListAsync();
