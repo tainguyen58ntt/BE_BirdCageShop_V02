@@ -77,8 +77,7 @@ namespace BirdCageShopOther.Mapper
 
 			//
 			CreateMap<ShoppingCart, ShoppingCartViewModel>()
-                .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Product.Title))
-				.ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Product.Description))
+                .ForMember(dest => dest.ProductViewModel, opt => opt.MapFrom(src => src.Product))
 				.ReverseMap();
 
 		}
