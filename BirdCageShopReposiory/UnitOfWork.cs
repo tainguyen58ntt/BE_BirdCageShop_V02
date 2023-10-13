@@ -23,23 +23,24 @@ namespace BirdCageShopReposiory
         private IWishlistRepository _wishlistRepository;
         private IFeatureRepository _featureRepository;
         private IBirdCageTypeRepository _birdCageTypeRepository;
+        private ISpecificationRepository _specificationRepository;
         public UnitOfWork(BirdCageShopContext context, IRoleRepository roleRepository, IUserRepository userRepository, IVoucherRepository voucherRepository,
             IWishlistRepository wishlistRepository, IOrderRepository orderRepository,
             ICategoryRepository categoryRepository, IProductRepository productRepository, IShoppingCartRepository shoppingCartRepository,
-            IFeatureRepository featureRepository, IBirdCageTypeRepository birdCageTypeRepository)
+            IFeatureRepository featureRepository, IBirdCageTypeRepository birdCageTypeRepository, ISpecificationRepository specificationRepository)
         {
             _context = context;
             _roleRepository = roleRepository;
             _userRepository = userRepository;
             _voucherRepository = voucherRepository;
-            _categoryRepository = categoryRepository;  
-            _orderRepository = orderRepository; 
-            _productRepository = productRepository; 
-            _shoppingCartRepository = shoppingCartRepository;   
-            _wishlistRepository = wishlistRepository;   
+            _categoryRepository = categoryRepository;
+            _orderRepository = orderRepository;
+            _productRepository = productRepository;
+            _shoppingCartRepository = shoppingCartRepository;
+            _wishlistRepository = wishlistRepository;
             _featureRepository = featureRepository;
             _birdCageTypeRepository = birdCageTypeRepository;
-            
+            _specificationRepository = specificationRepository;
         }
 
         public IRoleRepository RoleRepository => _roleRepository;
@@ -55,6 +56,7 @@ namespace BirdCageShopReposiory
         public IWishlistRepository WishlistRepository => _wishlistRepository;
         public IFeatureRepository FeatureRepository => _featureRepository;
         public IBirdCageTypeRepository BirdCageTypeRepository => _birdCageTypeRepository;
+        public ISpecificationRepository SpecificationRepository => _specificationRepository;
         public async Task<bool> SaveChangesAsync()
         {
             try

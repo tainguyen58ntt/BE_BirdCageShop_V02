@@ -82,7 +82,7 @@ namespace BirdCageShopService.Service
             {
                 List<GetFeature> features = _mapper.Map<List<GetFeature>>(
                     (await _unitOfWork. FeatureRepository.GetAllAsync())
-                    .Where(obj => obj.FeatureName.Contains(featureName, StringComparison.OrdinalIgnoreCase))
+                    .Where(obj => obj.FeatureName.Contains(featureName, StringComparison.OrdinalIgnoreCase) && obj.IsDelete == true)
                 );
 
                 return features;

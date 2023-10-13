@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BirdCageShopInterface.IServices
 {
-    public interface IBirdCageTypeService
+    public interface IBirdCageTypeService : IBaseService
     {
         Task<List<GetBirdCageType>> GetAllAsync();
         Task<GetBirdCageType> GetAsync(int key);

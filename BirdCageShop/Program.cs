@@ -88,6 +88,9 @@ builder.Services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
 builder.Services.AddScoped<IWishlistRepository, WishlistRepository>();
 builder.Services.AddScoped<IFeatureRepository, FeatureRepository>();
 builder.Services.AddScoped<IBirdCageTypeRepository, BirdCageTypeRepository>();
+builder.Services.AddScoped<ISpecificationRepository, SpecificationRepository>();
+
+
 
 
 
@@ -101,6 +104,8 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
 builder.Services.AddScoped<IFeatureService, FeatureService>();
 builder.Services.AddScoped<IBirdCageTypeService, BirdCageTypeService>();
+builder.Services.AddScoped<ISpecificationService, SpecificationService>();
+
 
 
 

@@ -39,6 +39,11 @@ namespace BirdCageShopOther.Mapper
             CreateMap<UserChangePasswordViewModel, User>().ReverseMap();
 
             //
+            CreateMap<CreateSpecifications, Specification>().ReverseMap();
+            CreateMap<GetSpecifications, Specification>().ReverseMap();
+            CreateMap<UpdateSpecifications, Specification>().ReverseMap();
+
+            //
             CreateMap<CreateFeature,Feature>().ReverseMap();
             CreateMap<GetFeature, Feature>().ReverseMap();
             CreateMap<UpdateFeature, Feature>().ReverseMap();

@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace BirdCageShopDbContext.Models
+namespace BirdCageShopDomain.Models
 {
     public partial class Specification
     {

@@ -81,7 +81,7 @@ namespace BirdCageShopService.Service
             {
                 List<GetBirdCageType> birdCageTypes = _mapper.Map<List<GetBirdCageType>>(
                     (await _unitOfWork.BirdCageTypeRepository.GetAllAsync())
-                    .Where(obj => obj.TypeName.Contains(birdCageTypeName, StringComparison.OrdinalIgnoreCase))
+                    .Where(obj => obj.TypeName.Contains(birdCageTypeName, StringComparison.OrdinalIgnoreCase) && obj.IsDelete == true)
                 );
 
                 return birdCageTypes;
