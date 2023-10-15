@@ -13,6 +13,7 @@ namespace BirdCageShopInterface.IServices
     public interface IVourcherService : IBaseService
     {
         Task<IEnumerable<VourcherViewModel>> GetVourcherAsync();
+        Task<VourcherViewModel?> GetVourcherByCodeAsync(string code);
         Task<ValidationResult> ValidateVourcherAdddpAsync(VourcherAddViewModel vm);
         Task<bool> CreateNewAsync(VourcherAddViewModel vm);
     }

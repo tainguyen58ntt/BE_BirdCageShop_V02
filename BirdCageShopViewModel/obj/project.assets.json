@@ -14,6 +14,16 @@
             "related": ".xml"
           }
         }
+      },
+      "BirdCageShopDomain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/BirdCageShopDomain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BirdCageShopDomain.dll": {}
+        }
       }
     }
   },
@@ -40,10 +50,16 @@
         "lib/netstandard2.1/FluentValidation.dll",
         "lib/netstandard2.1/FluentValidation.xml"
       ]
+    },
+    "BirdCageShopDomain/1.0.0": {
+      "type": "project",
+      "path": "../BirdCageShopDomain/BirdCageShopDomain.csproj",
+      "msbuildProject": "../BirdCageShopDomain/BirdCageShopDomain.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "BirdCageShopDomain >= 1.0.0",
       "FluentValidation >= 11.7.1"
     ]
   },
@@ -73,7 +89,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj": {
+              "projectPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

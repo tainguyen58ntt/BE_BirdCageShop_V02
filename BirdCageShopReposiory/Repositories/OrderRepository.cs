@@ -15,7 +15,7 @@ namespace BirdCageShopReposiory.Repositories
 
         public OrderRepository(BirdCageShopContext context) : base(context)
         {
-        }   
+        }
         public override async Task<Pagination<Order>> GetPaginationAsync(int pageIndex, int pageSize)
         {
             var source = _context.Set<Order>()
@@ -48,5 +48,11 @@ namespace BirdCageShopReposiory.Repositories
                 .Include(x => x.User)
                .FirstOrDefaultAsync(x => x.Id == id);
         }
+
+        //public async Task<Order> AddAsync(Order order)
+        //{
+        //    await _context.Orders.AddAsync(order);
+        //    return order;
+        // }
     }
 }

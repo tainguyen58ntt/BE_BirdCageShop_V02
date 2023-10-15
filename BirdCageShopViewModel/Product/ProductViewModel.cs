@@ -1,6 +1,6 @@
 ﻿using BirdCageShopViewModel.Category;
 using BirdCageShopViewModel.Feature;
-using BirdCageShopViewModel.Order;
+
 using BirdCageShopViewModel.ProductFeature;
 using BirdCageShopViewModel.ProductImage;
 using BirdCageShopViewModel.ProductSpecifications;
@@ -28,7 +28,7 @@ namespace BirdCageShopViewModel.Product
 		public int QuantityInStock { get; set; }
 		public string? EditedBy { get; set; }
 		public decimal? PercentDiscount { get; set; }
-		public decimal? PriceAfterDiscount { get; set; }
+		public decimal PriceAfterDiscount { get; set; }
 
 		public CategoryViewModel Category { get; set; }
 		//public IEnumerable<ProductFeatureViewModel> ProductFeatures { get; set; }

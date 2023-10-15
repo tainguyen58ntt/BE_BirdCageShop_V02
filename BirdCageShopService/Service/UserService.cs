@@ -41,7 +41,7 @@ namespace BirdCageShopService.Service
             //if (_timeService == null) return null;
             //if (user.Role.RoleName == null) return null;
             var roleName = await _unitOfWork.UserRepository.GetRoleNameByUserIdAsync(user.Id);
-            var accessToken = user.GenerateToken(user.Id, _configuration, _timeService.GetCurrentTime(), 60 * 24 * 30, roleName);
+            var accessToken = user.GenerateToken(user.Id, _configuration, _timeService.GetCurrentTimeInVietnam(), 60 * 24 * 30, roleName);
 
 
 			return accessToken;

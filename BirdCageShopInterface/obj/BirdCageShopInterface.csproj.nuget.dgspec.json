@@ -232,7 +232,11 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj": {
+                "projectPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

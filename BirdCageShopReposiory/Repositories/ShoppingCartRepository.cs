@@ -11,11 +11,21 @@ using System.Threading.Tasks;
 
 namespace BirdCageShopReposiory.Repositories
 {
-	public class ShoppingCartRepository : BaseRepository<ShoppingCart>, IShoppingCartRepository
-	{
-		public ShoppingCartRepository(BirdCageShopContext context) : base(context)
-		{
-		}
+    public class ShoppingCartRepository : BaseRepository<ShoppingCart>, IShoppingCartRepository
+    {
+        public ShoppingCartRepository(BirdCageShopContext context) : base(context)
+        {
+        }
+
+        public async Task DeleteShoppingCartsByUserIdAsync(int customerId)
+        {
+
+            var shoppingCartsToDelete = _context.Set<ShoppingCart>()
+        .Where(cart => cart.UserId == customerId)
+        .ToList();
+
+            _context.Set<ShoppingCart>().RemoveRange(shoppingCartsToDelete);
+        }
 
         //public Task<ShoppingCart> CreateItemByUserIdAndProDIdAsync(int customerId, int prodID)
         //{
@@ -27,20 +37,20 @@ namespace BirdCageShopReposiory.Repositories
 
         public async Task<ShoppingCart> GetCartItemByUserIdAndProDIdAsync(int customerId, int proDId)
         {
-			return await _context.Set<ShoppingCart>()
-			  .AsNoTracking()
-			  .Include(p => p.Product)
-			  .Where(x => x.UserId == customerId && x.ProductId == proDId)
-			  .FirstOrDefaultAsync();
+            return await _context.Set<ShoppingCart>()
+              .AsNoTracking()
+              .Include(p => p.Product)
+              .Where(x => x.UserId == customerId && x.ProductId == proDId)
+              .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<ShoppingCart>> GetShoppingCartsAsync(int customerId)
-		{
-			return await _context.Set<ShoppingCart>()
-			  .AsNoTracking()
-			  .Include(p => p.Product)
-			  //.Where(x => x.ExpDate >= DateTime.Now)
-			  .ToListAsync();
-		}
-	}
+        {
+            return await _context.Set<ShoppingCart>()
+              .AsNoTracking()
+              .Include(p => p.Product)
+              //.Where(x => x.ExpDate >= DateTime.Now)
+              .ToListAsync();
+        }
+    }
 }

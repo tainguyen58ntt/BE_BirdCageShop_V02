@@ -45,6 +45,12 @@ namespace BirdCageShopService.Service
             return _mapper.Map<List<VourcherViewModel>>(vourchers);
         }
 
+        public async Task<VourcherViewModel?> GetVourcherByCodeAsync(string code)
+        {
+            var vourchers = await _unitOfWork.VoucherRepository.GetVoucherByCodeAsync(code);
+            return _mapper.Map<VourcherViewModel>(vourchers);
+        }
+
         public Task<ValidationResult> ValidateVourcherAdddpAsync(VourcherAddViewModel vm)
         {
             return _voucherValidator.VourcherAddValidator.ValidateAsync(vm);

@@ -142,9 +142,6 @@ namespace BirdCageShopDbContext.Migrations
                     b.Property<DateTime?>("ShippingDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("StatusId")
-                        .HasColumnType("int");
-
                     b.Property<string>("StreetAddress")
                         .HasColumnType("nvarchar(max)");
 
@@ -158,8 +155,6 @@ namespace BirdCageShopDbContext.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("StatusId");
 
                     b.HasIndex("UserId");
 
@@ -667,10 +662,6 @@ namespace BirdCageShopDbContext.Migrations
 
             modelBuilder.Entity("BirdCageShopDbContext.Models.Order", b =>
                 {
-                    b.HasOne("BirdCageShopDomain.Models.Status", "Status")
-                        .WithMany("Orders")
-                        .HasForeignKey("StatusId");
-
                     b.HasOne("BirdCageShopDbContext.Models.User", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId");
@@ -678,8 +669,6 @@ namespace BirdCageShopDbContext.Migrations
                     b.HasOne("BirdCageShopDbContext.Models.Voucher", "Voucher")
                         .WithMany("Orders")
                         .HasForeignKey("VoucherId");
-
-                    b.Navigation("Status");
 
                     b.Navigation("User");
 
@@ -908,11 +897,6 @@ namespace BirdCageShopDbContext.Migrations
             modelBuilder.Entity("BirdCageShopDomain.Models.BirdCageType", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("BirdCageShopDomain.Models.Status", b =>
-                {
-                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

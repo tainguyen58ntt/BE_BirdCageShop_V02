@@ -11,6 +11,6 @@ namespace BirdCageShopDomain.Models
     {
         public int Id { get; set; }
         public string StatusState { get; set; } = null!;
-        public virtual ICollection<Order> Orders { get; set; }
+        //public virtual ICollection<Order> Orders { get; set; }
     }
 }

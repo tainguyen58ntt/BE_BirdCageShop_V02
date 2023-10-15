@@ -8,6 +8,6 @@ namespace BirdCageShopInterface.IServices
 {
 	public interface ITimeService
 	{
-		DateTime GetCurrentTime();
+		DateTime GetCurrentTimeInVietnam();
 	}
 }

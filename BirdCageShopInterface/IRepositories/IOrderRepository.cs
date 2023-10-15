@@ -9,5 +9,6 @@ namespace BirdCageShopInterface.IRepositories
 {
     public interface IOrderRepository : IBaseRepository<Order>
     {
+        //Task<Order> AddAsync(Order order);
     }
 }

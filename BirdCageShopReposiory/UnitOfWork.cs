@@ -21,9 +21,12 @@ namespace BirdCageShopReposiory
         private IProductRepository _productRepository;
 		private IShoppingCartRepository _shoppingCartRepository;
         private IWishlistRepository _wishlistRepository;
+        private IStatusRepository _statusRepository;
+        private IOrderDetailRepository _orderDetailRepository;
         public UnitOfWork(BirdCageShopContext context, IRoleRepository roleRepository, IUserRepository userRepository, IVoucherRepository voucherRepository,
             IWishlistRepository wishlistRepository, IOrderRepository orderRepository,
-            ICategoryRepository categoryRepository, IProductRepository productRepository, IShoppingCartRepository shoppingCartRepository)
+            ICategoryRepository categoryRepository, IProductRepository productRepository, IShoppingCartRepository shoppingCartRepository, IStatusRepository statusRepository
+            , IOrderDetailRepository orderDetailRepository)
         {
             _context = context;
             _roleRepository = roleRepository;
@@ -33,13 +36,18 @@ namespace BirdCageShopReposiory
             _orderRepository = orderRepository; 
             _productRepository = productRepository; 
             _shoppingCartRepository = shoppingCartRepository;   
-            _wishlistRepository = wishlistRepository;   
-            
+            _wishlistRepository = wishlistRepository;
+            _statusRepository = statusRepository;
+            _orderDetailRepository = orderDetailRepository;
+
+
         }
 
         public IRoleRepository RoleRepository => _roleRepository;
+        public IStatusRepository StatusRepository => _statusRepository;
 
         public IUserRepository UserRepository => _userRepository;
+        public IOrderDetailRepository OrderDetailRepository => _orderDetailRepository;
         public ICategoryRepository CategoryRepository => _categoryRepository;
         public IProductRepository ProductRepository => _productRepository;
 

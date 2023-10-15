@@ -17,12 +17,14 @@ namespace BirdCageShopDbContext.Models
         public string? City { get; set; }
         public string? PaymentStatus { get; set; }
         public DateTime? PaymentDate { get; set; }
-        public DateTime? ModifiedAt { get; set; }
+        public DateTime? ModifiedAt { get; set; }   
         public int? VoucherId { get; set; }
-        public virtual User? User { get; set; }
+        public virtual User? User { get; set; } 
         public virtual Voucher? Voucher { get; set; }
-        public virtual Status? Status { get; set; } = null!;
+        //public virtual Status? Status { get; set; } = null!;
         public IEnumerable<OrderDetail> Details { get; set; }
+
+
 
 
     }

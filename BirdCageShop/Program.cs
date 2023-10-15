@@ -23,6 +23,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using BirdCageShopViewModel.Order;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -84,6 +85,9 @@ builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
 builder.Services.AddScoped<IWishlistRepository, WishlistRepository>();
+builder.Services.AddScoped<IStatusRepository, StatusRepository>();
+builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+
 
 // Service 
 builder.Services.AddScoped<IRoleService, RoleService>();
@@ -93,6 +97,8 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
+builder.Services.AddScoped<IStatusService, StatusService>();
+
 
 builder.Services.AddScoped<IClaimService, ClaimService>();
 
@@ -116,6 +122,8 @@ builder.Services.AddScoped<VourcherAddRule>();
 
 builder.Services.AddScoped<ICategoryValidator, CategoryValidator>();
 builder.Services.AddScoped<CategoryCreateRule>();
+builder.Services.AddScoped<IShippingDetailValidator, ShippingDetailValidator>();
+builder.Services.AddScoped<ShippingDetailAddRule>();
 
 builder.Services.AddHttpContextAccessor();
 //
