@@ -24,10 +24,21 @@ using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using BirdCageShopViewModel.Order;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //Add services to the container.
+StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -95,7 +106,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IVourcherService, VourcherService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
-builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IProductService, BirdCageShopService.Service.ProductService>();
 builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
 builder.Services.AddScoped<IStatusService, StatusService>();
 
@@ -122,8 +133,8 @@ builder.Services.AddScoped<VourcherAddRule>();
 
 builder.Services.AddScoped<ICategoryValidator, CategoryValidator>();
 builder.Services.AddScoped<CategoryCreateRule>();
-builder.Services.AddScoped<IShippingDetailValidator, ShippingDetailValidator>();
-builder.Services.AddScoped<ShippingDetailAddRule>();
+builder.Services.AddScoped<IConfirmOrderValidator, ConfirmOrderValidator>();
+builder.Services.AddScoped<ConfirmOrderAddRule>();
 
 builder.Services.AddHttpContextAccessor();
 //

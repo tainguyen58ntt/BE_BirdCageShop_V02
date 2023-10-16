@@ -20,13 +20,13 @@ namespace BirdCageShopInterface.IServices
         Task<IEnumerable<ShoppingCartViewModel>> GetShoppingCartsAsync();
         Task<bool> ExistProductByIdAndUserIdAsync(int productId);
 
-        Task<bool> CheckoutAsync(ShippingDetailAddViewModel shippingDetailAddViewModel);
+        Task<bool> CheckoutAsync(ConfirmOrderAddViewModel confirmOrderAddViewModel);
         Task<ProductViewModel> ExistProductAsync(int productId);
         Task<ShoppingCartViewModel?> GetShoppingCartByIdAsync();
         Task<bool> RemoveFromCartAsync(int productId);
         Task<bool> CreateOrUpdateAsync(int productId, int count);
 
         //
-        Task<ValidationResult> ValidateShippingDetailAddAsync(ShippingDetailAddViewModel vm);
+        Task<ValidationResult> ValidateConfirmOrderAddAsync(ConfirmOrderAddViewModel vm);
     }
 }

@@ -104,17 +104,17 @@ namespace BirdCageShop.Controllers
 
 
         [HttpPost("checkout")]
-        public async Task<IActionResult> Checkout(ShippingDetailAddViewModel shippingDetailAddViewModel)
+        public async Task<IActionResult> Checkout(ConfirmOrderAddViewModel confirmOrderAddViewModel)
         {
-            var validateResult = await _shoppingCartService.ValidateShippingDetailAddAsync(shippingDetailAddViewModel);
+            var validateResult = await _shoppingCartService.ValidateConfirmOrderAddAsync(confirmOrderAddViewModel);
 
 
 
             // check voucher code
             // if != null and invalid return badrequest
-            if (shippingDetailAddViewModel.VourcherCode != null)
+            if (confirmOrderAddViewModel.VourcherCode != null)
             {
-                var voucher = await _vourcherService.GetVourcherByCodeAsync(shippingDetailAddViewModel.VourcherCode);
+                var voucher = await _vourcherService.GetVourcherByCodeAsync(confirmOrderAddViewModel.VourcherCode);
                 if (voucher == null)
                 {
                     validateResult.Errors.Add(new ValidationFailure("Voucher", "This voucher is not valid."));
@@ -129,13 +129,17 @@ namespace BirdCageShop.Controllers
                 return BadRequest(errors);
             }
 
-            var result = await _shoppingCartService.CheckoutAsync(shippingDetailAddViewModel);
+            var result = await _shoppingCartService.CheckoutAsync(confirmOrderAddViewModel);
             if (result is true) return Ok();
             // checkout 
 
 
             return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Check out from cart failed. Server Error." });
         }
+
+      
+
+        
 
     }
 }

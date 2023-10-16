@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 
 namespace BirdCageShopInterface.IValidator
 {
-    public interface IShippingDetailValidator
+    public interface IConfirmOrderValidator
     {
-        IValidator<ShippingDetailAddViewModel> ShippingDetailAddValidator { get; }
+        IValidator<ConfirmOrderAddViewModel> ConfirmOrderAddValidator { get; }
+        
     }
 }

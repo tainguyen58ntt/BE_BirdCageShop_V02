@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -38,6 +39,27 @@ namespace BirdCageShopReposiory.Repositories
             return result;
         }
 
+        public virtual async Task<Pagination<Order>> GetAllByConditionAsync(Expression<Func<Order, bool>> filters, int pageIndex, int pageSize)
+        {
+
+            var totalCount = await _context.Set<Order>().CountAsync();
+            var items = await _context.Set<Order>()
+                .AsNoTracking()
+                .Where(filters)
+                   .Include(o => o.Details)
+                .Skip(pageSize * pageIndex)
+                .Take(pageSize)
+                .ToListAsync();
+            var result = new Pagination<Order>()
+            {
+                Items = items,
+                PageIndex = pageIndex,
+                PageSize = pageSize,
+                TotalItemsCount = totalCount
+            };
+
+            return result;
+        }
         public override async Task<Order?> GetByIdAsync(int id)
         {
 
@@ -45,6 +67,7 @@ namespace BirdCageShopReposiory.Repositories
                 .AsNoTracking()
                 .AsNoTrackingWithIdentityResolution()
                 .Include(x => x.Details)
+                .ThenInclude(d => d.Product)
                 .Include(x => x.User)
                .FirstOrDefaultAsync(x => x.Id == id);
         }
@@ -54,5 +77,8 @@ namespace BirdCageShopReposiory.Repositories
         //    await _context.Orders.AddAsync(order);
         //    return order;
         // }
+
+
+      
     }
 }

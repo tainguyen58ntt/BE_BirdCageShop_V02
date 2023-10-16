@@ -16,6 +16,8 @@ namespace BirdCageShopDbContext.Models
         public string? StreetAddress { get; set; }
         public string? City { get; set; }
         public string? PaymentStatus { get; set; }
+        public string? SessionId { get; set; }
+        public string? PaymentIntentId { get; set; }
         public DateTime? PaymentDate { get; set; }
         public DateTime? ModifiedAt { get; set; }   
         public int? VoucherId { get; set; }

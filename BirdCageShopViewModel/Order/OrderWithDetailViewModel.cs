@@ -18,7 +18,7 @@ namespace BirdCageShopViewModel.Order
         public string? StreetAddress { get; set; }
         public string? City { get; set; }
         public string? PaymentStatus { get; set; }
-
+        public string? OrderStatus { get; set; }
 
         //
 

@@ -1,4 +1,5 @@
-﻿using BirdCageShopViewModel.Voucher;
+﻿using BirdCageShopViewModel.Status;
+using BirdCageShopViewModel.Voucher;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace BirdCageShopInterface.IServices
     public interface IStatusService : IBaseService
     {
         Task<string?> GetStatusByIdAsync(int id);
+        Task<IEnumerable<StatusViewModel>> GetStatusAsync();
     }
 }

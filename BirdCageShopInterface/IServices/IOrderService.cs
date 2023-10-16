@@ -1,5 +1,7 @@
-﻿using BirdCageShopUtils.Pagination;
+﻿using BirdCageShopDbContext.Models;
+using BirdCageShopUtils.Pagination;
 using BirdCageShopViewModel.Order;
+using BirdCageShopViewModel.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +15,10 @@ namespace BirdCageShopInterface.IServices
     
         Task<Pagination<OrderWithDetailViewModel>> GetPaginationAsync(int pageIndex, int pageSize);
         Task<OrderWithDetailViewModel?> GetByIdAsync(int id);
+        Task<Pagination<OrderWithDetailViewModel>> GetOrderByOderStatusPageAsync(int orderStatusId, int pageIndex, int pageSize);
+        //test
+        Task<Order?> GetOrderByIdAsync(int id);
+        //test
+        //Task<Pagination<OrderWithDetailViewModel>> GetByOrderStatusPageAsync(int statusId, int pageIndex, int pageSize);
     }
 }

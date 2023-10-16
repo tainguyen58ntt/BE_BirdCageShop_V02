@@ -8,17 +8,18 @@ using System.Threading.Tasks;
 
 namespace BirdCageShopViewModel.Order
 {
-    public class ShippingDetailAddViewModel
+    public class ConfirmOrderAddViewModel
     {
         public string Phone { get; set; }
         public string StreetAddress { get; set; }
         public string City { get; set; }
         public string? VourcherCode { get; set; }
+        public string PaymentMethod { get; set; }
     }
 
-    public class ShippingDetailAddRule : AbstractValidator<ShippingDetailAddViewModel>
+    public class ConfirmOrderAddRule : AbstractValidator<ConfirmOrderAddViewModel>
     {
-        public ShippingDetailAddRule()
+        public ConfirmOrderAddRule()
         {
             RuleFor(c => c.Phone)
                 .NotEmpty()
@@ -29,6 +30,9 @@ namespace BirdCageShopViewModel.Order
             RuleFor(c => c.City)
               .NotEmpty()
               .WithMessage("City can not be empty");
+            RuleFor(c => c.PaymentMethod)
+            .NotEmpty()
+            .WithMessage("PaymentMethod can not be empty");
 
         }
     }

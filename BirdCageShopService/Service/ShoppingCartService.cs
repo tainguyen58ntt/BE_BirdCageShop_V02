@@ -4,6 +4,7 @@ using BirdCageShopDomain.Models;
 using BirdCageShopInterface;
 using BirdCageShopInterface.IServices;
 using BirdCageShopInterface.IValidator;
+using BirdCageShopUtils;
 using BirdCageShopViewModel.Order;
 using BirdCageShopViewModel.Product;
 using BirdCageShopViewModel.ShoppingCart;
@@ -20,16 +21,16 @@ namespace BirdCageShopService.Service
 {
     public class ShoppingCartService : BaseService, IShoppingCartService
     {
-        private readonly IShippingDetailValidator _shippingDetailValidator;
+        private readonly IConfirmOrderValidator _confirmOrderValidator;
 
 
-        public ShoppingCartService(IShippingDetailValidator shippingDetailValidator, IClaimService claimService, ITimeService timeService, IUnitOfWork unitOfWork, IMapper mapper, IConfiguration configuration) : base(claimService, timeService, unitOfWork, mapper, configuration)
+        public ShoppingCartService(IConfirmOrderValidator confirmOrderValidator, IClaimService claimService, ITimeService timeService, IUnitOfWork unitOfWork, IMapper mapper, IConfiguration configuration) : base(claimService, timeService, unitOfWork, mapper, configuration)
         {
-            _shippingDetailValidator = shippingDetailValidator;
+            _confirmOrderValidator = confirmOrderValidator;
         }
 
 
-        public async Task<bool> CheckoutAsync(ShippingDetailAddViewModel shippingDetailAddViewModel)
+        public async Task<bool> CheckoutAsync(ConfirmOrderAddViewModel confirmOrderAddViewModel)
         {
             bool isSuccess = false;
             Voucher vourcher = new Voucher();
@@ -38,13 +39,13 @@ namespace BirdCageShopService.Service
 
       
             // get status
-            string? orderStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(1);
-            string? paymentStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(1);
+            //string? orderStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(1);
+            //string? paymentStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(1);
 
-            if (orderStatus == null && paymentStatus == null)
-            {
-                return false;
-            }
+            //if (orderStatus == null && paymentStatus == null)
+            //{
+            //    return false;
+            //}
 
             // get 
             List<ShoppingCart> shoppingCarts = (List<ShoppingCart>)await _unitOfWork.ShoppingCartRepository.GetShoppingCartsAsync(currentUserId);
@@ -54,10 +55,10 @@ namespace BirdCageShopService.Service
                 totalPrice += (x.Product.PriceAfterDiscount * x.Count);
             }
             //
-            if (shippingDetailAddViewModel.VourcherCode != null)
+            if (confirmOrderAddViewModel.VourcherCode != null)
             {
                 // get discount of voucher and update Total
-                vourcher = await _unitOfWork.VoucherRepository.GetVoucherByCodeAsync(shippingDetailAddViewModel.VourcherCode);
+                vourcher = await _unitOfWork.VoucherRepository.GetVoucherByCodeAsync(confirmOrderAddViewModel.VourcherCode);
                 totalPrice = totalPrice - totalPrice * vourcher.DiscountPercent;
             }
             //+update to orderdetail
@@ -85,44 +86,84 @@ namespace BirdCageShopService.Service
 
             /// update quatity in stock of product 
 
-            Order order ;
-            if (shippingDetailAddViewModel.VourcherCode != null)
+            Order order = new Order();
+            if (confirmOrderAddViewModel.PaymentMethod.Equals(PaymentMethod.COD))
             {
-                order = new Order
+                if (confirmOrderAddViewModel.VourcherCode != null)
                 {
-                    UserId = currentUserId,
-                    OrderDate = _timeService.GetCurrentTimeInVietnam(),
-                    TotalPrice = totalPrice,
-                    OrderStatus = orderStatus,
-                    PhoneNumber = shippingDetailAddViewModel.Phone,
-                    StreetAddress = shippingDetailAddViewModel.StreetAddress,
-                    City = shippingDetailAddViewModel.City,
-                    PaymentStatus = paymentStatus,
-                    VoucherId = vourcher.Id,
-                    Details = orderDetail
-                };
-            }
-            else
+                    order = new Order
+                    {
+                        UserId = currentUserId,
+                        OrderDate = _timeService.GetCurrentTimeInVietnam(),
+                        TotalPrice = totalPrice,
+                        OrderStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(2),  // approved
+                        PhoneNumber = confirmOrderAddViewModel.Phone,
+                        StreetAddress = confirmOrderAddViewModel.StreetAddress,
+                        City = confirmOrderAddViewModel.City,
+                        PaymentStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(2),  // approved
+                        VoucherId = vourcher.Id,
+                        Details = orderDetail
+                    };
+                }
+                else
+                {
+
+                    order = new Order
+                    {
+                        UserId = currentUserId,
+                        OrderDate = _timeService.GetCurrentTimeInVietnam(),
+                        TotalPrice = totalPrice,
+                        OrderStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(2),  // approved
+                        PhoneNumber = confirmOrderAddViewModel.Phone,
+                        StreetAddress = confirmOrderAddViewModel.StreetAddress,
+                        City = confirmOrderAddViewModel.City,
+                        PaymentStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(2),   // cod
+                        Details = orderDetail
+
+
+                    };
+                }
+            }else if (confirmOrderAddViewModel.PaymentMethod.Equals(PaymentMethod.PAYONLINE))
             {
-
-                order = new Order
+                if (confirmOrderAddViewModel.VourcherCode != null)
                 {
-                    UserId = currentUserId,
-                    OrderDate = _timeService.GetCurrentTimeInVietnam(),
-                    TotalPrice = totalPrice,
-                    OrderStatus = orderStatus,
-                    PhoneNumber = shippingDetailAddViewModel.Phone,
-                    StreetAddress = shippingDetailAddViewModel.StreetAddress,
-                    City = shippingDetailAddViewModel.City,
-                    PaymentStatus = paymentStatus,
-                    Details = orderDetail
+                    order = new Order
+                    {
+                        UserId = currentUserId,
+                        OrderDate = _timeService.GetCurrentTimeInVietnam(),
+                        TotalPrice = totalPrice,
+                        OrderStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(2),  // approved,
+                        PhoneNumber = confirmOrderAddViewModel.Phone,
+                        StreetAddress = confirmOrderAddViewModel.StreetAddress,
+                        City = confirmOrderAddViewModel.City,
+                        PaymentStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(5),   // PAYONLINE,
+                        VoucherId = vourcher.Id,
+                        Details = orderDetail
+                    };
+                }
+                else
+                {
+
+                    order = new Order
+                    {
+                        UserId = currentUserId,
+                        OrderDate = _timeService.GetCurrentTimeInVietnam(),
+                        TotalPrice = totalPrice,
+                        OrderStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(2),  // approved,,
+                        PhoneNumber = confirmOrderAddViewModel.Phone,
+                        StreetAddress = confirmOrderAddViewModel.StreetAddress,
+                        City = confirmOrderAddViewModel.City,
+                        PaymentStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(5),   // PAYONLINE,,
+                        Details = orderDetail
 
 
-                };
+                    };
+                }
             }
 
 
-             await _unitOfWork.OrderRepository.AddAsync(order);
+
+                await _unitOfWork.OrderRepository.AddAsync(order);
 
 
 
@@ -219,9 +260,9 @@ namespace BirdCageShopService.Service
             return await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task<ValidationResult> ValidateShippingDetailAddAsync(ShippingDetailAddViewModel vm)
+        public async Task<ValidationResult> ValidateConfirmOrderAddAsync(ConfirmOrderAddViewModel vm)
         {
-            return await _shippingDetailValidator.ShippingDetailAddValidator.ValidateAsync(vm);
+            return await _confirmOrderValidator.ConfirmOrderAddValidator.ValidateAsync(vm);
         }
     }
 }

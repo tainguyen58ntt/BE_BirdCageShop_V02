@@ -9,17 +9,17 @@ namespace BirdCageShop.Controllers
     [ApiController]
     public class StatusController : ControllerBase
     {
-        private readonly IStatusService  _tes;
-        public StatusController(IStatusService tes)
+        private readonly IStatusService  _statusService;
+        public StatusController(IStatusService statusService)
         {
-            _tes = tes;
+            _statusService = statusService;
          
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var rs = await _tes.GetStatusByIdAsync(1);
+            var rs = await _statusService.GetStatusAsync();
             return Ok(rs);
         }
     }
