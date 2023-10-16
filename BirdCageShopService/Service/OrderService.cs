@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 namespace BirdCageShopService.Service
 {
     public class OrderService : BaseService, IOrderService
+
     {
         public OrderService(IClaimService claimService, ITimeService timeService, IUnitOfWork unitOfWork, IMapper mapper, IConfiguration configuration) : base(claimService, timeService, unitOfWork, mapper, configuration)
         {
@@ -59,6 +60,17 @@ namespace BirdCageShopService.Service
 
             var result = await _unitOfWork.OrderRepository.GetAllByConditionAsync(c => c.OrderStatus == status.StatusState, pageIndex, pageSize);
             return _mapper.Map<Pagination<OrderWithDetailViewModel>>(result);
+        }
+
+        public async Task<bool> GetByIdToUpdateStatusToProcessAsync(int id)
+        {
+            var result = await _unitOfWork.OrderRepository.GetByIdToUpdateStatusToProcessAsync(id);
+            if (result == null) return false;
+            result.OrderStatus = "Processing";
+            _unitOfWork.OrderRepository.Update(result);
+            return  await _unitOfWork.SaveChangesAsync();
+
+
         }
     }
 }

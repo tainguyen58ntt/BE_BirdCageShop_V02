@@ -1,4 +1,5 @@
 ﻿using BirdCageShopDbContext.Models;
+using BirdCageShopDomain.Models;
 using BirdCageShopInterface.IRepositories;
 using BirdCageShopUtils.Pagination;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,8 @@ namespace BirdCageShopReposiory.Repositories
         public OrderRepository(BirdCageShopContext context) : base(context)
         {
         }
+
+
         public override async Task<Pagination<Order>> GetPaginationAsync(int pageIndex, int pageSize)
         {
             var source = _context.Set<Order>()
@@ -72,6 +75,18 @@ namespace BirdCageShopReposiory.Repositories
                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task<Order?> GetByIdToUpdateStatusToProcessAsync(int id)
+        {
+
+            return await _context.Set<Order>()
+               .AsNoTracking()
+               .AsNoTrackingWithIdentityResolution()
+               .Include(x => x.Details)
+               .ThenInclude(d => d.Product)
+               .Include(x => x.User)
+              .FirstOrDefaultAsync(x => x.Id == id && x.OrderStatus == "Approved" && (x.PaymentStatus == "COD" || x.PaymentStatus == "Payonline-approved"));   // will fix not hard code later on
+        }
+
         //public async Task<Order> AddAsync(Order order)
         //{
         //    await _context.Orders.AddAsync(order);
@@ -79,6 +94,6 @@ namespace BirdCageShopReposiory.Repositories
         // }
 
 
-      
+
     }
 }
