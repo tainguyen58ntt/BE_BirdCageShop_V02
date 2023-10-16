@@ -87,6 +87,17 @@ namespace BirdCageShopReposiory.Repositories
               .FirstOrDefaultAsync(x => x.Id == id && x.OrderStatus == "Approved" && (x.PaymentStatus == "COD" || x.PaymentStatus == "Payonline-approved"));   // will fix not hard code later on
         }
 
+        public async Task<Order?> GetByIdToUpdateStatusToShippedAsync(int id)
+        {
+            return await _context.Set<Order>()
+                .AsNoTracking()
+                .AsNoTrackingWithIdentityResolution()
+                .Include(x => x.Details)
+                .ThenInclude(d => d.Product)
+                .Include(x => x.User)
+               .FirstOrDefaultAsync(x => x.Id == id && x.OrderStatus == "Processing" && (x.PaymentStatus == "COD" || x.PaymentStatus == "Payonline-approved"));   // will fix not hard code later on
+        }
+
         //public async Task<Order> AddAsync(Order order)
         //{
         //    await _context.Orders.AddAsync(order);

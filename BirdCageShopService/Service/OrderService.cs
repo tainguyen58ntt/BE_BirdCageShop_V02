@@ -72,5 +72,14 @@ namespace BirdCageShopService.Service
 
 
         }
+
+        public async Task<bool> GetByIdToUpdateStatusToShippeddAsync(int id)
+        {
+            var result = await _unitOfWork.OrderRepository.GetByIdToUpdateStatusToShippedAsync(id);
+            if (result == null) return false;
+            result.OrderStatus = "Shipped";
+            _unitOfWork.OrderRepository.Update(result);
+            return await _unitOfWork.SaveChangesAsync();
+        }
     }
 }

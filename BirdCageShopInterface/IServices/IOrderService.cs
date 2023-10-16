@@ -16,6 +16,7 @@ namespace BirdCageShopInterface.IServices
         Task<Pagination<OrderWithDetailViewModel>> GetPaginationAsync(int pageIndex, int pageSize);
         Task<OrderWithDetailViewModel?> GetByIdAsync(int id);
         Task<bool> GetByIdToUpdateStatusToProcessAsync(int id); // where  order: approved, payment: cod  or  payonline-approved
+        Task<bool> GetByIdToUpdateStatusToShippeddAsync(int id); // where  order: processing, payment: cod  or  payonline-approved
         Task<Pagination<OrderWithDetailViewModel>> GetOrderByOderStatusPageAsync(int orderStatusId, int pageIndex, int pageSize);
         //test
         Task<Order?> GetOrderByIdAsync(int id);

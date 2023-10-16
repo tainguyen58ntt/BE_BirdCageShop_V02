@@ -57,11 +57,20 @@ namespace BirdCageShop.Controllers
         }
 
         /// update status order to processing where : orderstatus : aprroved and payment status: payonline-approved or COD
-        [HttpPut("{id}")]
+        [HttpPut("updateStatusToProcessing/{id}")]
         public async Task<IActionResult> UpdateOrderToProcessing([FromRoute] int id)
         {
 
             bool isUpdate = await _orderService.GetByIdToUpdateStatusToProcessAsync(id);
+            if (isUpdate) return Ok();
+            return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Update order status failed. Server Error." });
+        }
+
+        [HttpPut("updateStatusToShipped/{id}")]
+        public async Task<IActionResult> UpdateOrderToShipped([FromRoute] int id)
+        {
+
+            bool isUpdate = await _orderService.GetByIdToUpdateStatusToShippeddAsync(id);
             if (isUpdate) return Ok();
             return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Update order status failed. Server Error." });
         }
