@@ -22,12 +22,11 @@ namespace BirdCageShop.Controllers
     {
 
         private readonly IUserService _userService;
-        //private readonly IUnitOfWork _unitOfWork;
-        //private readonly IClaimService _claimService;
+
         private readonly BirdCageShopContext _db;
         private readonly UserManager<IdentityUser> _userManager;
 
-        //private readonly UserManager<ApplicationUser> _userManager;
+        
         public UserController(IUserService userService, IUnitOfWork unitOfWork, BirdCageShopContext db, UserManager<IdentityUser> userManager)
         {
             _userService = userService;
@@ -48,7 +47,7 @@ namespace BirdCageShop.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var x = await _userService.GetUserAsync();
+            var x = await _db.ApplicationUser.ToListAsync();
           
 
             return Ok(x);   

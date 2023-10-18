@@ -1,4 +1,5 @@
-﻿using BirdCageShopInterface.IServices;
+﻿using BirdCageShopDbContext.Models;
+using BirdCageShopInterface.IServices;
 using BirdCageShopOther.Email;
 using BirdCageShopViewModel.Auth;
 using Microsoft.AspNetCore.Http;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security;
 using System.Security.Claims;
 using System.Text;
 
@@ -16,19 +18,21 @@ namespace BirdCageShop.Controllers
     public class AuthenticationController : ControllerBase
     {
         private readonly IEmailService _emailService;
+        private readonly ITimeService _timeService;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IConfiguration _configuration;
 
 
-        public AuthenticationController(IConfiguration configuration, SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IEmailService emailService)
+        public AuthenticationController(ITimeService timeService, IConfiguration configuration, SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IEmailService emailService)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _emailService = emailService;
             _signInManager = signInManager;
             _configuration = configuration;
+            _timeService = timeService;
         }
 
         [HttpPost]
@@ -41,32 +45,41 @@ namespace BirdCageShop.Controllers
                 return StatusCode(StatusCodes.Status403Forbidden, new Response { Status = "Error", Message = "User already exists" });
             }
 
-            IdentityUser user = new()
-            {
-                Email = registerUser.Email,
-                SecurityStamp = Guid.NewGuid().ToString(),
-                UserName = registerUser.UserName,
-                TwoFactorEnabled = true
-            };
+            //IdentityUser user = new()
+            //{
+            //    Email = registerUser.Email,
+            //    SecurityStamp = Guid.NewGuid().ToString(),
+            //    UserName = registerUser.UserName,
+            //    TwoFactorEnabled = true
+            //};
 
-            
+
+            //test
+            var user2 = CreateUser();
+            user2.UserName = registerUser.UserName;
+            user2.Email = registerUser.Email;
+            user2.CreatedAt = _timeService.GetCurrentTimeInVietnam();
+            user2.SecurityStamp = Guid.NewGuid().ToString();
+            user2.TwoFactorEnabled = true;
+            //test
+
 
             if (await _roleManager.RoleExistsAsync(role))
             {
-                var result = await _userManager.CreateAsync(user, registerUser.Password);
+                var result = await _userManager.CreateAsync(user2, registerUser.Password);
 
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, role);
+                    await _userManager.AddToRoleAsync(user2, role);
 
                     //Add Token to Verify the email....
-                    var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var confirmationLink = Url.Action(nameof(ConfirmEmail), "Authentication", new { token, email = user.Email }, Request.Scheme);
-                    var message = new Message(new string[] { user.Email! }, "Confirmation email link", confirmationLink!);
+                    var token = await _userManager.GenerateEmailConfirmationTokenAsync(user2);
+                    var confirmationLink = Url.Action(nameof(ConfirmEmail), "Authentication", new { token, email = user2.Email }, Request.Scheme);
+                    var message = new Message(new string[] { user2.Email! }, "Confirmation email link", confirmationLink!);
                     _emailService.SendEmail(message);
 
                     return StatusCode(StatusCodes.Status200OK,
-                new Response { Status = "Success", Message = $"User created & Email Sent to {user.Email} SuccessFully" });
+                new Response { Status = "Success", Message = $"User created & Email Sent to {user2.Email} SuccessFully" });
 
                 }
                 else
@@ -83,6 +96,19 @@ namespace BirdCageShop.Controllers
             return Ok();
         }
 
+        private ApplicationUser CreateUser()
+        {
+            try
+            {
+                return Activator.CreateInstance<ApplicationUser>();
+            }
+            catch
+            {
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(IdentityUser)}'. " +
+                    $"Ensure that '{nameof(IdentityUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                    $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
+            }
+        }
 
         [HttpGet]
         public async Task<IActionResult> TestEmail()

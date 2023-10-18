@@ -73,6 +73,7 @@ namespace BirdCageShopReposiory.Repositories
      .AsNoTrackingWithIdentityResolution()
     .Where(x => x.Id == id)
     .Include(od => od.Details)
+    .ThenInclude(d => d.Product)
     .Include(u => u.ApplicationUser)
     .FirstOrDefaultAsync();
        
