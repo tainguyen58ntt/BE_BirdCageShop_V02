@@ -9,9 +9,9 @@ namespace BirdCageShopDbContext.Models
         public string Bank { get; set; } = null!;
         public string Name { get; set; } = null!;
         public string AccountNo { get; set; } = null!;
-        public int UserId { get; set; }
+        public string ApplicationUserId { get; set; }
 
         //
-        public User User { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
     }
 }

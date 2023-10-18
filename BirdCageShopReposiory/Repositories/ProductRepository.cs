@@ -40,14 +40,14 @@ namespace BirdCageShopReposiory.Repositories
                 .Include(p => p.ProductFeatures)
             .ThenInclude(ps => ps.Feature)
             .Include(p => p.ProductImages).FirstOrDefaultAsync();
-              
+
         }
         public override async Task<Pagination<Product>> GetPaginationAsync(int pageIndex, int pageSize)
         {
             var totalCount = await _context.Set<Product>().CountAsync();
             var items = await _context.Set<Product>()
                 .AsNoTracking()
-             
+
                    .Include(p => p.ProductSpecifications)
             .ThenInclude(ps => ps.Specification)
                 .Include(p => p.ProductFeatures)
@@ -95,7 +95,7 @@ namespace BirdCageShopReposiory.Repositories
                 .Include(p => p.ProductFeatures)
             .ThenInclude(ps => ps.Feature)
             .Include(p => p.ProductImages)
-            
+
                 .Skip(pageSize * pageIndex)
                 .Take(pageSize)
                 .ToListAsync();
@@ -110,7 +110,7 @@ namespace BirdCageShopReposiory.Repositories
             return result;
         }
 
-        public async Task<IEnumerable<Product>> GetProductsFromWishlistAsync(int customerId)
+        public async Task<IEnumerable<Product>> GetProductsFromWishlistAsync(string customerId)
         {
             return await _context.Set<Product>()
               .AsNoTracking()
@@ -118,7 +118,7 @@ namespace BirdCageShopReposiory.Repositories
               .Include(p => p.WishlistItems)
               .Include(p => p.ProductImages)
               .Where(x => !x.isDelete &&
-              x.WishlistItems.Any(pw => pw.WishList.UserId == customerId))
+              x.WishlistItems.Any(pw => pw.WishList.ApplicationUserId == customerId))
               .ToListAsync();
         }
 
@@ -127,7 +127,16 @@ namespace BirdCageShopReposiory.Repositories
             return await _context.Set<Product>()
                 .AsNoTracking()
                 .Include(p => p.ProductReviews)
-                .ThenInclude(pr => pr.User)
+                .ThenInclude(pr => pr.ApplicationUser)
+                .FirstOrDefaultAsync(x => !x.isDelete);
+        }
+
+        public async Task<Product> GetProductIncludeImage(int productID)
+        {
+            return await _context.Set<Product>()
+                .AsNoTracking()
+                .Include(p => p.ProductImages)
+                //.ThenInclude(pr => pr.ApplicationUser)
                 .FirstOrDefaultAsync(x => !x.isDelete);
         }
     }

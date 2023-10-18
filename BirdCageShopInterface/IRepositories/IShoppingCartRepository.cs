@@ -10,10 +10,10 @@ namespace BirdCageShopInterface.IRepositories
 {
 	public interface IShoppingCartRepository : IBaseRepository<ShoppingCart>
 	{
-		Task<IEnumerable<ShoppingCart>> GetShoppingCartsAsync(int customerId);
-        Task DeleteShoppingCartsByUserIdAsync(int customerId);
-        Task<ShoppingCart> GetCartItemByUserIdAndProDIdAsync(int customerId, int prodID);
-        
+		Task<IEnumerable<ShoppingCart>> GetShoppingCartsAsync(string customerId);
+		Task DeleteShoppingCartsByUserIdAsync(string customerId);
+		Task<ShoppingCart> GetCartItemByUserIdAndProDIdAsync(string customerId, int prodID);
 
-    }
+
+	}
 }

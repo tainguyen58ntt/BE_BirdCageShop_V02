@@ -68,7 +68,7 @@ namespace BirdCageShopService.Service
             if (result == null) return false;
             result.OrderStatus = "Processing";
             _unitOfWork.OrderRepository.Update(result);
-            return  await _unitOfWork.SaveChangesAsync();
+            return await _unitOfWork.SaveChangesAsync();
 
 
         }

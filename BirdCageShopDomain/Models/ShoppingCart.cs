@@ -17,8 +17,8 @@ namespace BirdCageShopDomain.Models
 		public DateTime? ModifiedAt { get; set; }
 		//public DateTime? ExpDate { get; set; }
 		public int ProductId { get; set; }
-		public int UserId { get; set; }
-		public virtual User User { get; set; } = null!;
+		public string ApplicationUserId { get; set; }
+		public virtual ApplicationUser ApplicationUser { get; set; } = null!;
 		public virtual Product Product { get; set; } = null!;
 
 

@@ -12,6 +12,6 @@ namespace BirdCageShopInterface.IValidator
     public interface IConfirmOrderValidator
     {
         IValidator<ConfirmOrderAddViewModel> ConfirmOrderAddValidator { get; }
-        
+
     }
 }

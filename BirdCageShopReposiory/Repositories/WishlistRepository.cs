@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace BirdCageShopReposiory.Repositories
 {
-    public class WishlistRepository :  BaseRepository<Wishlist>, IWishlistRepository
+    public class WishlistRepository : BaseRepository<Wishlist>, IWishlistRepository
     {
         public WishlistRepository(BirdCageShopContext context) : base(context)
         {
         }
 
-        //public async Task<Wishlist?> GetWishlistByUserIdAsync(int userId)
+        //public async Task<Wishlist?> GetWishlistByUserIdAsync(string userId)
         //{
         //    return await _context.Set<Wishlist>()
         //        .AsNoTracking()
-        //        .Include(w => w.ProductWishlists)
-        //        .FirstOrDefaultAsync(w => w.CustomerId == customerId);
+        //        .Include(w => w.WishlistItems)
+        //        .FirstOrDefaultAsync(w => w.UserId == userId);
         //}
     }
 }

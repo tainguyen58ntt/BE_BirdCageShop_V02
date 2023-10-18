@@ -16,7 +16,7 @@ namespace BirdCageShopInterface.IRepositories
         Task<Pagination<TModel>> GetPaginationAsync(int pageIndex, int pageSize);
         Task<Pagination<TModel>> GetAllByConditionAsync(
            Expression<Func<TModel, bool>> filters,
-         
+
            int pageIndex, int pageSize);
 
         Task AddAsync(TModel entity);

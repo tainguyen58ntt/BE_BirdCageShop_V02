@@ -35,9 +35,9 @@ namespace BirdCageShopService.Service
             bool isSuccess = false;
             Voucher vourcher = new Voucher();
             var currentUserId = _claimService.GetCurrentUserId();
-            if (currentUserId == -1) return false;
+            if (currentUserId == null) return false;
 
-      
+
             // get status
             //string? orderStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(1);
             //string? paymentStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(1);
@@ -67,7 +67,7 @@ namespace BirdCageShopService.Service
             {
                 OrderDetail _orderDetail = new OrderDetail()
                 {
-                  
+
                     ProductId = x.ProductId,
                     Quantity = x.Count,
                     Price = (x.Product.PriceAfterDiscount * x.Count)
@@ -93,7 +93,7 @@ namespace BirdCageShopService.Service
                 {
                     order = new Order
                     {
-                        UserId = currentUserId,
+                        ApplicationUserId = currentUserId,
                         OrderDate = _timeService.GetCurrentTimeInVietnam(),
                         TotalPrice = totalPrice,
                         OrderStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(2),  // approved
@@ -110,33 +110,34 @@ namespace BirdCageShopService.Service
 
                     order = new Order
                     {
-                        UserId = currentUserId,
+                        ApplicationUserId = currentUserId,
                         OrderDate = _timeService.GetCurrentTimeInVietnam(),
                         TotalPrice = totalPrice,
                         OrderStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(2),  // approved
                         PhoneNumber = confirmOrderAddViewModel.Phone,
                         StreetAddress = confirmOrderAddViewModel.StreetAddress,
                         City = confirmOrderAddViewModel.City,
-                        PaymentStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(2),   // cod
+                        PaymentStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(6),   // cod
                         Details = orderDetail
 
 
                     };
                 }
-            }else if (confirmOrderAddViewModel.PaymentMethod.Equals(PaymentMethod.PAYONLINE))
+            }
+            else if (confirmOrderAddViewModel.PaymentMethod.Equals(PaymentMethod.PAYONLINE))
             {
                 if (confirmOrderAddViewModel.VourcherCode != null)
                 {
                     order = new Order
                     {
-                        UserId = currentUserId,
+                        ApplicationUserId = currentUserId,
                         OrderDate = _timeService.GetCurrentTimeInVietnam(),
                         TotalPrice = totalPrice,
                         OrderStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(2),  // approved,
                         PhoneNumber = confirmOrderAddViewModel.Phone,
                         StreetAddress = confirmOrderAddViewModel.StreetAddress,
                         City = confirmOrderAddViewModel.City,
-                        PaymentStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(5),   // PAYONLINE,
+                        PaymentStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(7),   // PAYONLINE,
                         VoucherId = vourcher.Id,
                         Details = orderDetail
                     };
@@ -146,14 +147,14 @@ namespace BirdCageShopService.Service
 
                     order = new Order
                     {
-                        UserId = currentUserId,
+                        ApplicationUserId = currentUserId,
                         OrderDate = _timeService.GetCurrentTimeInVietnam(),
                         TotalPrice = totalPrice,
                         OrderStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(2),  // approved,,
                         PhoneNumber = confirmOrderAddViewModel.Phone,
                         StreetAddress = confirmOrderAddViewModel.StreetAddress,
                         City = confirmOrderAddViewModel.City,
-                        PaymentStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(5),   // PAYONLINE,,
+                        PaymentStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(7),   // PAYONLINE,,
                         Details = orderDetail
 
 
@@ -163,23 +164,23 @@ namespace BirdCageShopService.Service
 
 
 
-                await _unitOfWork.OrderRepository.AddAsync(order);
+            await _unitOfWork.OrderRepository.AddAsync(order);
 
 
 
             //+delete shopping cart
-            await _unitOfWork.ShoppingCartRepository.DeleteShoppingCartsByUserIdAsync(currentUserId);   
-                
+            await _unitOfWork.ShoppingCartRepository.DeleteShoppingCartsByUserIdAsync(currentUserId);
+
             return await _unitOfWork.SaveChangesAsync();
         }
 
-      
+
 
 
         public async Task<bool> CreateOrUpdateAsync(int productId, int count)
         {
             var currentUserId = _claimService.GetCurrentUserId();
-            if (currentUserId == -1) return false;
+            if (currentUserId == null) return false;
             var cartItem = await _unitOfWork.ShoppingCartRepository.GetCartItemByUserIdAndProDIdAsync(currentUserId, productId);
             if (cartItem == null)
             {
@@ -187,7 +188,7 @@ namespace BirdCageShopService.Service
                 {
                     ProductId = productId,
                     Count = count,
-                    UserId = currentUserId,
+                    ApplicationUserId = currentUserId,
                     CreatedAt = _timeService.GetCurrentTimeInVietnam()
                 };
                 _unitOfWork.ShoppingCartRepository.AddAsync(cartItem);
@@ -210,7 +211,7 @@ namespace BirdCageShopService.Service
         public async Task<bool> ExistProductByIdAndUserIdAsync(int productId)
         {
             var currentUserId = _claimService.GetCurrentUserId();
-            if (currentUserId == -1) return false;
+            if (currentUserId == null) return false;
 
             //
 
@@ -238,7 +239,7 @@ namespace BirdCageShopService.Service
             //
 
             var currentUserId = _claimService.GetCurrentUserId();
-            if (currentUserId == -1) return new List<ShoppingCartViewModel>();
+            if (currentUserId == null) return new List<ShoppingCartViewModel>();
 
 
             var result = await _unitOfWork.ShoppingCartRepository.GetShoppingCartsAsync(currentUserId);
@@ -250,7 +251,7 @@ namespace BirdCageShopService.Service
         public async Task<bool> RemoveFromCartAsync(int productId)
         {
             var currentUserId = _claimService.GetCurrentUserId();
-            if (currentUserId == -1) return false;
+            if (currentUserId == null) return false;
 
             //
 

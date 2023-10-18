@@ -9,13 +9,13 @@ namespace BirdCageShopInterface
 {
     public interface IUnitOfWork
     {
-        IRoleRepository RoleRepository { get; }
+        //IRoleRepository RoleRepository { get; }
         ICategoryRepository CategoryRepository { get; }
         IUserRepository UserRepository { get; }
         IVoucherRepository VoucherRepository { get; }
         IOrderRepository OrderRepository { get; }
         IProductRepository ProductRepository { get; }
-		IShoppingCartRepository ShoppingCartRepository { get; }
+        IShoppingCartRepository ShoppingCartRepository { get; }
         IWishlistRepository WishlistRepository { get; }
         IStatusRepository StatusRepository { get; }
         IOrderDetailRepository OrderDetailRepository { get; }

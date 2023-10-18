@@ -17,7 +17,7 @@ namespace BirdCageShop.Controllers
             _vourcherService = vourcherService;
         }
 
-        
+
 
         //get all vourcher exp date > current date
         [HttpGet]
@@ -33,7 +33,7 @@ namespace BirdCageShop.Controllers
             // check valid model
             var validateResult = await _vourcherService.ValidateVourcherAdddpAsync(vm);
 
-         
+
             if (!validateResult.IsValid)
             {
                 var errors = validateResult.Errors.Select(x => new { property = x.PropertyName, message = x.ErrorMessage });

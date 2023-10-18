@@ -8,7 +8,7 @@ namespace BirdCageShopInterface.IServices
 {
 	public interface IClaimService
 	{
-		int GetCurrentUserId();
-		int GetRoleId();
+		string?  GetCurrentUserId();
+		string GetRole();
 	}
 }

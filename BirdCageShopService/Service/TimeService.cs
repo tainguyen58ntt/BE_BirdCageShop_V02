@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace BirdCageShopService.Service
 {
-	public class TimeService : ITimeService
-	{
-		//public DateTime GetCurrentTime()
-		//{
-		//	return DateTime.UtcNow;
-		//}
+    public class TimeService : ITimeService
+    {
+        //public DateTime GetCurrentTime()
+        //{
+        //	return DateTime.UtcNow;
+        //}
 
         public DateTime GetCurrentTimeInVietnam()
         {

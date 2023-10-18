@@ -20,6 +20,6 @@ namespace BirdCageShopOther.Validator
         }
         public IValidator<ConfirmOrderAddViewModel> ConfirmOrderAddValidator => _confirmOrderAddValidator;
 
-        
+
     }
 }

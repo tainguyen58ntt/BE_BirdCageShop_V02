@@ -11,11 +11,11 @@ namespace BirdCageShopDbContext.Models
         }
 
         public int Id { get; set; }
-        public int UserId { get; set; }
+        public string ApplicationUserId { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
 
-        public virtual User User { get; set; } = null!;
+        public virtual ApplicationUser ApplicationUser { get; set; } = null!;
         public virtual ICollection<WishlistItem> WishlistItems { get; set; }
     }
 }

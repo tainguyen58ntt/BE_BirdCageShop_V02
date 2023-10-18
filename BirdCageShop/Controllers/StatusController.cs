@@ -9,11 +9,11 @@ namespace BirdCageShop.Controllers
     [ApiController]
     public class StatusController : ControllerBase
     {
-        private readonly IStatusService  _statusService;
+        private readonly IStatusService _statusService;
         public StatusController(IStatusService statusService)
         {
             _statusService = statusService;
-         
+
         }
 
         [HttpGet]

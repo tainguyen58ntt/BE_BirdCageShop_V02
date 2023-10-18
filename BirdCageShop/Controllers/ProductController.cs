@@ -1,4 +1,5 @@
 ﻿using BirdCageShopDbContext.Models;
+using BirdCageShopInterface.IRepositories;
 using BirdCageShopInterface.IServices;
 using BirdCageShopService.Service;
 using Microsoft.AspNetCore.Authorization;
@@ -7,15 +8,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BirdCageShop.Controllers
 {
-	[Route("api/[controller]")]
-	[ApiController]
-	public class ProductController : ControllerBase
-	{
-		private readonly IProductService _productService;
-		public ProductController(IProductService productService)
-		{
-			_productService = productService;
-		}
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ProductController : ControllerBase
+    {
+        private readonly IProductService _productService;
+        
+        public ProductController(IProductService productService)
+        {
+            _productService = productService;
+            
+        }
 
         //get product by bird type
         [HttpGet("by-birdCage-type/{birdCageTypeId}")]
@@ -35,6 +38,8 @@ namespace BirdCageShop.Controllers
             var result = await _productService.GetByCagegoryTypePageAsync(categoryId, pageIndex, pageSize);
             return Ok(result);
         }
+
+   
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
         {
@@ -60,7 +65,7 @@ namespace BirdCageShop.Controllers
             var result = await _productService.RemoveAsync(product);
             if (result is true) return Ok();
             return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Delete product failed. Server Error." });
-        }   
+        }
 
         //
         [HttpGet("from-wishlist")]
@@ -82,15 +87,15 @@ namespace BirdCageShop.Controllers
             return Ok(result);
         }
 
-        [HttpPost("add-to-wishlist/{productId}")]
-        public async Task<IActionResult> AddToWishlistAsync([FromRoute] int productId)
-        {
-            var product = await _productService.GetProductByIdAsync(productId);
-            if (product is null) return BadRequest(new { property = "Product ID", message = "Product doesn't exist." });
-            var result = await _productService.AddToWishlistAsync(productId);
-            if (result is true) return Ok();
-            return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Add to wishlist failed. Server Error." });
-        }
+        //[HttpPost("add-to-wishlist/{productId}")]
+        //public async Task<IActionResult> AddToWishlistAsync([FromRoute] int productId)
+        //{
+        //    var product = await _productService.GetProductByIdAsync(productId);
+        //    if (product is null) return BadRequest(new { property = "Product ID", message = "Product doesn't exist." });
+        //    var result = await _productService.AddToWishlistAsync(productId);
+        //    if (result is true) return Ok();
+        //    return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Add to wishlist failed. Server Error." });
+        //}
 
 
 
@@ -110,11 +115,11 @@ namespace BirdCageShop.Controllers
 
         //public async Task<IActionResult> AddToWishlistAsync([FromRoute] int productId)
         //{
-        //	var product = await _productService.GetProductByIdAsync(productId);
-        //	if (product is null) return BadRequest(new { property = "Product ID", message = "Product doesn't exist." });
-        //	var result = await _productService.AddToWishlistAsync(productId);
-        //	if (result is true) return Ok();
-        //	return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Add to wishlist failed. Server Error." });
+        //    var product = await _productService.GetProductByIdAsync(productId);
+        //    if (product is null) return BadRequest(new { property = "Product ID", message = "Product doesn't exist." });
+        //    var result = await _productService.AddToWishlistAsync(productId);
+        //    if (result is true) return Ok();
+        //    return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Add to wishlist failed. Server Error." });
         //}
 
     }

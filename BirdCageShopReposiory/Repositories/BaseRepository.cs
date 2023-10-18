@@ -19,7 +19,7 @@ namespace BirdCageShopReposiory.Repositories
         {
             _context = context;
         }
-        public  async Task AddAsync(TModel entity)
+        public async Task AddAsync(TModel entity)
         {
             await _context.Set<TModel>().AddAsync(entity);
         }

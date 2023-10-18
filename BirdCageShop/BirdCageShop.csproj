@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BirdCageShopDbContext\BirdCageShopDbContext.csproj" />
     <ProjectReference Include="..\BirdCageShopInterface\BirdCageShopInterface.csproj" />
     <ProjectReference Include="..\BirdCageShopOther\BirdCageShopOther.csproj" />
     <ProjectReference Include="..\BirdCageShopService\BirdCageShopService.csproj" />

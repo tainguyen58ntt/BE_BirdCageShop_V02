@@ -21,9 +21,9 @@ namespace BirdCageShopService.Service
 	public class ProductService : BaseService, IProductService
 	{
 
-		public ProductService(IClaimService claimService,ITimeService timeService, IUnitOfWork unitOfWork, IMapper mapper, IConfiguration configuration) : base(claimService, timeService, unitOfWork, mapper, configuration)
+		public ProductService(IClaimService claimService, ITimeService timeService, IUnitOfWork unitOfWork, IMapper mapper, IConfiguration configuration) : base(claimService, timeService, unitOfWork, mapper, configuration)
 		{
-			
+
 		}
 
 		public async Task<ProductViewModel?> GetByIdAsync(int id)
@@ -34,7 +34,7 @@ namespace BirdCageShopService.Service
 
 		public async Task<ProductWithReviewViewModel?> GetFeedBackByProductId(int productId)
 		{
-			
+
 			var result = await _unitOfWork.ProductRepository.GetProductWithReviewByProIdAsync(productId);
 			return _mapper.Map<ProductWithReviewViewModel>(result);
 		}
@@ -54,13 +54,13 @@ namespace BirdCageShopService.Service
 			//var result = await _unitOfWork.ProductRepository.GetAllByConditionAsync(pageIndex, pageSize);
 			//return _mapper.Map<Pagination<ProductViewModel>>(result);
 		}
-        public async Task<Pagination<ProductViewModel>> GetByCagegoryTypePageAsync(int categoryId, int pageIndex, int pageSize)
-        {
-            var result = await _unitOfWork.ProductRepository.GetAllByConditionAsync(c => c.CategoryId == categoryId, pageIndex, pageSize);
-            return _mapper.Map<Pagination<ProductViewModel>>(result);
-        }
+		public async Task<Pagination<ProductViewModel>> GetByCagegoryTypePageAsync(int categoryId, int pageIndex, int pageSize)
+		{
+			var result = await _unitOfWork.ProductRepository.GetAllByConditionAsync(c => c.CategoryId == categoryId, pageIndex, pageSize);
+			return _mapper.Map<Pagination<ProductViewModel>>(result);
+		}
 
-        public async Task<IEnumerable<ProductViewModel>> GetProductByCategoryAsync(int categoryId)
+		public async Task<IEnumerable<ProductViewModel>> GetProductByCategoryAsync(int categoryId)
 		{
 			var result = await _unitOfWork.ProductRepository.GetProductsByCategoryAsync(categoryId);
 			return _mapper.Map<List<ProductViewModel>>(result);
@@ -80,7 +80,7 @@ namespace BirdCageShopService.Service
 		public async Task<IEnumerable<ProductFromWishlist>> GetProductsFromWishlistAsync()
 		{
 			var currentUserId = _claimService.GetCurrentUserId();
-			if (currentUserId == -1) return new List<ProductFromWishlist>();
+			if (currentUserId == null) return new List<ProductFromWishlist>();
 			var result = await _unitOfWork.ProductRepository.GetProductsFromWishlistAsync(currentUserId);
 			var productFromWishlistList = new List<ProductFromWishlist>();
 			foreach (var product in result)
@@ -128,45 +128,45 @@ namespace BirdCageShopService.Service
 			return await _unitOfWork.SaveChangesAsync();
 		}
 
-		public async Task<bool> AddToWishlistAsync(int productId)
-		{
-			return false;
-            //var currentUserId = _claimService.GetRoleId();
-            //if (currentUserId == -1) return false;
+		//public async Task<bool> AddToWishlistAsync(int productId)
+		//{
+		//	//return false;
+		//	var currentUserId = _claimService.GetCurrentUserId();
+		//	if (currentUserId == null) return false;
 
-            //////test
-            ////var currentUserId = 1;
-            //////test
-            //////
-            //var wishlist = await _unitOfWork.WishlistRepository.GetWishlistByUserIdAsync(currentUserId);
-            //if (wishlist != null)
-            //{
+		//	////test
+		//	//var currentUserId = 1;
+		//	////test
+		//	////
+		//	var wishlist = await _unitOfWork.WishlistRepository.GetWishlistByUserIdAsync(currentUserId);
+		//	if (wishlist != null)
+		//	{
 
-            //    var product = await _unitOfWork.ProductRepository.GetProductByWishlistIdAndCustomerIdAsync(wishlist.Id, currentUserId);
-            //    if (product is not null)
-            //    {
-            //        var existItem = await _unitOfWork.ProductWishlistRepository.GetWishlistByWishlistIdAndProductIdAsync(wishlist.Id, product.Id);
-            //        if (existItem != null)
-            //        {
+		//		var product = await _unitOfWork.ProductRepository.GetProductByWishlistIdAndCustomerIdAsync(wishlist.Id, currentUserId);
+		//		if (product is not null)
+		//		{
+		//			var existItem = await _unitOfWork.ProductWishlistRepository.GetWishlistByWishlistIdAndProductIdAsync(wishlist.Id, product.Id);
+		//			if (existItem != null)
+		//			{
 
-            //            _unitOfWork.ProductWishlistRepository.Delete(existItem);
-            //            return await _unitOfWork.SaveChangesAsync();
-            //        }
+		//				_unitOfWork.ProductWishlistRepository.Delete(existItem);
+		//				return await _unitOfWork.SaveChangesAsync();
+		//			}
 
-            //    }
+		//		}
 
-            //    //_unitOfWork.WishlistRepository.Update(wishlist);
-            //}
+		//		//_unitOfWork.WishlistRepository.Update(wishlist);
+		//	}
 
 
 
-            //else
-            //{
-            //    return false;
+		//	else
+		//	{
+		//		return false;
 
-            //}
+		//	}
 
-            //return false;
-        }
+		//	return false;
+		//}
 	}
 }

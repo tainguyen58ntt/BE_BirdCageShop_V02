@@ -17,17 +17,17 @@ namespace BirdCageShopReposiory.Repositories
         {
         }
 
-        public async Task DeleteShoppingCartsByUserIdAsync(int customerId)
+        public async Task DeleteShoppingCartsByUserIdAsync(string customerId)
         {
 
             var shoppingCartsToDelete = _context.Set<ShoppingCart>()
-        .Where(cart => cart.UserId == customerId)
+        .Where(cart => cart.ApplicationUserId == customerId)
         .ToList();
 
             _context.Set<ShoppingCart>().RemoveRange(shoppingCartsToDelete);
         }
 
-        //public Task<ShoppingCart> CreateItemByUserIdAndProDIdAsync(int customerId, int prodID)
+        //public Task<ShoppingCart> CreateItemByUserIdAndProDIdAsync(string customerId, int prodID)
         //{
         //    var category = _mapper.Map<Category>(vm);
         //    category.CreateAt = DateTime.Now;
@@ -35,21 +35,22 @@ namespace BirdCageShopReposiory.Repositories
         //    return await _unitOfWork.SaveChangesAsync();
         //}
 
-        public async Task<ShoppingCart> GetCartItemByUserIdAndProDIdAsync(int customerId, int proDId)
+        public async Task<ShoppingCart> GetCartItemByUserIdAndProDIdAsync(string customerId, int proDId)
         {
             return await _context.Set<ShoppingCart>()
               .AsNoTracking()
               .Include(p => p.Product)
-              .Where(x => x.UserId == customerId && x.ProductId == proDId)
+              .Where(x => x.ApplicationUserId == customerId && x.ProductId == proDId)
               .FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<ShoppingCart>> GetShoppingCartsAsync(int customerId)
+        public async Task<IEnumerable<ShoppingCart>> GetShoppingCartsAsync(string customerId)
         {
             return await _context.Set<ShoppingCart>()
               .AsNoTracking()
               .Include(p => p.Product)
               //.Where(x => x.ExpDate >= DateTime.Now)
+              .Where(p => p.ApplicationUserId == customerId)   
               .ToListAsync();
         }
     }

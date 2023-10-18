@@ -74,7 +74,7 @@ namespace BirdCageShop.Controllers
         //      // get cart by specific by user id
 
         //      //
-        ////
+        //
         [HttpPost("update-cart/{productId}")]  // use for update and add
         public async Task<IActionResult> AddItemFromShoppingCart([FromRoute] int productId, [FromQuery] int count)
         {
@@ -137,9 +137,9 @@ namespace BirdCageShop.Controllers
             return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Check out from cart failed. Server Error." });
         }
 
-      
 
-        
+
+
 
     }
 }

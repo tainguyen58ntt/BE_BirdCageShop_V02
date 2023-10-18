@@ -1,4 +1,5 @@
 ﻿using BirdCageShopDbContext.Models;
+using birdcageshopinterface.IServices;
 using BirdCageShopUtils.Pagination;
 using BirdCageShopViewModel.Auth;
 using BirdCageShopViewModel.Role;
@@ -14,18 +15,18 @@ namespace BirdCageShopInterface.IServices
 {
     public interface IUserService : IBaseService
     {
-		 Task<string?> AuthorizeAsync(SignInViewModel vm);
+        //Task<string?> AuthorizeAsync(SignInViewModel vm);
 
-        //
-		Task<IEnumerable<UserViewModel>> GetUserAsync();
-        Task<User?> GetUserByIdAsync(int id);
-        Task<bool> DeleteAsync(User user);
-        Task<Pagination<UserViewModel>> GetPageAsync(int pageIndex, int pageSizes);
-        Task<ValidationResult> ValidateUserSignUpAsync(UserSignUpViewModel vm);
-        Task<bool> IsExistsEmailAsync(string email);
-        Task<bool> RegisterAsync(UserSignUpViewModel vm);
+        ////
+        Task<IEnumerable<UserViewModel>> GetUserAsync();
+        //Task<User?> GetUserByIdAsync(int id);
+        //Task<bool> DeleteAsync(User user);
+        //Task<Pagination<UserViewModel>> GetPageAsync(int pageIndex, int pageSizes);
+        //Task<ValidationResult> ValidateUserSignUpAsync(UserSignUpViewModel vm);
+        //Task<bool> IsExistsEmailAsync(string email);
+        //Task<bool> RegisterAsync(UserSignUpViewModel vm);
 
-        Task<ValidationResult> ValidateChangePasswordAsync(UserChangePasswordViewModel vm);
-        Task<bool> ChangePasswordAsync(UserChangePasswordViewModel vm);
+        //Task<ValidationResult> ValidateChangePasswordAsync(UserChangePasswordViewModel vm);
+        //Task<bool> ChangePasswordAsync(UserChangePasswordViewModel vm);
     }
 }

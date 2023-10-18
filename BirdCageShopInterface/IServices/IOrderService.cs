@@ -1,4 +1,5 @@
 ﻿using BirdCageShopDbContext.Models;
+using birdcageshopinterface.IServices;
 using BirdCageShopUtils.Pagination;
 using BirdCageShopViewModel.Order;
 using BirdCageShopViewModel.Product;
@@ -11,8 +12,8 @@ using System.Threading.Tasks;
 namespace BirdCageShopInterface.IServices
 {
     public interface IOrderService : IBaseService
-	{
-    
+    {
+
         Task<Pagination<OrderWithDetailViewModel>> GetPaginationAsync(int pageIndex, int pageSize);
         Task<OrderWithDetailViewModel?> GetByIdAsync(int id);
         Task<bool> GetByIdToUpdateStatusToProcessAsync(int id); // where  order: approved, payment: cod  or  payonline-approved

@@ -13,29 +13,50 @@ namespace BirdCageShopReposiory
     public class UnitOfWork : IUnitOfWork
     {
         private readonly BirdCageShopContext _context;
-        private IRoleRepository _roleRepository;
+        //private IRoleRepository _roleRepository;
         private ICategoryRepository _categoryRepository;
         private IUserRepository _userRepository;
         private IVoucherRepository _voucherRepository;
         private IOrderRepository _orderRepository;
         private IProductRepository _productRepository;
-		private IShoppingCartRepository _shoppingCartRepository;
+        private IShoppingCartRepository _shoppingCartRepository;
         private IWishlistRepository _wishlistRepository;
         private IStatusRepository _statusRepository;
         private IOrderDetailRepository _orderDetailRepository;
-        public UnitOfWork(BirdCageShopContext context, IRoleRepository roleRepository, IUserRepository userRepository, IVoucherRepository voucherRepository,
+        //public UnitOfWork(BirdCageShopContext context, IVoucherRepository voucherRepository,
+        //    IWishlistRepository wishlistRepository, IOrderRepository orderRepository,
+        //    ICategoryRepository categoryRepository, IProductRepository productRepository, IShoppingCartRepository shoppingCartRepository, IStatusRepository statusRepository
+        //    , IOrderDetailRepository orderDetailRepository)
+        //{
+        //    _context = context;
+        //    //_roleRepository = roleRepository;
+        //    //_userRepository = userRepository;
+        //    _voucherRepository = voucherRepository;
+        //    _categoryRepository = categoryRepository;
+        //    _orderRepository = orderRepository;
+        //    _productRepository = productRepository;
+        //    _shoppingCartRepository = shoppingCartRepository;
+        //    _wishlistRepository = wishlistRepository;
+        //    _statusRepository = statusRepository;
+        //    _orderDetailRepository = orderDetailRepository;
+
+
+        //}
+
+
+        public UnitOfWork(BirdCageShopContext context, IVoucherRepository voucherRepository,
             IWishlistRepository wishlistRepository, IOrderRepository orderRepository,
             ICategoryRepository categoryRepository, IProductRepository productRepository, IShoppingCartRepository shoppingCartRepository, IStatusRepository statusRepository
-            , IOrderDetailRepository orderDetailRepository)
+            , IOrderDetailRepository orderDetailRepository, IUserRepository userRepository)
         {
             _context = context;
-            _roleRepository = roleRepository;
+            //_roleRepository = roleRepository;
             _userRepository = userRepository;
             _voucherRepository = voucherRepository;
-            _categoryRepository = categoryRepository;  
-            _orderRepository = orderRepository; 
-            _productRepository = productRepository; 
-            _shoppingCartRepository = shoppingCartRepository;   
+            _categoryRepository = categoryRepository;
+            _orderRepository = orderRepository;
+            _productRepository = productRepository;
+            _shoppingCartRepository = shoppingCartRepository;
             _wishlistRepository = wishlistRepository;
             _statusRepository = statusRepository;
             _orderDetailRepository = orderDetailRepository;
@@ -43,7 +64,7 @@ namespace BirdCageShopReposiory
 
         }
 
-        public IRoleRepository RoleRepository => _roleRepository;
+        //public IRoleRepository RoleRepository => _roleRepository;
         public IStatusRepository StatusRepository => _statusRepository;
 
         public IUserRepository UserRepository => _userRepository;
@@ -54,7 +75,7 @@ namespace BirdCageShopReposiory
         public IVoucherRepository VoucherRepository => _voucherRepository;
 
         public IOrderRepository OrderRepository => _orderRepository;
-		public IShoppingCartRepository ShoppingCartRepository => _shoppingCartRepository;
+        public IShoppingCartRepository ShoppingCartRepository => _shoppingCartRepository;
         public IWishlistRepository WishlistRepository => _wishlistRepository;
 
         public async Task<bool> SaveChangesAsync()

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BirdCageShopInterface.IRepositories
 {
-    public interface IVoucherRepository: IBaseRepository<Voucher>
+    public interface IVoucherRepository : IBaseRepository<Voucher>
     {
         Task<Voucher?> GetVoucherByCodeAsync(string voucherCode);
     }

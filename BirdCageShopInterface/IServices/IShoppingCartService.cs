@@ -1,4 +1,5 @@
 ﻿using BirdCageShopDbContext.Models;
+using birdcageshopinterface.IServices;
 using BirdCageShopViewModel.Order;
 using BirdCageShopViewModel.Product;
 using BirdCageShopViewModel.Role;
@@ -14,8 +15,8 @@ using System.Threading.Tasks;
 
 namespace BirdCageShopInterface.IServices
 {
-	public interface IShoppingCartService: IBaseService
-	{
+    public interface IShoppingCartService : IBaseService
+    {
 
         Task<IEnumerable<ShoppingCartViewModel>> GetShoppingCartsAsync();
         Task<bool> ExistProductByIdAndUserIdAsync(int productId);

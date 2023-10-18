@@ -27,7 +27,7 @@ namespace BirdCageShopReposiory.Repositories
         {
             return await _context.Set<Voucher>()
            .AsNoTracking()
-           .Where(x => x.ExpirationDate > DateTime.Now &&  x.VoucherCode == voucherCode)
+           .Where(x => x.ExpirationDate > DateTime.Now && x.VoucherCode == voucherCode)
            .FirstOrDefaultAsync();
         }
     }

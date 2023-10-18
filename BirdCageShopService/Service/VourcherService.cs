@@ -21,16 +21,16 @@ namespace BirdCageShopService.Service
 
         private readonly IVoucherValidator _voucherValidator;
 
-		public VourcherService(IClaimService claimService, ITimeService timeService, IUnitOfWork unitOfWork, IMapper mapper, IConfiguration configuration) : base(claimService, timeService, unitOfWork, mapper, configuration)
-		{
-		}
+        public VourcherService(IClaimService claimService, ITimeService timeService, IUnitOfWork unitOfWork, IMapper mapper, IConfiguration configuration) : base(claimService, timeService, unitOfWork, mapper, configuration)
+        {
+        }
 
-		//public VourcherService(ITimeService timeService,IVoucherValidator voucherValidator, IUnitOfWork unitOfWork, IMapper mapper, IUserValidator userValidator, IConfiguration configuration) : base(timeService,unitOfWork, mapper, configuration)
-		//{
-		//          _voucherValidator = voucherValidator;
-		//      }
+        //public VourcherService(ITimeService timeService,IVoucherValidator voucherValidator, IUnitOfWork unitOfWork, IMapper mapper, IUserValidator userValidator, IConfiguration configuration) : base(timeService,unitOfWork, mapper, configuration)
+        //{
+        //          _voucherValidator = voucherValidator;
+        //      }
 
-		public async Task<bool> CreateNewAsync(VourcherAddViewModel vm)
+        public async Task<bool> CreateNewAsync(VourcherAddViewModel vm)
         {
             var voucher = _mapper.Map<Voucher>(vm);
             voucher.VoucherCode = VoucherCodeGenerator.GenerateUniqueVoucherCode();

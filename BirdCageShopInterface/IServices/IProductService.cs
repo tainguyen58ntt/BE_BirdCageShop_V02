@@ -1,5 +1,6 @@
 ﻿using BirdCageShopDbContext.Models;
 using BirdCageShopDomain.Models;
+using birdcageshopinterface.IServices;
 using BirdCageShopUtils.Pagination;
 using BirdCageShopViewModel.Product;
 using BirdCageShopViewModel.ProductReviews;
@@ -17,11 +18,11 @@ namespace BirdCageShopInterface.IServices
 		Task<IEnumerable<ProductViewModel>> GetProductsAsync();
 		Task<Pagination<ProductViewModel>> GetPageAsync(int pageIndex, int pageSize);
 		Task<Pagination<ProductViewModel>> GetByBirdCageTypePageAsync(int birdCageTypeId, int pageIndex, int pageSize);
-        Task<Pagination<ProductViewModel>> GetByCagegoryTypePageAsync(int categoryId, int pageIndex, int pageSize);
-        
-        Task<ProductViewModel?> GetByIdAsync(int id);
+		Task<Pagination<ProductViewModel>> GetByCagegoryTypePageAsync(int categoryId, int pageIndex, int pageSize);
+
+		Task<ProductViewModel?> GetByIdAsync(int id);
 		Task<Product?> GetProductByIdAsync(int id);
-		Task<bool> AddToWishlistAsync(int productId);
+		//Task<bool> AddToWishlistAsync(int productId);
 		Task<IEnumerable<ProductViewModel>> GetProductByCategoryAsync(int categoryId);
 		Task<bool> RemoveAsync(Product product);
 
@@ -30,6 +31,6 @@ namespace BirdCageShopInterface.IServices
 
 		//
 		Task<IEnumerable<ProductFromWishlist>> GetProductsFromWishlistAsync();
-		
+
 	}
 }

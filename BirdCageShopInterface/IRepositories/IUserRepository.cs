@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace BirdCageShopInterface.IRepositories
 {
-    public interface IUserRepository : IBaseRepository<User>
+    public interface IUserRepository : IBaseRepository<ApplicationUser>
     {
-        Task<User?> GetUserByEmailAsync(string email);
-		Task<string?> GetRoleNameByUserIdAsync(int id);
-		Task<User?> AuthorizeAsync(string email, string password);
-	}
+        //Task<User?> GetUserByEmailAsync(string email);
+        //Task<string?> GetRoleNameByUserIdAsync(int id);
+        //Task<User?> AuthorizeAsync(string email, string password);
+    }
 }
 

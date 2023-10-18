@@ -18,7 +18,7 @@ namespace BirdCageShopOther.Validator
         public UserValidator(UserSignUpRule userSignUpValidator, UserChangePasswordRule userChangePassswordValidator)
         {
             _userSignUpValidator = userSignUpValidator;
-            _userChangePassswordValidator = userChangePassswordValidator;   
+            _userChangePassswordValidator = userChangePassswordValidator;
         }
         public IValidator<UserSignUpViewModel> UserSignUpValidator => _userSignUpValidator;
 

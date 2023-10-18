@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace BirdCageShopDbContext.Models
 {
+    
     public partial class Category
     {
         public int Id { get; set; }

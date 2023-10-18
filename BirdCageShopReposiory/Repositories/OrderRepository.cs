@@ -23,7 +23,7 @@ namespace BirdCageShopReposiory.Repositories
         public override async Task<Pagination<Order>> GetPaginationAsync(int pageIndex, int pageSize)
         {
             var source = _context.Set<Order>()
-               .Include(o => o.Details).Include(o => o.User);
+               .Include(o => o.Details).Include(o => o.ApplicationUser);
             //
             var totalCount = await source.CountAsync();
             var items = await source
@@ -66,13 +66,16 @@ namespace BirdCageShopReposiory.Repositories
         public override async Task<Order?> GetByIdAsync(int id)
         {
 
+         
+
             return await _context.Set<Order>()
-                .AsNoTracking()
-                .AsNoTrackingWithIdentityResolution()
-                .Include(x => x.Details)
-                .ThenInclude(d => d.Product)
-                .Include(x => x.User)
-               .FirstOrDefaultAsync(x => x.Id == id);
+    .AsNoTracking()
+     .AsNoTrackingWithIdentityResolution()
+    .Where(x => x.Id == id)
+    .Include(od => od.Details)
+    .Include(u => u.ApplicationUser)
+    .FirstOrDefaultAsync();
+       
         }
 
         public async Task<Order?> GetByIdToUpdateStatusToProcessAsync(int id)
@@ -83,7 +86,7 @@ namespace BirdCageShopReposiory.Repositories
                .AsNoTrackingWithIdentityResolution()
                .Include(x => x.Details)
                .ThenInclude(d => d.Product)
-               .Include(x => x.User)
+               .Include(x => x.ApplicationUser)
               .FirstOrDefaultAsync(x => x.Id == id && x.OrderStatus == "Approved" && (x.PaymentStatus == "COD" || x.PaymentStatus == "Payonline-approved"));   // will fix not hard code later on
         }
 
@@ -94,7 +97,7 @@ namespace BirdCageShopReposiory.Repositories
                 .AsNoTrackingWithIdentityResolution()
                 .Include(x => x.Details)
                 .ThenInclude(d => d.Product)
-                .Include(x => x.User)
+                .Include(x => x.ApplicationUser)
                .FirstOrDefaultAsync(x => x.Id == id && x.OrderStatus == "Processing" && (x.PaymentStatus == "COD" || x.PaymentStatus == "Payonline-approved"));   // will fix not hard code later on
         }
 
