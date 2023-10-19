@@ -15,5 +15,8 @@ namespace BirdCageShopInterface.IRepositories
 
         
         Task<Order?> GetByIdToUpdateStatusToShippedAsync(int id);
+
+
+        Task<Order?> GetByIdToUpdateStatusPayToApprovedAsync(int id);
     }
 }

@@ -81,5 +81,14 @@ namespace BirdCageShopService.Service
             _unitOfWork.OrderRepository.Update(result);
             return await _unitOfWork.SaveChangesAsync();
         }
+
+        public async Task<bool> GetByIdToUpdateStatusPayToApprovedAsync(int id)
+        {
+            var result = await _unitOfWork.OrderRepository.GetByIdToUpdateStatusPayToApprovedAsync(id);
+            if (result == null) return false;
+            result.PaymentStatus = "Approved";
+            _unitOfWork.OrderRepository.Update(result);
+            return await _unitOfWork.SaveChangesAsync();
+        }
     }
 }

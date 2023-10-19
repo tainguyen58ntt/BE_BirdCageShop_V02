@@ -13,6 +13,7 @@ namespace BirdCageShopService.Service
 	{
 		private readonly IHttpContextAccessor _contextAccessor;
 
+		
 		public ClaimService(IHttpContextAccessor contextAccessor)
 		{
 			_contextAccessor = contextAccessor;
