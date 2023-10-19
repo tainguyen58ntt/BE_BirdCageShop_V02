@@ -2,9 +2,11 @@
 using BirdCageShopInterface.IRepositories;
 using BirdCageShopInterface.IServices;
 using BirdCageShopService.Service;
+using BirdCageShopViewModel.Product;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Drawing.Printing;
 
 namespace BirdCageShop.Controllers
 {
@@ -13,11 +15,11 @@ namespace BirdCageShop.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
-        
+
         public ProductController(IProductService productService)
         {
             _productService = productService;
-            
+
         }
 
         //get product by bird type
@@ -39,7 +41,7 @@ namespace BirdCageShop.Controllers
             return Ok(result);
         }
 
-   
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
         {
@@ -75,16 +77,38 @@ namespace BirdCageShop.Controllers
             return Ok(result);
         }
 
-
+        [HttpGet("search-by-title")]
+        public async Task<IActionResult> GetProductByTitle(string title, [FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
+        {
+            if (pageIndex < 0) return BadRequest("Page index cannot be negative");
+            if (pageSize <= 0) return BadRequest("Page size must greater than 0");
+          
+            var result = await _productService.GetByTilePageAsync(title, pageIndex, pageSize);
+            return Ok(result);
+        }
 
 
         [HttpGet("view-feedback/{productId}")]
         public async Task<IActionResult> GetFeedBackByIdAsync([FromRoute] int productId)
         {
             var product = await _productService.GetProductByIdAsync(productId);
-            if (product is null) return NotFound();
+            if (product is null) return NotFound("Not found this product");
             var result = await _productService.GetFeedBackByProductId(productId);
             return Ok(result);
+        }
+
+
+        [HttpPost("review-product/{productId}")]
+        public async Task<IActionResult> ReviewProductByIdAsync([FromRoute] int productId, [FromBody] AddReviewProductViewModel addReviewProductViewModel)
+        {
+            var product = await _productService.GetProductByIdAsync(productId);
+            if (product is null) return NotFound("Not found this product");
+
+            // create
+            bool isSuccess = await _productService.AddReviewProduct(productId, addReviewProductViewModel);
+
+            if (isSuccess) return Ok();
+            return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Review product failed. Server Error." });
         }
 
         //[HttpPost("add-to-wishlist/{productId}")]

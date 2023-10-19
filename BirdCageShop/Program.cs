@@ -49,17 +49,27 @@ builder.Services.AddDbContext<BirdCageShopContext>(
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<BirdCageShopContext>().AddDefaultTokenProviders();
     
 
-//builder.Services.AddScoped<UserManager<IdentityUser>>();
-//builder.Services.AddScoped<SignInManager<IdentityUser>>();
+
 //Add services to the container.
 StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
+//builder.Services.AddCors(options =>
+//{
+//    options.AddDefaultPolicy(builder =>
+//    {
+//        builder.AllowAnyOrigin()
+//            .AllowAnyHeader()
+//            .AllowAnyMethod();
+//    });
+//});
+
+//add cors
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(builder =>
+    options.AddPolicy("AllowReactApp", builder =>
     {
-        builder.AllowAnyOrigin()
-            .AllowAnyHeader()
-            .AllowAnyMethod();
+        builder.AllowAnyOrigin() 
+               .AllowAnyHeader()
+               .AllowAnyMethod();
     });
 });
 
@@ -204,7 +214,7 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 }
 
 
-
+app.UseCors("AllowReactApp");
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();

@@ -3,7 +3,7 @@
   <parameter name="IIS Web Application Name" description="" value="tainguyen58-001-site1" tags="IisApp">
     <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\Semester\ 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShop\\obj\\Release\\net6\.0\\PubTmp\\Out\\$" />
   </parameter>
-  <parameter name="BirdCageShopDbContext.Models.BirdCageShopContext" description="" value="Data Source=SQL5111.site4now.net;Initial Catalog=db_a9fe6c_birdcageshop4;User Id=db_a9fe6c_birdcageshop4_admin;Password=tainguyen58" tags="dbfullsql">
+  <parameter name="BirdCageShopDbContext.Models.BirdCageShopContext" description="" value="Data Source=SQL5111.site4now.net;Initial Catalog=db_a9fe6c_birdcageshop8;User Id=db_a9fe6c_birdcageshop8_admin;Password=tainguyen58" tags="dbfullsql">
     <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^D:\\Semester\ 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShop\\obj\\Release\\net6\.0\\PubTmp\\EFSQLScripts\\BirdCageShopDbContext\.Models\.BirdCageShopContext\.sql$" />
   </parameter>
 </parameters>

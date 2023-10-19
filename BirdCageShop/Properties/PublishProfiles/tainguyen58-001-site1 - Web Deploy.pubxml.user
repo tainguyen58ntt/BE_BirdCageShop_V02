@@ -7,17 +7,17 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword />
-    <History>True|2023-10-11T06:06:36.5347787Z;</History>
+    <History>True|2023-10-19T03:24:19.2803269Z;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
     <DestinationConnectionStrings Include="DefaultConnection">
-      <Value>Data Source=SQL5111.site4now.net%3bInitial Catalog=db_a9fe6c_birdcageshop4%3bUser Id=db_a9fe6c_birdcageshop4_admin%3bPassword=tainguyen58</Value>
+      <Value>Data Source=SQL5111.site4now.net%3bInitial Catalog=db_a9fe6c_birdcageshop8%3bUser Id=db_a9fe6c_birdcageshop8_admin%3bPassword=tainguyen58</Value>
     </DestinationConnectionStrings>
   </ItemGroup>
   <ItemGroup>
     <EFMigrations Include="BirdCageShopDbContext.Models.BirdCageShopContext">
-      <Value>Data Source=SQL5111.site4now.net%3bInitial Catalog=db_a9fe6c_birdcageshop4%3bUser Id=db_a9fe6c_birdcageshop4_admin%3bPassword=tainguyen58</Value>
+      <Value>Data Source=SQL5111.site4now.net%3bInitial Catalog=db_a9fe6c_birdcageshop8%3bUser Id=db_a9fe6c_birdcageshop8_admin%3bPassword=tainguyen58</Value>
     </EFMigrations>
   </ItemGroup>
 </Project>

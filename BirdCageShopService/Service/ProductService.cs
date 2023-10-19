@@ -128,45 +128,74 @@ namespace BirdCageShopService.Service
 			return await _unitOfWork.SaveChangesAsync();
 		}
 
-		//public async Task<bool> AddToWishlistAsync(int productId)
-		//{
-		//	//return false;
-		//	var currentUserId = _claimService.GetCurrentUserId();
-		//	if (currentUserId == null) return false;
-
-		//	////test
-		//	//var currentUserId = 1;
-		//	////test
-		//	////
-		//	var wishlist = await _unitOfWork.WishlistRepository.GetWishlistByUserIdAsync(currentUserId);
-		//	if (wishlist != null)
-		//	{
-
-		//		var product = await _unitOfWork.ProductRepository.GetProductByWishlistIdAndCustomerIdAsync(wishlist.Id, currentUserId);
-		//		if (product is not null)
-		//		{
-		//			var existItem = await _unitOfWork.ProductWishlistRepository.GetWishlistByWishlistIdAndProductIdAsync(wishlist.Id, product.Id);
-		//			if (existItem != null)
-		//			{
-
-		//				_unitOfWork.ProductWishlistRepository.Delete(existItem);
-		//				return await _unitOfWork.SaveChangesAsync();
-		//			}
-
-		//		}
-
-		//		//_unitOfWork.WishlistRepository.Update(wishlist);
-		//	}
+        public async Task<bool> AddReviewProduct(int productId, AddReviewProductViewModel addReviewProductViewModel)
+        {
+            //check userId bought that product - have order status aprroved and payment: approved or Payonline-approved
+            var currentUserId = _claimService.GetCurrentUserId();
 
 
 
-		//	else
-		//	{
-		//		return false;
+            var product = await _unitOfWork.ProductRepository.GetByIdAsync(productId);
 
-		//	}
+			ProductReview productReview = new ProductReview();
+			productReview.Rating = addReviewProductViewModel.Rating;
+			productReview.ReviewText = addReviewProductViewModel.ReviewText;
+			productReview.ReviewDate = _timeService.GetCurrentTimeInVietnam();
+			if (product != null) { 
+			
+				product.ProductReviews.Add(productReview);
+			}
 
-		//	return false;
-		//}
-	}
+            return await _unitOfWork.SaveChangesAsync();
+
+
+        }
+
+        public async Task<Pagination<ProductViewModel>> GetByTilePageAsync(string title, int pageIndex, int pageSize)
+        {
+            var productList = await _unitOfWork.ProductRepository.GetAllByConditionAsync(c => c.Title.Contains(title), pageIndex, pageSize);
+            return _mapper.Map<Pagination<ProductViewModel>>(productList);
+        }
+
+        //public async Task<bool> AddToWishlistAsync(int productId)
+        //{
+        //	//return false;
+        //	var currentUserId = _claimService.GetCurrentUserId();
+        //	if (currentUserId == null) return false;
+
+        //	////test
+        //	//var currentUserId = 1;
+        //	////test
+        //	////
+        //	var wishlist = await _unitOfWork.WishlistRepository.GetWishlistByUserIdAsync(currentUserId);
+        //	if (wishlist != null)
+        //	{
+
+        //		var product = await _unitOfWork.ProductRepository.GetProductByWishlistIdAndCustomerIdAsync(wishlist.Id, currentUserId);
+        //		if (product is not null)
+        //		{
+        //			var existItem = await _unitOfWork.ProductWishlistRepository.GetWishlistByWishlistIdAndProductIdAsync(wishlist.Id, product.Id);
+        //			if (existItem != null)
+        //			{
+
+        //				_unitOfWork.ProductWishlistRepository.Delete(existItem);
+        //				return await _unitOfWork.SaveChangesAsync();
+        //			}
+
+        //		}
+
+        //		//_unitOfWork.WishlistRepository.Update(wishlist);
+        //	}
+
+
+
+        //	else
+        //	{
+        //		return false;
+
+        //	}
+
+        //	return false;
+        //}
+    }
 }

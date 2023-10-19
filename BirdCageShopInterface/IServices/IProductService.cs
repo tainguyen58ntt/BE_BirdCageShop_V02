@@ -17,7 +17,8 @@ namespace BirdCageShopInterface.IServices
 	{
 		Task<IEnumerable<ProductViewModel>> GetProductsAsync();
 		Task<Pagination<ProductViewModel>> GetPageAsync(int pageIndex, int pageSize);
-		Task<Pagination<ProductViewModel>> GetByBirdCageTypePageAsync(int birdCageTypeId, int pageIndex, int pageSize);
+        Task<Pagination<ProductViewModel>> GetByTilePageAsync(string title, int pageIndex, int pageSize);
+        Task<Pagination<ProductViewModel>> GetByBirdCageTypePageAsync(int birdCageTypeId, int pageIndex, int pageSize);
 		Task<Pagination<ProductViewModel>> GetByCagegoryTypePageAsync(int categoryId, int pageIndex, int pageSize);
 
 		Task<ProductViewModel?> GetByIdAsync(int id);
@@ -31,6 +32,8 @@ namespace BirdCageShopInterface.IServices
 
 		//
 		Task<IEnumerable<ProductFromWishlist>> GetProductsFromWishlistAsync();
+		//
+		Task<bool> AddReviewProduct(int productId, AddReviewProductViewModel addReviewProductViewModel);
 
-	}
+    }
 }
