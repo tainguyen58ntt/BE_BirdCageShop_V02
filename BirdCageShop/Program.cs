@@ -161,6 +161,7 @@ builder.Services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
 builder.Services.AddScoped<IWishlistRepository, WishlistRepository>();
 builder.Services.AddScoped<IStatusRepository, StatusRepository>();
 builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 
 
 //// Service 
@@ -172,6 +173,7 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IProductService, BirdCageShopService.Service.ProductService>();
 builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
 builder.Services.AddScoped<IStatusService, StatusService>();
+
 
 
 builder.Services.AddScoped<IClaimService, ClaimService>();

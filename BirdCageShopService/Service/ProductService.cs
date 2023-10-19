@@ -131,22 +131,30 @@ namespace BirdCageShopService.Service
         public async Task<bool> AddReviewProduct(int productId, AddReviewProductViewModel addReviewProductViewModel)
         {
             //check userId bought that product - have order status aprroved and payment: approved or Payonline-approved
+        
             var currentUserId = _claimService.GetCurrentUserId();
+			if (currentUserId == null) return false;
 
-
-
-            var product = await _unitOfWork.ProductRepository.GetByIdAsync(productId);
+            var product = await _unitOfWork.ProductRepository.GetProductWithReviewByProIdAsync(productId);
 
 			ProductReview productReview = new ProductReview();
 			productReview.Rating = addReviewProductViewModel.Rating;
 			productReview.ReviewText = addReviewProductViewModel.ReviewText;
 			productReview.ReviewDate = _timeService.GetCurrentTimeInVietnam();
-			if (product != null) { 
-			
-				product.ProductReviews.Add(productReview);
-			}
+			productReview.ApplicationUserId = currentUserId;
+			productReview.ProductId = productId;	
+			//if (product != null) {
 
-            return await _unitOfWork.SaveChangesAsync();
+			//	product.ProductReviews = productReview;
+			//}
+
+			//product.ProductReviews.ToList().Add(productReview);
+
+
+			_unitOfWork.ReviewRepository.AddAsync(productReview);
+
+
+			return await _unitOfWork.SaveChangesAsync();
 
 
         }

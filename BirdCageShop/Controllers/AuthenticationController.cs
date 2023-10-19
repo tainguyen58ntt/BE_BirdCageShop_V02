@@ -143,7 +143,7 @@ namespace BirdCageShop.Controllers
         public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
         {
             var user = await _userManager.FindByNameAsync(loginModel.Username);
-
+            if(user == null) return Unauthorized();
             if (user.TwoFactorEnabled)
             {
                 await _signInManager.SignOutAsync();

@@ -99,6 +99,7 @@ namespace BirdCageShop.Controllers
 
 
         [HttpPost("review-product/{productId}")]
+        [Authorize(Roles = "Customer")]
         public async Task<IActionResult> ReviewProductByIdAsync([FromRoute] int productId, [FromBody] AddReviewProductViewModel addReviewProductViewModel)
         {
             var product = await _productService.GetProductByIdAsync(productId);
