@@ -140,7 +140,7 @@ namespace BirdCageShopReposiory.Repositories
                 .FirstOrDefaultAsync(x => !x.isDelete);
         }
 
-        public async Task<Product?> GetProductByWishlistIdAndCustomerIdAsync(string customerId, int productId)
+        public async Task<Product?> GetProductByProductIdAndCustomerIdAsync(string customerId, int productId)
         {
             return await _context.Set<Product>()
                 .AsNoTracking()

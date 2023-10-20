@@ -119,6 +119,7 @@ namespace BirdCageShop.Controllers
 
         //
         [HttpGet("from-wishlist")]
+        [Authorize("Customer")]
         public async Task<IActionResult> GetFromWishlistAsync()
         {
             var result = await _productService.GetProductsFromWishlistAsync();
@@ -128,6 +129,7 @@ namespace BirdCageShop.Controllers
 
 
         [HttpPost("add-to-wishlist/{productId}")]
+        [Authorize("Customer")]
         public async Task<IActionResult> AddToWishlistAsync([FromRoute] int productId)
         {
             var product = await _productService.GetProductByIdAsync(productId);
@@ -138,21 +140,25 @@ namespace BirdCageShop.Controllers
         }
 
 
+        [HttpPost("remove-product-from-wishlist/{productId}")]
+        [Authorize("Customer")]
+        public async Task<IActionResult> RemoveProductFromWishlistAsync([FromRoute] int productId)
+        {
+            var product = await _productService.GetProductByIdAsync(productId);
+            if (product is null) return BadRequest(new { property = "Product ID", message = "Product doesn't exist." });
+            var result = await _productService.AddToWishlistAsync(productId);
+            if (result is true) return Ok();
+            return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Remove product from wishlist failed. Server Error." });
+        }
 
 
 
 
 
-        //[HttpPost("add-to-wishlist/{productId}")]
 
-        //public async Task<IActionResult> AddToWishlistAsync([FromRoute] int productId)
-        //{
-        //    var product = await _productService.GetProductByIdAsync(productId);
-        //    if (product is null) return BadRequest(new { property = "Product ID", message = "Product doesn't exist." });
-        //    var result = await _productService.AddToWishlistAsync(productId);
-        //    if (result is true) return Ok();
-        //    return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Add to wishlist failed. Server Error." });
-        //}
+
+
+
 
     }
 }

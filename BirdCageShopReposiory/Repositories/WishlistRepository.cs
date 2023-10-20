@@ -15,7 +15,13 @@ namespace BirdCageShopReposiory.Repositories
         {
         }
 
-
+        public async Task<Wishlist?> GetWishlistByCustomerIdAndProductIdAsync(string customerId, int productId)
+        {
+            return await _context.Set<Wishlist>()
+                 .AsNoTracking()
+                 //.Include(w => w.WishlistItems)
+                 .FirstOrDefaultAsync(w => w.ApplicationUserId == customerId && w.ProductId == productId);
+        }
 
         public async Task<Wishlist?> GetWishlistByCustomerIdAsync(string customerId)
         {

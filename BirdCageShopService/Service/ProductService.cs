@@ -190,7 +190,7 @@ namespace BirdCageShopService.Service
 			else
 			{
 				// check if exist that pro in wishlist
-				var product = await _unitOfWork.ProductRepository.GetProductByWishlistIdAndCustomerIdAsync(currentUserId, productId);
+				var product = await _unitOfWork.ProductRepository.GetProductByProductIdAndCustomerIdAsync(currentUserId, productId);
 				if (product != null) return false;
 				//wishlist.WishlistItems.Append(new WishlistItem()
 				//{
@@ -213,6 +213,39 @@ namespace BirdCageShopService.Service
 
 		}
 
+        public async Task<bool> RemoveProductFromWishlistAsync(int productId)
+        {
+            var currentUserId = _claimService.GetCurrentUserId();
+            if (currentUserId == null) return false;
 
-	}
+
+            // check exist wishlist
+            var wishlist = await _unitOfWork.WishlistRepository.GetWishlistByCustomerIdAsync(currentUserId);
+            if (wishlist == null)
+            {
+				return false;
+                //var newWishlist = new Wishlist()
+                //{
+
+                //    ApplicationUserId = currentUserId,
+                //    ProductId = productId
+                //};
+                //_unitOfWork.WishlistRepository.AddAsync(newWishlist);
+
+            }
+            else
+            {
+                
+                var wishlistItem = await _unitOfWork.WishlistRepository.GetWishlistItemByWIdAndCustomerIdAsync(currentUserId, productId);
+                if (wishlistItem == null) return false;
+               
+                _unitOfWork.WishlistRepository.Delete(wishlistItem);
+
+
+
+            }
+
+            return await _unitOfWork.SaveChangesAsync();
+        }
+    }
 }
