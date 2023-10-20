@@ -31,7 +31,7 @@ namespace BirdCageShopDbContext.Models
         public virtual DbSet<ApplicationUser> ApplicationUser { get; set; } = null!;
         public virtual DbSet<Voucher> Vouchers { get; set; } = null!;
         public virtual DbSet<Wishlist> Wishlists { get; set; } = null!;
-        public virtual DbSet<WishlistItem> WishlistItems { get; set; } = null!;
+        //public virtual DbSet<WishlistItem> WishlistItems { get; set; } = null!;
         public virtual DbSet<ShoppingCart> ShoppingCarts { get; set; } = null!;
         public virtual DbSet<BirdCageType> BirdCageTypes { get; set; } = null!;
         public virtual DbSet<ProductSpecification> ProductSpecifications { get; set; } = null!;
@@ -48,10 +48,15 @@ namespace BirdCageShopDbContext.Models
             SeedStatus(modelBuilder);
             SeedRoles(modelBuilder);
             //
+            //   modelBuilder.Entity<ApplicationUser>()
+            //.HasOne(u => u.W)   // User has one Wishlist
+            //.WithOne(w => w.ApplicationUser)      // Wishlist has one User
+            //.HasForeignKey<Wishlist>(w => w.ApplicationUserId);
+
             modelBuilder.Entity<ApplicationUser>()
-         .HasOne(u => u.Wishlist)   // User has one Wishlist
-         .WithOne(w => w.ApplicationUser)      // Wishlist has one User
-         .HasForeignKey<Wishlist>(w => w.ApplicationUserId);
+    .HasMany(p => p.Wishlists)
+    .WithOne(sc => sc.ApplicationUser)
+    .HasForeignKey(sc => sc.ApplicationUserId);
 
             modelBuilder.Entity<Order>()
                 .Property(o => o.TotalPrice)

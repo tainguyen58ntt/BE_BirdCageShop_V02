@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BirdCageShopDbContext.Migrations
 {
     [DbContext(typeof(BirdCageShopContext))]
-    [Migration("20231018032928_init")]
+    [Migration("20231020063900_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -82,35 +82,6 @@ namespace BirdCageShopDbContext.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("BirdCageShopDbContext.Models.Feature", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FeatureName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal?>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Feature");
                 });
 
             modelBuilder.Entity("BirdCageShopDbContext.Models.Order", b =>
@@ -411,41 +382,16 @@ namespace BirdCageShopDbContext.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId")
-                        .IsUnique();
-
-                    b.ToTable("Wishlists");
-                });
-
-            modelBuilder.Entity("BirdCageShopDbContext.Models.WishlistItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WishListId")
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("WishListId");
-
-                    b.ToTable("WishlistItems");
+                    b.ToTable("Wishlists");
                 });
 
             modelBuilder.Entity("BirdCageShopDomain.Models.BirdCageType", b =>
@@ -475,6 +421,35 @@ namespace BirdCageShopDbContext.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("BirdCageTypes");
+                });
+
+            modelBuilder.Entity("BirdCageShopDomain.Models.Feature", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FeatureName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal?>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Feature");
                 });
 
             modelBuilder.Entity("BirdCageShopDomain.Models.ProductFeature", b =>
@@ -571,6 +546,43 @@ namespace BirdCageShopDbContext.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Statuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            StatusState = "Pending"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            StatusState = "Approved"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            StatusState = "Processing"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            StatusState = "Shipped"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            StatusState = "Payonline-approved"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            StatusState = "COD"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            StatusState = "Payonline"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -602,28 +614,28 @@ namespace BirdCageShopDbContext.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "045311ce-71ec-4a9d-9ecf-832f940eb37c",
+                            Id = "0368f2b6-3639-45ee-b70f-f6e7e18ba474",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "4f3efecf-a7a5-403a-afaa-f5807d1a7ec8",
+                            Id = "5d634370-b97b-42f6-a98e-3123a151bcba",
                             ConcurrencyStamp = "2",
                             Name = "Customer",
                             NormalizedName = "Customer"
                         },
                         new
                         {
-                            Id = "def202bf-c9a4-4a1d-9106-61b07f874e44",
+                            Id = "fe32947c-c483-416f-ba61-18cfb8aa3236",
                             ConcurrencyStamp = "2",
                             Name = "Manager",
                             NormalizedName = "Manager"
                         },
                         new
                         {
-                            Id = "9fc7c2e2-eb08-4963-a42b-511ce73e524b",
+                            Id = "649975b1-0807-4198-82e2-776510e76509",
                             ConcurrencyStamp = "3",
                             Name = "Staff",
                             NormalizedName = "Staff"
@@ -928,34 +940,25 @@ namespace BirdCageShopDbContext.Migrations
             modelBuilder.Entity("BirdCageShopDbContext.Models.Wishlist", b =>
                 {
                     b.HasOne("BirdCageShopDbContext.Models.ApplicationUser", "ApplicationUser")
-                        .WithOne("Wishlist")
-                        .HasForeignKey("BirdCageShopDbContext.Models.Wishlist", "ApplicationUserId")
+                        .WithMany("Wishlists")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BirdCageShopDbContext.Models.Product", "Product")
+                        .WithMany("Wishlists")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("ApplicationUser");
-                });
-
-            modelBuilder.Entity("BirdCageShopDbContext.Models.WishlistItem", b =>
-                {
-                    b.HasOne("BirdCageShopDbContext.Models.Product", "Product")
-                        .WithMany("WishlistItems")
-                        .HasForeignKey("ProductId");
-
-                    b.HasOne("BirdCageShopDbContext.Models.Wishlist", "WishList")
-                        .WithMany("WishlistItems")
-                        .HasForeignKey("WishListId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("Product");
-
-                    b.Navigation("WishList");
                 });
 
             modelBuilder.Entity("BirdCageShopDomain.Models.ProductFeature", b =>
                 {
-                    b.HasOne("BirdCageShopDbContext.Models.Feature", "Feature")
+                    b.HasOne("BirdCageShopDomain.Models.Feature", "Feature")
                         .WithMany("ProductFeatures")
                         .HasForeignKey("FeatureId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1066,11 +1069,6 @@ namespace BirdCageShopDbContext.Migrations
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("BirdCageShopDbContext.Models.Feature", b =>
-                {
-                    b.Navigation("ProductFeatures");
-                });
-
             modelBuilder.Entity("BirdCageShopDbContext.Models.Order", b =>
                 {
                     b.Navigation("Details");
@@ -1088,7 +1086,7 @@ namespace BirdCageShopDbContext.Migrations
 
                     b.Navigation("ShoppingCarts");
 
-                    b.Navigation("WishlistItems");
+                    b.Navigation("Wishlists");
                 });
 
             modelBuilder.Entity("BirdCageShopDbContext.Models.Specification", b =>
@@ -1101,14 +1099,14 @@ namespace BirdCageShopDbContext.Migrations
                     b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("BirdCageShopDbContext.Models.Wishlist", b =>
-                {
-                    b.Navigation("WishlistItems");
-                });
-
             modelBuilder.Entity("BirdCageShopDomain.Models.BirdCageType", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("BirdCageShopDomain.Models.Feature", b =>
+                {
+                    b.Navigation("ProductFeatures");
                 });
 
             modelBuilder.Entity("BirdCageShopDbContext.Models.ApplicationUser", b =>
@@ -1121,7 +1119,7 @@ namespace BirdCageShopDbContext.Migrations
 
                     b.Navigation("ShoppingCarts");
 
-                    b.Navigation("Wishlist");
+                    b.Navigation("Wishlists");
                 });
 #pragma warning restore 612, 618
         }

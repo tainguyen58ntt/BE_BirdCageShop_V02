@@ -11,6 +11,7 @@ namespace BirdCageShopDbContext.Models
         {
             Orders = new HashSet<Order>();
             ProductReviews = new HashSet<ProductReview>();
+            Wishlists = new HashSet<Wishlist>();
         }
 
     
@@ -27,7 +28,8 @@ namespace BirdCageShopDbContext.Models
         public bool IsDelete { get; set; }
 
 
-        public virtual Wishlist? Wishlist { get; set; }
+        //public virtual Wishlist? Wishlist { get; set; }
+        public virtual ICollection<Wishlist> Wishlists { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<ProductReview> ProductReviews { get; set; }
 		public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }

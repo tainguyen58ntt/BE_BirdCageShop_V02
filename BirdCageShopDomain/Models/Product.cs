@@ -11,7 +11,7 @@ namespace BirdCageShopDbContext.Models
         {
             ProductImages = new HashSet<ProductImage>();
             ProductReviews = new HashSet<ProductReview>();
-            WishlistItems = new HashSet<WishlistItem>();
+            Wishlists = new HashSet<Wishlist>();
         }
 
         public int Id { get; set; }
@@ -37,9 +37,10 @@ namespace BirdCageShopDbContext.Models
         //
         public virtual ICollection<ProductImage> ProductImages { get; set; }
         public virtual ICollection<ProductReview> ProductReviews { get; set; }
-        public virtual ICollection<WishlistItem> WishlistItems { get; set; }
+        //public virtual ICollection<WishlistItem> WishlistItems { get; set; }
+        public virtual ICollection<Wishlist> Wishlists { get; set; }
         //public virtual ICollection<Feature> Features { get; set; }
-		public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
+        public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
         public virtual ICollection<ProductSpecification> ProductSpecifications { get; set; }
         public virtual ICollection<ProductFeature> ProductFeatures { get; set; }
 

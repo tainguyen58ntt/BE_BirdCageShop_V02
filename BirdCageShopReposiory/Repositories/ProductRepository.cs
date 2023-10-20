@@ -115,10 +115,10 @@ namespace BirdCageShopReposiory.Repositories
             return await _context.Set<Product>()
               .AsNoTracking()
               .Include(p => p.Category)
-              .Include(p => p.WishlistItems)
+              
               .Include(p => p.ProductImages)
               .Where(x => !x.isDelete &&
-              x.WishlistItems.Any(pw => pw.WishList.ApplicationUserId == customerId))
+              x.Wishlists.Any(pw => pw.ApplicationUserId == customerId))
               .ToListAsync();
         }
 
@@ -140,11 +140,11 @@ namespace BirdCageShopReposiory.Repositories
                 .FirstOrDefaultAsync(x => !x.isDelete);
         }
 
-        public async Task<Product?> GetProductByWishlistIdAndCustomerIdAsync(int wishlistId, string customerId, int productId)
+        public async Task<Product?> GetProductByWishlistIdAndCustomerIdAsync(string customerId, int productId)
         {
             return await _context.Set<Product>()
                 .AsNoTracking()
-                .FirstOrDefaultAsync(x => !x.isDelete && x.WishlistItems.Any(wl => wl.WishListId == wishlistId && wl.ProductId == productId && wl.WishList.ApplicationUserId == customerId));
+                .FirstOrDefaultAsync(x => !x.isDelete && x.Wishlists.Any(wl => wl.ProductId == productId && wl.ApplicationUserId == customerId));
         }
     }
 }

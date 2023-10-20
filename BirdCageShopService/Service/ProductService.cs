@@ -99,10 +99,10 @@ namespace BirdCageShopService.Service
 			//	productFromWishlistList.Add(productFromWishlist);
 			//}
 			var productFromWishlistList = new List<ProductViewModel>();
-            return _mapper.Map<List<ProductViewModel>>(result);
+			return _mapper.Map<List<ProductViewModel>>(result);
 
 
-          
+
 		}
 
 		private string? GetMainImageUrl(Product product)
@@ -166,89 +166,53 @@ namespace BirdCageShopService.Service
             return _mapper.Map<Pagination<ProductViewModel>>(productList);
         }
 
-        public async Task<bool> AddToWishlistAsync(int productId)
-        {
-            var currentUserId = _claimService.GetCurrentUserId();
+
+
+		public async Task<bool> AddToWishlistAsync(int productId)
+		{
+			var currentUserId = _claimService.GetCurrentUserId();
 			if (currentUserId == null) return false;
 
 
 			// check exist wishlist
 			var wishlist = await _unitOfWork.WishlistRepository.GetWishlistByCustomerIdAsync(currentUserId);
-			if(wishlist == null)
+			if (wishlist == null)
 			{
 				var newWishlist = new Wishlist()
 				{
-					CreatedAt = _timeService.GetCurrentTimeInVietnam(),
+
 					ApplicationUserId = currentUserId,
-					WishlistItems = new List<WishlistItem>()
-					{
-						new WishlistItem()
-						{
-							ProductId = productId,
-						}
-					}
+					ProductId = productId
 				};
 				_unitOfWork.WishlistRepository.AddAsync(newWishlist);
+
 			}
 			else
 			{
-                // check if exist that pro in wishlist
-                var product = await _unitOfWork.ProductRepository.GetProductByWishlistIdAndCustomerIdAsync(wishlist.Id, currentUserId, productId);
+				// check if exist that pro in wishlist
+				var product = await _unitOfWork.ProductRepository.GetProductByWishlistIdAndCustomerIdAsync(currentUserId, productId);
 				if (product != null) return false;
-                wishlist.WishlistItems.Append(new WishlistItem()
-                {
-                    ProductId = productId
-                });
-                _unitOfWork.WishlistRepository.Update(wishlist);
+				//wishlist.WishlistItems.Append(new WishlistItem()
+				//{
+				//	ProductId = productId
+				//});
 
-             
-
-            }
-
-             return await _unitOfWork.SaveChangesAsync();
-
-
-        }
-
-        //public async Task<bool> AddToWishlistAsync(int productId)
-        //{
-        //	//return false;
-        //	var currentUserId = _claimService.GetCurrentUserId();
-        //	if (currentUserId == null) return false;
-
-        //	////test
-        //	//var currentUserId = 1;
-        //	////test
-        //	////
-        //	var wishlist = await _unitOfWork.WishlistRepository.GetWishlistByUserIdAsync(currentUserId);
-        //	if (wishlist != null)
-        //	{
-
-        //		var product = await _unitOfWork.ProductRepository.GetProductByWishlistIdAndCustomerIdAsync(wishlist.Id, currentUserId);
-        //		if (product is not null)
-        //		{
-        //			var existItem = await _unitOfWork.ProductWishlistRepository.GetWishlistByWishlistIdAndProductIdAsync(wishlist.Id, product.Id);
-        //			if (existItem != null)
-        //			{
-
-        //				_unitOfWork.ProductWishlistRepository.Delete(existItem);
-        //				return await _unitOfWork.SaveChangesAsync();
-        //			}
-
-        //		}
-
-        //		//_unitOfWork.WishlistRepository.Update(wishlist);
-        //	}
+				Wishlist addNew = new Wishlist()
+				{
+					ProductId = productId,
+					ApplicationUserId = wishlist.ApplicationUserId
+				};
+				_unitOfWork.WishlistRepository.AddAsync(addNew);
 
 
 
-        //	else
-        //	{
-        //		return false;
+			}
 
-        //	}
+			return await _unitOfWork.SaveChangesAsync();
 
-        //	return false;
-        //}
-    }
+
+		}
+
+
+	}
 }

@@ -11,10 +11,10 @@ namespace BirdCageShopInterface.IRepositories
 	{
 		Task<IEnumerable<Product>> GetProductsByCategoryAsync(int categoryId);
 		Task<Product> GetProductWithReviewByProIdAsync(int productID);
-        Task<Product?> GetProductByWishlistIdAndCustomerIdAsync(int wishlistId, string customerId, int productId);
+		Task<Product?> GetProductByWishlistIdAndCustomerIdAsync(string customerId, int productId);
 
-        Task<Product> GetProductIncludeImage(int productID);
-        Task<IEnumerable<Product>> GetProductsFromWishlistAsync(string customerId);
+		Task<Product> GetProductIncludeImage(int productID);
+		Task<IEnumerable<Product>> GetProductsFromWishlistAsync(string customerId);
 
 
 

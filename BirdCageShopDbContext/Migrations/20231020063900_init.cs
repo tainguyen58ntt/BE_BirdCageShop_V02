@@ -284,27 +284,6 @@ namespace BirdCageShopDbContext.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Wishlists",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Wishlists", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Wishlists_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -514,26 +493,27 @@ namespace BirdCageShopDbContext.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "WishlistItems",
+                name: "Wishlists",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    WishListId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: true)
+                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WishlistItems", x => x.Id);
+                    table.PrimaryKey("PK_Wishlists", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WishlistItems_Products_ProductId",
+                        name: "FK_Wishlists_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Wishlists_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_WishlistItems_Wishlists_WishListId",
-                        column: x => x.WishListId,
-                        principalTable: "Wishlists",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -569,10 +549,24 @@ namespace BirdCageShopDbContext.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "045311ce-71ec-4a9d-9ecf-832f940eb37c", "1", "Admin", "Admin" },
-                    { "4f3efecf-a7a5-403a-afaa-f5807d1a7ec8", "2", "Customer", "Customer" },
-                    { "9fc7c2e2-eb08-4963-a42b-511ce73e524b", "3", "Staff", "Staff" },
-                    { "def202bf-c9a4-4a1d-9106-61b07f874e44", "2", "Manager", "Manager" }
+                    { "0368f2b6-3639-45ee-b70f-f6e7e18ba474", "1", "Admin", "Admin" },
+                    { "5d634370-b97b-42f6-a98e-3123a151bcba", "2", "Customer", "Customer" },
+                    { "649975b1-0807-4198-82e2-776510e76509", "3", "Staff", "Staff" },
+                    { "fe32947c-c483-416f-ba61-18cfb8aa3236", "2", "Manager", "Manager" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Statuses",
+                columns: new[] { "Id", "StatusState" },
+                values: new object[,]
+                {
+                    { 1, "Pending" },
+                    { 2, "Approved" },
+                    { 3, "Processing" },
+                    { 4, "Shipped" },
+                    { 5, "Payonline-approved" },
+                    { 6, "COD" },
+                    { 7, "Payonline" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -701,20 +695,14 @@ namespace BirdCageShopDbContext.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_WishlistItems_ProductId",
-                table: "WishlistItems",
-                column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_WishlistItems_WishListId",
-                table: "WishlistItems",
-                column: "WishListId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Wishlists_ApplicationUserId",
                 table: "Wishlists",
-                column: "ApplicationUserId",
-                unique: true);
+                column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Wishlists_ProductId",
+                table: "Wishlists",
+                column: "ProductId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -759,7 +747,7 @@ namespace BirdCageShopDbContext.Migrations
                 name: "Statuses");
 
             migrationBuilder.DropTable(
-                name: "WishlistItems");
+                name: "Wishlists");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -777,7 +765,7 @@ namespace BirdCageShopDbContext.Migrations
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Wishlists");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Vouchers");
@@ -787,9 +775,6 @@ namespace BirdCageShopDbContext.Migrations
 
             migrationBuilder.DropTable(
                 name: "Categories");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
         }
     }
 }
