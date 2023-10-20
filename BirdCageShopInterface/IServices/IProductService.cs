@@ -23,7 +23,7 @@ namespace BirdCageShopInterface.IServices
 
 		Task<ProductViewModel?> GetByIdAsync(int id);
 		Task<Product?> GetProductByIdAsync(int id);
-		//Task<bool> AddToWishlistAsync(int productId);
+		Task<bool> AddToWishlistAsync(int productId);
 		Task<IEnumerable<ProductViewModel>> GetProductByCategoryAsync(int categoryId);
 		Task<bool> RemoveAsync(Product product);
 
@@ -31,7 +31,7 @@ namespace BirdCageShopInterface.IServices
 		Task<ProductWithReviewViewModel?> GetFeedBackByProductId(int productId);
 
 		//
-		Task<IEnumerable<ProductFromWishlist>> GetProductsFromWishlistAsync();
+		Task<IEnumerable<ProductViewModel>> GetProductsFromWishlistAsync();
 		//
 		Task<bool> AddReviewProduct(int productId, AddReviewProductViewModel addReviewProductViewModel);
 

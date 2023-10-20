@@ -8,6 +8,7 @@ namespace BirdCageShopUtils
 {
     public class PaymentMethod
     {
+        
         public  const string COD = "COD";
         public const string PAYONLINE = "PAYONLINE";
     }

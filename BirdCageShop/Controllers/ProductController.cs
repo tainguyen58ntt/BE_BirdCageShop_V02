@@ -69,13 +69,7 @@ namespace BirdCageShop.Controllers
             return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Delete product failed. Server Error." });
         }
 
-        //
-        [HttpGet("from-wishlist")]
-        public async Task<IActionResult> GetFromWishlistAsync()
-        {
-            var result = await _productService.GetProductsFromWishlistAsync();
-            return Ok(result);
-        }
+     
 
         [HttpGet("search-by-title")]
         public async Task<IActionResult> GetProductByTitle(string title, [FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
@@ -123,12 +117,25 @@ namespace BirdCageShop.Controllers
         //}
 
 
+        //
+        [HttpGet("from-wishlist")]
+        public async Task<IActionResult> GetFromWishlistAsync()
+        {
+            var result = await _productService.GetProductsFromWishlistAsync();
+            return Ok(result);
+        }
 
 
 
-
-
-
+        [HttpPost("add-to-wishlist/{productId}")]
+        public async Task<IActionResult> AddToWishlistAsync([FromRoute] int productId)
+        {
+            var product = await _productService.GetProductByIdAsync(productId);
+            if (product is null) return BadRequest(new { property = "Product ID", message = "Product doesn't exist." });
+            var result = await _productService.AddToWishlistAsync(productId);
+            if (result is true) return Ok();
+            return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Add to wishlist failed. Server Error." });
+        }
 
 
 

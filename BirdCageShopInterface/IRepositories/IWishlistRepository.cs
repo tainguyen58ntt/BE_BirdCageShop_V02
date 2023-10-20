@@ -9,5 +9,6 @@ namespace BirdCageShopInterface.IRepositories
 {
     public interface IWishlistRepository : IBaseRepository<Wishlist>
     {
+        Task<Wishlist?> GetWishlistByCustomerIdAsync(string customerId);
     }
 }

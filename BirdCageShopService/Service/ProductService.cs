@@ -77,31 +77,32 @@ namespace BirdCageShopService.Service
 			return _mapper.Map<List<ProductViewModel>>(products);
 		}
 
-		public async Task<IEnumerable<ProductFromWishlist>> GetProductsFromWishlistAsync()
+		public async Task<IEnumerable<ProductViewModel>> GetProductsFromWishlistAsync()
 		{
 			var currentUserId = _claimService.GetCurrentUserId();
-			if (currentUserId == null) return new List<ProductFromWishlist>();
+			if (currentUserId == null) return new List<ProductViewModel>();
 			var result = await _unitOfWork.ProductRepository.GetProductsFromWishlistAsync(currentUserId);
-			var productFromWishlistList = new List<ProductFromWishlist>();
-			foreach (var product in result)
-			{
-				var mainImageUrl = GetMainImageUrl(product);
-				var productFromWishlist = new ProductFromWishlist
-				{
-					Title = product.Title,
-					Category = new CategoryViewModel
-					{
-						// Populate CategoryViewModel properties if needed
-					},
-					PriceAfterDiscount = product.PriceAfterDiscount,
-					ImageUrl = mainImageUrl // Set the main image URL
-				};
-				productFromWishlistList.Add(productFromWishlist);
-			}
+			//var productFromWishlistList = new List<ProductFromWishlist>();
+			//foreach (var product in result)
+			//{
+			//	var mainImageUrl = GetMainImageUrl(product);
+			//	var productFromWishlist = new ProductFromWishlist
+			//	{
+			//		Title = product.Title,
+			//		Category = new CategoryViewModel
+			//		{
+			//			// Populate CategoryViewModel properties if needed
+			//		},
+			//		PriceAfterDiscount = product.PriceAfterDiscount,
+			//		ImageUrl = mainImageUrl // Set the main image URL
+			//	};
+			//	productFromWishlistList.Add(productFromWishlist);
+			//}
+			var productFromWishlistList = new List<ProductViewModel>();
+            return _mapper.Map<List<ProductViewModel>>(result);
 
 
-
-			return productFromWishlistList;
+          
 		}
 
 		private string? GetMainImageUrl(Product product)
@@ -163,6 +164,50 @@ namespace BirdCageShopService.Service
         {
             var productList = await _unitOfWork.ProductRepository.GetAllByConditionAsync(c => c.Title.Contains(title), pageIndex, pageSize);
             return _mapper.Map<Pagination<ProductViewModel>>(productList);
+        }
+
+        public async Task<bool> AddToWishlistAsync(int productId)
+        {
+            var currentUserId = _claimService.GetCurrentUserId();
+			if (currentUserId == null) return false;
+
+
+			// check exist wishlist
+			var wishlist = await _unitOfWork.WishlistRepository.GetWishlistByCustomerIdAsync(currentUserId);
+			if(wishlist == null)
+			{
+				var newWishlist = new Wishlist()
+				{
+					CreatedAt = _timeService.GetCurrentTimeInVietnam(),
+					ApplicationUserId = currentUserId,
+					WishlistItems = new List<WishlistItem>()
+					{
+						new WishlistItem()
+						{
+							ProductId = productId,
+						}
+					}
+				};
+				_unitOfWork.WishlistRepository.AddAsync(newWishlist);
+			}
+			else
+			{
+                // check if exist that pro in wishlist
+                var product = await _unitOfWork.ProductRepository.GetProductByWishlistIdAndCustomerIdAsync(wishlist.Id, currentUserId, productId);
+				if (product != null) return false;
+                wishlist.WishlistItems.Append(new WishlistItem()
+                {
+                    ProductId = productId
+                });
+                _unitOfWork.WishlistRepository.Update(wishlist);
+
+             
+
+            }
+
+             return await _unitOfWork.SaveChangesAsync();
+
+
         }
 
         //public async Task<bool> AddToWishlistAsync(int productId)

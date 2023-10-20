@@ -15,12 +15,14 @@ namespace BirdCageShopReposiory.Repositories
         {
         }
 
-        //public async Task<Wishlist?> GetWishlistByUserIdAsync(string userId)
-        //{
-        //    return await _context.Set<Wishlist>()
-        //        .AsNoTracking()
-        //        .Include(w => w.WishlistItems)
-        //        .FirstOrDefaultAsync(w => w.UserId == userId);
-        //}
+     
+
+        public async Task<Wishlist?> GetWishlistByCustomerIdAsync(string customerId)
+        {
+            return await _context.Set<Wishlist>()
+                .AsNoTracking()
+                .Include(w => w.WishlistItems)
+                .FirstOrDefaultAsync(w => w.ApplicationUserId == customerId);
+        }
     }
 }
