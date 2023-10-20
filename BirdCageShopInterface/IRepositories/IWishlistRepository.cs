@@ -9,7 +9,7 @@ namespace BirdCageShopInterface.IRepositories
 {
     public interface IWishlistRepository : IBaseRepository<Wishlist>
     {
-        Task<Wishlist?> GetWishlistByCustomerIdAsync(string customerId);
+        Task<IEnumerable<Wishlist>?> GetWishlistByCustomerIdAsync(string customerId);
         Task<Wishlist?> GetWishlistByCustomerIdAndProductIdAsync(string customerId, int productId);
     }
 }
