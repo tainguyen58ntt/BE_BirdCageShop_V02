@@ -52,7 +52,16 @@ namespace BirdCageShop.Controllers
             if (result is null) return NotFound();
             return Ok(result);
         }
+
+        //[HttpGet]
+        //public async Task<IActionResult> GetByEmailAsync([FromBody] string email)
+        //{
+        //    var result = await _userService.GetUserByIdAsync(id);
+        //    if (result is null) return NotFound();
+        //    return Ok(result);
+        //}
         [HttpGet]
+        [Authorize(Roles = "Staff, Admin, Manager")]
         public async Task<IActionResult> Get()
         {
             var x = await _db.ApplicationUser.ToListAsync();

@@ -10,6 +10,6 @@ namespace BirdCageShopInterface.IRepositories
 {
     public interface IReviewRepository : IBaseRepository<ProductReview>
     {
-
+        Task<ProductReview> GetReviewByProIAndReviewIddAsync(int productID, int reviewId);
     }
 }

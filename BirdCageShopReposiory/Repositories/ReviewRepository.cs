@@ -1,5 +1,6 @@
 ﻿using BirdCageShopDbContext.Models;
 using BirdCageShopInterface.IRepositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,5 +16,10 @@ namespace BirdCageShopReposiory.Repositories
         {
         }
 
+        public async Task<ProductReview> GetReviewByProIAndReviewIddAsync(int productID, int reviewId)
+        {
+            return await _context.Set<ProductReview>()
+               .FirstOrDefaultAsync(x => x.ProductId == productID && x.Id == reviewId && x.IsDelete == false);
+        }
     }
-}
+    }

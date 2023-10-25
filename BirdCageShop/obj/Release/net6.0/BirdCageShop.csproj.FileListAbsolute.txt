@@ -73,8 +73,6 @@ D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\bin\Re
 D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\bin\Release\net6.0\BirdCageShopViewModel.pdb
 D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\obj\Release\net6.0\BirdCageShop.csproj.AssemblyReference.cache
 D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\obj\Release\net6.0\BirdCageShop.GeneratedMSBuildEditorConfig.editorconfig
-D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\obj\Release\net6.0\BirdCageShop.AssemblyInfoInputs.cache
-D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\obj\Release\net6.0\BirdCageShop.AssemblyInfo.cs
 D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\obj\Release\net6.0\BirdCageShop.csproj.CoreCompileInputs.cache
 D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\obj\Release\net6.0\BirdCageShop.MvcApplicationPartsAssemblyInfo.cs
 D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\obj\Release\net6.0\BirdCageShop.MvcApplicationPartsAssemblyInfo.cache

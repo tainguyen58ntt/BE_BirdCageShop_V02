@@ -173,6 +173,7 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IProductService, BirdCageShopService.Service.ProductService>();
 builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
 builder.Services.AddScoped<IStatusService, StatusService>();
+builder.Services.AddScoped<IProductReviewService, ProductReviewService>();
 
 
 

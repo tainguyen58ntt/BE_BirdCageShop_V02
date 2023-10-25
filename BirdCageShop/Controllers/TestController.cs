@@ -9,6 +9,10 @@ namespace BirdCageShop.Controllers
     [ApiController]
     public class TestController : ControllerBase
     {
-       
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            return Ok();
+        }
     }
 }

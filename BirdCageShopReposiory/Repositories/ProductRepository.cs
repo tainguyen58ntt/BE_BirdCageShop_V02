@@ -39,7 +39,7 @@ namespace BirdCageShopReposiory.Repositories
             .ThenInclude(ps => ps.Specification)
                 .Include(p => p.ProductFeatures)
             .ThenInclude(ps => ps.Feature)
-             .Include(p => p.ProductReviews)
+             .Include(p => p.ProductReviews.Where(pr => pr.IsDelete == false))
                 .ThenInclude(pr => pr.ApplicationUser)
             .Include(p => p.ProductImages).FirstOrDefaultAsync();
 

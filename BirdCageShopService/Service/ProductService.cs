@@ -19,6 +19,7 @@ using System.Threading.Tasks;
 namespace BirdCageShopService.Service
 {
     public class ProductService : BaseService, IProductService
+
     {
 
         public ProductService(IClaimService claimService, ITimeService timeService, IUnitOfWork unitOfWork, IMapper mapper, IConfiguration configuration) : base(claimService, timeService, unitOfWork, mapper, configuration)
@@ -275,5 +276,7 @@ namespace BirdCageShopService.Service
 
             return await _unitOfWork.SaveChangesAsync();
         }
+
+     
     }
 }

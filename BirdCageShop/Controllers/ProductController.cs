@@ -16,11 +16,12 @@ namespace BirdCageShop.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
+        private readonly IProductReviewService _productReviewService;
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService, IProductReviewService productReviewService)
         {
             _productService = productService;
-
+            _productReviewService = productReviewService;       
         }
 
 
@@ -95,6 +96,25 @@ namespace BirdCageShop.Controllers
         //    var result = await _productService.GetFeedBackByProductId(productId);
         //    return Ok(result);
         //}
+
+
+        //delete feedback of product
+        [HttpDelete("{productId}/reviews/{reviewId}")]
+        [Authorize(Roles = "Staff")]
+        public async Task<IActionResult> DeleteReviewProductByProIdAndReviewIdAsync([FromRoute] int productId, [FromRoute] int reviewId)
+        {
+            //var product = await _productService.GetProductByIdAsync(productId);
+            //if (product is null) return NotFound("Not found this product");
+            var reviewOfProduct = await _productReviewService.GetProductReviewByProductIDAndReviewIdByIdAsync(productId, reviewId);
+            if (reviewOfProduct is null) return NotFound("Not found this review");
+            //
+            //delete review
+            bool isSuccess = await _productReviewService.DeleteReviewProduct(reviewOfProduct);
+
+            if (isSuccess) return Ok();
+            return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Delete review product failed. Server Error." });
+        }
+
 
 
         [HttpPost("review-product/{productId}")]

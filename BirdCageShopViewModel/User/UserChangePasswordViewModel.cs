@@ -22,17 +22,20 @@ namespace BirdCageShopViewModel.User
         public UserChangePasswordRule()
         {
             RuleFor(x => x.OldPassword)
-            .NotEmpty()
-            .WithMessage("Old password must not be empty")
+             .NotEmpty()
+             .WithMessage("Password must not be empty")
              .Length(6, 20)
-                .WithMessage("Old password must between 6..20 characters");
+             .WithMessage("Password must be between 6 and 20 characters")
+             .Matches(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).+$")
+             .WithMessage("Password must contain at least one lowercase letter, one uppercase letter, one digit, and one non-alphanumeric character.");
 
             RuleFor(x => x.NewPassword)
                 .NotEmpty()
-                .WithMessage("New password must not be empty")
-               .Length(6, 20)
-                .WithMessage("New password must between 6..20 characters");
-
+             .WithMessage("Password must not be empty")
+             .Length(6, 20)
+             .WithMessage("Password must be between 6 and 20 characters")
+             .Matches(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).+$")
+             .WithMessage("Password must contain at least one lowercase letter, one uppercase letter, one digit, and one non-alphanumeric character.");
 
             RuleFor(x => x.ConfirmPassword)
                 .NotEmpty()
@@ -40,7 +43,11 @@ namespace BirdCageShopViewModel.User
                .Length(6, 20)
                 .WithMessage("New password must between 6..20 characters")
                 .Equal(x => x.NewPassword)
-                .WithMessage("Confirm password must match the new password");
+                .WithMessage("Confirm password must match the new password")
+                 .Length(6, 20)
+                 .WithMessage("Password must be between 6 and 20 characters")
+                 .Matches(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).+$")
+                 .WithMessage("Password must contain at least one lowercase letter, one uppercase letter, one digit, and one non-alphanumeric character.");
 
         }
     }

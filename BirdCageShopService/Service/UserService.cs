@@ -69,13 +69,13 @@ namespace BirdCageShopService.Service
 
         //public async Task<bool> ChangePasswordAsync(UserChangePasswordViewModel vm)
         //{
-        //    //var currentUserId = _claimService.GetCurrentUserId();
-        //    //if (currentUserId == -1) return false;
-        //    //test
-        //    int currentUserId = 5;
-        //    //test
+        //    var currentUserId = _claimService.GetCurrentUserId();
+        //    if (currentUserId == null) return false;
+        //    ////test
+        //    //int currentUserId = 5;
+        //    ////test
 
-        //    var user = await _unitOfWork.UserRepository.GetByIdAsync(currentUserId);
+        //    var user = await _unitOfWork.UserRepository.GetByStringIdAsync(currentUserId);
         //    if (user == null) return false;
         //    user.PasswordHash = vm.NewPassword.BCryptSaltAndHash();
         //    //

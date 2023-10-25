@@ -23,7 +23,8 @@ namespace BirdCageShopInterface.IServices
 
 		Task<ProductWithReviewViewModel?> GetByIdAsync(int id);
 		Task<Product?> GetProductByIdAsync(int id);
-		Task<bool> AddToWishlistAsync(int productId);
+        
+        Task<bool> AddToWishlistAsync(int productId);
         Task<bool> MoveProFromWishlistToShoppingCart();
         Task<bool> RemoveProductFromWishlistAsync(int productId);
         Task<IEnumerable<ProductViewModel>> GetProductByCategoryAsync(int categoryId);
