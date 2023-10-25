@@ -6,6 +6,7 @@ using BirdCageShopInterface.IValidator;
 using BirdCageShopUtils.Pagination;
 using BirdCageShopUtils.UtilMethod;
 using BirdCageShopViewModel.Auth;
+using BirdCageShopViewModel.Order;
 using BirdCageShopViewModel.Role;
 using BirdCageShopViewModel.User;
 using FluentValidation.Results;
@@ -25,6 +26,25 @@ namespace BirdCageShopService.Service
         public UserService(IUserValidator userValidator, IClaimService claimService, ITimeService timeService, IUnitOfWork unitOfWork, IMapper mapper, IConfiguration configuration) : base(claimService, timeService, unitOfWork, mapper, configuration)
         {
             _userValidator = userValidator;
+        }
+
+        public async Task<Pagination<OrderWithDetailViewModel>> GetOrderHistoryAsync(int pageIndex, int pageSize)
+        {
+
+            var currentUserId = _claimService.GetCurrentUserId();
+            if (currentUserId == null)
+            {
+               
+                return new Pagination<OrderWithDetailViewModel>
+                {
+                    Items = new List<OrderWithDetailViewModel>(),
+                    TotalItemsCount = 0,
+                    PageIndex = pageIndex,
+                    PageSize = pageSize
+                };
+            }
+            var result = await _unitOfWork.OrderRepository.GetAllByConditionAsync(o => o.ApplicationUserId == currentUserId,pageIndex, pageSize);
+            return _mapper.Map<Pagination<OrderWithDetailViewModel>>(result);
         }
 
         //public UserService(ITimeService timeService, IUnitOfWork unitOfWork, IMapper mapper, IUserValidator userValidator, IConfiguration configuration) : base(timeService,unitOfWork, mapper,configuration)

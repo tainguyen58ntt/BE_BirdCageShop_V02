@@ -52,6 +52,13 @@ namespace BirdCageShop.Controllers
 
             return Ok(x);   
         }
+        [HttpGet("order-history")]
+        public async Task<IActionResult> GetCustomerOrderHistory([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
+        {
+            var x = await _userService.GetOrderHistoryAsync(pageIndex, pageSize);
+
+            return Ok(x);
+        }
 
         //[HttpGet("page")]
         //public async Task<IActionResult> GetPageAsync([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)

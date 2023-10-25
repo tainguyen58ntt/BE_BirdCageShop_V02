@@ -26,10 +26,10 @@ namespace BirdCageShopService.Service
 
         }
 
-        public async Task<ProductViewModel?> GetByIdAsync(int id)
+        public async Task<ProductWithReviewViewModel?> GetByIdAsync(int id)
         {
             var result = await _unitOfWork.ProductRepository.GetByIdAsync(id);
-            return _mapper.Map<ProductViewModel>(result);
+            return _mapper.Map<ProductWithReviewViewModel>(result);
         }
 
         public async Task<ProductWithReviewViewModel?> GetFeedBackByProductId(int productId)

@@ -21,7 +21,7 @@ namespace BirdCageShopInterface.IServices
         Task<Pagination<ProductViewModel>> GetByBirdCageTypePageAsync(int birdCageTypeId, int pageIndex, int pageSize);
 		Task<Pagination<ProductViewModel>> GetByCagegoryTypePageAsync(int categoryId, int pageIndex, int pageSize);
 
-		Task<ProductViewModel?> GetByIdAsync(int id);
+		Task<ProductWithReviewViewModel?> GetByIdAsync(int id);
 		Task<Product?> GetProductByIdAsync(int id);
 		Task<bool> AddToWishlistAsync(int productId);
         Task<bool> MoveProFromWishlistToShoppingCart();

@@ -2,6 +2,7 @@
 using birdcageshopinterface.IServices;
 using BirdCageShopUtils.Pagination;
 using BirdCageShopViewModel.Auth;
+using BirdCageShopViewModel.Order;
 using BirdCageShopViewModel.Role;
 using BirdCageShopViewModel.User;
 using FluentValidation.Results;
@@ -19,6 +20,9 @@ namespace BirdCageShopInterface.IServices
 
         ////
         Task<IEnumerable<UserViewModel>> GetUserAsync();
+        
+
+        Task<Pagination<OrderWithDetailViewModel>> GetOrderHistoryAsync(int pageIndex, int pageSize);
         //Task<User?> GetUserByIdAsync(int id);
         //Task<bool> DeleteAsync(User user);
         //Task<Pagination<UserViewModel>> GetPageAsync(int pageIndex, int pageSizes);

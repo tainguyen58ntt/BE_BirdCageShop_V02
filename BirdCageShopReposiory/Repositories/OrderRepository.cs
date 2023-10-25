@@ -50,6 +50,9 @@ namespace BirdCageShopReposiory.Repositories
                 .AsNoTracking()
                 .Where(filters)
                    .Include(o => o.Details)
+                    .ThenInclude(d => d.Product)
+                     .ThenInclude(p => p.ProductImages)
+                   .Include(o => o.ApplicationUser)
                 .Skip(pageSize * pageIndex)
                 .Take(pageSize)
                 .ToListAsync();

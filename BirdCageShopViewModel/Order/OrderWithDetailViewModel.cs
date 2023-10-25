@@ -24,7 +24,8 @@ namespace BirdCageShopViewModel.Order
 
 
         public VourcherViewModel Voucher { get; set; }
-        public UserViewModel User { get; set; }
+        //public UserViewModel ApplicationUser { get; set; }
+        public string UserName { get;set; }
         public IEnumerable<OrderDetailViewModel> Details { get; set; }
     }
 }

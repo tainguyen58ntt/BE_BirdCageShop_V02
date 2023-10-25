@@ -39,6 +39,7 @@ namespace BirdCageShop.Controllers
 
 
         [HttpGet("page")]
+
         public async Task<IActionResult> GetPageAsync([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
         {
             if (pageIndex < 0) return BadRequest("Page index cannot be negative");

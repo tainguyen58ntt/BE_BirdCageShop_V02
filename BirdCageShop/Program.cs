@@ -116,9 +116,9 @@ builder.Services.AddSwaggerGen(option =>
 
 // add configure require email
 //Add Config for Required Email
-builder.Services.Configure<IdentityOptions>(
-opts => opts.SignIn.RequireConfirmedEmail = true
-);
+//builder.Services.Configure<IdentityOptions>(
+//opts => opts.SignIn.RequireConfirmedEmail = true
+//);
 
 builder.Services.AddAuthentication(options =>
 {

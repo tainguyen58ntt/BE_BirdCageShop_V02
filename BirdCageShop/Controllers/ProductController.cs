@@ -11,6 +11,7 @@ using System.Drawing.Printing;
 namespace BirdCageShop.Controllers
 {
     [Route("api/[controller]")]
+
     [ApiController]
     public class ProductController : ControllerBase
     {
@@ -82,14 +83,14 @@ namespace BirdCageShop.Controllers
         }
 
 
-        [HttpGet("view-feedback/{productId}")]
-        public async Task<IActionResult> GetFeedBackByIdAsync([FromRoute] int productId)
-        {
-            var product = await _productService.GetProductByIdAsync(productId);
-            if (product is null) return NotFound("Not found this product");
-            var result = await _productService.GetFeedBackByProductId(productId);
-            return Ok(result);
-        }
+        //[HttpGet("view-feedback/{productId}")]
+        //public async Task<IActionResult> GetFeedBackByIdAsync([FromRoute] int productId)
+        //{
+        //    var product = await _productService.GetProductByIdAsync(productId);
+        //    if (product is null) return NotFound("Not found this product");
+        //    var result = await _productService.GetFeedBackByProductId(productId);
+        //    return Ok(result);
+        //}
 
 
         [HttpPost("review-product/{productId}")]
@@ -106,7 +107,10 @@ namespace BirdCageShop.Controllers
             return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Review product failed. Server Error." });
         }
 
-   
+
+        
+
+
 
         //
         [HttpGet("from-wishlist")]
@@ -137,7 +141,7 @@ namespace BirdCageShop.Controllers
         {
             var product = await _productService.GetProductByIdAsync(productId);
             if (product is null) return BadRequest(new { property = "Product ID", message = "Product doesn't exist." });
-            var result = await _productService.AddToWishlistAsync(productId);
+            var result = await _productService.RemoveProductFromWishlistAsync(productId);
             if (result is true) return Ok();
             return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Remove product from wishlist failed. Server Error." });
         }
@@ -150,6 +154,9 @@ namespace BirdCageShop.Controllers
             if (result is true) return Ok();
             return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Move product from wishlist to shopping cart failed. Server Error." });
         }
+
+
+
 
 
 

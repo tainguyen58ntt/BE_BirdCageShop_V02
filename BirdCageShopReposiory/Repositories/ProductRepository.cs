@@ -39,6 +39,8 @@ namespace BirdCageShopReposiory.Repositories
             .ThenInclude(ps => ps.Specification)
                 .Include(p => p.ProductFeatures)
             .ThenInclude(ps => ps.Feature)
+             .Include(p => p.ProductReviews)
+                .ThenInclude(pr => pr.ApplicationUser)
             .Include(p => p.ProductImages).FirstOrDefaultAsync();
 
         }
@@ -115,7 +117,7 @@ namespace BirdCageShopReposiory.Repositories
             return await _context.Set<Product>()
               .AsNoTracking()
               .Include(p => p.Category)
-              
+
               .Include(p => p.ProductImages)
               .Where(x => !x.isDelete &&
               x.Wishlists.Any(pw => pw.ApplicationUserId == customerId))

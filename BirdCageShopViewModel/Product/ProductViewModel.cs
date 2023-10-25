@@ -3,6 +3,7 @@ using BirdCageShopViewModel.Feature;
 
 using BirdCageShopViewModel.ProductFeature;
 using BirdCageShopViewModel.ProductImage;
+using BirdCageShopViewModel.ProductReviews;
 using BirdCageShopViewModel.ProductSpecifications;
 using BirdCageShopViewModel.Specification;
 using System;
@@ -36,7 +37,7 @@ namespace BirdCageShopViewModel.Product
 
 		public IEnumerable<SpecificationViewModel> Specifications { get; set; }
         public IEnumerable<FeatureViewModel> Features { get; set; }
-
+        
         public IEnumerable<ProductImageViewModel> ProductImages { get; set; }
 	}
 }

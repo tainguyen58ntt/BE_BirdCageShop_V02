@@ -25,5 +25,7 @@ namespace BirdCageShopViewModel.Product
 		public decimal? PercentDiscount { get; set; }
 		public decimal? PriceAfterDiscount { get; set; }
 		public IEnumerable<ProductReviewsViewModel> ProductReviews { get; set; }
-	}
+
+        public IEnumerable<ProductImageViewModel> ProductImages { get; set; }
+    }
 }

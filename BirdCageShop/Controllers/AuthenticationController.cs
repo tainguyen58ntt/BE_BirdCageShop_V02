@@ -48,13 +48,7 @@ namespace BirdCageShop.Controllers
                 return StatusCode(StatusCodes.Status403Forbidden, new Response { Status = "Error", Message = "User already exists" });
             }
 
-            //IdentityUser user = new()
-            //{
-            //    Email = registerUser.Email,
-            //    SecurityStamp = Guid.NewGuid().ToString(),
-            //    UserName = registerUser.UserName,
-            //    TwoFactorEnabled = true
-            //};
+     
 
 
             //test
@@ -63,7 +57,7 @@ namespace BirdCageShop.Controllers
             user2.Email = registerUser.Email;
             user2.CreatedAt = _timeService.GetCurrentTimeInVietnam();
             user2.SecurityStamp = Guid.NewGuid().ToString();
-            user2.TwoFactorEnabled = true;
+            //user2.TwoFactorEnabled = true;
             //test
 
 
@@ -77,12 +71,15 @@ namespace BirdCageShop.Controllers
 
                     //Add Token to Verify the email....
                     var token = await _userManager.GenerateEmailConfirmationTokenAsync(user2);
-                    var confirmationLink = Url.Action(nameof(ConfirmEmail), "Authentication", new { token, email = user2.Email }, Request.Scheme);
-                    var message = new Message(new string[] { user2.Email! }, "Confirmation email link", confirmationLink!);
-                    _emailService.SendEmail(message);
+                    //var confirmationLink = Url.Action(nameof(ConfirmEmail), "Authentication", new { token, email = user2.Email }, Request.Scheme);
+                    //var message = new Message(new string[] { user2.Email! }, "Confirmation email link", confirmationLink!);
+                    //_emailService.SendEmail(message);
+
+                    //    return StatusCode(StatusCodes.Status200OK,
+                    //new Response { Status = "Success", Message = $"User created & Email Sent to {user2.Email} SuccessFully" });
 
                     return StatusCode(StatusCodes.Status200OK,
-                new Response { Status = "Success", Message = $"User created & Email Sent to {user2.Email} SuccessFully" });
+                new Response { Status = "Success", Message = $"Register success" });
 
                 }
                 else
@@ -152,10 +149,11 @@ namespace BirdCageShop.Controllers
                 await _signInManager.SignOutAsync();
                 await _signInManager.PasswordSignInAsync(user, loginModel.Password, false, true);
                 var token = await _userManager.GenerateTwoFactorTokenAsync(user, "Email");
-                var message = new Message(new string[] { user.Email! }, "OTP Confrimation", token);
-                _emailService.SendEmail(message);
+                //var message = new Message(new string[] { user.Email! }, "OTP Confrimation", token);
+                //_emailService.SendEmail(message);
 
-                return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Message = $"We have sent an OTP to your Email {user.Email}" });
+                //return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Message = $"We have sent an OTP to your Email {user.Email}" });
+                return StatusCode(StatusCodes.Status200OK, token);
             }
 
             if (user != null && await _userManager.CheckPasswordAsync(user, loginModel.Password))
