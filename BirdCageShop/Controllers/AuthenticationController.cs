@@ -20,6 +20,7 @@ namespace BirdCageShop.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
+        private readonly IUserService _userService;
         private readonly IEmailService _emailService;
         private readonly ITimeService _timeService;
         private readonly UserManager<IdentityUser> _userManager;
@@ -28,7 +29,7 @@ namespace BirdCageShop.Controllers
         private readonly IConfiguration _configuration;
 
 
-        public AuthenticationController(ITimeService timeService, IConfiguration configuration, SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IEmailService emailService)
+        public AuthenticationController(IUserService userService,ITimeService timeService, IConfiguration configuration, SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IEmailService emailService)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -36,19 +37,28 @@ namespace BirdCageShop.Controllers
             _signInManager = signInManager;
             _configuration = configuration;
             _timeService = timeService;
+            _userService = userService;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register([FromBody] RegisterUser registerUser, string role)
+        public async Task<IActionResult> Register([FromBody] UserSignUpViewModel registerUser, string role)
         {
+            
+
             //check exists
             var userExists = await _userManager.FindByEmailAsync(registerUser.Email);
             if (userExists != null)
             {
                 return StatusCode(StatusCodes.Status403Forbidden, new Response { Status = "Error", Message = "User already exists" });
             }
+            // check password
+            var validateResult = await _userService.ValidateUserSignUpAsync(registerUser);
 
-     
+            if (!validateResult.IsValid)
+            {
+                var errors = validateResult.Errors.Select(x => new { property = x.PropertyName, message = x.ErrorMessage });
+                return BadRequest(errors);
+            }
 
 
             //test

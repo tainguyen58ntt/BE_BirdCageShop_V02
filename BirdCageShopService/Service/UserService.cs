@@ -139,9 +139,9 @@ namespace BirdCageShopService.Service
         //    return _userValidator.UserChangePasswordValidator.ValidateAsync(vm);
         //}
 
-        //public Task<ValidationResult> ValidateUserSignUpAsync(UserSignUpViewModel vm)
-        //{
-        //    return _userValidator.UserSignUpValidator.ValidateAsync(vm);
-        //}
+        public Task<ValidationResult> ValidateUserSignUpAsync(UserSignUpViewModel vm)
+        {
+            return _userValidator.UserSignUpValidator.ValidateAsync(vm);
+        }
     }
 }

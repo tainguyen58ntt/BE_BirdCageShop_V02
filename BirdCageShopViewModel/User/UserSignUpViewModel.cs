@@ -9,8 +9,7 @@ namespace BirdCageShopViewModel.User
 {
     public class UserSignUpViewModel
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string? UserName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
     }
@@ -20,17 +19,14 @@ namespace BirdCageShopViewModel.User
         public UserSignUpRule()
         {
 
-            RuleFor(x => x.FirstName)
+            RuleFor(x => x.UserName)
                 .NotEmpty()
                 .WithMessage("User first name must not be empty");
 
 
 
 
-            RuleFor(x => x.LastName)
-              .NotEmpty()
-              .WithMessage("User last name must not be empty");
-            
+          
 
             RuleFor(x => x.Email)
                .NotNull()
@@ -40,8 +36,12 @@ namespace BirdCageShopViewModel.User
 
 
             RuleFor(x => x.Password)
-            .Length(6, 20)
-            .WithMessage("Password must between 6..20 characters");
+              .NotEmpty()
+              .WithMessage("Password must not be empty")
+              .Length(6, 20)
+              .WithMessage("Password must be between 6 and 20 characters")
+              .Matches(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).+$")
+              .WithMessage("Password must contain at least one lowercase letter, one uppercase letter, one digit, and one non-alphanumeric character.");
         }
     }
 
