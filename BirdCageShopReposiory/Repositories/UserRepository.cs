@@ -52,6 +52,15 @@ namespace BirdCageShopReposiory.Repositories
             //.Select(user => user.Gender)
             //.FirstOrDefaultAsync();
         }
+        public async Task<ApplicationUser?> GetByStringIdAsync(string id)
+        {
+            var user = await _context.Set<ApplicationUser>().FirstOrDefaultAsync(x => x.Id.Equals(id) && x.IsDelete == false);
+
+            return user;
+
+            
+
+        }
 
         //public override async Task<Pagination<User>> GetPaginationAsync(int pageIndex, int pageSize)
         //{

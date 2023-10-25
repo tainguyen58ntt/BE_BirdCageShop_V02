@@ -105,11 +105,11 @@ namespace BirdCageShopService.Service
             return _mapper.Map<List<UserViewModel>>(users);
         }
 
-        //public async Task<User?> GetUserByIdAsync(int id)
-        //{
-        //    var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
-        //    return user;
-        //}
+        public async Task<ApplicationUser?> GetUserByIdAsync(string id)
+        {
+            var user = await _unitOfWork.UserRepository.GetByStringIdAsync(id);
+            return user;
+        }
 
         //public async Task<bool> IsExistsEmailAsync(string email)
         //{

@@ -23,7 +23,7 @@ namespace BirdCageShopInterface.IServices
         
 
         Task<Pagination<OrderWithDetailViewModel>> GetOrderHistoryAsync(int pageIndex, int pageSize);
-        //Task<User?> GetUserByIdAsync(int id);
+        Task<ApplicationUser?> GetUserByIdAsync(string id);
         //Task<bool> DeleteAsync(User user);
         //Task<Pagination<UserViewModel>> GetPageAsync(int pageIndex, int pageSizes);
         //Task<ValidationResult> ValidateUserSignUpAsync(UserSignUpViewModel vm);

@@ -23,6 +23,10 @@ namespace BirdCageShop.Controllers
 
         }
 
+
+        [HttpPost("create")]
+
+
         //get product by bird type
         [HttpGet("by-birdCage-type/{birdCageTypeId}")]
         public async Task<IActionResult> GetByBirdCageType([FromRoute] int birdCageTypeId, [FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)

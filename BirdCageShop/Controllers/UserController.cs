@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Stripe;
 using System.Collections.Generic;
 
 namespace BirdCageShop.Controllers
@@ -44,6 +45,13 @@ namespace BirdCageShop.Controllers
         //    return Ok(rs);
         //}
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetByIdAsync([FromRoute] string id)
+        {
+            var result = await _userService.GetUserByIdAsync(id);
+            if (result is null) return NotFound();
+            return Ok(result);
+        }
         [HttpGet]
         public async Task<IActionResult> Get()
         {
