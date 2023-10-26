@@ -15,6 +15,8 @@ namespace BirdCageShopViewModel.Order
         public string City { get; set; }
         public string? VourcherCode { get; set; }
         public string PaymentMethod { get; set; }
+
+        public string Name { get; set; }
     }
 
     public class ConfirmOrderAddRule : AbstractValidator<ConfirmOrderAddViewModel>
@@ -24,6 +26,9 @@ namespace BirdCageShopViewModel.Order
             RuleFor(c => c.Phone)
                 .NotEmpty()
                 .WithMessage("Phone can not be empty");
+            RuleFor(c => c.Name)
+              .NotEmpty()
+              .WithMessage("Name can not be empty");
             RuleFor(c => c.StreetAddress)
               .NotEmpty()
               .WithMessage("StreetAddress can not be empty");

@@ -11,7 +11,7 @@ namespace BirdCageShopInterface.IRepositories
     public interface IOrderRepository : IBaseRepository<Order>
     {
         //Task<Order> AddAsync(Order order);
-        Task<Order?> GetByIdToUpdateStatusToProcessAsync(int id);
+        Task<Order?> GetByIdToUpdateStatusToApprovedAsync(int id);
 
         
         Task<Order?> GetByIdToUpdateStatusToShippedAsync(int id);

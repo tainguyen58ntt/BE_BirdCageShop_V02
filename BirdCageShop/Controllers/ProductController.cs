@@ -66,6 +66,7 @@ namespace BirdCageShop.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> RemoveAsync(int id)
         {
             var product = await _productService.GetProductByIdAsync(id);

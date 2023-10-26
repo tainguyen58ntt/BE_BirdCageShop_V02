@@ -20,12 +20,12 @@ namespace BirdCageShopViewModel.Order
         public string? PaymentStatus { get; set; }
         public string? OrderStatus { get; set; }
 
+        public string NameRecieved { get;set; }
         //
 
 
-        public VourcherViewModel Voucher { get; set; }
+        public string? VoucherCode { get; set; }
         //public UserViewModel ApplicationUser { get; set; }
-        public string UserName { get;set; }
         public IEnumerable<OrderDetailViewModel> Details { get; set; }
     }
 }

@@ -30,6 +30,7 @@ namespace BirdCageShopDbContext.Models
 
         //public virtual Wishlist? Wishlist { get; set; }
         public virtual ICollection<Wishlist> Wishlists { get; set; }
+        public virtual ICollection<Voucher> Vouchers { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<ProductReview> ProductReviews { get; set; }
 		public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }

@@ -57,12 +57,12 @@ namespace BirdCageShop.Controllers
             return Ok(result);
         }
 
-        /// update status order to processing where : orderstatus : aprroved and payment status: payonline-approved or COD
-        [HttpPut("updateStatusToProcessing/{id}")]
-        public async Task<IActionResult> UpdateOrderToProcessing([FromRoute] int id)
+        /// update status order to approved where : orderstatus : pending and payment status: payonline-approved or COD
+        [HttpPut("updateStatusToApproved/{id}")]
+        public async Task<IActionResult> updateStatusToApproved([FromRoute] int id)
         {
 
-            bool isUpdate = await _orderService.GetByIdToUpdateStatusToProcessAsync(id);
+            bool isUpdate = await _orderService.GetByIdToUpdateStatusToApprovedAsync(id);
             if (isUpdate) return Ok();
             return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Update order status failed. Server Error." });
         }

@@ -50,17 +50,20 @@ namespace BirdCageShopService.Service
             // get 
             List<ShoppingCart> shoppingCarts = (List<ShoppingCart>)await _unitOfWork.ShoppingCartRepository.GetShoppingCartsAsync(currentUserId);
             decimal? totalPrice = 0;
+            decimal? beforeVoucherPrice = 0;
             foreach (var x in shoppingCarts)
             {
-                totalPrice += (x.Product.PriceAfterDiscount * x.Count);
+                beforeVoucherPrice += (x.Product.PriceAfterDiscount * x.Count);
             }
             //
             if (confirmOrderAddViewModel.VourcherCode != null)
             {
                 // get discount of voucher and update Total
                 vourcher = await _unitOfWork.VoucherRepository.GetVoucherByCodeAsync(confirmOrderAddViewModel.VourcherCode);
-                totalPrice = totalPrice - totalPrice * vourcher.DiscountPercent;
+                totalPrice = beforeVoucherPrice - beforeVoucherPrice * vourcher.DiscountPercent;
             }
+            //
+            totalPrice = beforeVoucherPrice;
             //+update to orderdetail
             List<OrderDetail> orderDetail = new List<OrderDetail>();
             foreach (var x in shoppingCarts)
@@ -94,14 +97,17 @@ namespace BirdCageShopService.Service
                     order = new Order
                     {
                         ApplicationUserId = currentUserId,
+                        NameRecieved = confirmOrderAddViewModel.Name,
                         OrderDate = _timeService.GetCurrentTimeInVietnam(),
+                        TotalPriceBeforeVoucher = beforeVoucherPrice,
                         TotalPrice = totalPrice,
-                        OrderStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(2),  // approved
+                        OrderStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(1),  // pending
                         PhoneNumber = confirmOrderAddViewModel.Phone,
                         StreetAddress = confirmOrderAddViewModel.StreetAddress,
                         City = confirmOrderAddViewModel.City,
-                        PaymentStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(2),  // approved
-                        VoucherId = vourcher.Id,
+                        PaymentStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(1),  // pending
+                        //VoucherId = vourcher.Id,
+                        VoucherCode = confirmOrderAddViewModel.VourcherCode,
                         Details = orderDetail
                     };
                 }
@@ -111,9 +117,10 @@ namespace BirdCageShopService.Service
                     order = new Order
                     {
                         ApplicationUserId = currentUserId,
+                        NameRecieved = confirmOrderAddViewModel.Name,
                         OrderDate = _timeService.GetCurrentTimeInVietnam(),
                         TotalPrice = totalPrice,
-                        OrderStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(2),  // approved
+                        OrderStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(1),  // pending
                         PhoneNumber = confirmOrderAddViewModel.Phone,
                         StreetAddress = confirmOrderAddViewModel.StreetAddress,
                         City = confirmOrderAddViewModel.City,
@@ -131,6 +138,7 @@ namespace BirdCageShopService.Service
                     order = new Order
                     {
                         ApplicationUserId = currentUserId,
+                        NameRecieved = confirmOrderAddViewModel.Name,
                         OrderDate = _timeService.GetCurrentTimeInVietnam(),
                         TotalPrice = totalPrice,
                         OrderStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(2),  // approved,
@@ -138,7 +146,7 @@ namespace BirdCageShopService.Service
                         StreetAddress = confirmOrderAddViewModel.StreetAddress,
                         City = confirmOrderAddViewModel.City,
                         PaymentStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(7),   // PAYONLINE,
-                        VoucherId = vourcher.Id,
+                        //VoucherId = vourcher.Id,
                         Details = orderDetail
                     };
                 }
@@ -148,6 +156,7 @@ namespace BirdCageShopService.Service
                     order = new Order
                     {
                         ApplicationUserId = currentUserId,
+                        NameRecieved = confirmOrderAddViewModel.Name,
                         OrderDate = _timeService.GetCurrentTimeInVietnam(),
                         TotalPrice = totalPrice,
                         OrderStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(2),  // approved,,

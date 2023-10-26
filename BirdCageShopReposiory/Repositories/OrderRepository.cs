@@ -82,7 +82,7 @@ namespace BirdCageShopReposiory.Repositories
        
         }
 
-        public async Task<Order?> GetByIdToUpdateStatusToProcessAsync(int id)
+        public async Task<Order?> GetByIdToUpdateStatusToApprovedAsync(int id)
         {
 
             return await _context.Set<Order>()
@@ -91,7 +91,7 @@ namespace BirdCageShopReposiory.Repositories
                .Include(x => x.Details)
                .ThenInclude(d => d.Product)
                .Include(x => x.ApplicationUser)
-              .FirstOrDefaultAsync(x => x.Id == id && x.OrderStatus == "Approved" && (x.PaymentStatus == "COD" || x.PaymentStatus == "Payonline-approved"));   // will fix not hard code later on
+              .FirstOrDefaultAsync(x => x.Id == id && x.OrderStatus == "Pending" && (x.PaymentStatus == "COD" || x.PaymentStatus == "Payonline-approved"));   // will fix not hard code later on
         }
 
         public async Task<Order?> GetByIdToUpdateStatusToShippedAsync(int id)
@@ -102,7 +102,7 @@ namespace BirdCageShopReposiory.Repositories
                 .Include(x => x.Details)
                 .ThenInclude(d => d.Product)
                 .Include(x => x.ApplicationUser)
-               .FirstOrDefaultAsync(x => x.Id == id && x.OrderStatus == "Processing" && (x.PaymentStatus == "COD" || x.PaymentStatus == "Payonline-approved"));   // will fix not hard code later on
+               .FirstOrDefaultAsync(x => x.Id == id && x.OrderStatus == "Approved" && (x.PaymentStatus == "COD" || x.PaymentStatus == "Payonline-approved"));   // will fix not hard code later on
         }
 
         public async Task<Order?> GetByIdToUpdateStatusPayToApprovedAsync(int id)

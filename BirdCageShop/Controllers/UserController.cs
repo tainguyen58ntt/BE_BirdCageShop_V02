@@ -61,7 +61,7 @@ namespace BirdCageShop.Controllers
         //    return Ok(result);
         //}
         [HttpGet]
-        [Authorize(Roles = "Staff, Admin, Manager")]
+        //[Authorize(Roles = "Staff, Admin, Manager")]
         public async Task<IActionResult> Get()
         {
             var x = await _db.ApplicationUser.ToListAsync();
@@ -86,17 +86,17 @@ namespace BirdCageShop.Controllers
         //    return Ok(result);
         //}
 
-        //[HttpDelete("delete/{userId}")]
-        //public async Task<IActionResult> DeleteAsync([FromRoute] int userId)
-        //{
-        //    var user = await _userService.GetUserByIdAsync(userId);
-        //    if (user == null) return BadRequest("User not exist");
+        [HttpDelete("/{userId}")]
+        public async Task<IActionResult> DeleteAsync([FromRoute] string userId)
+        {
+            var user = await _userService.GetUserByIdAsync(userId);
+            if (user == null) return BadRequest("User not exist");
 
-        //    var result = await _userService.DeleteAsync(user);
-        //    if (result is true) return Ok();
-        //    return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Delete Fail. Error server" });
+            var result = await _userService.DeleteAsync(user);
+            if (result is true) return Ok();
+            return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Delete Fail. Error server" });
 
-        //}
+        }
 
         //[HttpPost("register")]
         //public async Task<IActionResult> RegisterAsync([FromBody] UserSignUpViewModel vm)

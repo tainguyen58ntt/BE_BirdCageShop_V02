@@ -58,7 +58,7 @@ namespace BirdCageShopOther.Mapper
                 .ReverseMap();
             //
             CreateMap<Order, OrderWithDetailViewModel>()
-     .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.ApplicationUser.UserName))
+     .ForMember(dest => dest.NameRecieved, opt => opt.MapFrom(src => src.NameRecieved))
      .ReverseMap();
 
 

@@ -62,11 +62,11 @@ namespace BirdCageShopService.Service
             return _mapper.Map<Pagination<OrderWithDetailViewModel>>(result);
         }
 
-        public async Task<bool> GetByIdToUpdateStatusToProcessAsync(int id)
+        public async Task<bool> GetByIdToUpdateStatusToApprovedAsync(int id)
         {
-            var result = await _unitOfWork.OrderRepository.GetByIdToUpdateStatusToProcessAsync(id);
+            var result = await _unitOfWork.OrderRepository.GetByIdToUpdateStatusToApprovedAsync(id);
             if (result == null) return false;
-            result.OrderStatus = "Processing";
+            result.OrderStatus = "Approved";
             _unitOfWork.OrderRepository.Update(result);
             return await _unitOfWork.SaveChangesAsync();
 

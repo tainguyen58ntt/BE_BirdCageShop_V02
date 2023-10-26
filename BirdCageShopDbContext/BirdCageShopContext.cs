@@ -58,9 +58,9 @@ namespace BirdCageShopDbContext.Models
     .WithOne(sc => sc.ApplicationUser)
     .HasForeignKey(sc => sc.ApplicationUserId);
 
-            modelBuilder.Entity<Order>()
-                .Property(o => o.TotalPrice)
-                .HasColumnType("decimal(18, 2)");
+            //modelBuilder.Entity<Order>()
+            //    .Property(o => o.TotalPrice)
+            //    .HasColumnType("decimal(18, 2)");
 
             modelBuilder.Entity<OrderDetail>()
                 .Property(od => od.Price)

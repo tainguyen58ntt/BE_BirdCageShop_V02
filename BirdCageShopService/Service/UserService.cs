@@ -83,12 +83,12 @@ namespace BirdCageShopService.Service
         //    return await _unitOfWork.SaveChangesAsync();
         //}
 
-        //public async Task<bool> DeleteAsync(User user)
-        //{
-        //    user.IsDelete = true;
-        //    _unitOfWork.UserRepository.Update(user);
-        //    return await _unitOfWork.SaveChangesAsync();
-        //}
+        public async Task<bool> DeleteAsync(ApplicationUser user)
+        {
+            user.IsDelete = true;
+            _unitOfWork.UserRepository.Update(user);
+            return await _unitOfWork.SaveChangesAsync();
+        }
 
 
 

@@ -24,7 +24,7 @@ namespace BirdCageShopInterface.IServices
 
         Task<Pagination<OrderWithDetailViewModel>> GetOrderHistoryAsync(int pageIndex, int pageSize);
         Task<ApplicationUser?> GetUserByIdAsync(string id);
-        //Task<bool> DeleteAsync(User user);
+        Task<bool> DeleteAsync(ApplicationUser user);
         //Task<Pagination<UserViewModel>> GetPageAsync(int pageIndex, int pageSizes);
         Task<ValidationResult> ValidateUserSignUpAsync(UserSignUpViewModel vm);
         //Task<bool> IsExistsEmailAsync(string email);
