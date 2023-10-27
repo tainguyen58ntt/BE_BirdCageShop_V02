@@ -62,8 +62,12 @@ namespace BirdCageShopService.Service
                 vourcher = await _unitOfWork.VoucherRepository.GetVoucherByCodeAsync(confirmOrderAddViewModel.VourcherCode);
                 totalPrice = beforeVoucherPrice - beforeVoucherPrice * vourcher.DiscountPercent;
             }
+            else
+            {
+
+                totalPrice = beforeVoucherPrice;
+            }
             //
-            totalPrice = beforeVoucherPrice;
             //+update to orderdetail
             List<OrderDetail> orderDetail = new List<OrderDetail>();
             foreach (var x in shoppingCarts)

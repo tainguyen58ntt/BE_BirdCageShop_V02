@@ -3,11 +3,13 @@ using BirdCageShopDomain.Models;
 using BirdCageShopInterface.IRepositories;
 using BirdCageShopInterface.IServices;
 using BirdCageShopService.Service;
+using BirdCageShopUtils;
 using BirdCageShopViewModel.Order;
 using BirdCageShopViewModel.ShoppingCart;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Stripe.Checkout;
 
 namespace BirdCageShop.Controllers
 {
@@ -130,6 +132,39 @@ namespace BirdCageShop.Controllers
             }
 
             var result = await _shoppingCartService.CheckoutAsync(confirmOrderAddViewModel);
+
+            ///// check payment 
+            //if(confirmOrderAddViewModel.PaymentMethod == PaymentMethod.PAYONLINE)
+            //{
+            //    //stripe logic
+            //    var domain = Request.Scheme + "://" + Request.Host.Value + "/";
+            //    var options = new SessionCreateOptions
+            //    {
+            //        SuccessUrl = domain + $"customer/cart/OrderConfirmation?id={ShoppingCartVM.OrderHeader.Id}",
+            //        CancelUrl = domain + "customer/cart/index",
+            //        LineItems = new List<SessionLineItemOptions>(),
+            //        Mode = "payment",
+            //    };
+            //    foreach (var item in ShoppingCartVM.ShoppingCartList)
+            //    {
+            //        var sessionLineItem = new SessionLineItemOptions
+            //        {
+            //            PriceData = new SessionLineItemPriceDataOptions
+            //            {
+            //                UnitAmount = (long)(item.Price * 100), // $20.50 => 2050
+            //                Currency = "usd",
+            //                ProductData = new SessionLineItemPriceDataProductDataOptions
+            //                {
+            //                    Name = item.Product.Title
+            //                }
+            //            },
+            //            Quantity = item.Count
+            //        };
+            //        options.LineItems.Add(sessionLineItem);
+            //    }
+            //}
+
+
             if (result is true) return Ok();
             // checkout 
 
