@@ -24,6 +24,7 @@ namespace BirdCageShopInterface.IServices
         Task<Pagination<OrderWithDetailViewModel>> GetOrderByOderStatusPageAsync(int orderStatusId, int pageIndex, int pageSize);
         //test
         Task<Order?> GetOrderByIdAsync(int id);
+        Task UpdateOrderAsync(Order order);
         //test
         //Task<Pagination<OrderWithDetailViewModel>> GetByOrderStatusPageAsync(int statusId, int pageIndex, int pageSize);
     }

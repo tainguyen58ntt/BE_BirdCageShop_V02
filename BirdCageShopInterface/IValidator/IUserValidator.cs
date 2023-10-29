@@ -13,5 +13,7 @@ namespace BirdCageShopInterface.IValidator
     {
         IValidator<UserSignUpViewModel> UserSignUpValidator { get; }
         IValidator<UserChangePasswordViewModel> UserChangePasswordValidator { get; }
+        IValidator<UpdateProfileViewModel> UserUpdateProfileValidator { get; }
+        IValidator<ResetPassword> ResetPasswordValidator { get; }
     }
 }

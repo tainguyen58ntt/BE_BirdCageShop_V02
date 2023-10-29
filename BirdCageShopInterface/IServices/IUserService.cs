@@ -30,7 +30,15 @@ namespace BirdCageShopInterface.IServices
         //Task<bool> IsExistsEmailAsync(string email);
         //Task<bool> RegisterAsync(UserSignUpViewModel vm);
 
-        //Task<ValidationResult> ValidateChangePasswordAsync(UserChangePasswordViewModel vm);
-        //Task<bool> ChangePasswordAsync(UserChangePasswordViewModel vm);
+        Task<ValidationResult> ValidateChangePasswordAsync(UserChangePasswordViewModel vm);
+        Task<ValidationResult> ValidateUpdateProfileAsync(UpdateProfileViewModel vm);
+        Task<ValidationResult> ValidateResetPasswordAsync(ResetPassword vm);
+        Task<bool> ChangePasswordAsync(UserChangePasswordViewModel vm);
+
+        Task<bool> UpdateProfileAsync(UpdateProfileViewModel vm);
+
+
+        Task<bool> isExistUsername(string username);
+        Task<bool> isExistEmail(string email);
     }
 }

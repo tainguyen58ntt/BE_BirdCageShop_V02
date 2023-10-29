@@ -14,14 +14,21 @@ namespace BirdCageShopOther.Validator
     {
         private readonly UserSignUpRule _userSignUpValidator;
         private readonly UserChangePasswordRule _userChangePassswordValidator;
+        private readonly UpdateProfileRule _userUpdateProfileValidator;
+        private readonly ResetPasswordRule _resetPasswordValidator;
 
-        public UserValidator(UserSignUpRule userSignUpValidator, UserChangePasswordRule userChangePassswordValidator)
+        public UserValidator(ResetPasswordRule resetPasswordValidator, UserSignUpRule userSignUpValidator, UserChangePasswordRule userChangePassswordValidator, UpdateProfileRule userUpdateProfileValidator)
         {
             _userSignUpValidator = userSignUpValidator;
             _userChangePassswordValidator = userChangePassswordValidator;
+            _userUpdateProfileValidator = userUpdateProfileValidator;   
+            _resetPasswordValidator = resetPasswordValidator;
         }
         public IValidator<UserSignUpViewModel> UserSignUpValidator => _userSignUpValidator;
 
         public IValidator<UserChangePasswordViewModel> UserChangePasswordValidator => _userChangePassswordValidator;
+
+        public IValidator<UpdateProfileViewModel> UserUpdateProfileValidator => _userUpdateProfileValidator;
+        public IValidator<ResetPassword> ResetPasswordValidator => _resetPasswordValidator;
     }
 }

@@ -84,83 +84,86 @@ namespace BirdCageShop.Controllers
             if (isUpdate) return Ok();
             return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Update payment status failed. Server Error." });
         }
+        ///
 
-        /////
-        [HttpPost("Pay/{orderId}")]
-        public async Task<ActionResult> CheckoutOrder([FromRoute] int orderId, [FromServices] IServiceProvider sp)
-        {
-            var order = await _orderService.GetOrderByIdAsync(orderId);
-            if (!order.PaymentStatus.Equals("PayOnline")) return BadRequest();
-            var referer = Request.Headers.Referer;
-            s_wasmClientURL = referer[0];
+     
 
-            // Build the URL to which the customer will be redirected after paying.
-            var server = sp.GetRequiredService<IServer>();
+        ///////
+        //[HttpPost("Pay/{orderId}")]
+        //public async Task<ActionResult> CheckoutOrder([FromRoute] int orderId, [FromServices] IServiceProvider sp)
+        //{
+        //    var order = await _orderService.GetOrderByIdAsync(orderId);
+        //    if (!order.PaymentStatus.Equals("PayOnline")) return BadRequest();
+        //    var referer = Request.Headers.Referer;
+        //    s_wasmClientURL = referer[0];
 
-            var serverAddressesFeature = server.Features.Get<IServerAddressesFeature>();
+        //    // Build the URL to which the customer will be redirected after paying.
+        //    var server = sp.GetRequiredService<IServer>();
 
-            string? thisApiUrl = null;
+        //    var serverAddressesFeature = server.Features.Get<IServerAddressesFeature>();
 
-            if (serverAddressesFeature is not null)
-            {
-                thisApiUrl = serverAddressesFeature.Addresses.FirstOrDefault();
-            }
+        //    string? thisApiUrl = null;
 
-            if (thisApiUrl is not null)
-            {
-                var sessionId = await CheckOut(order, thisApiUrl);
-                var pubKey = _configuration["Stripe:PubKey"];
+        //    if (serverAddressesFeature is not null)
+        //    {
+        //        thisApiUrl = serverAddressesFeature.Addresses.FirstOrDefault();
+        //    }
 
-                var checkoutOrderResponse = new CheckoutOrderResponse()
-                {
-                    SessionId = sessionId,
-                    PubKey = pubKey
-                };
+        //    if (thisApiUrl is not null)
+        //    {
+        //        var sessionId = await CheckOut(order, thisApiUrl);
+        //        var pubKey = _configuration["Stripe:PubKey"];
 
-                return Ok(checkoutOrderResponse);
-            }
-            else
-            {
-                return StatusCode(500);
-            }
-        }
+        //        var checkoutOrderResponse = new CheckoutOrderResponse()
+        //        {
+        //            SessionId = sessionId,
+        //            PubKey = pubKey
+        //        };
 
-        [NonAction]
-        public async Task<string> CheckOut(Order order, string thisApiUrl)
-        {
-            // Create a payment flow from the items in the cart.
-            // Gets sent to Stripe API.
-            var options = new SessionCreateOptions
-            {
-                // Stripe calls the URLs below when certain checkout events happen such as success and failure.
-                SuccessUrl = $"{thisApiUrl}/order/success?sessionId=" + "{CHECKOUT_SESSION_ID}", // Customer paid.
-                CancelUrl = s_wasmClientURL + "failed",  // Checkout cancelled.
-                LineItems = new List<SessionLineItemOptions>(),
-                Mode = "payment",
-            };
-            foreach (var item in order.Details)
-            {
-                var sessionLineItem = new SessionLineItemOptions
-                {
-                    PriceData = new SessionLineItemPriceDataOptions
-                    {
-                        UnitAmount = (long)(item.Price * 100), // $20.50 => 2050
-                        Currency = "usd",
-                        ProductData = new SessionLineItemPriceDataProductDataOptions
-                        {
-                            Name = item.Product.Title
-                        }
-                    },
-                    Quantity = item.Quantity
-                };
-                options.LineItems.Add(sessionLineItem);
-            }
+        //        return Ok(checkoutOrderResponse);
+        //    }
+        //    else
+        //    {
+        //        return StatusCode(500);
+        //    }
+        //}
 
-            var service = new SessionService();
-            var session = await service.CreateAsync(options);
+        //[NonAction]
+        //public async Task<string> CheckOut(Order order, string thisApiUrl)
+        //{
+        //    // Create a payment flow from the items in the cart.
+        //    // Gets sent to Stripe API.
+        //    var options = new SessionCreateOptions
+        //    {
+        //        // Stripe calls the URLs below when certain checkout events happen such as success and failure.
+        //        SuccessUrl = $"{thisApiUrl}/order/success?sessionId=" + "{CHECKOUT_SESSION_ID}", // Customer paid.
+        //        CancelUrl = s_wasmClientURL + "failed",  // Checkout cancelled.
+        //        LineItems = new List<SessionLineItemOptions>(),
+        //        Mode = "payment",
+        //    };
+        //    foreach (var item in order.Details)
+        //    {
+        //        var sessionLineItem = new SessionLineItemOptions
+        //        {
+        //            PriceData = new SessionLineItemPriceDataOptions
+        //            {
+        //                UnitAmount = (long)(item.Price * 100), // $20.50 => 2050
+        //                Currency = "usd",
+        //                ProductData = new SessionLineItemPriceDataProductDataOptions
+        //                {
+        //                    Name = item.Product.Title
+        //                }
+        //            },
+        //            Quantity = item.Quantity
+        //        };
+        //        options.LineItems.Add(sessionLineItem);
+        //    }
 
-            return session.Id;
-        }
+        //    var service = new SessionService();
+        //    var session = await service.CreateAsync(options);
+
+        //    return session.Id;
+        //}
 
         ////  //update order information: order status != processing
         //[HttpPut("update-inform-order/{orderid}")]
@@ -170,26 +173,26 @@ namespace BirdCageShop.Controllers
         //}
 
 
-        [HttpGet("success")]
-        // Automatic query parameter handling from ASP.NET.
-        // Example URL: https://localhost:7051/checkout/success?sessionId=si_123123123123
-        public ActionResult CheckoutSuccess(string sessionId)
-        {
-            var sessionService = new SessionService();
-            var session = sessionService.Get(sessionId);
+        //[HttpGet("success")]
+        //// Automatic query parameter handling from ASP.NET.
+        //// Example URL: https://localhost:7051/checkout/success?sessionId=si_123123123123
+        //public ActionResult CheckoutSuccess(string sessionId)
+        //{
+        //    var sessionService = new SessionService();
+        //    var session = sessionService.Get(sessionId);
 
-            // Here you can save order and customer details to your database.
-            var total = session.AmountTotal.Value;
-            //var customerEmail = session.CustomerDetails.Email;
-            if (session.PaymentStatus.ToLower() == "paid")
-            {
-                //_unitOfWork.OrderHeader.UpdateStripePaymentID(id, session.Id, session.PaymentIntentId);
-                //_unitOfWork.OrderHeader.UpdateStatus(id, SD.StatusApproved, SD.PaymentStatusApproved);
-                //_unitOfWork.Save();
-                //_unit
-            }
-            return Redirect(s_wasmClientURL + "success");
-        }
+        //    // Here you can save order and customer details to your database.
+        //    var total = session.AmountTotal.Value;
+        //    //var customerEmail = session.CustomerDetails.Email;
+        //    if (session.PaymentStatus.ToLower() == "paid")
+        //    {
+        //        //_unitOfWork.OrderHeader.UpdateStripePaymentID(id, session.Id, session.PaymentIntentId);
+        //        //_unitOfWork.OrderHeader.UpdateStatus(id, SD.StatusApproved, SD.PaymentStatusApproved);
+        //        //_unitOfWork.Save();
+        //        //_unit
+        //    }
+        //    return Redirect(s_wasmClientURL + "success");
+        //}
     }
 }
 

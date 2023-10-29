@@ -47,6 +47,7 @@ namespace BirdCageShop.Controllers
 
             //check exists
             var userExists = await _userManager.FindByEmailAsync(registerUser.Email);
+             
             if (userExists != null)
             {
                 return StatusCode(StatusCodes.Status403Forbidden, new Response { Status = "Error", Message = "User already exists" });
@@ -256,8 +257,8 @@ namespace BirdCageShop.Controllers
             if (user != null)
             {
                 var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-                var forgotPasswordlink = Url.Action("ResetPassword", "Authentication", new { token, email = user.Email }, Request.Scheme);
-                var message = new Message(new string[] { user.Email! }, "Forgot password link", forgotPasswordlink);
+                //var forgotPasswordlink = Url.Action("ResetPassword", "Authentication", new { token, email = user.Email }, Request.Scheme);
+                var message = new Message(new string[] { user.Email! }, "Forgot password link", token);
                 _emailService.SendEmail(message);
                 return StatusCode(StatusCodes.Status200OK, new Response
                 {
@@ -276,18 +277,27 @@ namespace BirdCageShop.Controllers
             });
         }
 
-        [HttpGet]
-        [Route("reset-password")]
-        public async Task<IActionResult> ResetPassword(string token, string email)
-        {
-            var model = new ResetPassword { Token = token, Email = email };
-            return Ok(new { model });
-        }
+        //[HttpGet]
+        //[Route("reset-password")]
+        //public async Task<IActionResult> ResetPassword(string token, string email)
+        //{
+        //    var model = new ResetPassword { Token = token, Email = email };
+        //    return Ok(new { model });
+        //}
 
         [HttpPost]
         [Route("reset-password")]
         public async Task<IActionResult> ResetPassword(ResetPassword resetPassword)
         {
+
+            var validateResult = await _userService.ValidateResetPasswordAsync(resetPassword);
+            if (!validateResult.IsValid)
+            {
+                var errors = validateResult.Errors.Select(e => new { property = e.PropertyName, message = e.ErrorMessage });
+                return BadRequest(errors);
+            }
+
+            //
             var user = await _userManager.FindByEmailAsync(resetPassword.Email);
             if (user != null)
             {
@@ -306,5 +316,7 @@ namespace BirdCageShop.Controllers
             }
             return StatusCode(StatusCodes.Status400BadRequest, new Response { Status = "Error", Message = $"Could not send link to email" });
         }
+
+
     }
 }
