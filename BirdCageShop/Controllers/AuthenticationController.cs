@@ -260,11 +260,12 @@ namespace BirdCageShop.Controllers
                 //var forgotPasswordlink = Url.Action("ResetPassword", "Authentication", new { token, email = user.Email }, Request.Scheme);
                 var message = new Message(new string[] { user.Email! }, "Forgot password link", token);
                 _emailService.SendEmail(message);
-                return StatusCode(StatusCodes.Status200OK, new Response
+                return StatusCode(StatusCodes.Status200OK, new
                 {
                     Status = "Success",
                     Message = $"Password change request is" +
-                    $"sent on email {user.Email}"
+                    $"sent on email {user.Email}",
+                    Email = user.Email
                 });
 
 

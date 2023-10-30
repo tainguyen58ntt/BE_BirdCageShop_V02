@@ -2,6 +2,7 @@
 using BirdCageShopDbContext.Models;
 using BirdCageShopInterface;
 using BirdCageShopInterface.IServices;
+using BirdCageShopReposiory;
 using BirdCageShopService.Service;
 using BirdCageShopUtils.UtilMethod;
 using BirdCageShopViewModel.Auth;
@@ -15,6 +16,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Stripe;
 using System.Collections.Generic;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace BirdCageShop.Controllers
 {
@@ -40,24 +42,40 @@ namespace BirdCageShop.Controllers
             _db = db;
             _userManager = userManager;
             _orderService = orderService;
-            _timeService = timeService; 
+            _timeService = timeService;
             _roleManager = roleManager;
-
         }
+        //[HttpGet("Test")]
 
-        //[HttpGet]
-
-        //public async Task<IActionResult> Get()
+        //public async Task<IActionResult> Test()
         //{
-        //    var rs = await _userManager.Users.ToListAsync();    
-        //    return Ok(rs);
+        //    List<ApplicationUser> objUserList = _db.ApplicationUser.FirstOrDefaultAsync;
+
+        //    foreach (var user in objUserList)
+        //    {
+
+        //        user.Role = _userManager.GetRolesAsync(user).GetAwaiter().GetResult().FirstOrDefault();
+
+        //        //if (user.Company == null)
+        //        //{
+        //        //    user.Company = new Company()
+        //        //    {
+        //        //        Name = ""
+        //        //    };
+        //        //}
+        //    }
+        //    //var rs = await _userManager.Users.ToListAsync();
+        //    return Ok(objUserList);
         //}
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync([FromRoute] string id)
         {
-            var result = await _userService.GetUserByIdAsync(id);
+            //var result = await _userService.GetUserByIdAsync(id);
+            var result = await _db.ApplicationUser.FirstOrDefaultAsync(x => x.Id == id);
             if (result is null) return NotFound();
+
+            result.Role = _userManager.GetRolesAsync(result).GetAwaiter().GetResult().FirstOrDefault();
             return Ok(result);
         }
 
@@ -72,10 +90,18 @@ namespace BirdCageShop.Controllers
         //[Authorize(Roles = "Staff, Admin, Manager")]
         public async Task<IActionResult> Get()
         {
-            var x = await _db.ApplicationUser.ToListAsync();
+            List<ApplicationUser> objUserList = await _db.ApplicationUser.ToListAsync();
+            foreach (var user in objUserList)
+            {
+
+                user.Role = _userManager.GetRolesAsync(user).GetAwaiter().GetResult().FirstOrDefault();
 
 
-            return Ok(x);
+            }
+            var rs = await _userManager.Users.ToListAsync();
+            return Ok(objUserList);
+
+
         }
         [HttpGet("order-history")]
         public async Task<IActionResult> GetCustomerOrderHistory([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
@@ -122,11 +148,11 @@ namespace BirdCageShop.Controllers
 
         //    return Ok();
 
-       
+
         //}
 
 
-  
+
 
         [HttpDelete("/{userId}")]
         public async Task<IActionResult> DeleteAsync([FromRoute] string userId)
@@ -225,7 +251,7 @@ namespace BirdCageShop.Controllers
 
         public async Task<IActionResult> ChangePasswordAsync([FromBody] UserChangePasswordViewModel vm)
         {
-            
+
             var validateResult = await _userService.ValidateChangePasswordAsync(vm);
             if (!validateResult.IsValid)
             {

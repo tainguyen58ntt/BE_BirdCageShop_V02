@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace BirdCageShopViewModel.User
@@ -14,19 +15,26 @@ namespace BirdCageShopViewModel.User
         public string Password { get; set; }
     }
 
+
     public class UserSignUpRule : AbstractValidator<UserSignUpViewModel>
     {
+        private bool IsValidUserName(string userName)
+        {
+            // Use regular expressions to check if the username contains only letters and digits.
+            return !string.IsNullOrWhiteSpace(userName) && Regex.IsMatch(userName, "^[a-zA-Z0-9]+$");
+        }
         public UserSignUpRule()
         {
 
             RuleFor(x => x.UserName)
-                .NotEmpty()
-                .WithMessage("User first name must not be empty");
+             .NotEmpty()
+             .WithMessage("Username must not be empty")
+             .Must(IsValidUserName)
+             .WithMessage("Username can only contain letters and digits");
 
 
 
 
-          
 
             RuleFor(x => x.Email)
                .NotNull()

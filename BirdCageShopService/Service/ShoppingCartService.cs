@@ -109,7 +109,7 @@ namespace BirdCageShopService.Service
                         PhoneNumber = confirmOrderAddViewModel.Phone,
                         StreetAddress = confirmOrderAddViewModel.StreetAddress,
                         City = confirmOrderAddViewModel.City,
-                        PaymentStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(1),  // pending
+                        PaymentStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(6),  // cod
                         //VoucherId = vourcher.Id,
                         VoucherCode = confirmOrderAddViewModel.VourcherCode,
                         Details = orderDetail

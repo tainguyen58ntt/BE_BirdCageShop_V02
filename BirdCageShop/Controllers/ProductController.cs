@@ -125,6 +125,9 @@ namespace BirdCageShop.Controllers
             var product = await _productService.GetProductByIdAsync(productId);
             if (product is null) return NotFound("Not found this product");
 
+            // check if bought that pro or not
+            //var wasBought = 
+
             // create
             bool isSuccess = await _productService.AddReviewProduct(productId, addReviewProductViewModel);
 

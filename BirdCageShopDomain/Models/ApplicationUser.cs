@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BirdCageShopDbContext.Models
 {
@@ -26,6 +27,9 @@ namespace BirdCageShopDbContext.Models
         public string? Gender { get; set; }
 
         public bool IsDelete { get; set; }
+
+        [NotMapped]
+        public string Role { get; set; }
 
 
         //public virtual Wishlist? Wishlist { get; set; }
