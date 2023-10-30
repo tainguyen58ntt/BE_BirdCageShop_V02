@@ -85,6 +85,32 @@ namespace BirdCageShop.Controllers
 
         //      //
         //
+
+        [HttpPut]
+        [Route("updatecart")]
+        public async Task<IActionResult> UpdateCart([FromBody] List<ShoppingCartUpdate> updatedCart)
+        {
+            foreach (var updatedItem in updatedCart)
+            {
+           
+                var cartItem = await _shoppingCartService.GetShoppingCartByProIdAsync(updatedItem.ProductId);
+                if (cartItem != null)
+                {
+                    cartItem.Count = updatedItem.Count;
+                }
+
+                var isUpdate = await _shoppingCartService.CreateOrUpdateAsync(updatedItem.ProductId, updatedItem.Count);
+                if(isUpdate == false)
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Add to cart failed. Server Error" });
+                }
+            }
+
+            return Ok();
+        }
+
+
+
         [HttpPost("update-cart/{productId}")]  // use for update and add
         public async Task<IActionResult> AddItemFromShoppingCart([FromRoute] int productId, [FromQuery] int count)
         {

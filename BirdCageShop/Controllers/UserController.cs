@@ -45,28 +45,7 @@ namespace BirdCageShop.Controllers
             _timeService = timeService;
             _roleManager = roleManager;
         }
-        //[HttpGet("Test")]
-
-        //public async Task<IActionResult> Test()
-        //{
-        //    List<ApplicationUser> objUserList = _db.ApplicationUser.FirstOrDefaultAsync;
-
-        //    foreach (var user in objUserList)
-        //    {
-
-        //        user.Role = _userManager.GetRolesAsync(user).GetAwaiter().GetResult().FirstOrDefault();
-
-        //        //if (user.Company == null)
-        //        //{
-        //        //    user.Company = new Company()
-        //        //    {
-        //        //        Name = ""
-        //        //    };
-        //        //}
-        //    }
-        //    //var rs = await _userManager.Users.ToListAsync();
-        //    return Ok(objUserList);
-        //}
+   
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync([FromRoute] string id)
@@ -114,42 +93,42 @@ namespace BirdCageShop.Controllers
 
 
 
-        //[HttpPost("cancel-order/{orderId}")]
-        //public async Task<IActionResult> CancelOrder([FromRoute] int orderId)
-        //{
-        //    var x = await _orderService.GetOrderByIdAsync(orderId);
-        //    if (x.OrderStatus == "Pending" && x.PaymentStatus == "Payonline")
-        //    {
-        //        var options = new RefundCreateOptions
-        //        {
-        //            Reason = RefundReasons.RequestedByCustomer,
-        //            PaymentIntent = x.PaymentIntentId
-        //        };
+        [HttpPut("cancel-order/{orderId}")]
+        public async Task<IActionResult> CancelOrder([FromRoute] int orderId)
+        {
+            var x = await _orderService.GetOrderByIdAsync(orderId);
+            if (x.OrderStatus == "Pending" && x.PaymentStatus == "Payonline")
+            {
+                var options = new RefundCreateOptions
+                {
+                    Reason = RefundReasons.RequestedByCustomer,
+                    PaymentIntent = x.PaymentIntentId
+                };
 
-        //        var service = new RefundService();
-        //        Refund refund = service.Create(options);
-        //        x.OrderStatus = "Canceled";
-        //        x.PaymentStatus = "Refund";
-        //    }
-        //    if (x.OrderStatus == "Pending" && x.PaymentStatus == "COD")
-        //    {
-        //        var options = new RefundCreateOptions
-        //        {
-        //            Reason = RefundReasons.RequestedByCustomer,
-        //            PaymentIntent = x.PaymentIntentId
-        //        };
+                var service = new RefundService();
+                Refund refund = service.Create(options);
+                x.OrderStatus = "Canceled";
+                x.PaymentStatus = "Refund";
+            }
+            if (x.OrderStatus == "Pending" && x.PaymentStatus == "COD")
+            {
+                //var options = new RefundCreateOptions
+                //{
+                //    Reason = RefundReasons.RequestedByCustomer,
+                //    PaymentIntent = x.PaymentIntentId
+                //};
 
-        //        var service = new RefundService();
-        //        Refund refund = service.Create(options);
-        //        x.OrderStatus = "Canceled";
-        //        x.PaymentStatus = "Canceled";
-        //    }
-        //    await _orderService.UpdateOrderAsync(x);
+                //var service = new RefundService();
+                //Refund refund = service.Create(options);
+                x.OrderStatus = "Canceled";
+                x.PaymentStatus = "Canceled";
+            }
+            await _orderService.UpdateOrderAsync(x);
 
-        //    return Ok();
+            return Ok();
 
 
-        //}
+        }
 
 
 

@@ -244,9 +244,15 @@ namespace BirdCageShopService.Service
         //    return _mapper.Map<ProductViewModel>(result);
         //}
 
-        public Task<ShoppingCartViewModel?> GetShoppingCartByIdAsync()
+     
+        public async Task<ShoppingCartViewModel?> GetShoppingCartByProIdAsync(int proId)
         {
-            throw new NotImplementedException();
+            var currentUserId = _claimService.GetCurrentUserId();
+            if (currentUserId == null) return null;
+
+            var result = await _unitOfWork.ShoppingCartRepository.GetCartItemByUserIdAndProDIdAsync(currentUserId,proId);
+
+            return _mapper.Map<ShoppingCartViewModel>(result);
         }
 
         public async Task<IEnumerable<ShoppingCartViewModel>> GetShoppingCartsAsync()

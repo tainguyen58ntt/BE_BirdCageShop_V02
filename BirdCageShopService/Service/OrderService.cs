@@ -94,6 +94,7 @@ namespace BirdCageShopService.Service
         public async Task UpdateOrderAsync(Order order)
         {
             _unitOfWork.OrderRepository.Update(order);
+            await _unitOfWork.SaveChangesAsync();
         }
     }
 }
