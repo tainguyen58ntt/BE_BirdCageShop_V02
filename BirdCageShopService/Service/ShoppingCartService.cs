@@ -282,6 +282,32 @@ namespace BirdCageShopService.Service
             return await _unitOfWork.SaveChangesAsync();
         }
 
+        public async Task<bool> UpdateAsync(int productId, int count)
+        {
+            var currentUserId = _claimService.GetCurrentUserId();
+            if (currentUserId == null) return false;
+            var cartItem = await _unitOfWork.ShoppingCartRepository.GetCartItemByUserIdAndProDIdAsync(currentUserId, productId);
+            if (cartItem == null)
+            {
+                //cartItem = new ShoppingCart
+                //{
+                //    ProductId = productId,
+                //    Count = count,
+                //    ApplicationUserId = currentUserId,
+                //    CreatedAt = _timeService.GetCurrentTimeInVietnam()
+                //};
+                //_unitOfWork.ShoppingCartRepository.AddAsync(cartItem);
+                //return await _unitOfWork.SaveChangesAsync();
+                return false;
+
+
+            }
+            cartItem.Count = count;
+            cartItem.ModifiedAt = _timeService.GetCurrentTimeInVietnam();
+            _unitOfWork.ShoppingCartRepository.Update(cartItem);
+            return await _unitOfWork.SaveChangesAsync();
+        }
+
         public async Task<ValidationResult> ValidateConfirmOrderAddAsync(ConfirmOrderAddViewModel vm)
         {
             return await _confirmOrderValidator.ConfirmOrderAddValidator.ValidateAsync(vm);

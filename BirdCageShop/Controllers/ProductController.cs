@@ -16,12 +16,15 @@ namespace BirdCageShop.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
+        private readonly IUserService _userService;
+
         private readonly IProductReviewService _productReviewService;
 
-        public ProductController(IProductService productService, IProductReviewService productReviewService)
+        public ProductController(IUserService userService, IProductService productService, IProductReviewService productReviewService)
         {
             _productService = productService;
-            _productReviewService = productReviewService;       
+            _productReviewService = productReviewService;
+            _userService = userService;
         }
 
 
@@ -76,7 +79,18 @@ namespace BirdCageShop.Controllers
             return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Delete product failed. Server Error." });
         }
 
-     
+        [HttpPut("recover/{id}")]
+        [Authorize(Roles = "Manager")]
+        public async Task<IActionResult> RecoverAsync(int id)
+        {
+            var product = await _productService.GetByIdInCludeProductDeletedAsync(id);
+            if (product is null) return NotFound();
+            var result = await _productService.RecoverAsync(product);
+            if (result is true) return Ok();
+            return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Delete product failed. Server Error." });
+        }
+
+
 
         [HttpGet("search-by-title")]
         public async Task<IActionResult> GetProductByTitle(string title, [FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
@@ -125,8 +139,14 @@ namespace BirdCageShop.Controllers
             var product = await _productService.GetProductByIdAsync(productId);
             if (product is null) return NotFound("Not found this product");
 
-            // check if bought that pro or not
-            //var wasBought = 
+
+            // check if customer purchased the product
+            var isPurchased = await _userService.IsProductPurchasedByCustomer(productId);
+            if (!isPurchased)
+            {
+                return StatusCode(StatusCodes.Status403Forbidden, new { message = "You must purchase the product before you can review it." });
+            }
+
 
             // create
             bool isSuccess = await _productService.AddReviewProduct(productId, addReviewProductViewModel);

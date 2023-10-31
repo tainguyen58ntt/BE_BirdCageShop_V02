@@ -24,7 +24,7 @@ namespace BirdCageShop.Controllers
         private readonly IVourcherService _vourcherService;
         private readonly IClaimService _claimService;
         private readonly IUnitOfWork _unitOfWork;
-        public ShoppingCartController(ITimeService timeService, IUnitOfWork unitOfWork,IShoppingCartService shoppingCartService, IVourcherService vourcherService, IClaimService claimService)
+        public ShoppingCartController(ITimeService timeService, IUnitOfWork unitOfWork, IShoppingCartService shoppingCartService, IVourcherService vourcherService, IClaimService claimService)
         {
             _shoppingCartService = shoppingCartService;
             _vourcherService = vourcherService;
@@ -92,15 +92,15 @@ namespace BirdCageShop.Controllers
         {
             foreach (var updatedItem in updatedCart)
             {
-           
+
                 var cartItem = await _shoppingCartService.GetShoppingCartByProIdAsync(updatedItem.ProductId);
                 if (cartItem != null)
                 {
                     cartItem.Count = updatedItem.Count;
                 }
 
-                var isUpdate = await _shoppingCartService.CreateOrUpdateAsync(updatedItem.ProductId, updatedItem.Count);
-                if(isUpdate == false)
+                var isUpdate = await _shoppingCartService.UpdateAsync(updatedItem.ProductId, updatedItem.Count);
+                if (isUpdate == false)
                 {
                     return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Add to cart failed. Server Error" });
                 }
@@ -201,7 +201,7 @@ namespace BirdCageShop.Controllers
                     {
                         PriceData = new SessionLineItemPriceDataOptions
                         {
-                            UnitAmount = (long)(item.Product.Price), 
+                            UnitAmount = (long)(item.Product.Price),
                             Currency = "vnd",
                             ProductData = new SessionLineItemPriceDataProductDataOptions
                             {
@@ -250,7 +250,7 @@ namespace BirdCageShop.Controllers
                 //_unitOfWork.OrderHeader.UpdateStatus(id, SD.StatusApproved, SD.PaymentStatusApproved);
                 //_unitOfWork.Save();
 
-            
+
                 //get
                 List<ShoppingCart> shoppingCartss = (List<ShoppingCart>)await _unitOfWork.ShoppingCartRepository.GetShoppingCartsAsync(userId);
                 decimal? totalPrice = 0;
@@ -263,7 +263,7 @@ namespace BirdCageShop.Controllers
                 if (confirmOrderAddViewModel.VourcherCode != null)
                 {
                     //get discount of voucher and update Total
-                  var vourcher = await _unitOfWork.VoucherRepository.GetVoucherByCodeAsync(confirmOrderAddViewModel.VourcherCode);
+                    var vourcher = await _unitOfWork.VoucherRepository.GetVoucherByCodeAsync(confirmOrderAddViewModel.VourcherCode);
                     totalPrice = beforeVoucherPrice - beforeVoucherPrice * vourcher.DiscountPercent;
                 }
                 else
@@ -313,7 +313,7 @@ namespace BirdCageShop.Controllers
                             StreetAddress = confirmOrderAddViewModel.StreetAddress,
                             City = confirmOrderAddViewModel.City,
                             PaymentStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(7),   // PAYONLINE,
-                          
+
                             PaymentIntentId = session.PaymentIntentId,
                             SessionId = sessionId,
                             Details = orderDetail
@@ -334,7 +334,7 @@ namespace BirdCageShop.Controllers
                             City = confirmOrderAddViewModel.City,
                             PaymentStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(7),   // PAYONLINE,,
                             Details = orderDetail,
-                              PaymentIntentId = session.PaymentIntentId,
+                            PaymentIntentId = session.PaymentIntentId,
                             SessionId = sessionId,
 
                         };
@@ -392,7 +392,13 @@ namespace BirdCageShop.Controllers
             //_emailSender.SendEmailAsync(orderHeader.ApplicationUser.Email, "New Order - Bulky Book",
             //$"<p>New Order Created - {orderHeader.Id}</p>");
 
-            return Ok(new { message = "Payment successful" });
+            string url = "test url ";
+
+            return Ok(new
+            {
+                message = "Payment successful",
+                url = url
+            });
         }
 
 

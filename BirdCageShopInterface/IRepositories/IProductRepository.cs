@@ -9,6 +9,8 @@ namespace BirdCageShopInterface.IRepositories
 {
 	public interface IProductRepository : IBaseRepository<Product>
 	{
+
+
 		Task<IEnumerable<Product>> GetProductsByCategoryAsync(int categoryId);
 		Task<Product> GetProductWithReviewByProIdAsync(int productID);
 		Task<Product?> GetProductByProductIdAndCustomerIdAsync(string customerId, int productId);
@@ -16,7 +18,10 @@ namespace BirdCageShopInterface.IRepositories
 		Task<Product> GetProductIncludeImage(int productID);
 		Task<IEnumerable<Product>> GetProductsFromWishlistAsync(string customerId);
 
+        Task<Product> GetByIdInCludeProductDeletedAsync(int productID);
+        
 
 
-	}
+
+    }
 }

@@ -69,7 +69,7 @@ namespace BirdCageShopReposiory.Repositories
         public override async Task<Order?> GetByIdAsync(int id)
         {
 
-         
+
 
             return await _context.Set<Order>()
     .AsNoTracking()
@@ -79,7 +79,7 @@ namespace BirdCageShopReposiory.Repositories
     .ThenInclude(d => d.Product)
     .Include(u => u.ApplicationUser)
     .FirstOrDefaultAsync();
-       
+
         }
 
         public async Task<Order?> GetByIdToUpdateStatusToApprovedAsync(int id)
@@ -114,6 +114,19 @@ namespace BirdCageShopReposiory.Repositories
              .ThenInclude(d => d.Product)
              .Include(x => x.ApplicationUser)
             .FirstOrDefaultAsync(x => x.Id == id && x.OrderStatus == "Shipped" && x.PaymentStatus == "COD");   // will fix not hard code later on
+        }
+
+        public async Task<IEnumerable<Order>?> GetOrdersByCustomerIdAsync(string customerId)
+        {
+
+            return await _context.Set<Order>()
+    .AsNoTracking()
+     .AsNoTrackingWithIdentityResolution()
+    .Where(x => x.ApplicationUserId == customerId)
+    .Include(od => od.Details)
+    //.ThenInclude(d => d.Product)
+    //.Include(u => u.ApplicationUser)
+    .ToListAsync();
         }
 
         //public async Task<Order> AddAsync(Order order)

@@ -62,6 +62,13 @@ namespace BirdCageShopReposiory.Repositories
 
         }
 
+        public async Task<ApplicationUser?> GetByStringIdInCludeUserDeletedAsync(string id)
+        {
+            var user = await _context.Set<ApplicationUser>().FirstOrDefaultAsync(x => x.Id.Equals(id));
+
+            return user;
+        }
+
 
         //public override async Task<Pagination<User>> GetPaginationAsync(int pageIndex, int pageSize)
         //{

@@ -72,6 +72,11 @@ namespace BirdCageShopService.Service
             return await _unitOfWork.ProductRepository.GetByIdAsync(id);
         }
 
+        public async Task<Product?> GetByIdInCludeProductDeletedAsync(int id)
+        {
+            return await _unitOfWork.ProductRepository.GetByIdAsync(id);
+        }
+
         public async Task<IEnumerable<ProductViewModel>> GetProductsAsync()
         {
             var products = await _unitOfWork.ProductRepository.GetAllAsync();
@@ -129,6 +134,15 @@ namespace BirdCageShopService.Service
             _unitOfWork.ProductRepository.Update(product);
             return await _unitOfWork.SaveChangesAsync();
         }
+
+        public async Task<bool> RecoverAsync(Product product)
+        {
+           
+            product.isDelete = false;
+            _unitOfWork.ProductRepository.Update(product);
+            return await _unitOfWork.SaveChangesAsync();
+        }
+
 
         public async Task<bool> AddReviewProduct(int productId, AddReviewProductViewModel addReviewProductViewModel)
         {
@@ -277,6 +291,6 @@ namespace BirdCageShopService.Service
             return await _unitOfWork.SaveChangesAsync();
         }
 
-     
+       
     }
 }

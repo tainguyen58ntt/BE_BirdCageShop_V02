@@ -186,7 +186,9 @@ namespace BirdCageShop.Controllers
                 return Ok(new
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(jwtToken),
-                    expiration = jwtToken.ValidTo
+                    expiration = jwtToken.ValidTo,
+                    role = userRoles
+
                 });
             }
 

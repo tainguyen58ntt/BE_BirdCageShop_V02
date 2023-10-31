@@ -22,16 +22,21 @@ namespace BirdCageShopInterface.IServices
 		Task<Pagination<ProductViewModel>> GetByCagegoryTypePageAsync(int categoryId, int pageIndex, int pageSize);
 
 		Task<ProductWithReviewViewModel?> GetByIdAsync(int id);
-		Task<Product?> GetProductByIdAsync(int id);
         
+
+        Task<Product?> GetProductByIdAsync(int id);
+
+        Task<Product?> GetByIdInCludeProductDeletedAsync(int id);
+
         Task<bool> AddToWishlistAsync(int productId);
         Task<bool> MoveProFromWishlistToShoppingCart();
         Task<bool> RemoveProductFromWishlistAsync(int productId);
         Task<IEnumerable<ProductViewModel>> GetProductByCategoryAsync(int categoryId);
 		Task<bool> RemoveAsync(Product product);
+        Task<bool> RecoverAsync(Product product);
 
-		//
-		Task<ProductWithReviewViewModel?> GetFeedBackByProductId(int productId);
+        //
+        Task<ProductWithReviewViewModel?> GetFeedBackByProductId(int productId);
 
 		//
 		Task<IEnumerable<ProductViewModel>> GetProductsFromWishlistAsync();

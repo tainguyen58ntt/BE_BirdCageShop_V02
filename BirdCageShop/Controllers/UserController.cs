@@ -52,7 +52,7 @@ namespace BirdCageShop.Controllers
         {
             //var result = await _userService.GetUserByIdAsync(id);
             var result = await _db.ApplicationUser.FirstOrDefaultAsync(x => x.Id == id);
-            if (result is null) return NotFound();
+            if (result is null) return BadRequest("Not found that user");
 
             result.Role = _userManager.GetRolesAsync(result).GetAwaiter().GetResult().FirstOrDefault();
             return Ok(result);
@@ -90,7 +90,13 @@ namespace BirdCageShop.Controllers
             return Ok(x);
         }
 
+        [HttpGet("vouhers")]
+        public async Task<IActionResult> GetVouherOfUser([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
+        {
+            var x = await _userService.GetVoucherByUserIdAsync(pageIndex, pageSize);
 
+            return Ok(x);
+        }
 
 
         [HttpPut("cancel-order/{orderId}")]
@@ -137,6 +143,18 @@ namespace BirdCageShop.Controllers
         public async Task<IActionResult> DeleteAsync([FromRoute] string userId)
         {
             var user = await _userService.GetUserByIdAsync(userId);
+            if (user == null) return BadRequest("User not exist");
+
+            var result = await _userService.DeleteAsync(user);
+            if (result is true) return Ok();
+            return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Delete Fail. Error server" });
+
+        }
+
+        [HttpPut("recover/{userId}")]
+        public async Task<IActionResult> RecoverAsync([FromRoute] string userId)
+        {
+            var user = await _userService.GetUserIncludeUserDeletedByIdAsync(userId);
             if (user == null) return BadRequest("User not exist");
 
             var result = await _userService.DeleteAsync(user);

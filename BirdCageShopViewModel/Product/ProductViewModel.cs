@@ -23,7 +23,7 @@ namespace BirdCageShopViewModel.Product
 		public DateTime? CreatedAt { get; set; }
 		public DateTime? ModifieldAt { get; set; }
 		public DateTime? DeletedAt { get; set; }
-		//public bool isDelete { get; set; }
+		public bool isDelete { get; set; }
 		public decimal Price { get; set; }
 		public string SKU { get; set; }
 		public int QuantityInStock { get; set; }

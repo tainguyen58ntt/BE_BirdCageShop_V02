@@ -29,6 +29,13 @@ namespace BirdCageShopReposiory.Repositories
                 .Where(x => !x.isDelete)
                 .ToListAsync();
         }
+        public async Task<Product> GetByIdInCludeProductDeletedAsync(int productID)
+        {
+            return await _context.Set<Product>()
+              .AsNoTracking()
+               .Where(x => x.Id == productID)
+          .FirstOrDefaultAsync();
+        }
 
         public virtual async Task<Product?> GetByIdAsync(int id)
         {
@@ -148,5 +155,7 @@ namespace BirdCageShopReposiory.Repositories
                 .AsNoTracking()
                 .FirstOrDefaultAsync(x => !x.isDelete && x.Wishlists.Any(wl => wl.ProductId == productId && wl.ApplicationUserId == customerId));
         }
+
+     
     }
 }

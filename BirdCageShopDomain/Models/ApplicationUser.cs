@@ -8,12 +8,12 @@ namespace BirdCageShopDbContext.Models
 {
     public partial class ApplicationUser : IdentityUser
     {
-        public ApplicationUser()
-        {
-            Orders = new HashSet<Order>();
-            ProductReviews = new HashSet<ProductReview>();
-            Wishlists = new HashSet<Wishlist>();
-        }
+            public ApplicationUser()
+            {
+                Orders = new HashSet<Order>();
+                ProductReviews = new HashSet<ProductReview>();
+                Wishlists = new HashSet<Wishlist>();
+            }
 
     
       

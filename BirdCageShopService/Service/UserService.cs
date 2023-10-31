@@ -11,6 +11,7 @@ using BirdCageShopViewModel.Auth;
 using BirdCageShopViewModel.Order;
 using BirdCageShopViewModel.Role;
 using BirdCageShopViewModel.User;
+using BirdCageShopViewModel.Voucher;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Identity;
@@ -35,6 +36,41 @@ namespace BirdCageShopService.Service
             _userRepository = userRepository;
         }
 
+        //public async Task<Pagination<OrderWithDetailViewModel>> GetVoucherByUserIdAsync(int pageIndex, int pageSize)
+        //{
+        //    var currentUserId = _claimService.GetCurrentUserId();
+        //    if (currentUserId == null)
+        //    {
+
+        //        return new Pagination<OrderWithDetailViewModel>
+        //        {
+        //            Items = new List<OrderWithDetailViewModel>(),
+        //            TotalItemsCount = 0,
+        //            PageIndex = pageIndex,
+        //            PageSize = pageSize
+        //        };
+        //    }
+        //    var result = await _unitOfWork.OrderRepository.GetAllByConditionAsync(o => o.ApplicationUserId == currentUserId, pageIndex, pageSize);
+        //    return _mapper.Map<Pagination<OrderWithDetailViewModel>>(result);
+        //}
+
+        public async Task<Pagination<VourcherViewModel>> GetVoucherByUserIdAsync(int pageIndex, int pageSize)
+        {
+            var currentUserId = _claimService.GetCurrentUserId();
+            if (currentUserId == null)
+            {
+
+                return new Pagination<VourcherViewModel>
+                {
+                    Items = new List<VourcherViewModel>(),
+                    TotalItemsCount = 0,
+                    PageIndex = pageIndex,
+                    PageSize = pageSize
+                };
+            }
+            var result = await _unitOfWork.VoucherRepository.GetAllByConditionAsync(o => o.ApplicationUserId == currentUserId, pageIndex, pageSize);
+            return _mapper.Map<Pagination<VourcherViewModel>>(result);
+        }
         public async Task<Pagination<OrderWithDetailViewModel>> GetOrderHistoryAsync(int pageIndex, int pageSize)
         {
 
@@ -96,7 +132,12 @@ namespace BirdCageShopService.Service
             _unitOfWork.UserRepository.Update(user);
             return await _unitOfWork.SaveChangesAsync();
         }
-
+        public async Task<bool> RecoverAsync(ApplicationUser user)
+        {
+            user.IsDelete = false;
+            _unitOfWork.UserRepository.Update(user);
+            return await _unitOfWork.SaveChangesAsync();
+        }
 
 
 
@@ -113,6 +154,12 @@ namespace BirdCageShopService.Service
         }
 
         public async Task<ApplicationUser?> GetUserByIdAsync(string id)
+        {
+            var user = await _unitOfWork.UserRepository.GetByStringIdAsync(id);
+            return user;
+        }
+
+        public async Task<ApplicationUser?> GetUserIncludeUserDeletedByIdAsync(string id)
         {
             var user = await _unitOfWork.UserRepository.GetByStringIdAsync(id);
             return user;
@@ -218,5 +265,24 @@ namespace BirdCageShopService.Service
         {
             return _userValidator.ResetPasswordValidator.ValidateAsync(vm);
         }
+
+        public async Task<bool> IsProductPurchasedByCustomer(int productId)
+        {
+            string currentUserId = _claimService.GetCurrentUserId();
+            if (currentUserId == null) return false;
+            var orders = await _unitOfWork.OrderRepository.GetOrdersByCustomerIdAsync(currentUserId);
+            foreach (var order in orders)
+            {
+                if (order.Details.Any(orderItem => orderItem.ProductId == productId) && order.OrderStatus == "Approved" || order.OrderStatus == "Shipped")
+                {
+                    return true;
+                }
+            }
+
+            return false;
+
+        }
+
+      
     }
 }

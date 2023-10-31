@@ -5,6 +5,7 @@ using BirdCageShopViewModel.Auth;
 using BirdCageShopViewModel.Order;
 using BirdCageShopViewModel.Role;
 using BirdCageShopViewModel.User;
+using BirdCageShopViewModel.Voucher;
 using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
@@ -20,11 +21,15 @@ namespace BirdCageShopInterface.IServices
 
         ////
         Task<IEnumerable<UserViewModel>> GetUserAsync();
-        
+
+        Task<bool> IsProductPurchasedByCustomer(int productId);
 
         Task<Pagination<OrderWithDetailViewModel>> GetOrderHistoryAsync(int pageIndex, int pageSize);
+        Task<Pagination<VourcherViewModel>> GetVoucherByUserIdAsync(int pageIndex, int pageSize);
         Task<ApplicationUser?> GetUserByIdAsync(string id);
+        Task<ApplicationUser?> GetUserIncludeUserDeletedByIdAsync(string id);
         Task<bool> DeleteAsync(ApplicationUser user);
+        Task<bool> RecoverAsync(ApplicationUser user);
         //Task<Pagination<UserViewModel>> GetPageAsync(int pageIndex, int pageSizes);
         Task<ValidationResult> ValidateUserSignUpAsync(UserSignUpViewModel vm);
         //Task<bool> IsExistsEmailAsync(string email);
