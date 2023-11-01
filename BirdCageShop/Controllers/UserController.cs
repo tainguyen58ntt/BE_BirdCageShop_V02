@@ -157,7 +157,7 @@ namespace BirdCageShop.Controllers
             var user = await _userService.GetUserIncludeUserDeletedByIdAsync(userId);
             if (user == null) return BadRequest("User not exist");
 
-            var result = await _userService.DeleteAsync(user);
+            var result = await _userService.RecoverAsync(user);
             if (result is true) return Ok();
             return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Delete Fail. Error server" });
 

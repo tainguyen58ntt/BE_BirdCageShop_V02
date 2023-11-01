@@ -161,7 +161,7 @@ namespace BirdCageShopService.Service
 
         public async Task<ApplicationUser?> GetUserIncludeUserDeletedByIdAsync(string id)
         {
-            var user = await _unitOfWork.UserRepository.GetByStringIdAsync(id);
+            var user = await _unitOfWork.UserRepository.GetByStringIdInCludeUserDeletedAsync(id);
             return user;
         }
 
