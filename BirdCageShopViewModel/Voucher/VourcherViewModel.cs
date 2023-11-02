@@ -13,5 +13,6 @@ namespace BirdCageShopViewModel.Voucher
         public string VoucherCode { get; set; } = null!;
         public DateTime ExpirationDate { get; set; }
         public DateTime StartDate { get; set; }
+        public bool IsDelete { get; set; }
     }
 }

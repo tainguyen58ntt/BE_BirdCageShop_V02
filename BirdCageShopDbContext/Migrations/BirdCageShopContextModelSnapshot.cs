@@ -22,37 +22,6 @@ namespace BirdCageShopDbContext.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("BirdCageShopDbContext.Models.BankAccount", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("AccountNo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ApplicationUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Bank")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.ToTable("BankAccounts");
-                });
-
             modelBuilder.Entity("BirdCageShopDbContext.Models.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -705,28 +674,28 @@ namespace BirdCageShopDbContext.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f52c945c-7e48-432b-8569-a6204ee00c7e",
+                            Id = "260373f8-4a15-4cb7-9e5e-035bffa9d5a2",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "6cf654ca-d558-4a0f-b024-0bb362e04bb7",
+                            Id = "492d0d50-a0af-4407-a00d-430b7acb5598",
                             ConcurrencyStamp = "2",
                             Name = "Customer",
                             NormalizedName = "Customer"
                         },
                         new
                         {
-                            Id = "712adba2-69a0-47aa-a647-b56e86621f23",
+                            Id = "cbfede43-a0de-4e22-9bc2-b7b3209470c4",
                             ConcurrencyStamp = "2",
                             Name = "Manager",
                             NormalizedName = "Manager"
                         },
                         new
                         {
-                            Id = "91fbb465-4014-4811-88a6-3d7ce60bc319",
+                            Id = "29fd75fc-e761-490a-8058-eb1afb6322be",
                             ConcurrencyStamp = "3",
                             Name = "Staff",
                             NormalizedName = "Staff"
@@ -938,17 +907,6 @@ namespace BirdCageShopDbContext.Migrations
                     b.ToTable("AspNetUsers", (string)null);
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
-                });
-
-            modelBuilder.Entity("BirdCageShopDbContext.Models.BankAccount", b =>
-                {
-                    b.HasOne("BirdCageShopDbContext.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("BankAccounts")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("BirdCageShopDbContext.Models.Order", b =>
@@ -1213,8 +1171,6 @@ namespace BirdCageShopDbContext.Migrations
 
             modelBuilder.Entity("BirdCageShopDbContext.Models.ApplicationUser", b =>
                 {
-                    b.Navigation("BankAccounts");
-
                     b.Navigation("Orders");
 
                     b.Navigation("ProductReviews");

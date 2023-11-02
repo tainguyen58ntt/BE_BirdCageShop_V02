@@ -245,28 +245,6 @@ namespace BirdCageShopDbContext.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BankAccounts",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Bank = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AccountNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BankAccounts", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_BankAccounts_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Order",
                 columns: table => new
                 {
@@ -592,10 +570,10 @@ namespace BirdCageShopDbContext.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "6cf654ca-d558-4a0f-b024-0bb362e04bb7", "2", "Customer", "Customer" },
-                    { "712adba2-69a0-47aa-a647-b56e86621f23", "2", "Manager", "Manager" },
-                    { "91fbb465-4014-4811-88a6-3d7ce60bc319", "3", "Staff", "Staff" },
-                    { "f52c945c-7e48-432b-8569-a6204ee00c7e", "1", "Admin", "Admin" }
+                    { "260373f8-4a15-4cb7-9e5e-035bffa9d5a2", "1", "Admin", "Admin" },
+                    { "29fd75fc-e761-490a-8058-eb1afb6322be", "3", "Staff", "Staff" },
+                    { "492d0d50-a0af-4407-a00d-430b7acb5598", "2", "Customer", "Customer" },
+                    { "cbfede43-a0de-4e22-9bc2-b7b3209470c4", "2", "Manager", "Manager" }
                 });
 
             migrationBuilder.InsertData(
@@ -650,11 +628,6 @@ namespace BirdCageShopDbContext.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BankAccounts_ApplicationUserId",
-                table: "BankAccounts",
-                column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Formulas_BirdCageTypeId",
@@ -769,9 +742,6 @@ namespace BirdCageShopDbContext.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "BankAccounts");
 
             migrationBuilder.DropTable(
                 name: "Formulas");

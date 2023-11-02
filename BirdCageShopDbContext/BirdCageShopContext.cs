@@ -18,7 +18,7 @@ namespace BirdCageShopDbContext.Models
         {
         }
 
-        public virtual DbSet<BankAccount> BankAccounts { get; set; } = null!;
+        //public virtual DbSet<BankAccount> BankAccounts { get; set; } = null!;
         public virtual DbSet<Category> Categories { get; set; } = null!;
         public virtual DbSet<Order> Order { get; set; } = null!;
         public virtual DbSet<OrderDetail> OrderDetail { get; set; } = null!;
@@ -113,10 +113,10 @@ namespace BirdCageShopDbContext.Models
     .WithOne(sc => sc.ApplicationUser)
     .HasForeignKey(sc => sc.ApplicationUserId);
 
-            modelBuilder.Entity<ApplicationUser>()
-    .HasMany(u => u.BankAccounts)
-    .WithOne(sc => sc.ApplicationUser)
-    .HasForeignKey(sc => sc.ApplicationUserId);
+    //        modelBuilder.Entity<ApplicationUser>()
+    //.HasMany(u => u.BankAccounts)
+    //.WithOne(sc => sc.ApplicationUser)
+    //.HasForeignKey(sc => sc.ApplicationUserId);
         }
 
 
