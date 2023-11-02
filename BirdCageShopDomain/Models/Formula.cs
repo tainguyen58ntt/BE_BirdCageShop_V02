@@ -15,7 +15,7 @@ namespace BirdCageShopDomain.Models
         public int MaxWidth { get; set; }
         public int MinHeight { get; set; }
         public int MaxHeight { get; set; }
-        public string Color { get; set; }
+        //public string Color { get; set; }
 
         public string Material { get; set; }
         public int MinBars { get; set; }
@@ -25,6 +25,8 @@ namespace BirdCageShopDomain.Models
         public int? BirdCageTypeId { get; set; }
 
         public BirdCageType BirdCageType { get; set; }
+
+        public int? ConstructionTime { get; set; }  
 
 
     }

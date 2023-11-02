@@ -157,9 +157,6 @@ namespace BirdCageShopDbContext.Migrations
                     b.Property<int?>("Bars")
                         .HasColumnType("int");
 
-                    b.Property<string>("Color")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int?>("Height")
                         .HasColumnType("int");
 
@@ -493,9 +490,8 @@ namespace BirdCageShopDbContext.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Color")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("ConstructionTime")
+                        .HasColumnType("int");
 
                     b.Property<string>("Material")
                         .IsRequired()
@@ -589,9 +585,6 @@ namespace BirdCageShopDbContext.Migrations
 
                     b.Property<int?>("Bars")
                         .HasColumnType("int");
-
-                    b.Property<string>("Color")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Count")
                         .HasColumnType("int");
@@ -712,28 +705,28 @@ namespace BirdCageShopDbContext.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "18339d0b-2484-40e6-a54d-60153daeb871",
+                            Id = "f52c945c-7e48-432b-8569-a6204ee00c7e",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "5baf032d-2037-4809-9661-6e3d4e5bb7a6",
+                            Id = "6cf654ca-d558-4a0f-b024-0bb362e04bb7",
                             ConcurrencyStamp = "2",
                             Name = "Customer",
                             NormalizedName = "Customer"
                         },
                         new
                         {
-                            Id = "563d3d47-bd94-4d41-b30c-e853e75ebc87",
+                            Id = "712adba2-69a0-47aa-a647-b56e86621f23",
                             ConcurrencyStamp = "2",
                             Name = "Manager",
                             NormalizedName = "Manager"
                         },
                         new
                         {
-                            Id = "efe29813-25e4-4d87-8130-780f07dcb9c4",
+                            Id = "91fbb465-4014-4811-88a6-3d7ce60bc319",
                             ConcurrencyStamp = "3",
                             Name = "Staff",
                             NormalizedName = "Staff"
