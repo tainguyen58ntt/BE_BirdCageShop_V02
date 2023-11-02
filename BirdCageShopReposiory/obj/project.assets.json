@@ -3126,11 +3126,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopReposiory\\BirdCageShopReposiory.csproj",
+      "projectUniqueName": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopReposiory\\BirdCageShopReposiory.csproj",
       "projectName": "BirdCageShopReposiory",
-      "projectPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopReposiory\\BirdCageShopReposiory.csproj",
+      "projectPath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopReposiory\\BirdCageShopReposiory.csproj",
       "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-      "outputPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopReposiory\\obj\\",
+      "outputPath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopReposiory\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3147,11 +3147,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDbContext\\BirdCageShopDbContext.csproj": {
-              "projectPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDbContext\\BirdCageShopDbContext.csproj"
+            "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDbContext\\BirdCageShopDbContext.csproj": {
+              "projectPath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDbContext\\BirdCageShopDbContext.csproj"
             },
-            "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopInterface\\BirdCageShopInterface.csproj": {
-              "projectPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopInterface\\BirdCageShopInterface.csproj"
+            "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopInterface\\BirdCageShopInterface.csproj": {
+              "projectPath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopInterface\\BirdCageShopInterface.csproj"
             }
           }
         }

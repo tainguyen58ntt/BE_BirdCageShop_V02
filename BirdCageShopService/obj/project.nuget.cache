@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "k1SAZ12hWLq9umEXsXkhVMrJdkGvgcYGVN+WF3X/Xd2SyrJAD626TfEOnfvA64m32LxLSkk05a4HRJU2vKELtg==",
+  "dgSpecHash": "xukx67S1ZFFoK3nvs/t5CEBLN1zQqqR/jgdVNVeWm5RXNu436nPDH2iMgWBiD4FpwD2sVba98JfFrs0dQs8K8g==",
   "success": true,
-  "projectFilePath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopService\\BirdCageShopService.csproj",
+  "projectFilePath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopService\\BirdCageShopService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ASUS\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\ASUS\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopService\\BirdCageShopService.csproj": {}
+    "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopService\\BirdCageShopService.csproj": {}
   },
   "projects": {
-    "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDbContext\\BirdCageShopDbContext.csproj": {
+    "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDbContext\\BirdCageShopDbContext.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDbContext\\BirdCageShopDbContext.csproj",
+        "projectUniqueName": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDbContext\\BirdCageShopDbContext.csproj",
         "projectName": "BirdCageShopDbContext",
-        "projectPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDbContext\\BirdCageShopDbContext.csproj",
+        "projectPath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDbContext\\BirdCageShopDbContext.csproj",
         "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDbContext\\obj\\",
+        "outputPath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDbContext\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj": {
-                "projectPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj"
+              "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj": {
+                "projectPath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj"
               }
             }
           }
@@ -89,14 +89,14 @@
         }
       }
     },
-    "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj": {
+    "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj",
+        "projectUniqueName": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj",
         "projectName": "BirdCageShopDomain",
-        "projectPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj",
+        "projectPath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj",
         "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\obj\\",
+        "outputPath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -156,14 +156,14 @@
         }
       }
     },
-    "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopInterface\\BirdCageShopInterface.csproj": {
+    "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopInterface\\BirdCageShopInterface.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopInterface\\BirdCageShopInterface.csproj",
+        "projectUniqueName": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopInterface\\BirdCageShopInterface.csproj",
         "projectName": "BirdCageShopInterface",
-        "projectPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopInterface\\BirdCageShopInterface.csproj",
+        "projectPath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopInterface\\BirdCageShopInterface.csproj",
         "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopInterface\\obj\\",
+        "outputPath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopInterface\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -180,14 +180,14 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj": {
-                "projectPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj"
+              "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj": {
+                "projectPath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj"
               },
-              "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopUtils\\BirdCageShopUtils.csproj": {
-                "projectPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopUtils\\BirdCageShopUtils.csproj"
+              "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopUtils\\BirdCageShopUtils.csproj": {
+                "projectPath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopUtils\\BirdCageShopUtils.csproj"
               },
-              "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopViewModel\\BirdCageShopViewModel.csproj": {
-                "projectPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopViewModel\\BirdCageShopViewModel.csproj"
+              "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopViewModel\\BirdCageShopViewModel.csproj": {
+                "projectPath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopViewModel\\BirdCageShopViewModel.csproj"
               }
             }
           }
@@ -221,14 +221,14 @@
         }
       }
     },
-    "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopReposiory\\BirdCageShopReposiory.csproj": {
+    "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopReposiory\\BirdCageShopReposiory.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopReposiory\\BirdCageShopReposiory.csproj",
+        "projectUniqueName": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopReposiory\\BirdCageShopReposiory.csproj",
         "projectName": "BirdCageShopReposiory",
-        "projectPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopReposiory\\BirdCageShopReposiory.csproj",
+        "projectPath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopReposiory\\BirdCageShopReposiory.csproj",
         "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopReposiory\\obj\\",
+        "outputPath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopReposiory\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -245,11 +245,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDbContext\\BirdCageShopDbContext.csproj": {
-                "projectPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDbContext\\BirdCageShopDbContext.csproj"
+              "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDbContext\\BirdCageShopDbContext.csproj": {
+                "projectPath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDbContext\\BirdCageShopDbContext.csproj"
               },
-              "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopInterface\\BirdCageShopInterface.csproj": {
-                "projectPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopInterface\\BirdCageShopInterface.csproj"
+              "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopInterface\\BirdCageShopInterface.csproj": {
+                "projectPath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopInterface\\BirdCageShopInterface.csproj"
               }
             }
           }
@@ -283,14 +283,14 @@
         }
       }
     },
-    "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopService\\BirdCageShopService.csproj": {
+    "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopService\\BirdCageShopService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopService\\BirdCageShopService.csproj",
+        "projectUniqueName": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopService\\BirdCageShopService.csproj",
         "projectName": "BirdCageShopService",
-        "projectPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopService\\BirdCageShopService.csproj",
+        "projectPath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopService\\BirdCageShopService.csproj",
         "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopService\\obj\\",
+        "outputPath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -307,14 +307,14 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDbContext\\BirdCageShopDbContext.csproj": {
-                "projectPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDbContext\\BirdCageShopDbContext.csproj"
+              "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDbContext\\BirdCageShopDbContext.csproj": {
+                "projectPath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDbContext\\BirdCageShopDbContext.csproj"
               },
-              "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopInterface\\BirdCageShopInterface.csproj": {
-                "projectPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopInterface\\BirdCageShopInterface.csproj"
+              "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopInterface\\BirdCageShopInterface.csproj": {
+                "projectPath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopInterface\\BirdCageShopInterface.csproj"
               },
-              "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopReposiory\\BirdCageShopReposiory.csproj": {
-                "projectPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopReposiory\\BirdCageShopReposiory.csproj"
+              "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopReposiory\\BirdCageShopReposiory.csproj": {
+                "projectPath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopReposiory\\BirdCageShopReposiory.csproj"
               }
             }
           }
@@ -370,14 +370,14 @@
         }
       }
     },
-    "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopUtils\\BirdCageShopUtils.csproj": {
+    "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopUtils\\BirdCageShopUtils.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopUtils\\BirdCageShopUtils.csproj",
+        "projectUniqueName": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopUtils\\BirdCageShopUtils.csproj",
         "projectName": "BirdCageShopUtils",
-        "projectPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopUtils\\BirdCageShopUtils.csproj",
+        "projectPath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopUtils\\BirdCageShopUtils.csproj",
         "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopUtils\\obj\\",
+        "outputPath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopUtils\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -394,8 +394,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj": {
-                "projectPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj"
+              "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj": {
+                "projectPath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj"
               }
             }
           }
@@ -451,14 +451,14 @@
         }
       }
     },
-    "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopViewModel\\BirdCageShopViewModel.csproj": {
+    "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopViewModel\\BirdCageShopViewModel.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopViewModel\\BirdCageShopViewModel.csproj",
+        "projectUniqueName": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopViewModel\\BirdCageShopViewModel.csproj",
         "projectName": "BirdCageShopViewModel",
-        "projectPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopViewModel\\BirdCageShopViewModel.csproj",
+        "projectPath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopViewModel\\BirdCageShopViewModel.csproj",
         "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopViewModel\\obj\\",
+        "outputPath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopViewModel\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -475,8 +475,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj": {
-                "projectPath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj"
+              "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj": {
+                "projectPath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopDomain\\BirdCageShopDomain.csproj"
               }
             }
           }

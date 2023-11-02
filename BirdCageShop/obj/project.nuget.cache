@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "SSYQ9KOKpV0zEdwkqDTA9DPGbCqFAq3lCP+r6ST9m0rr+4SKEjKYGTfMTpiZVSNAdhHx5JcS5uew0g4Nz5WWCg==",
+  "dgSpecHash": "3V4yCRtxXWHPyW8oQYGhQbSJV3sdNhuWjw29ma4FdFpsfuwLgpsCWBau02534r99vBnB6N1sVgHoiSxu9F4ULw==",
   "success": true,
-  "projectFilePath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShop\\BirdCageShop.csproj",
+  "projectFilePath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShop\\BirdCageShop.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ASUS\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\ASUS\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XQbCXHl3XoIKZT1phBRUqOMKa7lK0by8xwFQGaj8+Uy0NZYiZwNLnemU31Iga6rHS7U/p8HnXgdnu3eh7wemiA==",
+  "dgSpecHash": "LpllreZxPtsNtCXnSkdz2BgpphDuXkC74NwKvLA+MbDYPLUrvEm/ySNPIKAXh0SXUFNNx56CnvdCFqrBFsoV3A==",
   "success": true,
-  "projectFilePath": "D:\\Semester 8\\SWP391\\v02_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopViewModel\\BirdCageShopViewModel.csproj",
+  "projectFilePath": "D:\\Semester 8\\SWP391\\v03_BE_BirdCageShop\\BE_BirdCageShop_V02\\BirdCageShopViewModel\\BirdCageShopViewModel.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ASUS\\.nuget\\packages\\fluentvalidation\\11.7.1\\fluentvalidation.11.7.1.nupkg.sha512",
     "C:\\Users\\ASUS\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.23\\microsoft.aspnetcore.cryptography.internal.6.0.23.nupkg.sha512",
