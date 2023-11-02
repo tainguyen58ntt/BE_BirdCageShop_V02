@@ -4,6 +4,7 @@ using BirdCageShopDbContext.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BirdCageShopDbContext.Migrations
 {
     [DbContext(typeof(BirdCageShopContext))]
-    partial class BirdCageShopContextModelSnapshot : ModelSnapshot
+    [Migration("20231102083343_update-for-design")]
+    partial class updatefordesign
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -596,9 +598,6 @@ namespace BirdCageShopDbContext.Migrations
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal?>("PriceDesign")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
@@ -694,28 +693,28 @@ namespace BirdCageShopDbContext.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "22ff69e7-251b-4024-af51-7cb5c8ee0286",
+                            Id = "f707d0ce-9ace-4a76-a642-aff9c6d79c67",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "b1dce125-cfa1-4be8-a247-26e32383f720",
+                            Id = "a7e83e6c-728e-4e3f-a9cf-6958f925414d",
                             ConcurrencyStamp = "2",
                             Name = "Customer",
                             NormalizedName = "Customer"
                         },
                         new
                         {
-                            Id = "390ee178-e97c-46cd-a6a3-1906eb7cf268",
+                            Id = "731511d8-14c6-4216-bc0d-5a5cb682ffd8",
                             ConcurrencyStamp = "2",
                             Name = "Manager",
                             NormalizedName = "Manager"
                         },
                         new
                         {
-                            Id = "2076edc9-0072-4aa0-bc11-aa3fae84cdd5",
+                            Id = "d72e36f6-c00d-49d3-92d0-11e676117893",
                             ConcurrencyStamp = "3",
                             Name = "Staff",
                             NormalizedName = "Staff"

@@ -39,7 +39,7 @@ namespace BirdCageShopDbContext.Models
 
 
         //
-        //public virtual DbSet<Formula> Formulas { get; set; } = null!;
+        public virtual DbSet<Formula> Formulas { get; set; } = null!;
         //public virtual DbSet<OrderDetailFeature> OrderDetailFeatures { get; set; } = null!;
 
         //public virtual DbSet<OrderDetailSpecification> OrderDetailSpecifications { get; set; } = null!;

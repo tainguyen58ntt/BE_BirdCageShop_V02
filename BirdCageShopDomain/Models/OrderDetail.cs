@@ -12,5 +12,13 @@ namespace BirdCageShopDbContext.Models
         public decimal? Price { get; set; }
         public Order Order { get; set; }
         public Product Product { get; set; }
+
+        public string? Model { get; set; }
+        public int? Width { get; set; }
+        public int? Height { get; set; }
+        public string? Color { get; set; }
+        public string? Material { get; set; }
+        public string? Bars { get; set; }
+
     }
 }

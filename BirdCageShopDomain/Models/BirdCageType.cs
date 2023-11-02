@@ -18,5 +18,7 @@ namespace BirdCageShopDomain.Models
         public bool IsDelete { get; set; }
 
         public IEnumerable<Product> Products { get; set; }
+
+        public IEnumerable<Formula> Formulas { get; set; }
     }
 }
