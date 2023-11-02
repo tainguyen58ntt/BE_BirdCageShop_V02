@@ -15,3 +15,20 @@ D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShopDbConte
 D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShopDbContext\obj\Debug\net6.0\BirdCageShopDbContext.pdb
 D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShopDbContext\obj\Debug\net6.0\BirdCageShopDbContext.genruntimeconfig.cache
 D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShopDbContext\obj\Debug\net6.0\ref\BirdCageShopDbContext.dll
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopDbContext\bin\Debug\net6.0\BirdCageShopDbContext.deps.json
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopDbContext\bin\Debug\net6.0\BirdCageShopDbContext.runtimeconfig.json
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopDbContext\bin\Debug\net6.0\BirdCageShopDbContext.dll
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopDbContext\bin\Debug\net6.0\BirdCageShopDbContext.pdb
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopDbContext\bin\Debug\net6.0\BirdCageShopDomain.dll
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopDbContext\bin\Debug\net6.0\BirdCageShopDomain.pdb
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopDbContext\obj\Debug\net6.0\BirdCageShopDbContext.csproj.AssemblyReference.cache
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopDbContext\obj\Debug\net6.0\BirdCageShopDbContext.GeneratedMSBuildEditorConfig.editorconfig
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopDbContext\obj\Debug\net6.0\BirdCageShopDbContext.AssemblyInfoInputs.cache
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopDbContext\obj\Debug\net6.0\BirdCageShopDbContext.AssemblyInfo.cs
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopDbContext\obj\Debug\net6.0\BirdCageShopDbContext.csproj.CoreCompileInputs.cache
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopDbContext\obj\Debug\net6.0\BirdCageShopDbContext.csproj.CopyComplete
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopDbContext\obj\Debug\net6.0\BirdCageShopDbContext.dll
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopDbContext\obj\Debug\net6.0\refint\BirdCageShopDbContext.dll
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopDbContext\obj\Debug\net6.0\BirdCageShopDbContext.pdb
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopDbContext\obj\Debug\net6.0\BirdCageShopDbContext.genruntimeconfig.cache
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopDbContext\obj\Debug\net6.0\ref\BirdCageShopDbContext.dll

@@ -4,6 +4,7 @@ using BirdCageShopDomain.Models;
 using BirdCageShopUtils.Pagination;
 using BirdCageShopViewModel.Category;
 using BirdCageShopViewModel.Feature;
+using BirdCageShopViewModel.Formula;
 using BirdCageShopViewModel.Order;
 using BirdCageShopViewModel.Product;
 using BirdCageShopViewModel.ProductFeature;
@@ -40,7 +41,7 @@ namespace BirdCageShopOther.Mapper
             CreateMap<UserChangePasswordViewModel, ApplicationUser>().ReverseMap();
 
             //
-
+            CreateMap<FormulaViewModel, Formula>().ReverseMap();
 
             //
             CreateMap<VourcherViewModel, Voucher>().ReverseMap();

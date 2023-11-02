@@ -17,3 +17,22 @@ D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShopInterfa
 D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShopInterface\obj\Debug\net6.0\refint\BirdCageShopInterface.dll
 D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShopInterface\obj\Debug\net6.0\BirdCageShopInterface.pdb
 D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShopInterface\obj\Debug\net6.0\ref\BirdCageShopInterface.dll
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopInterface\bin\Debug\net6.0\BirdCageShopInterface.deps.json
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopInterface\bin\Debug\net6.0\BirdCageShopInterface.dll
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopInterface\bin\Debug\net6.0\BirdCageShopInterface.pdb
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopInterface\bin\Debug\net6.0\BirdCageShopDomain.dll
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopInterface\bin\Debug\net6.0\BirdCageShopUtils.dll
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopInterface\bin\Debug\net6.0\BirdCageShopViewModel.dll
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopInterface\bin\Debug\net6.0\BirdCageShopDomain.pdb
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopInterface\bin\Debug\net6.0\BirdCageShopUtils.pdb
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopInterface\bin\Debug\net6.0\BirdCageShopViewModel.pdb
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopInterface\obj\Debug\net6.0\BirdCageShopInterface.csproj.AssemblyReference.cache
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopInterface\obj\Debug\net6.0\BirdCageShopInterface.GeneratedMSBuildEditorConfig.editorconfig
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopInterface\obj\Debug\net6.0\BirdCageShopInterface.AssemblyInfoInputs.cache
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopInterface\obj\Debug\net6.0\BirdCageShopInterface.AssemblyInfo.cs
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopInterface\obj\Debug\net6.0\BirdCageShopInterface.csproj.CoreCompileInputs.cache
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopInterface\obj\Debug\net6.0\BirdCageShopInterface.csproj.CopyComplete
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopInterface\obj\Debug\net6.0\BirdCageShopInterface.dll
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopInterface\obj\Debug\net6.0\refint\BirdCageShopInterface.dll
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopInterface\obj\Debug\net6.0\BirdCageShopInterface.pdb
+E:\SWP-BirdCage\BE_BirdCageShop_V02\BirdCageShopInterface\obj\Debug\net6.0\ref\BirdCageShopInterface.dll

@@ -26,7 +26,7 @@ namespace BirdCageShopInterface.IServices
         //Task<ShoppingCartViewModel?> GetShoppingCartByIdAsync();
         Task<ShoppingCartViewModel?> GetShoppingCartByProIdAsync(int proId);
         Task<bool> RemoveFromCartAsync(int productId);
-        Task<bool> CreateOrUpdateAsync(int productId, int count);
+        Task<bool> CreateOrUpdateAsync(int productId, int count, ShoppingCartDesignViewModel shoppingCartDesignViewModel);
 
 
         Task<bool> UpdateAsync(int productId, int count);
