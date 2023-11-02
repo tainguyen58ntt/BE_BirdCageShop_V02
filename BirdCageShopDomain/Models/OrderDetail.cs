@@ -18,7 +18,7 @@ namespace BirdCageShopDbContext.Models
         public int? Height { get; set; }
         public string? Color { get; set; }
         public string? Material { get; set; }
-        public string? Bars { get; set; }
+        public int? Bars { get; set; }
 
     }
 }
