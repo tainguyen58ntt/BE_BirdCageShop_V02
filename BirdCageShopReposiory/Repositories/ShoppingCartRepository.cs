@@ -49,6 +49,7 @@ namespace BirdCageShopReposiory.Repositories
             return await _context.Set<ShoppingCart>()
               .AsNoTracking()
               .Include(p => p.Product)
+              .ThenInclude(pi => pi.ProductImages)
               //.Where(x => x.ExpDate >= DateTime.Now)
               .Where(p => p.ApplicationUserId == customerId)   
               .ToListAsync();
