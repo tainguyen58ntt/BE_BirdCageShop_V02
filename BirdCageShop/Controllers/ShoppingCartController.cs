@@ -190,7 +190,7 @@ namespace BirdCageShop.Controllers
                 {
                     //SuccessUrl = domain + $"customer/cart/OrderConfirmation",
                     SuccessUrl = domain + $"api/shoppingcart/OrderConfirmation?sessionId={{CHECKOUT_SESSION_ID}}&vmodel={Uri.EscapeDataString(JsonConvert.SerializeObject(confirmOrderAddViewModel))}&userId={currentUserId}",
-                    CancelUrl = domain + "api/shoppingcart",
+                    CancelUrl = domain + "/falure",
                     LineItems = new List<SessionLineItemOptions>(),
                     Mode = "payment",
                 };

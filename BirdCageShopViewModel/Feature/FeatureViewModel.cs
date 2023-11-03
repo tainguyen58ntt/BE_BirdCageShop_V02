@@ -10,8 +10,8 @@ namespace BirdCageShopViewModel.Feature
     {
         public int Id { get; set; }
         public string FeatureName { get; set; } = null!;
-        public string SpecificationValue { get; set; } = null!;
-        public decimal? Price { get; set; }
+        //public string SpecificationValue { get; set; } = null!;
+        //public decimal? Price { get; set; }
     }
 }
 

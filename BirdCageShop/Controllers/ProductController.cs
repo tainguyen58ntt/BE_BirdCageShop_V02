@@ -59,6 +59,9 @@ namespace BirdCageShop.Controllers
             return Ok(result);
         }
 
+    
+
+
         [HttpGet("page")]
         public async Task<IActionResult> GetPageAsync([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
         {
@@ -202,6 +205,9 @@ namespace BirdCageShop.Controllers
             if (result is true) return Ok();
             return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Move product from wishlist to shopping cart failed. Server Error." });
         }
+
+
+
 
 
 

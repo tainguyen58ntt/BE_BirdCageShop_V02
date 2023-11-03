@@ -18,6 +18,7 @@ namespace BirdCageShopDbContext.Models
         public DateTime StartDate { get; set; }
 
         public bool IsDelete { get; set; }
+        public bool IsValid { get; set; }
 
         //public virtual ICollection<Order> Orders { get; set; }
         public virtual ApplicationUser? ApplicationUser { get; set; }

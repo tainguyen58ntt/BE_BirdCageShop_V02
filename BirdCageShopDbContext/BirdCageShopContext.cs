@@ -76,13 +76,13 @@ namespace BirdCageShopDbContext.Models
                 .Property(od => od.Price)
                 .HasColumnType("decimal(18, 2)");
 
-            modelBuilder.Entity<Feature>()
-                .Property(pf => pf.Price)
-                .HasColumnType("decimal(18, 2)");
+            //modelBuilder.Entity<Feature>()
+            //    .Property(pf => pf.Price)
+            //    .HasColumnType("decimal(18, 2)");
 
-            modelBuilder.Entity<Specification>()
-                .Property(ps => ps.Price)
-                .HasColumnType("decimal(18, 2)");
+            //modelBuilder.Entity<Specification>()
+            //    .Property(ps => ps.Price)
+            //    .HasColumnType("decimal(18, 2)");
 
             modelBuilder.Entity<Voucher>()
                 .Property(v => v.DiscountPercent)
@@ -134,14 +134,15 @@ namespace BirdCageShopDbContext.Models
             builder.Entity<Status>().HasData(
                 new Status() {Id = 1, StatusState = "Pending" },
                 new Status() { Id = 2, StatusState = "Approved" },
-                new Status() {Id = 3, StatusState = "Processing" },
+                new Status() { Id = 3, StatusState = "Canceled" },
                 new Status() {Id = 4, StatusState = "Shipped" },
-                new Status() {Id = 5, StatusState = "Payonline-approved" },
+                new Status() { Id = 5, StatusState = "Refund" },
                 new Status() {Id = 6, StatusState = "COD" },
-                new Status() {Id = 7, StatusState = "Payonline" });
+                new Status() {Id = 7, StatusState = "PAYONLINE" });
 
 
         }
+        
 
     }
 }

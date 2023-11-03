@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sitemanifest>
-  <IisApp path="D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\obj\Release\net6.0\PubTmp\Out\" />
-  <dbfullsql path="D:\Semester 8\SWP391\v02_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\obj\Release\net6.0\PubTmp\EFSQLScripts\BirdCageShopDbContext.Models.BirdCageShopContext.sql" />
+  <IisApp path="D:\Semester 8\SWP391\v03_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\obj\Release\net6.0\PubTmp\Out\" />
+  <dbfullsql path="D:\Semester 8\SWP391\v03_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\obj\Release\net6.0\PubTmp\EFSQLScripts\BirdCageShopDbContext.Models.BirdCageShopContext.sql" />
 </sitemanifest>

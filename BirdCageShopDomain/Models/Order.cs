@@ -11,7 +11,9 @@ namespace BirdCageShopDbContext.Models
         public DateTime? OrderDate { get; set; }
         public decimal? TotalPrice { get; set; }
         public decimal? TotalPriceBeforeVoucher { get; set; }
-        
+
+        public decimal? ShipCost { get; set; }
+
         public DateTime? ShippingDate { get; set; }
         public string? OrderStatus { get; set; }
         public string? PhoneNumber { get; set; }

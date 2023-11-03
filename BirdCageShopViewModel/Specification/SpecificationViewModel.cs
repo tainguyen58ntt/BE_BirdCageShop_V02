@@ -11,6 +11,6 @@ namespace BirdCageShopViewModel.Specification
         public int Id { get; set; }
         public string SpecificationName { get; set; } = null!;
         public string SpecificationValue { get; set; } = null!;
-        public decimal? Price { get; set; }
+        //public decimal? Price { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace BirdCageShopDomain.Models
         //public string FeatureValue { get; set; } = null!;
         public DateTime? CreatedAt { get; set; }
         public DateTime? ModiedAt { get; set; }
-        public decimal? Price { get; set; }
+        //public decimal? Price { get; set; }
         //public int? ProductId { get; set; }
 
         //public virtual Product? Product { get; set; }

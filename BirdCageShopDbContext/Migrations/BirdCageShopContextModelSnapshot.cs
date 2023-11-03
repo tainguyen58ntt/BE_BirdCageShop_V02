@@ -93,6 +93,9 @@ namespace BirdCageShopDbContext.Migrations
                     b.Property<string>("SessionId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal?>("ShipCost")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<DateTime?>("ShippingDate")
                         .HasColumnType("datetime2");
 
@@ -308,9 +311,6 @@ namespace BirdCageShopDbContext.Migrations
                     b.Property<DateTime?>("ModiedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal?>("Price")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<string>("SpecificationName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -343,6 +343,9 @@ namespace BirdCageShopDbContext.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsValid")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("StartDate")
@@ -435,9 +438,6 @@ namespace BirdCageShopDbContext.Migrations
 
                     b.Property<DateTime?>("ModiedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<decimal?>("Price")
-                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -621,7 +621,7 @@ namespace BirdCageShopDbContext.Migrations
                         new
                         {
                             Id = 3,
-                            StatusState = "Processing"
+                            StatusState = "Canceled"
                         },
                         new
                         {
@@ -631,7 +631,7 @@ namespace BirdCageShopDbContext.Migrations
                         new
                         {
                             Id = 5,
-                            StatusState = "Payonline-approved"
+                            StatusState = "Refund"
                         },
                         new
                         {
@@ -641,7 +641,7 @@ namespace BirdCageShopDbContext.Migrations
                         new
                         {
                             Id = 7,
-                            StatusState = "Payonline"
+                            StatusState = "PAYONLINE"
                         });
                 });
 
@@ -674,28 +674,28 @@ namespace BirdCageShopDbContext.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "260373f8-4a15-4cb7-9e5e-035bffa9d5a2",
+                            Id = "86c4d3d4-8d79-4cf9-a2d5-83cc64b6d125",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "492d0d50-a0af-4407-a00d-430b7acb5598",
+                            Id = "27b0b46c-c395-479d-acf2-1745c69d8687",
                             ConcurrencyStamp = "2",
                             Name = "Customer",
                             NormalizedName = "Customer"
                         },
                         new
                         {
-                            Id = "cbfede43-a0de-4e22-9bc2-b7b3209470c4",
+                            Id = "116ef264-5733-45c6-a1a0-0226b7d1b613",
                             ConcurrencyStamp = "2",
                             Name = "Manager",
                             NormalizedName = "Manager"
                         },
                         new
                         {
-                            Id = "29fd75fc-e761-490a-8058-eb1afb6322be",
+                            Id = "57febbcf-47cb-44c9-8395-cde1afc1fb3b",
                             ConcurrencyStamp = "3",
                             Name = "Staff",
                             NormalizedName = "Staff"

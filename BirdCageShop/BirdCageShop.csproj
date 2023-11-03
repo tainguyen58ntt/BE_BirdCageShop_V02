@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <ErrorReport>prompt</ErrorReport>
+	  
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -42,6 +43,10 @@
     <ProjectReference Include="..\BirdCageShopInterface\BirdCageShopInterface.csproj" />
     <ProjectReference Include="..\BirdCageShopOther\BirdCageShopOther.csproj" />
     <ProjectReference Include="..\BirdCageShopService\BirdCageShopService.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 
 </Project>
