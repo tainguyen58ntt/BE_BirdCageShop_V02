@@ -283,7 +283,7 @@ namespace BirdCageShopDbContext.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     DiscountPercent = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     VoucherCode = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -298,8 +298,7 @@ namespace BirdCageShopDbContext.Migrations
                         name: "FK_Vouchers_AspNetUsers_ApplicationUserId",
                         column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -570,10 +569,10 @@ namespace BirdCageShopDbContext.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "116ef264-5733-45c6-a1a0-0226b7d1b613", "2", "Manager", "Manager" },
-                    { "27b0b46c-c395-479d-acf2-1745c69d8687", "2", "Customer", "Customer" },
-                    { "57febbcf-47cb-44c9-8395-cde1afc1fb3b", "3", "Staff", "Staff" },
-                    { "86c4d3d4-8d79-4cf9-a2d5-83cc64b6d125", "1", "Admin", "Admin" }
+                    { "43f9e578-c772-46a6-ad91-710477a0f04f", "3", "Staff", "Staff" },
+                    { "6ce42eda-ecfe-4a07-8d69-38976f2607f4", "1", "Admin", "Admin" },
+                    { "88b03d69-e16c-4979-8433-c9cdcfd9ebb2", "2", "Manager", "Manager" },
+                    { "b845ffe3-f719-4cc3-9f88-b2d14d2ffb8b", "2", "Customer", "Customer" }
                 });
 
             migrationBuilder.InsertData(

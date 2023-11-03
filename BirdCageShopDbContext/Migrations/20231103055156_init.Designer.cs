@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BirdCageShopDbContext.Migrations
 {
     [DbContext(typeof(BirdCageShopContext))]
-    [Migration("20231103041721_init")]
+    [Migration("20231103055156_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -335,7 +335,6 @@ namespace BirdCageShopDbContext.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ApplicationUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal?>("DiscountPercent")
@@ -676,28 +675,28 @@ namespace BirdCageShopDbContext.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "86c4d3d4-8d79-4cf9-a2d5-83cc64b6d125",
+                            Id = "6ce42eda-ecfe-4a07-8d69-38976f2607f4",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "27b0b46c-c395-479d-acf2-1745c69d8687",
+                            Id = "b845ffe3-f719-4cc3-9f88-b2d14d2ffb8b",
                             ConcurrencyStamp = "2",
                             Name = "Customer",
                             NormalizedName = "Customer"
                         },
                         new
                         {
-                            Id = "116ef264-5733-45c6-a1a0-0226b7d1b613",
+                            Id = "88b03d69-e16c-4979-8433-c9cdcfd9ebb2",
                             ConcurrencyStamp = "2",
                             Name = "Manager",
                             NormalizedName = "Manager"
                         },
                         new
                         {
-                            Id = "57febbcf-47cb-44c9-8395-cde1afc1fb3b",
+                            Id = "43f9e578-c772-46a6-ad91-710477a0f04f",
                             ConcurrencyStamp = "3",
                             Name = "Staff",
                             NormalizedName = "Staff"
@@ -986,9 +985,7 @@ namespace BirdCageShopDbContext.Migrations
                 {
                     b.HasOne("BirdCageShopDbContext.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("Vouchers")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ApplicationUserId");
 
                     b.Navigation("ApplicationUser");
                 });
