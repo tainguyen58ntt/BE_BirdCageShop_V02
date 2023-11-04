@@ -112,13 +112,13 @@ namespace BirdCageShop.Controllers
 
 
         [HttpPost("update-cart/{productId}")]  // use for update and add
-        public async Task<IActionResult> AddItemFromShoppingCart([FromRoute] int productId, [FromQuery] int count)
+        public async Task<IActionResult> AddItemFromShoppingCart([FromRoute] int productId, [FromQuery] int count, [FromForm] ShoppingCartDesignViewModel? shoppingCartDesignViewModel)
         {
             // check exist product in db 
             var existProduct = await _shoppingCartService.ExistProductAsync(productId);
             if (existProduct == null) return BadRequest(new { property = "Product ID", message = "Product does not exist" });
             // check if pro exist in cart  -> update count == count
-            var existProductCart = await _shoppingCartService.CreateOrUpdateAsync(productId, count);
+            var existProductCart = await _shoppingCartService.CreateOrUpdateAsync(productId, count, shoppingCartDesignViewModel);
             if (existProductCart == true) return Ok();
             return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Add to cart failed. Server Error" });
 

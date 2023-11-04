@@ -144,7 +144,7 @@ namespace BirdCageShopDbContext.Migrations
                     b.Property<decimal?>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("ProductId")
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<int?>("Quantity")
@@ -673,28 +673,28 @@ namespace BirdCageShopDbContext.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6ce42eda-ecfe-4a07-8d69-38976f2607f4",
+                            Id = "2caad810-40a1-48c4-83ec-82421f906618",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "b845ffe3-f719-4cc3-9f88-b2d14d2ffb8b",
+                            Id = "ab4fbe8f-1be3-4279-bbb9-2980cfe9a958",
                             ConcurrencyStamp = "2",
                             Name = "Customer",
                             NormalizedName = "Customer"
                         },
                         new
                         {
-                            Id = "88b03d69-e16c-4979-8433-c9cdcfd9ebb2",
+                            Id = "c2ceca79-3a26-46d8-8131-dd5b5c9797c5",
                             ConcurrencyStamp = "2",
                             Name = "Manager",
                             NormalizedName = "Manager"
                         },
                         new
                         {
-                            Id = "43f9e578-c772-46a6-ad91-710477a0f04f",
+                            Id = "9c800009-9cdd-45c8-a689-a226ace5321c",
                             ConcurrencyStamp = "3",
                             Name = "Staff",
                             NormalizedName = "Staff"
@@ -927,7 +927,9 @@ namespace BirdCageShopDbContext.Migrations
 
                     b.HasOne("BirdCageShopDbContext.Models.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Order");
 

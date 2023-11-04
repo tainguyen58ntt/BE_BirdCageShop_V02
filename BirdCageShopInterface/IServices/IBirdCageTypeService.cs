@@ -1,5 +1,5 @@
 ﻿using birdcageshopinterface.IServices;
-using BirdCageShopViewModel.Product;
+using BirdCageShopViewModel.BirdCageType;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,11 @@ namespace BirdCageShopInterface.IServices
 {
     public interface IBirdCageTypeService : IBaseService
     {
-
-        Task<IEnumerable<ProductViewModel>> GetBirdCageTypeAsync();
+        Task<List<GetBirdCageType>> GetAllAsync();
+        Task<GetBirdCageType> GetAsync(int key);
+        Task CreateBirdCageTypeAsync(CreateBirdCageType createBirdCageType);
+        Task UpdateBirdCageTypeAsync(int key, UpdateBirdCageType updateBirdCageType);
+        Task DeleteBirdCageTypeAsync(int key);
+        Task<List<GetBirdCageType>> GetBirdCageTypeNameAsync(string BirdCageTypeName);
     }
 }

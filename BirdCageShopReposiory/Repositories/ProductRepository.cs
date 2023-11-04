@@ -156,6 +156,11 @@ namespace BirdCageShopReposiory.Repositories
                 .FirstOrDefaultAsync(x => !x.isDelete && x.Wishlists.Any(wl => wl.ProductId == productId && wl.ApplicationUserId == customerId));
         }
 
-     
+        public async Task<Product?> FirstOrDefaultAsync()
+        {
+            var products = _context.Products.AsQueryable();
+
+            return await products.FirstOrDefaultAsync();
+        }
     }
 }

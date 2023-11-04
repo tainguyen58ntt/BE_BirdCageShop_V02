@@ -24,6 +24,8 @@ namespace BirdCageShopReposiory
         private IWishlistRepository _wishlistRepository;
         private IStatusRepository _statusRepository;
         private IOrderDetailRepository _orderDetailRepository;
+        private IFormulaRepository _formulaRepository;
+        private IBirdCageTypeRepository _birdCageTypeRepository;
         //public UnitOfWork(BirdCageShopContext context, IVoucherRepository voucherRepository,
         //    IWishlistRepository wishlistRepository, IOrderRepository orderRepository,
         //    ICategoryRepository categoryRepository, IProductRepository productRepository, IShoppingCartRepository shoppingCartRepository, IStatusRepository statusRepository
@@ -48,8 +50,9 @@ namespace BirdCageShopReposiory
         public UnitOfWork(BirdCageShopContext context,IReviewRepository reviewRepository ,IVoucherRepository voucherRepository,
             IWishlistRepository wishlistRepository, IOrderRepository orderRepository,
             ICategoryRepository categoryRepository, IProductRepository productRepository, IShoppingCartRepository shoppingCartRepository, IStatusRepository statusRepository
-            , IOrderDetailRepository orderDetailRepository, IUserRepository userRepository)
-        {
+            , IOrderDetailRepository orderDetailRepository, IUserRepository userRepository, IFormulaRepository formulaRepository, IBirdCageTypeRepository birdCageTypeRepository)
+            {
+           
             _context = context;
             //_roleRepository = roleRepository;
             _userRepository = userRepository;
@@ -61,10 +64,11 @@ namespace BirdCageShopReposiory
             _wishlistRepository = wishlistRepository;
             _statusRepository = statusRepository;
             _orderDetailRepository = orderDetailRepository;
-            _reviewRepository = reviewRepository;   
+            _reviewRepository = reviewRepository;
+             _formulaRepository = formulaRepository;
+            _birdCageTypeRepository = birdCageTypeRepository;
 
-
-        }
+            }
 
         //public IRoleRepository RoleRepository => _roleRepository;
         public IStatusRepository StatusRepository => _statusRepository;
@@ -80,7 +84,9 @@ namespace BirdCageShopReposiory
         public IOrderRepository OrderRepository => _orderRepository;
         public IShoppingCartRepository ShoppingCartRepository => _shoppingCartRepository;
         public IWishlistRepository WishlistRepository => _wishlistRepository;
+        public IFormulaRepository FormulaRepository => _formulaRepository;
 
+        public IBirdCageTypeRepository BirdCageTypeRepository => _birdCageTypeRepository;
         public async Task<bool> SaveChangesAsync()
         {
             try

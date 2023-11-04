@@ -19,7 +19,7 @@ namespace BirdCageShopInterface.IRepositories
 		Task<IEnumerable<Product>> GetProductsFromWishlistAsync(string customerId);
 
         Task<Product> GetByIdInCludeProductDeletedAsync(int productID);
-        
+        Task<Product?> FirstOrDefaultAsync();
 
 
 

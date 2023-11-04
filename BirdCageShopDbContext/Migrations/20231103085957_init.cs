@@ -373,7 +373,7 @@ namespace BirdCageShopDbContext.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderId = table.Column<int>(type: "int", nullable: true),
-                    ProductId = table.Column<int>(type: "int", nullable: true),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     Model = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -394,7 +394,8 @@ namespace BirdCageShopDbContext.Migrations
                         name: "FK_OrderDetail_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -569,10 +570,10 @@ namespace BirdCageShopDbContext.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "43f9e578-c772-46a6-ad91-710477a0f04f", "3", "Staff", "Staff" },
-                    { "6ce42eda-ecfe-4a07-8d69-38976f2607f4", "1", "Admin", "Admin" },
-                    { "88b03d69-e16c-4979-8433-c9cdcfd9ebb2", "2", "Manager", "Manager" },
-                    { "b845ffe3-f719-4cc3-9f88-b2d14d2ffb8b", "2", "Customer", "Customer" }
+                    { "2caad810-40a1-48c4-83ec-82421f906618", "1", "Admin", "Admin" },
+                    { "9c800009-9cdd-45c8-a689-a226ace5321c", "3", "Staff", "Staff" },
+                    { "ab4fbe8f-1be3-4279-bbb9-2980cfe9a958", "2", "Customer", "Customer" },
+                    { "c2ceca79-3a26-46d8-8131-dd5b5c9797c5", "2", "Manager", "Manager" }
                 });
 
             migrationBuilder.InsertData(
