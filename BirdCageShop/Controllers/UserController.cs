@@ -83,6 +83,7 @@ namespace BirdCageShop.Controllers
 
         }
         [HttpGet("order-history")]
+        [Authorize(Roles = "Customer")]
         public async Task<IActionResult> GetCustomerOrderHistory([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
         {
             var x = await _userService.GetOrderHistoryAsync(pageIndex, pageSize);
@@ -140,6 +141,7 @@ namespace BirdCageShop.Controllers
 
 
         [HttpDelete("/{userId}")]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> DeleteAsync([FromRoute] string userId)
         {
             var user = await _userService.GetUserByIdAsync(userId);
@@ -152,6 +154,7 @@ namespace BirdCageShop.Controllers
         }
 
         [HttpPut("recover/{userId}")]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> RecoverAsync([FromRoute] string userId)
         {
             var user = await _userService.GetUserIncludeUserDeletedByIdAsync(userId);

@@ -29,6 +29,45 @@ namespace BirdCageShop.Controllers
 
 
         [HttpPost("create")]
+        public async Task<IActionResult> CreateProduct([FromForm] CreateProductViewModel createProductViewModel)
+        {
+            try
+            {
+                var createproduct = await _productService.CreateProductAsync(createProductViewModel);
+                if (createproduct is StatusCodeResult statusCodeResult)
+                {
+                    if (statusCodeResult.StatusCode == 404) { return StatusCode(StatusCodes.Status404NotFound, "Thiếu thông tin"); }
+                    else if (statusCodeResult.StatusCode == 300) { return StatusCode(StatusCodes.Status300MultipleChoices, "Số ảnh không được vượt quá 10 ảnh"); }
+                    else { return StatusCode(StatusCodes.Status500InternalServerError, "có gì đó bị lỗi"); };
+                }
+                return createproduct;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Lỗi hệ thống");
+            }
+        }
+
+
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateProduct(int id, [FromForm] UpdateProductViewModel updateProductViewModel)
+        {
+            try
+            {
+                var updateProduct = await _productService.UpdateProductAsync(id, updateProductViewModel);
+                if (updateProduct is StatusCodeResult statusCodeResult)
+                {
+                    if (statusCodeResult.StatusCode == 404) { return StatusCode(StatusCodes.Status404NotFound, "Thiếu thông tin"); }
+                    else if (statusCodeResult.StatusCode == 300) { return StatusCode(StatusCodes.Status300MultipleChoices, "Số ảnh không được vượt quá 10 ảnh"); }
+                    else { return StatusCode(StatusCodes.Status500InternalServerError, "có gì đó bị lỗi"); };
+                }
+                return updateProduct;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Lỗi hệ thống");
+            }
+        }
 
 
         //get product by bird type

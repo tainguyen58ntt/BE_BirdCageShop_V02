@@ -2,6 +2,8 @@
 using BirdCageShopDbContext.Models;
 using BirdCageShopInterface;
 using BirdCageShopInterface.IRepositories;
+using BirdCageShopReposiory.Repositories;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +28,12 @@ namespace BirdCageShopReposiory
         private IOrderDetailRepository _orderDetailRepository;
         private IFormulaRepository _formulaRepository;
         private IBirdCageTypeRepository _birdCageTypeRepository;
+        private ISpecificationRepository _specificationRepository;
+        private IFormulaSpecificationRepository _formulaSpecificationRepository;
+        private IProductSpecificationsRepository _productSpecificationsRepository;
+        private IFeatureRepository _featureRepository;
+        private IProductImageRepository _productImageRepository;
+        private IProductFeatureRepository _productFeatureRepository;
         //public UnitOfWork(BirdCageShopContext context, IVoucherRepository voucherRepository,
         //    IWishlistRepository wishlistRepository, IOrderRepository orderRepository,
         //    ICategoryRepository categoryRepository, IProductRepository productRepository, IShoppingCartRepository shoppingCartRepository, IStatusRepository statusRepository
@@ -50,7 +58,10 @@ namespace BirdCageShopReposiory
         public UnitOfWork(BirdCageShopContext context,IReviewRepository reviewRepository ,IVoucherRepository voucherRepository,
             IWishlistRepository wishlistRepository, IOrderRepository orderRepository,
             ICategoryRepository categoryRepository, IProductRepository productRepository, IShoppingCartRepository shoppingCartRepository, IStatusRepository statusRepository
-            , IOrderDetailRepository orderDetailRepository, IUserRepository userRepository, IFormulaRepository formulaRepository, IBirdCageTypeRepository birdCageTypeRepository)
+            , IOrderDetailRepository orderDetailRepository, IUserRepository userRepository, IFormulaRepository formulaRepository, IBirdCageTypeRepository birdCageTypeRepository,
+            ISpecificationRepository specificationRepository, IFormulaSpecificationRepository formulaSpecificationRepository,
+            IProductSpecificationsRepository productSpecificationsRepository,
+            IProductFeatureRepository productFeatureRepository, IFeatureRepository featureRepository, IProductImageRepository productImageRepository)
             {
            
             _context = context;
@@ -67,8 +78,14 @@ namespace BirdCageShopReposiory
             _reviewRepository = reviewRepository;
              _formulaRepository = formulaRepository;
             _birdCageTypeRepository = birdCageTypeRepository;
-
-            }
+            _specificationRepository = specificationRepository;
+            _formulaSpecificationRepository = formulaSpecificationRepository;
+            _productSpecificationsRepository = productSpecificationsRepository;
+            _productFeatureRepository = productFeatureRepository;
+            _specificationRepository = specificationRepository;
+            _featureRepository = featureRepository;
+            _productImageRepository = productImageRepository;
+        }
 
         //public IRoleRepository RoleRepository => _roleRepository;
         public IStatusRepository StatusRepository => _statusRepository;
@@ -87,6 +104,13 @@ namespace BirdCageShopReposiory
         public IFormulaRepository FormulaRepository => _formulaRepository;
 
         public IBirdCageTypeRepository BirdCageTypeRepository => _birdCageTypeRepository;
+        public ISpecificationRepository SpecificationRepository => _specificationRepository;
+        public IFormulaSpecificationRepository FormulaSpecificationRepository => _formulaSpecificationRepository;
+        public IProductImageRepository ProductImageRepository => _productImageRepository;
+        public IFeatureRepository FeatureRepository => _featureRepository;
+        public IProductFeatureRepository ProductFeatureRepository => _productFeatureRepository;
+        public IProductSpecificationsRepository ProductSpecificationsRepository => _productSpecificationsRepository;
+
         public async Task<bool> SaveChangesAsync()
         {
             try
@@ -97,6 +121,12 @@ namespace BirdCageShopReposiory
             {
                 return false;
             }
+        }
+        private IDbContextTransaction _transaction1;
+        public IDbContextTransaction Transaction()
+        {
+            _transaction1 = _context.Database.BeginTransaction();
+            return _transaction1;
         }
     }
 }

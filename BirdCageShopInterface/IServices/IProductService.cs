@@ -5,6 +5,7 @@ using BirdCageShopUtils.Pagination;
 using BirdCageShopViewModel.Product;
 using BirdCageShopViewModel.ProductReviews;
 using BirdCageShopViewModel.Role;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,7 @@ namespace BirdCageShopInterface.IServices
 		Task<IEnumerable<ProductViewModel>> GetProductsFromWishlistAsync();
 		//
 		Task<bool> AddReviewProduct(int productId, AddReviewProductViewModel addReviewProductViewModel);
-
+        Task<IActionResult> CreateProductAsync(CreateProductViewModel requestBody);
+        Task<IActionResult> UpdateProductAsync(int id, UpdateProductViewModel requestBody);
     }
 }

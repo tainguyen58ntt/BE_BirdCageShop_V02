@@ -1,5 +1,7 @@
 ﻿using birdcageshopinterface.IServices;
+using BirdCageShopUtils.Pagination;
 using BirdCageShopViewModel.Formula;
+using BirdCageShopViewModel.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +16,7 @@ namespace BirdCageShopInterface.IServices
         Task<List<FormulaViewModel>> GetByIdAsync(int key);
         Task CreateFormulaAsync(CreateFormulaViewModel createFormulaViewModel);
         Task UpdateFormulaAsync(int key, UpdateFormulaViewModel updateFormulaViewModel);
+        Task<Pagination<FormulaViewModel>> GetPageAsync(int pageIndex, int pageSize);
         /*Task DeleteCommentAsync(int key);*/
     }
 }

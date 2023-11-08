@@ -42,8 +42,11 @@ namespace BirdCageShopOther.Mapper
             CreateMap<UserChangePasswordViewModel, ApplicationUser>().ReverseMap();
 
             //
-            CreateMap<FormulaViewModel, Formula>().ReverseMap();
+            CreateMap<Formula, FormulaViewModel>()
+                .ForMember(dest => dest.Specifications, opt => opt.MapFrom(src => src.FormulaSpecifications.Select(ps => ps.Specification)))
+                .ReverseMap();
             CreateMap<CreateFormulaViewModel, Formula>().ReverseMap();
+
             CreateMap<UpdateFormulaViewModel, Formula>().ReverseMap();
             //
             CreateMap<CreateBirdCageType, BirdCageType>().ReverseMap();
@@ -74,10 +77,10 @@ namespace BirdCageShopOther.Mapper
 
             CreateMap<ProductWithReviewViewModel, Product>().ReverseMap();
             CreateMap<Product, ProductViewModel>()
-      .ForMember(dest => dest.Specifications, opt => opt.MapFrom(src => src.ProductSpecifications.Select(ps => ps.Specification)))
-      .ForMember(dest => dest.Features, opt => opt.MapFrom(src => src.ProductFeatures.Select(ps => ps.Feature)))
-       .ForMember(dest => dest.ProductImages, opt => opt.MapFrom(src => src.ProductImages))
-      .ReverseMap();
+              .ForMember(dest => dest.Specifications, opt => opt.MapFrom(src => src.ProductSpecifications.Select(ps => ps.Specification)))
+              .ForMember(dest => dest.Features, opt => opt.MapFrom(src => src.ProductFeatures.Select(ps => ps.Feature)))
+              .ForMember(dest => dest.ProductImages, opt => opt.MapFrom(src => src.ProductImages))
+              .ReverseMap();
             CreateMap<Specification, SpecificationViewModel>().ReverseMap();
             CreateMap<Feature, FeatureViewModel>().ReverseMap();
 
@@ -89,7 +92,6 @@ namespace BirdCageShopOther.Mapper
             CreateMap<ProductFeatureViewModel, ProductFeature>().ReverseMap();
             CreateMap<ProductSpecificationsViewModel, ProductSpecification>().ReverseMap();
             CreateMap<ProductImageViewModel, ProductImage>().ReverseMap();
-
             //
             CreateMap<ShoppingCart, ShoppingCartViewModel>()
                 .ForMember(dest => dest.ProductViewModel, opt => opt.MapFrom(src => src.Product))

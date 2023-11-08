@@ -11,6 +11,9 @@ namespace BirdCageShopInterface.IRepositories
 {
     public interface IBaseRepository<TModel> where TModel : class
     {
+        TModel FirstOrDefault(Expression<Func<TModel, bool>> predicate);
+
+        Task<TModel> FirstOrDefaultAsync(Expression<Func<TModel, bool>> predicate);
         Task<IEnumerable<TModel>> GetAllAsync();
         Task<TModel?> GetByIdAsync(int id);
         Task<Pagination<TModel>> GetPaginationAsync(int pageIndex, int pageSize);

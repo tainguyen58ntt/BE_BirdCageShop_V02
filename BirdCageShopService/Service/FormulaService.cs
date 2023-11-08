@@ -1,14 +1,18 @@
 ﻿using AutoMapper;
+using BirdCageShopDbContext.Models;
 using BirdCageShopDomain.Models;
 using BirdCageShopInterface;
 using BirdCageShopInterface.IServices;
+using BirdCageShopUtils.Pagination;
 using BirdCageShopViewModel.Formula;
+using BirdCageShopViewModel.Product;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Http.Results;
 
 namespace BirdCageShopService.Service
 {
@@ -18,40 +22,59 @@ namespace BirdCageShopService.Service
         {
         }
 
-        public async Task CreateFormulaAsync(CreateFormulaViewModel createFormulaViewModel)
+        public async Task CreateFormulaAsync(CreateFormulaViewModel requestBody)
         {
-            try
-            {
-
-                BirdCageType existedBirdCageType = (await _unitOfWork.BirdCageTypeRepository.GetByIdAsync(createFormulaViewModel.BirdCageTypeId));
+          
+                var transaction = _unitOfWork.Transaction();
+                BirdCageType existedBirdCageType = (await _unitOfWork.BirdCageTypeRepository.GetByIdAsync(requestBody.BirdCageTypeId));
                 if (existedBirdCageType == null)
                 {
                     throw new Exception("BirdCageType Id does not exist in the system.");
                 }
                 Formula formula = new Formula()
                 {
-                    Code = createFormulaViewModel.Code,
-                    MinWidth = createFormulaViewModel.MinWidth,
-                    Material = createFormulaViewModel.Material,
-                    MaxBars = createFormulaViewModel.MaxBars,
-                    MaxHeight = createFormulaViewModel.MaxHeight,
-                    MinHeight = createFormulaViewModel.MinHeight,
-                    MaxWidth = createFormulaViewModel.MaxWidth,
-                    MinBars = createFormulaViewModel.MinBars,
-                    Price = createFormulaViewModel.Price,
-                    BirdCageTypeId = createFormulaViewModel.BirdCageTypeId,
-                    ConstructionTime = createFormulaViewModel.ConstructionTime,
+                    Code = requestBody.Code,
+                    MinWidth = requestBody.MinWidth,
+                    MaxBars = requestBody.MaxBars,
+                    MaxHeight = requestBody.MaxHeight,
+                    MinHeight = requestBody.MinHeight,
+                    MaxWidth = requestBody.MaxWidth,
+                    MinBars = requestBody.MinBars,
+                    Price = requestBody.Price,
+                    BirdCageTypeId = requestBody.BirdCageTypeId,
+                    ConstructionTime = requestBody.ConstructionTime,
                 };
+            await _unitOfWork.FormulaRepository.AddAsync(formula);
+            await _unitOfWork.SaveChangesAsync();
 
-                await _unitOfWork.FormulaRepository.AddAsync(formula);
+            foreach (var item in requestBody.Specifications)
+                {
+                    var specifications = await _unitOfWork.SpecificationRepository.FirstOrDefaultAsync(p => p.Id == item);
+
+                    if (specifications == null)
+                    {
+                        throw new Exception("BirdCageType Id does not exist in the system.");
+                    }
+                    FormulaSpecification formulaSpecification = new FormulaSpecification
+                    {
+                        FormulaId = formula.Id,
+                        SpecificationId = specifications.Id
+                    };
+
+                    await _unitOfWork.FormulaSpecificationRepository.AddAsync(formulaSpecification);
+                    await _unitOfWork.SaveChangesAsync();
+                }
+
+                
                 await _unitOfWork.SaveChangesAsync();
+                transaction.Commit();
             }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+        
+        public async Task<Pagination<FormulaViewModel>> GetPageAsync(int pageIndex, int pageSize)
+        {
+            var result = await _unitOfWork.FormulaRepository.GetPaginationAsync(pageIndex, pageSize);
+            return _mapper.Map<Pagination<FormulaViewModel>>(result);
         }
-
         public async Task<List<FormulaViewModel>> GetAllAsync()
         {
             try
@@ -94,6 +117,7 @@ namespace BirdCageShopService.Service
         {
             try
             {
+                var transaction = _unitOfWork.Transaction();
                 Formula existedFormula = await _unitOfWork.FormulaRepository.GetByIdAsync(key);
 
                 if (existedFormula == null)
@@ -112,10 +136,6 @@ namespace BirdCageShopService.Service
                 if (!string.IsNullOrEmpty(updateFormulaViewModel.Code))
                 {
                     existedFormula.Code = updateFormulaViewModel.Code;
-                }
-                if (!string.IsNullOrEmpty(updateFormulaViewModel.Material))
-                {
-                    existedFormula.Material = updateFormulaViewModel.Material;
                 }
                 if (updateFormulaViewModel.MinWidth != null)
                 {
@@ -149,9 +169,25 @@ namespace BirdCageShopService.Service
                 {
                     existedFormula.ConstructionTime = (int)updateFormulaViewModel.ConstructionTime;
                 }
+                foreach (var item in updateFormulaViewModel.Specifications)
+                {
+                    var formulaSpecifications = await _unitOfWork.SpecificationRepository.FirstOrDefaultAsync(p => p.Id == item);
 
+                    if (formulaSpecifications == null)
+                    {
+                        throw new Exception("Specifications Id does not exist in the system.");
+                    }
+                    FormulaSpecification formulaSpecification = new FormulaSpecification
+                    {
+                        FormulaId = existedFormula.Id,
+                        SpecificationId = formulaSpecifications.Id
+                    };
+                    await _unitOfWork.FormulaSpecificationRepository.AddAsync(formulaSpecification);
+                    await _unitOfWork.SaveChangesAsync();
+                }
                 _unitOfWork.FormulaRepository.Update(existedFormula);
                 await _unitOfWork.SaveChangesAsync();
+                transaction.Commit();
             }
             catch (Exception ex)
             {

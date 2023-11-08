@@ -46,7 +46,9 @@ namespace BirdCageShopDbContext.Models
 
         //public virtual DbSet<BirdCageTypeFomula> BirdCageTypeFomulas { get; set; } = null!;
 
+
         public virtual DbSet<Status> Statuses { get; set; } = null!;
+        public virtual DbSet<FormulaSpecification> FormulaSpecifications { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -9,12 +9,17 @@ using BirdCageShopViewModel.Category;
 using BirdCageShopViewModel.Product;
 using BirdCageShopViewModel.ProductReviews;
 using BirdCageShopViewModel.Role;
+using Firebase.Storage;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Http.Results;
+
 
 namespace BirdCageShopService.Service
 {
@@ -291,6 +296,228 @@ namespace BirdCageShopService.Service
             return await _unitOfWork.SaveChangesAsync();
         }
 
-       
+        public async Task<IActionResult> CreateProductAsync(CreateProductViewModel requestBody)
+        {
+            var transaction = _unitOfWork.Transaction();
+            var category = await _unitOfWork.CategoryRepository.FirstOrDefaultAsync(c => c.Id == requestBody.CategoryId);
+
+            if (requestBody.files == null || requestBody.files.Count > 10 || requestBody.files.Count == 0)
+            {
+                return new Microsoft.AspNetCore.Mvc.StatusCodeResult(300);
+            }
+
+            if (category == null)
+            {
+                return new Microsoft.AspNetCore.Mvc.StatusCodeResult(404);
+            }
+
+            var birdType = await _unitOfWork.BirdCageTypeRepository.FirstOrDefaultAsync(b => b.Id == requestBody.BirdCageTypeId);
+
+            if (birdType == null)
+            {
+                return new Microsoft.AspNetCore.Mvc.StatusCodeResult(404);
+            }
+
+            var product = new Product
+            {
+                Title = requestBody.Title,
+                Description = requestBody.Description,
+                CategoryId = requestBody.CategoryId,
+                BirdCageTypeId = requestBody.BirdCageTypeId,
+                CreatedAt = DateTime.Now,
+                isDelete = false,
+                isEmpty = requestBody.isEmpty,
+                Price = requestBody.Price,
+                SKU = requestBody.SKU,
+                QuantityInStock = requestBody.QuantityInStock
+            };
+
+            if (requestBody.PercentDiscount != null)
+            {
+                product.PercentDiscount = requestBody.PercentDiscount / 100;
+                product.PriceAfterDiscount = product.Price - (product.Price * product.PercentDiscount);
+            }
+
+            await _unitOfWork.ProductRepository.AddAsync(product);
+            await _unitOfWork.SaveChangesAsync();
+
+            foreach (var item in requestBody.ProductSpecifications)
+            {
+                var productSpecifications = await _unitOfWork.SpecificationRepository.FirstOrDefaultAsync(p => p.Id == item);
+
+                if (productSpecifications == null)
+                {
+                    return new Microsoft.AspNetCore.Mvc.StatusCodeResult(404);
+                }
+                ProductSpecification productSpecification = new ProductSpecification
+                {
+                    ProductId = product.Id,
+                    SpecificationId = productSpecifications.Id
+                };
+
+                await _unitOfWork.ProductSpecificationsRepository.AddAsync(productSpecification);
+                await _unitOfWork.SaveChangesAsync();
+            }
+
+            if (requestBody.ProductFeature != null)
+            {
+                foreach (var feature in requestBody.ProductFeature)
+                {
+                    var productfeature = _unitOfWork.FeatureRepository.FirstOrDefault(p => p.Id == feature);
+
+                    if (productfeature == null)
+                    {
+                        return new Microsoft.AspNetCore.Mvc.StatusCodeResult(404);
+                    }
+
+                    ProductFeature productFeature = new ProductFeature
+                    {
+                        ProductId = product.Id,
+                        FeatureId = productfeature.Id
+                    };
+
+                    await _unitOfWork.ProductFeatureRepository.AddAsync(productFeature);
+                    await _unitOfWork.SaveChangesAsync();
+
+                }
+            }
+
+            var firstFile = requestBody.files[0];
+            foreach (var file in requestBody.files)
+            {
+                var imageItem = new ProductImage
+                {
+                    ImageUrl = await UploadProductImageToFirebase(file),
+                    CreatedAt = DateTime.Now,
+                    ProductId = product.Id,
+                    IsMainImage = (file == firstFile)
+                };
+
+                await _unitOfWork.ProductImageRepository.AddAsync(imageItem);
+            }
+
+            await _unitOfWork.SaveChangesAsync();
+
+            transaction.Commit();
+            return new OkObjectResult(await GetByIdAsync(product.Id));
+        }
+        public async Task<IActionResult> UpdateProductAsync(int id, UpdateProductViewModel requestBody)
+        {
+            var transaction = _unitOfWork.Transaction();
+            Product exitedProduct = await _unitOfWork.ProductRepository.GetByIdAsync(id);
+            if (exitedProduct == null)
+            {
+                return new Microsoft.AspNetCore.Mvc.StatusCodeResult(404);
+            }
+            var category = await _unitOfWork.CategoryRepository.FirstOrDefaultAsync(c => c.Id == requestBody.CategoryId);
+
+            if (requestBody.files == null || requestBody.files.Count > 10 || requestBody.files.Count == 0)
+            {
+                return new Microsoft.AspNetCore.Mvc.StatusCodeResult(300);
+            }
+
+            if (category == null)
+            {
+                return new Microsoft.AspNetCore.Mvc.StatusCodeResult(404);
+            }
+
+            var birdType = await _unitOfWork.BirdCageTypeRepository.FirstOrDefaultAsync(b => b.Id == requestBody.BirdCageTypeId);
+
+            if (birdType == null)
+            {
+                return new Microsoft.AspNetCore.Mvc.StatusCodeResult(404);
+            }
+            exitedProduct.Title = requestBody.Title;
+            exitedProduct.Description = requestBody.Description;
+            exitedProduct.CategoryId = requestBody.CategoryId;
+            exitedProduct.BirdCageTypeId = requestBody.BirdCageTypeId;
+            exitedProduct.ModifieldAt = DateTime.Now;
+            exitedProduct.isDelete = false;
+            exitedProduct.Price = requestBody.Price;
+            exitedProduct.EditedBy = requestBody.EditedBy;
+            exitedProduct.SKU = requestBody.SKU;
+            exitedProduct.QuantityInStock = requestBody.QuantityInStock;
+            exitedProduct.isEmpty = requestBody.isEmpty;
+
+            if (requestBody.PercentDiscount != null)
+            {
+                exitedProduct.PercentDiscount = requestBody.PercentDiscount / 100;
+                exitedProduct.PriceAfterDiscount = exitedProduct.Price - (exitedProduct.Price * exitedProduct.PercentDiscount);
+            }
+
+            _unitOfWork.ProductRepository.Update(exitedProduct);
+            await _unitOfWork.SaveChangesAsync();
+
+            foreach (var item in requestBody.ProductSpecifications)
+            {
+                var productSpecifications = await _unitOfWork.SpecificationRepository.FirstOrDefaultAsync(p => p.Id == item);
+
+                if (productSpecifications == null)
+                {
+                    return new Microsoft.AspNetCore.Mvc.StatusCodeResult(404);
+                }
+                ProductSpecification productSpecification = new ProductSpecification
+                {
+                    ProductId = exitedProduct.Id,
+                    SpecificationId = productSpecifications.Id
+                };
+
+                await _unitOfWork.ProductSpecificationsRepository.AddAsync(productSpecification);
+                await _unitOfWork.SaveChangesAsync();
+            }
+
+            if (requestBody.ProductFeature != null)
+            {
+                foreach (var feature in requestBody.ProductFeature)
+                {
+                    var productfeature = _unitOfWork.FeatureRepository.FirstOrDefault(p => p.Id == feature);
+
+                    if (productfeature == null)
+                    {
+                        return new Microsoft.AspNetCore.Mvc.StatusCodeResult(404);
+                    }
+
+                    ProductFeature productFeature = new ProductFeature
+                    {
+                        ProductId = exitedProduct.Id,
+                        FeatureId = productfeature.Id
+                    };
+
+                    _unitOfWork.ProductFeatureRepository.Update(productFeature);
+                    await _unitOfWork.SaveChangesAsync();
+
+                }
+            }
+
+            var firstFile = requestBody.files[0];
+            foreach (var file in requestBody.files)
+            {
+                var imageItem = new ProductImage
+                {
+                    ImageUrl = await UploadProductImageToFirebase(file),
+                    CreatedAt = DateTime.Now,
+                    ProductId = exitedProduct.Id,
+                    IsMainImage = (file == firstFile)
+                };
+
+                await _unitOfWork.ProductImageRepository.AddAsync(imageItem);
+            }
+
+            await _unitOfWork.SaveChangesAsync();
+
+            transaction.Commit();
+            return new OkObjectResult(await GetByIdAsync(exitedProduct.Id));
+        }
+
+        private async Task<string?> UploadProductImageToFirebase(IFormFile file)
+        {
+            var storage = new FirebaseStorage("swp2023-fc0eb.appspot.com");
+            var imageName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
+            var imageUrl = await storage.Child("images")
+                                        .Child(imageName)
+                                        .PutAsync(file.OpenReadStream());
+            return imageUrl;
+        }
     }
 }
+

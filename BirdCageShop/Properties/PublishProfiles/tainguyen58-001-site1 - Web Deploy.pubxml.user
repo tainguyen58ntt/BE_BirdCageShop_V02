@@ -7,17 +7,17 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword />
-    <History>True|2023-11-04T03:46:21.9235092Z;False|2023-11-04T10:45:28.3906265+07:00;False|2023-11-04T10:44:32.5626796+07:00;True|2023-11-04T10:28:42.8654573+07:00;False|2023-11-04T10:27:44.8470952+07:00;True|2023-11-03T18:34:47.3376507+07:00;</History>
+    <History>True|2023-11-08T02:46:28.4454975Z;False|2023-11-08T09:45:48.6429541+07:00;False|2023-11-08T09:44:55.8295596+07:00;True|2023-11-08T00:24:14.1036606+07:00;False|2023-11-08T00:23:17.3207882+07:00;True|2023-11-08T00:12:37.3157721+07:00;False|2023-11-08T00:09:11.7817111+07:00;True|2023-11-07T22:44:15.9517292+07:00;False|2023-11-07T22:43:07.8905772+07:00;True|2023-11-07T21:40:12.1938022+07:00;False|2023-11-07T21:39:07.0916830+07:00;True|2023-11-07T20:24:45.4469154+07:00;False|2023-11-07T20:22:01.2592947+07:00;True|2023-11-07T15:00:04.0097817+07:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
     <DestinationConnectionStrings Include="DefaultConnection">
-      <Value>Data Source=SQL5110.site4now.net%3bInitial Catalog=db_a9fe6c_birdcageshop11%3bUser Id=db_a9fe6c_birdcageshop11_admin%3bPassword=tainguyen58</Value>
+      <Value>Data Source=SQL5110.site4now.net%3bInitial Catalog=db_a9fe6c_birdcageshop12%3bUser Id=db_a9fe6c_birdcageshop12_admin%3bPassword=tainguyen58</Value>
     </DestinationConnectionStrings>
   </ItemGroup>
   <ItemGroup>
     <EFMigrations Include="BirdCageShopDbContext.Models.BirdCageShopContext">
-      <Value>Data Source=SQL5110.site4now.net%3bInitial Catalog=db_a9fe6c_birdcageshop11%3bUser Id=db_a9fe6c_birdcageshop11_admin%3bPassword=tainguyen58</Value>
+      <Value>Data Source=SQL5110.site4now.net%3bInitial Catalog=db_a9fe6c_birdcageshop12%3bUser Id=db_a9fe6c_birdcageshop12_admin%3bPassword=tainguyen58</Value>
     </EFMigrations>
   </ItemGroup>
 </Project>

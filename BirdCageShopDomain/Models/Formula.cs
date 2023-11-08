@@ -17,16 +17,20 @@ namespace BirdCageShopDomain.Models
         public int MaxHeight { get; set; }
         //public string Color { get; set; }
 
-        public string Material { get; set; }
+        //public string Material { get; set; }
         public int MinBars { get; set; }
         public int MaxBars { get; set; }
 
         public decimal Price { get; set; }
+
+        public bool isDelete { get; set; }
         public int? BirdCageTypeId { get; set; }
 
         public BirdCageType BirdCageType { get; set; }
 
-        public int? ConstructionTime { get; set; }  
+        public int? ConstructionTime { get; set; }
+
+        public virtual ICollection<FormulaSpecification> FormulaSpecifications { get; set; }
 
 
     }

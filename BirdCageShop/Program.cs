@@ -164,6 +164,12 @@ builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<IFormulaRepository, FormulaRepository>();
 builder.Services.AddScoped<IBirdCageTypeRepository, BirdCageTypeRepository>();
+builder.Services.AddScoped<IFormulaSpecificationRepository, FormulaSpecificationRepository>();
+builder.Services.AddScoped<ISpecificationRepository, SpecificationRepository>();
+builder.Services.AddScoped<IProductFeatureRepository, ProductFeatureRepository>();
+builder.Services.AddScoped<IProductSpecificationsRepository, ProductSpecificationsRepository>();
+builder.Services.AddScoped<IFeatureRepository, FeatureRepository>();
+builder.Services.AddScoped<IProductImageRepository, ProductImageRepository>();
 
 
 

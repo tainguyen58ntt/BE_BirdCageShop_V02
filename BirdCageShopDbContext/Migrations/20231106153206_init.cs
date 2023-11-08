@@ -312,10 +312,10 @@ namespace BirdCageShopDbContext.Migrations
                     MaxWidth = table.Column<int>(type: "int", nullable: false),
                     MinHeight = table.Column<int>(type: "int", nullable: false),
                     MaxHeight = table.Column<int>(type: "int", nullable: false),
-                    Material = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MinBars = table.Column<int>(type: "int", nullable: false),
                     MaxBars = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    isDelete = table.Column<bool>(type: "bit", nullable: false),
                     BirdCageTypeId = table.Column<int>(type: "int", nullable: true),
                     ConstructionTime = table.Column<int>(type: "int", nullable: true)
                 },
@@ -343,6 +343,7 @@ namespace BirdCageShopDbContext.Migrations
                     ModifieldAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     isDelete = table.Column<bool>(type: "bit", nullable: false),
+                    isEmpty = table.Column<bool>(type: "bit", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     SKU = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     QuantityInStock = table.Column<int>(type: "int", nullable: false),
@@ -362,6 +363,32 @@ namespace BirdCageShopDbContext.Migrations
                         name: "FK_Products_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FormulaSpecifications",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FormulaId = table.Column<int>(type: "int", nullable: false),
+                    SpecificationId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FormulaSpecifications", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_FormulaSpecifications_Formulas_FormulaId",
+                        column: x => x.FormulaId,
+                        principalTable: "Formulas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_FormulaSpecifications_Specification_SpecificationId",
+                        column: x => x.SpecificationId,
+                        principalTable: "Specification",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -570,10 +597,10 @@ namespace BirdCageShopDbContext.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "2caad810-40a1-48c4-83ec-82421f906618", "1", "Admin", "Admin" },
-                    { "9c800009-9cdd-45c8-a689-a226ace5321c", "3", "Staff", "Staff" },
-                    { "ab4fbe8f-1be3-4279-bbb9-2980cfe9a958", "2", "Customer", "Customer" },
-                    { "c2ceca79-3a26-46d8-8131-dd5b5c9797c5", "2", "Manager", "Manager" }
+                    { "78a0dba2-ccc3-4960-89d6-8ca5d098db2e", "2", "Customer", "Customer" },
+                    { "ad932f0d-be33-4f66-80a2-8f7e90133f80", "1", "Admin", "Admin" },
+                    { "c14712fb-84f4-4a42-bbc4-744f9e546fd8", "2", "Manager", "Manager" },
+                    { "f59da13a-1583-49d0-9aa5-405d2f53ccfa", "3", "Staff", "Staff" }
                 });
 
             migrationBuilder.InsertData(
@@ -633,6 +660,16 @@ namespace BirdCageShopDbContext.Migrations
                 name: "IX_Formulas_BirdCageTypeId",
                 table: "Formulas",
                 column: "BirdCageTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FormulaSpecifications_FormulaId",
+                table: "FormulaSpecifications",
+                column: "FormulaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FormulaSpecifications_SpecificationId",
+                table: "FormulaSpecifications",
+                column: "SpecificationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Order_ApplicationUserId",
@@ -744,7 +781,7 @@ namespace BirdCageShopDbContext.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Formulas");
+                name: "FormulaSpecifications");
 
             migrationBuilder.DropTable(
                 name: "OrderDetail");
@@ -775,6 +812,9 @@ namespace BirdCageShopDbContext.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Formulas");
 
             migrationBuilder.DropTable(
                 name: "Order");

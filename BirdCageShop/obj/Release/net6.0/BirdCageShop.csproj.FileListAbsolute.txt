@@ -214,3 +214,9 @@ D:\Semester 8\SWP391\v03_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\obj\Re
 D:\Semester 8\SWP391\v03_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\obj\Release\net6.0\BirdCageShop.pdb
 D:\Semester 8\SWP391\v03_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\obj\Release\net6.0\BirdCageShop.genruntimeconfig.cache
 D:\Semester 8\SWP391\v03_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\obj\Release\net6.0\ref\BirdCageShop.dll
+D:\Semester 8\SWP391\v03_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\bin\Release\net6.0\System.Net.Http.Formatting.dll
+D:\Semester 8\SWP391\v03_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\bin\Release\net6.0\System.Web.Http.dll
+D:\Semester 8\SWP391\v03_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\bin\Release\net6.0\Newtonsoft.Json.Bson.dll
+D:\Semester 8\SWP391\v03_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\bin\Release\net6.0\Firebase.Storage.dll
+D:\Semester 8\SWP391\v03_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\bin\Release\net6.0\Microsoft.DotNet.PlatformAbstractions.dll
+D:\Semester 8\SWP391\v03_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\bin\Release\net6.0\Microsoft.Extensions.DependencyModel.dll

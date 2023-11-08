@@ -14,7 +14,14 @@ namespace BirdCageShop.Controllers
         {
             _formulaService = formulaService;
         }
-
+        [HttpGet("page")]
+        public async Task<IActionResult> GetPageAsync([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
+        {
+            if (pageIndex < 0) return BadRequest("Page index cannot be negative");
+            if (pageSize <= 0) return BadRequest("Page size must greater than 0");
+            var result = await _formulaService.GetPageAsync(pageIndex, pageSize);
+            return Ok(result);
+        }
         [HttpGet]
         [Route("get-all")]
         public async Task<IActionResult> GetAllPF()
@@ -59,7 +66,7 @@ namespace BirdCageShop.Controllers
 
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> CreatePF([FromBody] CreateFormulaViewModel createFormulaViewModel)
+        public async Task<IActionResult> CreatePF([FromForm] CreateFormulaViewModel createFormulaViewModel)
         {
             try
             {

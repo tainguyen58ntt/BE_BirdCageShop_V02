@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BirdCageShopDomain\BirdCageShopDomain.csproj" />
     <ProjectReference Include="..\BirdCageShopUtils\BirdCageShopUtils.csproj" />
     <ProjectReference Include="..\BirdCageShopViewModel\BirdCageShopViewModel.csproj" />

@@ -1,4 +1,5 @@
 ﻿using BirdCageShopInterface.IRepositories;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,13 @@ namespace BirdCageShopInterface
         IOrderDetailRepository OrderDetailRepository { get; }
         IFormulaRepository FormulaRepository { get; }
         IBirdCageTypeRepository BirdCageTypeRepository { get; }
+        ISpecificationRepository SpecificationRepository { get; }
+        IFormulaSpecificationRepository FormulaSpecificationRepository { get; }
+        IFeatureRepository FeatureRepository { get; }
+        IProductImageRepository ProductImageRepository { get; }
+        IProductFeatureRepository ProductFeatureRepository { get; }
+        IProductSpecificationsRepository ProductSpecificationsRepository { get; }
         Task<bool> SaveChangesAsync();
+        public IDbContextTransaction Transaction();
     }
 }

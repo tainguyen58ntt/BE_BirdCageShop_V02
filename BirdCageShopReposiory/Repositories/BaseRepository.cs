@@ -15,9 +15,20 @@ namespace BirdCageShopReposiory.Repositories
     public class BaseRepository<TModel> : IBaseRepository<TModel> where TModel : class
     {
         protected readonly BirdCageShopContext _context;
+        protected readonly DbSet<TModel> _entities;
         public BaseRepository(BirdCageShopContext context)
         {
             _context = context;
+            _entities = context.Set<TModel>();
+        }
+        public TModel FirstOrDefault(Expression<Func<TModel, bool>> predicate)
+        {
+            return _entities.FirstOrDefault(predicate) ?? null!;
+        }
+
+        public async Task<TModel> FirstOrDefaultAsync(Expression<Func<TModel, bool>> predicate)
+        {
+            return await _entities.FirstOrDefaultAsync(predicate) ?? null!;
         }
         public async Task AddAsync(TModel entity)
         {

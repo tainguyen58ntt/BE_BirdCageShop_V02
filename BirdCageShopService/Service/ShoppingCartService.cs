@@ -237,7 +237,7 @@ namespace BirdCageShopService.Service
                     {
                         ProductId = x.ProductId,
                         Quantity = x.Count,
-                        Price = (x.Product.PriceAfterDiscount * x.Count + x.PriceDesign),
+                        Price = ((x.Product.PriceAfterDiscount + x.PriceDesign) * x.Count),
                         Model = x.Model,
                         Width = x.Width,
                         Height = x.Height,
@@ -364,11 +364,10 @@ namespace BirdCageShopService.Service
         {
             var currentUserId = _claimService.GetCurrentUserId();
             if (currentUserId == null) return false;
-            var firstProduct = await _unitOfWork.ProductRepository.FirstOrDefaultAsync();
             var product = await _unitOfWork.ProductRepository.GetByIdAsync(productId);
             if (product.QuantityInStock < 1) return false;
             var cartItem = await _unitOfWork.ShoppingCartRepository.GetCartItemByUserIdAndProDIdAsync(currentUserId, productId);
-            if (cartItem == null && productId != firstProduct.Id)
+            if (cartItem == null && product.isEmpty == false)
             {
                 cartItem = new ShoppingCart
                 {
@@ -381,7 +380,7 @@ namespace BirdCageShopService.Service
                 await _unitOfWork.ShoppingCartRepository.AddAsync(cartItem);
                 return await _unitOfWork.SaveChangesAsync();
             }
-            if (cartItem == null && productId == firstProduct.Id)
+            if (cartItem == null && product.isEmpty == true)
             {
                 cartItem = new ShoppingCart
                 {
