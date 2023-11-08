@@ -189,7 +189,8 @@ namespace BirdCageShop.Controllers
                 var options = new SessionCreateOptions
                 {
                     //SuccessUrl = domain + $"customer/cart/OrderConfirmation",
-                    SuccessUrl = domain + $"api/shoppingcart/OrderConfirmation?sessionId={{CHECKOUT_SESSION_ID}}&vmodel={Uri.EscapeDataString(JsonConvert.SerializeObject(confirmOrderAddViewModel))}&userId={currentUserId}",
+                    //SuccessUrl = domain + $"api/shoppingcart/OrderConfirmation?sessionId={{CHECKOUT_SESSION_ID}}&vmodel={Uri.EscapeDataString(JsonConvert.SerializeObject(confirmOrderAddViewModel))}&userId={currentUserId}",
+                    SuccessUrl = "http://localhost:3000/intro",
                     CancelUrl = domain + "/falure",
                     LineItems = new List<SessionLineItemOptions>(),
                     Mode = "payment",
@@ -215,44 +216,18 @@ namespace BirdCageShop.Controllers
                 var service = new SessionService();
                 Session session = service.Create(options);
 
-                //_unitOfWork.OrderHeader.UpdateStripePaymentID(shoppingCartVM.OrderHeader.Id, session.Id, session.PaymentIntentId);
-                //_unitOfWork.Save();
-                return Ok(new
-                {
-                    SessionId = session.Id,
-                    RedirectTo = session.Url
-                });
-            }
+                Console.WriteLine("Payment Status: " + session.PaymentStatus);
 
 
+                //test 
 
+                //if (session.PaymentStatus.ToLower() == "paid")
+                //{
 
-
-            //if (result is true) return Ok();
-
-            return Ok();
-            // checkout 
-
-
-            return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Check out from cart failed. Server Error." });
-        }
-
-        [HttpGet("OrderConfirmation")]
-        public async Task<IActionResult> OrderConfirmation(string sessionId, string vmodel, string userId) // truyen session id and confirm form
-        {
-            ConfirmOrderAddViewModel confirmOrderAddViewModel = JsonConvert.DeserializeObject<ConfirmOrderAddViewModel>(Uri.UnescapeDataString(vmodel));
-            var service = new SessionService();
-            Session session = service.Get(sessionId);
-
-            if (session.PaymentStatus.ToLower() == "paid")
-            {
-                //_unitOfWork.OrderHeader.UpdateStripePaymentID(id, session.Id, session.PaymentIntentId);
-                //_unitOfWork.OrderHeader.UpdateStatus(id, SD.StatusApproved, SD.PaymentStatusApproved);
-                //_unitOfWork.Save();
 
 
                 //get
-                List<ShoppingCart> shoppingCartss = (List<ShoppingCart>)await _unitOfWork.ShoppingCartRepository.GetShoppingCartsAsync(userId);
+                List<ShoppingCart> shoppingCartss = (List<ShoppingCart>)await _unitOfWork.ShoppingCartRepository.GetShoppingCartsAsync(_claimService.GetCurrentUserId());
                 decimal? totalPrice = 0;
                 decimal? beforeVoucherPrice = 0;
                 foreach (var x in shoppingCartss)
@@ -290,12 +265,7 @@ namespace BirdCageShop.Controllers
 
                 }
 
-                //order detail
 
-                /// update quatity in stock of product
-                ///
-
-                /// update quatity in stock of product
 
                 Order order = new Order();
                 if (confirmOrderAddViewModel.PaymentMethod.Equals(PaymentMethod.PAYONLINE))
@@ -304,7 +274,7 @@ namespace BirdCageShop.Controllers
                     {
                         order = new Order
                         {
-                            ApplicationUserId = userId,
+                            ApplicationUserId = _claimService.GetCurrentUserId(),
                             NameRecieved = confirmOrderAddViewModel.Name,
                             OrderDate = _timeService.GetCurrentTimeInVietnam(),
                             TotalPrice = totalPrice,
@@ -313,9 +283,9 @@ namespace BirdCageShop.Controllers
                             StreetAddress = confirmOrderAddViewModel.StreetAddress,
                             City = confirmOrderAddViewModel.City,
                             PaymentStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(7),   // PAYONLINE,
-
+                            ShipCost = 30000,
                             PaymentIntentId = session.PaymentIntentId,
-                            SessionId = sessionId,
+                            SessionId = session.Id,
                             Details = orderDetail
                         };
                     }
@@ -324,7 +294,7 @@ namespace BirdCageShop.Controllers
 
                         order = new Order
                         {
-                            ApplicationUserId = userId,
+                            ApplicationUserId = _claimService.GetCurrentUserId(),
                             NameRecieved = confirmOrderAddViewModel.Name,
                             OrderDate = _timeService.GetCurrentTimeInVietnam(),
                             TotalPrice = totalPrice,
@@ -334,8 +304,9 @@ namespace BirdCageShop.Controllers
                             City = confirmOrderAddViewModel.City,
                             PaymentStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(7),   // PAYONLINE,,
                             Details = orderDetail,
+                            ShipCost = 30000,
                             PaymentIntentId = session.PaymentIntentId,
-                            SessionId = sessionId,
+                            SessionId = session.Id,
 
                         };
                     }
@@ -352,54 +323,161 @@ namespace BirdCageShop.Controllers
 
 
                 //+delete shopping cart
-                await _unitOfWork.ShoppingCartRepository.DeleteShoppingCartsByUserIdAsync(userId);
+                await _unitOfWork.ShoppingCartRepository.DeleteShoppingCartsByUserIdAsync(_claimService.GetCurrentUserId());
 
                 await _unitOfWork.SaveChangesAsync();
+
+                //test
+
+
+
+
+
+
+
+
+                return Ok(new
+                {
+                    SessionId = session.Id,
+                    RedirectTo = session.Url
+                });
+
+
             }
-            //HttpContext.Session.Clear();
-
-
-            //OrderHeader orderHeader = _unitOfWork.OrderHeader.Get(u => u.Id == id, includeProperties: "ApplicationUser");
-            //if (orderHeader.PaymentStatus != SD.PaymentStatusDelayedPayment)
-            //{
-            //    //this is an order by customer
-
-            //    var service = new SessionService();
-            //    Session session = service.Get(orderHeader.SessionId);
-
-            //    if (session.PaymentStatus.ToLower() == "paid")
-            //    {
-            //        _unitOfWork.OrderHeader.UpdateStripePaymentID(id, session.Id, session.PaymentIntentId);
-            //        _unitOfWork.OrderHeader.UpdateStatus(id, SD.StatusApproved, SD.PaymentStatusApproved);
-            //        _unitOfWork.Save();
-            //    }
-            //    HttpContext.Session.Clear();
-
-            //}
 
 
 
-            //List<ShoppingCart> shoppingCarts = _unitOfWork.ShoppingCart
-            //    .GetAll(u => u.ApplicationUserId == orderHeader.ApplicationUserId).ToList();
+            //if (result is true) return Ok();
 
-            //_unitOfWork.ShoppingCart.RemoveRange(shoppingCarts);
-            //_unitOfWork.Save();
-
-            //return View(id);
+            return Ok();
+            // checkout 
 
 
-
-            //_emailSender.SendEmailAsync(orderHeader.ApplicationUser.Email, "New Order - Bulky Book",
-            //$"<p>New Order Created - {orderHeader.Id}</p>");
-
-            string url = "test url ";
-
-            return Ok(new
-            {
-                message = "Payment successful",
-                url = url
-            });
+            //return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Check out from cart failed. Server Error." });
         }
+
+        //[HttpGet("OrderConfirmation")]
+        //public async Task<IActionResult> OrderConfirmation(string sessionId, string vmodel, string userId) // truyen session id and confirm form
+        //{
+        //    ConfirmOrderAddViewModel confirmOrderAddViewModel = JsonConvert.DeserializeObject<ConfirmOrderAddViewModel>(Uri.UnescapeDataString(vmodel));
+        //    var service = new SessionService();
+        //    Session session = service.Get(sessionId);
+
+        //    if (session.PaymentStatus.ToLower() == "paid")
+        //    {
+
+
+
+        //        //get
+        //        List<ShoppingCart> shoppingCartss = (List<ShoppingCart>)await _unitOfWork.ShoppingCartRepository.GetShoppingCartsAsync(userId);
+        //        decimal? totalPrice = 0;
+        //        decimal? beforeVoucherPrice = 0;
+        //        foreach (var x in shoppingCartss)
+        //        {
+        //            beforeVoucherPrice += (x.Product.PriceAfterDiscount * x.Count);
+        //        }
+
+        //        if (confirmOrderAddViewModel.VourcherCode != null)
+        //        {
+        //            //get discount of voucher and update Total
+        //            var vourcher = await _unitOfWork.VoucherRepository.GetVoucherByCodeAsync(confirmOrderAddViewModel.VourcherCode);
+        //            totalPrice = beforeVoucherPrice - beforeVoucherPrice * vourcher.DiscountPercent;
+        //        }
+        //        else
+        //        {
+
+        //            totalPrice = beforeVoucherPrice;
+        //        }
+
+        //        //+update to orderdetail
+        //        List<OrderDetail> orderDetail = new List<OrderDetail>();
+        //        foreach (var x in shoppingCartss)
+        //        {
+        //            OrderDetail _orderDetail = new OrderDetail()
+        //            {
+
+        //                ProductId = x.ProductId,
+        //                Quantity = x.Count,
+        //                Price = (x.Product.PriceAfterDiscount * x.Count)
+
+
+        //            };
+        //            orderDetail.Add(_orderDetail);
+        //            //await _unitOfWork.OrderDetailRepository.AddAsync(orderDetail);
+
+        //        }
+
+
+
+        //        Order order = new Order();
+        //        if (confirmOrderAddViewModel.PaymentMethod.Equals(PaymentMethod.PAYONLINE))
+        //        {
+        //            if (confirmOrderAddViewModel.VourcherCode != null)
+        //            {
+        //                order = new Order
+        //                {
+        //                    ApplicationUserId = userId,
+        //                    NameRecieved = confirmOrderAddViewModel.Name,
+        //                    OrderDate = _timeService.GetCurrentTimeInVietnam(),
+        //                    TotalPrice = totalPrice,
+        //                    OrderStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(1),  // pending,
+        //                    PhoneNumber = confirmOrderAddViewModel.Phone,
+        //                    StreetAddress = confirmOrderAddViewModel.StreetAddress,
+        //                    City = confirmOrderAddViewModel.City,
+        //                    PaymentStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(7),   // PAYONLINE,
+
+        //                    PaymentIntentId = session.PaymentIntentId,
+        //                    SessionId = sessionId,
+        //                    Details = orderDetail
+        //                };
+        //            }
+        //            else
+        //            {
+
+        //                order = new Order
+        //                {
+        //                    ApplicationUserId = userId,
+        //                    NameRecieved = confirmOrderAddViewModel.Name,
+        //                    OrderDate = _timeService.GetCurrentTimeInVietnam(),
+        //                    TotalPrice = totalPrice,
+        //                    OrderStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(1),  // pending,,
+        //                    PhoneNumber = confirmOrderAddViewModel.Phone,
+        //                    StreetAddress = confirmOrderAddViewModel.StreetAddress,
+        //                    City = confirmOrderAddViewModel.City,
+        //                    PaymentStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(7),   // PAYONLINE,,
+        //                    Details = orderDetail,
+        //                    PaymentIntentId = session.PaymentIntentId,
+        //                    SessionId = sessionId,
+
+        //                };
+        //            }
+
+
+        //        }
+
+
+
+        //        await _unitOfWork.OrderRepository.AddAsync(order);
+
+
+
+
+
+        //        //+delete shopping cart
+        //        await _unitOfWork.ShoppingCartRepository.DeleteShoppingCartsByUserIdAsync(userId);
+
+        //        await _unitOfWork.SaveChangesAsync();
+        //    }
+
+
+        //    string url = "test url ";
+
+        //    return Ok(new
+        //    {
+        //        message = "Payment successful",
+        //        url = url
+        //    });
+        //}
 
 
 
