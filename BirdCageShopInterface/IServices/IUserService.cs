@@ -22,6 +22,8 @@ namespace BirdCageShopInterface.IServices
         ////
         Task<IEnumerable<UserViewModel>> GetUserAsync();
 
+        //Task<Pagination<UserViewModel>> GetUserPageAsync(int pageIndex, int pageSize);
+
         Task<bool> IsProductPurchasedByCustomer(int productId);
 
         Task<Pagination<OrderWithDetailViewModel>> GetOrderHistoryAsync(int pageIndex, int pageSize);

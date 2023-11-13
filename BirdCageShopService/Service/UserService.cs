@@ -213,7 +213,7 @@ namespace BirdCageShopService.Service
             user.NormalizedEmail = vm.Email.ToUpper();
             user.Gender = vm.Gender;
             user.PhoneNumber = vm.PhoneNumber;
-            user.DoB = (DateTime)vm.DoB;
+            //user.DoB = (DateTime)vm.DoB;
             
 
             //var userUpdate =  await _userManager.UpdateAsync(user);

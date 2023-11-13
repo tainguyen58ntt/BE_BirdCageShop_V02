@@ -78,6 +78,7 @@ namespace BirdCageShopService.Service
             var result = await _unitOfWork.OrderRepository.GetByIdToUpdateStatusToShippedAsync(id);
             if (result == null) return false;
             result.OrderStatus = "Shipped";
+            result.ShippingDate = _timeService.GetCurrentTimeInVietnam();
             _unitOfWork.OrderRepository.Update(result);
             return await _unitOfWork.SaveChangesAsync();
         }

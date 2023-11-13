@@ -4,6 +4,7 @@ using BirdCageShopDomain.Models;
 using BirdCageShopInterface;
 using BirdCageShopInterface.IServices;
 using BirdCageShopUtils.Pagination;
+using BirdCageShopViewModel.Feature;
 using BirdCageShopViewModel.Formula;
 using BirdCageShopViewModel.Product;
 using Microsoft.Extensions.Configuration;
@@ -75,13 +76,31 @@ namespace BirdCageShopService.Service
             var result = await _unitOfWork.FormulaRepository.GetPaginationAsync(pageIndex, pageSize);
             return _mapper.Map<Pagination<FormulaViewModel>>(result);
         }
+        public async Task<List<FormulaViewModel>> GetAllFromulaAsync()
+        {
+            try
+            {
+                IEnumerable<Formula> formulas = await _unitOfWork.FormulaRepository.GetAllAsync();
+                List<FormulaViewModel> formulaViewModels = _mapper.Map<List<FormulaViewModel>>(
+                     (await _unitOfWork.FormulaRepository.GetAllAsync())
+                     
+                );
+
+                return formulaViewModels;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public async Task<List<FormulaViewModel>> GetAllAsync()
         {
             try
             {
                 IEnumerable<Formula> formulas = await _unitOfWork.FormulaRepository.GetAllAsync();
                 List<FormulaViewModel> formulaViewModels = _mapper.Map<List<FormulaViewModel>>(
-                     await _unitOfWork.FormulaRepository.GetAllAsync()
+                     (await _unitOfWork.FormulaRepository.GetAllAsync())
+                     .Where(f => f.isDelete == false)
                 );
 
                 return formulaViewModels;
@@ -111,6 +130,16 @@ namespace BirdCageShopService.Service
             {
                 throw new Exception(ex.Message);
             }
+        }
+        public async Task<FormulaViewModel> GetFormulaById(int key)
+        {
+            Formula feature = await _unitOfWork.FormulaRepository.GetByIdAsync(key);
+            if (feature == null)
+            {
+                throw new Exception("Please enter the correct information!!! ");
+            }
+            var result = _mapper.Map<FormulaViewModel>(feature);
+            return result;
         }
 
         public async Task UpdateFormulaAsync(int key, UpdateFormulaViewModel updateFormulaViewModel)
@@ -169,6 +198,7 @@ namespace BirdCageShopService.Service
                 {
                     existedFormula.ConstructionTime = (int)updateFormulaViewModel.ConstructionTime;
                 }
+                existedFormula.isDelete= updateFormulaViewModel.isDelete;
                 foreach (var item in updateFormulaViewModel.Specifications)
                 {
                     var formulaSpecifications = await _unitOfWork.SpecificationRepository.FirstOrDefaultAsync(p => p.Id == item);
@@ -182,8 +212,9 @@ namespace BirdCageShopService.Service
                         FormulaId = existedFormula.Id,
                         SpecificationId = formulaSpecifications.Id
                     };
-                    await _unitOfWork.FormulaSpecificationRepository.AddAsync(formulaSpecification);
-                    await _unitOfWork.SaveChangesAsync();
+                    /* FormulaSpecification
+                      _unitOfWork.FormulaSpecificationRepository.Update(formulaSpecification);
+                      await _unitOfWork.SaveChangesAsync();*/
                 }
                 _unitOfWork.FormulaRepository.Update(existedFormula);
                 await _unitOfWork.SaveChangesAsync();
@@ -194,6 +225,30 @@ namespace BirdCageShopService.Service
                 throw new Exception(ex.Message);
             }
 
+        }
+        public async Task DeleteFormula(int key)
+        {
+            Formula existedFormula = await _unitOfWork.FormulaRepository.GetByIdAsync(key);
+
+            if (existedFormula == null)
+            {
+                throw new Exception("Formula Id does not exist in the system.");
+            }
+            existedFormula.isDelete = true;
+            _unitOfWork.FormulaRepository.Update(existedFormula);
+            await _unitOfWork.SaveChangesAsync();
+        }
+        public async Task UpdateFormula(int key)
+        {
+            Formula existedFormula = await _unitOfWork.FormulaRepository.GetByIdAsync(key);
+
+            if (existedFormula == null)
+            {
+                throw new Exception("Formula Id does not exist in the system.");
+            }
+            existedFormula.isDelete = false;
+            _unitOfWork.FormulaRepository.Update(existedFormula);
+            await _unitOfWork.SaveChangesAsync();
         }
     }
 }

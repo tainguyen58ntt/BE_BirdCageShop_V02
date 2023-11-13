@@ -302,6 +302,36 @@ namespace BirdCageShopDbContext.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Designs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PriceDesign = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    Model = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Width = table.Column<int>(type: "int", nullable: true),
+                    Height = table.Column<int>(type: "int", nullable: true),
+                    Material = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Bars = table.Column<int>(type: "int", nullable: true),
+                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    BirdCageTypeId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Designs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Designs_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Designs_BirdCageTypes_BirdCageTypeId",
+                        column: x => x.BirdCageTypeId,
+                        principalTable: "BirdCageTypes",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Formulas",
                 columns: table => new
                 {
@@ -542,6 +572,7 @@ namespace BirdCageShopDbContext.Migrations
                     ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TypeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PriceDesign = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     Model = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Width = table.Column<int>(type: "int", nullable: true),
@@ -597,10 +628,10 @@ namespace BirdCageShopDbContext.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "78a0dba2-ccc3-4960-89d6-8ca5d098db2e", "2", "Customer", "Customer" },
-                    { "ad932f0d-be33-4f66-80a2-8f7e90133f80", "1", "Admin", "Admin" },
-                    { "c14712fb-84f4-4a42-bbc4-744f9e546fd8", "2", "Manager", "Manager" },
-                    { "f59da13a-1583-49d0-9aa5-405d2f53ccfa", "3", "Staff", "Staff" }
+                    { "03d3ecbe-1dfe-4ba2-864c-834c1436b7f5", "2", "Manager", "Manager" },
+                    { "112dfcf5-0a44-4550-8fcc-99ed2be57b7e", "3", "Staff", "Staff" },
+                    { "1280c21e-fdae-416a-8e12-5010f518ebc3", "2", "Customer", "Customer" },
+                    { "cee31bca-3907-4d33-96ff-59df66ab2ad0", "1", "Admin", "Admin" }
                 });
 
             migrationBuilder.InsertData(
@@ -655,6 +686,16 @@ namespace BirdCageShopDbContext.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Designs_ApplicationUserId",
+                table: "Designs",
+                column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Designs_BirdCageTypeId",
+                table: "Designs",
+                column: "BirdCageTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Formulas_BirdCageTypeId",
@@ -779,6 +820,9 @@ namespace BirdCageShopDbContext.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Designs");
 
             migrationBuilder.DropTable(
                 name: "FormulaSpecifications");

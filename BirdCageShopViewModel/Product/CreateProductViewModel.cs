@@ -19,7 +19,7 @@ namespace BirdCageShopViewModel.Product
         [Required]
         public int BirdCageTypeId { get; set; }
         [Required]
-        [Range(150000, 9000000, ErrorMessage = "Price invalid.")]
+        [Range(50000, 15000000, ErrorMessage = "Price invalid.")]
         public decimal Price { get; set; }
         [Required]
         public string SKU { get; set; }
@@ -27,11 +27,12 @@ namespace BirdCageShopViewModel.Product
         [Range(0, 300, ErrorMessage = "Quantity invalid.")]
         public int QuantityInStock { get; set; }
         [Range(0, 100, ErrorMessage = "PercentDiscount invalid.")]
+
         public decimal? PercentDiscount { get; set; }
         public bool isEmpty { get; set; }
         public ICollection<int> ProductSpecifications { get; set; } 
 
-        public ICollection<int?> ProductFeature { get; set; }
+        public ICollection<int?> ProductFeature { get; set; } 
         [Required]
         public List<IFormFile> files { get; set; } = new List<IFormFile>();
 

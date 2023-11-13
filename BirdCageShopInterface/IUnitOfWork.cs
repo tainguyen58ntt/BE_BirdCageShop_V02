@@ -29,6 +29,7 @@ namespace BirdCageShopInterface
         IProductImageRepository ProductImageRepository { get; }
         IProductFeatureRepository ProductFeatureRepository { get; }
         IProductSpecificationsRepository ProductSpecificationsRepository { get; }
+        IDesignRepository DesignRepository { get; }
         Task<bool> SaveChangesAsync();
         public IDbContextTransaction Transaction();
     }

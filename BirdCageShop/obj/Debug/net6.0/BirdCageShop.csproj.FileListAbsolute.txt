@@ -201,7 +201,6 @@ D:\Semester 8\SWP391\v03_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\bin\De
 D:\Semester 8\SWP391\v03_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\obj\Debug\net6.0\BirdCageShop.csproj.AssemblyReference.cache
 D:\Semester 8\SWP391\v03_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\obj\Debug\net6.0\BirdCageShop.GeneratedMSBuildEditorConfig.editorconfig
 D:\Semester 8\SWP391\v03_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\obj\Debug\net6.0\BirdCageShop.csproj.CoreCompileInputs.cache
-D:\Semester 8\SWP391\v03_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\obj\Debug\net6.0\BirdCageShop.MvcApplicationPartsAssemblyInfo.cs
 D:\Semester 8\SWP391\v03_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\obj\Debug\net6.0\BirdCageShop.MvcApplicationPartsAssemblyInfo.cache
 D:\Semester 8\SWP391\v03_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\obj\Debug\net6.0\staticwebassets\msbuild.BirdCageShop.Microsoft.AspNetCore.StaticWebAssets.props
 D:\Semester 8\SWP391\v03_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\obj\Debug\net6.0\staticwebassets\msbuild.build.BirdCageShop.props
@@ -220,3 +219,4 @@ D:\Semester 8\SWP391\v03_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\bin\De
 D:\Semester 8\SWP391\v03_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\bin\Debug\net6.0\Firebase.Storage.dll
 D:\Semester 8\SWP391\v03_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\bin\Debug\net6.0\Microsoft.DotNet.PlatformAbstractions.dll
 D:\Semester 8\SWP391\v03_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+D:\Semester 8\SWP391\v03_BE_BirdCageShop\BE_BirdCageShop_V02\BirdCageShop\obj\Debug\net6.0\BirdCageShop.MvcApplicationPartsAssemblyInfo.cs

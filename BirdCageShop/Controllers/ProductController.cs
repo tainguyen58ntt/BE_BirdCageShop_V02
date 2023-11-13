@@ -17,14 +17,16 @@ namespace BirdCageShop.Controllers
     {
         private readonly IProductService _productService;
         private readonly IUserService _userService;
+        private readonly ICategoryService _categoryService;
 
         private readonly IProductReviewService _productReviewService;
 
-        public ProductController(IUserService userService, IProductService productService, IProductReviewService productReviewService)
+        public ProductController(ICategoryService categoryService, IUserService userService, IProductService productService, IProductReviewService productReviewService)
         {
             _productService = productService;
             _productReviewService = productReviewService;
             _userService = userService;
+            _categoryService = categoryService;
         }
 
 
@@ -47,6 +49,7 @@ namespace BirdCageShop.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Lỗi hệ thống");
             }
         }
+
 
 
         [HttpPut("update")]
@@ -82,10 +85,21 @@ namespace BirdCageShop.Controllers
 
         [HttpGet("by-category/{categoryId}")]
         public async Task<IActionResult> GetByCategoryAsync([FromRoute] int categoryId, [FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
-        {
+       {
             if (pageIndex < 0) return BadRequest("Page index cannot be negative");
             if (pageSize <= 0) return BadRequest("Page size must greater than 0");
+
+            //
+            var category = await _categoryService.GetByIdAsync(categoryId);
+            if (category is null) return NotFound("Not found that category Id");
+            //
             var result = await _productService.GetByCagegoryTypePageAsync(categoryId, pageIndex, pageSize);
+            return Ok(result);
+        }
+        [HttpGet()]
+        public async Task<IActionResult> GetProductForDesign()
+        {
+            var result = await _productService.GetProductForDesign();
             return Ok(result);
         }
 
@@ -98,7 +112,7 @@ namespace BirdCageShop.Controllers
             return Ok(result);
         }
 
-    
+      
 
 
         [HttpGet("page")]
@@ -107,6 +121,14 @@ namespace BirdCageShop.Controllers
             if (pageIndex < 0) return BadRequest("Page index cannot be negative");
             if (pageSize <= 0) return BadRequest("Page size must greater than 0");
             var result = await _productService.GetPageAsync(pageIndex, pageSize);
+            return Ok(result);
+        }
+        [HttpGet("get-all-product/page")]
+        public async Task<IActionResult> GetAllPageAsync([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
+        {
+            if (pageIndex < 0) return BadRequest("Page index cannot be negative");
+            if (pageSize <= 0) return BadRequest("Page size must greater than 0");
+            var result = await _productService.GetAllPageAsync(pageIndex, pageSize);
             return Ok(result);
         }
 
@@ -125,7 +147,7 @@ namespace BirdCageShop.Controllers
         [Authorize(Roles = "Manager")]
         public async Task<IActionResult> RecoverAsync(int id)
         {
-            var product = await _productService.GetByIdInCludeProductDeletedAsync(id);
+            var product = await _productService.GetByIdProductDeletedAsync(id);
             if (product is null) return NotFound();
             var result = await _productService.RecoverAsync(product);
             if (result is true) return Ok();

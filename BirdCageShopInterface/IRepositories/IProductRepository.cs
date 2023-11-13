@@ -1,4 +1,5 @@
 ﻿using BirdCageShopDbContext.Models;
+using BirdCageShopUtils.Pagination;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,13 +13,16 @@ namespace BirdCageShopInterface.IRepositories
 
 
 		Task<IEnumerable<Product>> GetProductsByCategoryAsync(int categoryId);
-		Task<Product> GetProductWithReviewByProIdAsync(int productID);
+        Task<IEnumerable<Product>> GetProductForDesign();
+		Task<Product?> GetProductEmptyByIdAsync(int id);
+		Task<Pagination<Product>> GetPaginationAllProductAsync(int pageIndex, int pageSize);
+        Task<Product> GetProductWithReviewByProIdAsync(int productID);
 		Task<Product?> GetProductByProductIdAndCustomerIdAsync(string customerId, int productId);
 
 		Task<Product> GetProductIncludeImage(int productID);
 		Task<IEnumerable<Product>> GetProductsFromWishlistAsync(string customerId);
 
-        Task<Product> GetByIdInCludeProductDeletedAsync(int productID);
+        Task<Product> GetByIdProductDeletedAsync(int productID);
         Task<Product?> FirstOrDefaultAsync();
 
 

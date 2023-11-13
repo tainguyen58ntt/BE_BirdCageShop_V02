@@ -21,6 +21,8 @@ namespace BirdCageShopDomain.Models
 		public virtual ApplicationUser ApplicationUser { get; set; } = null!;
 		public virtual Product Product { get; set; } = null!;
 
+
+        public string? TypeName { get; set; }
         public decimal? PriceDesign { get; set; }
         //[NotMapped]
         //public double Price { get; set; }

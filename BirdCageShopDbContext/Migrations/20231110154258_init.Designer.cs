@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BirdCageShopDbContext.Migrations
 {
     [DbContext(typeof(BirdCageShopContext))]
-    [Migration("20231106153206_init")]
+    [Migration("20231110154258_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -422,6 +422,47 @@ namespace BirdCageShopDbContext.Migrations
                     b.ToTable("BirdCageTypes");
                 });
 
+            modelBuilder.Entity("BirdCageShopDomain.Models.Design", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("Bars")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("BirdCageTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Height")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Material")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Model")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("PriceDesign")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("Width")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("BirdCageTypeId");
+
+                    b.ToTable("Designs");
+                });
+
             modelBuilder.Entity("BirdCageShopDomain.Models.Feature", b =>
                 {
                     b.Property<int>("Id")
@@ -605,6 +646,9 @@ namespace BirdCageShopDbContext.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
+                    b.Property<string>("TypeName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("Width")
                         .HasColumnType("int");
 
@@ -700,28 +744,28 @@ namespace BirdCageShopDbContext.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ad932f0d-be33-4f66-80a2-8f7e90133f80",
+                            Id = "cee31bca-3907-4d33-96ff-59df66ab2ad0",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "78a0dba2-ccc3-4960-89d6-8ca5d098db2e",
+                            Id = "1280c21e-fdae-416a-8e12-5010f518ebc3",
                             ConcurrencyStamp = "2",
                             Name = "Customer",
                             NormalizedName = "Customer"
                         },
                         new
                         {
-                            Id = "c14712fb-84f4-4a42-bbc4-744f9e546fd8",
+                            Id = "03d3ecbe-1dfe-4ba2-864c-834c1436b7f5",
                             ConcurrencyStamp = "2",
                             Name = "Manager",
                             NormalizedName = "Manager"
                         },
                         new
                         {
-                            Id = "f59da13a-1583-49d0-9aa5-405d2f53ccfa",
+                            Id = "112dfcf5-0a44-4550-8fcc-99ed2be57b7e",
                             ConcurrencyStamp = "3",
                             Name = "Staff",
                             NormalizedName = "Staff"
@@ -1036,6 +1080,21 @@ namespace BirdCageShopDbContext.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("BirdCageShopDomain.Models.Design", b =>
+                {
+                    b.HasOne("BirdCageShopDbContext.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("Designs")
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.HasOne("BirdCageShopDomain.Models.BirdCageType", "BirdCageType")
+                        .WithMany("Designs")
+                        .HasForeignKey("BirdCageTypeId");
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("BirdCageType");
+                });
+
             modelBuilder.Entity("BirdCageShopDomain.Models.Formula", b =>
                 {
                     b.HasOne("BirdCageShopDomain.Models.BirdCageType", "BirdCageType")
@@ -1206,6 +1265,8 @@ namespace BirdCageShopDbContext.Migrations
 
             modelBuilder.Entity("BirdCageShopDomain.Models.BirdCageType", b =>
                 {
+                    b.Navigation("Designs");
+
                     b.Navigation("Formulas");
 
                     b.Navigation("Products");
@@ -1223,6 +1284,8 @@ namespace BirdCageShopDbContext.Migrations
 
             modelBuilder.Entity("BirdCageShopDbContext.Models.ApplicationUser", b =>
                 {
+                    b.Navigation("Designs");
+
                     b.Navigation("Orders");
 
                     b.Navigation("ProductReviews");

@@ -29,11 +29,11 @@ namespace BirdCageShopReposiory.Repositories
                 .Where(x => !x.isDelete)
                 .ToListAsync();
         }
-        public async Task<Product> GetByIdInCludeProductDeletedAsync(int productID)
+        public async Task<Product> GetByIdProductDeletedAsync(int productID)
         {
             return await _context.Set<Product>()
               .AsNoTracking()
-               .Where(x => x.Id == productID)
+               .Where(x => x.Id == productID && x.isDelete == true)
           .FirstOrDefaultAsync();
         }
 
@@ -41,7 +41,21 @@ namespace BirdCageShopReposiory.Repositories
         {
             return await _context.Set<Product>()
                 .AsNoTracking()
-                 .Where(x => x.Id == id)
+                 .Where(x => x.Id == id && x.isDelete == false)
+                 .Include(p => p.ProductSpecifications)
+            .ThenInclude(ps => ps.Specification)
+                .Include(p => p.ProductFeatures)
+            .ThenInclude(ps => ps.Feature)
+             .Include(p => p.ProductReviews.Where(pr => pr.IsDelete == false))
+                .ThenInclude(pr => pr.ApplicationUser)
+            .Include(p => p.ProductImages).FirstOrDefaultAsync();
+
+        }
+        public virtual async Task<Product?> GetProductEmptyByIdAsync(int id)
+        {
+            return await _context.Set<Product>()
+                .AsNoTracking()
+                 .Where(x => x.Id == id && x.isDelete == false)
                  .Include(p => p.ProductSpecifications)
             .ThenInclude(ps => ps.Specification)
                 .Include(p => p.ProductFeatures)
@@ -56,7 +70,7 @@ namespace BirdCageShopReposiory.Repositories
             var totalCount = await _context.Set<Product>().CountAsync();
             var items = await _context.Set<Product>()
                 .AsNoTracking()
-
+               .Where(p => p.isEmpty == false && p.isDelete == false)
                    .Include(p => p.ProductSpecifications)
             .ThenInclude(ps => ps.Specification)
                 .Include(p => p.ProductFeatures)
@@ -76,7 +90,43 @@ namespace BirdCageShopReposiory.Repositories
 
             return result;
         }
+        public async Task<Pagination<Product>> GetPaginationAllProductAsync(int pageIndex, int pageSize)
+        {
+            var totalCount = await _context.Set<Product>().CountAsync();
+            var items = await _context.Set<Product>()
+                .AsNoTracking()
+                   .Include(p => p.ProductSpecifications)
+            .ThenInclude(ps => ps.Specification)
+                .Include(p => p.ProductFeatures)
+            .ThenInclude(ps => ps.Feature)
+            .Include(p => p.ProductImages)
 
+                .Skip(pageSize * pageIndex)
+                .Take(pageSize)
+                .ToListAsync();
+            var result = new Pagination<Product>()
+            {
+                Items = items,
+                PageIndex = pageIndex,
+                PageSize = pageSize,
+                TotalItemsCount = totalCount
+            };
+
+            return result;
+        }
+        public async Task<IEnumerable<Product>> GetProductForDesign()
+        {
+            return await _context.Set<Product>()
+                
+               .Include(p => p.ProductFeatures)
+               .Include(p => p.ProductSpecifications)
+               .Include(p => p.ProductImages)
+               .Include(p => p.Category)
+                  //.Include(x => x.ProductWishlist)
+                  .Where(x => !x.isDelete && x.isEmpty == true)
+                  .ToListAsync();          
+        }
+           
         public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(int categoryId)
         {
             return await _context.Set<Product>()

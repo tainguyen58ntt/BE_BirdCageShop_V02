@@ -10,6 +10,7 @@ using BirdCageShopViewModel.ShoppingCart;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyModel;
 using Newtonsoft.Json;
 using Stripe.Checkout;
 
@@ -43,10 +44,18 @@ namespace BirdCageShop.Controllers
             decimal total = 0;
             foreach (var cart in shoppingCarts)
             {
+                if (cart.ProductViewModel.PercentDiscount == null || cart.ProductViewModel.PercentDiscount == 0)
+                {
+
+                    total += cart.ProductViewModel.Price * cart.Count;
+                }
+                else
+                {
+                    total += cart.ProductViewModel.PriceAfterDiscount * cart.Count;
+                }
 
                 //cart.pricePerUnit = GetPriceBasedOnQuantity(cart);
                 //total += (cart.pricePerUnit * cart.Count);
-                total += cart.ProductViewModel.PriceAfterDiscount * cart.Count;
             }
 
 
@@ -112,13 +121,13 @@ namespace BirdCageShop.Controllers
 
 
         [HttpPost("update-cart/{productId}")]  // use for update and add
-        public async Task<IActionResult> AddItemFromShoppingCart([FromRoute] int productId, [FromQuery] int count, [FromForm] ShoppingCartDesignViewModel? shoppingCartDesignViewModel)
+        public async Task<IActionResult> AddItemFromShoppingCart([FromRoute] int productId, [FromQuery] int count)
         {
             // check exist product in db 
             var existProduct = await _shoppingCartService.ExistProductAsync(productId);
             if (existProduct == null) return BadRequest(new { property = "Product ID", message = "Product does not exist" });
             // check if pro exist in cart  -> update count == count
-            var existProductCart = await _shoppingCartService.CreateOrUpdateAsync(productId, count, shoppingCartDesignViewModel);
+                var existProductCart = await _shoppingCartService.CreateOrUpdateAsync(productId, count);
             if (existProductCart == true) return Ok();
             return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Add to cart failed. Server Error" });
 
@@ -190,7 +199,7 @@ namespace BirdCageShop.Controllers
                 {
                     //SuccessUrl = domain + $"customer/cart/OrderConfirmation",
                     //SuccessUrl = domain + $"api/shoppingcart/OrderConfirmation?sessionId={{CHECKOUT_SESSION_ID}}&vmodel={Uri.EscapeDataString(JsonConvert.SerializeObject(confirmOrderAddViewModel))}&userId={currentUserId}",
-                    SuccessUrl = "http://localhost:3000/intro",
+                    SuccessUrl = "https://bird-cage-project.vercel.app/intro",
                     CancelUrl = domain + "/falure",
                     LineItems = new List<SessionLineItemOptions>(),
                     Mode = "payment",
@@ -198,11 +207,21 @@ namespace BirdCageShop.Controllers
 
                 foreach (var item in shoppingCarts)
                 {
+                    decimal? price = 0;
+                    if(item.Product.PercentDiscount == 0 || item.Product.PercentDiscount == null)
+                    {
+                        price = item.Product.Price + 30000;
+                    }
+                    else
+                    {
+                        price = item.Product.PriceAfterDiscount + 30000;
+                    }
                     var sessionLineItem = new SessionLineItemOptions
                     {
                         PriceData = new SessionLineItemPriceDataOptions
                         {
-                            UnitAmount = (long)(item.Product.Price),
+                            //UnitAmount = (long)(item.Product.Price),
+                            UnitAmount = (long)price,
                             Currency = "vnd",
                             ProductData = new SessionLineItemPriceDataProductDataOptions
                             {
@@ -232,7 +251,16 @@ namespace BirdCageShop.Controllers
                 decimal? beforeVoucherPrice = 0;
                 foreach (var x in shoppingCartss)
                 {
-                    beforeVoucherPrice += (x.Product.PriceAfterDiscount * x.Count);
+                    //beforeVoucherPrice += (x.Product.PriceAfterDiscount * x.Count);
+                    if (x.Product.PercentDiscount == null || x.Product.PercentDiscount == 0)
+                    {
+                        beforeVoucherPrice += x.Product.Price * x.Count;
+                    }
+                    else
+                    {
+
+                        beforeVoucherPrice += (x.Product.PriceAfterDiscount * x.Count);
+                    }
                 }
 
                 if (confirmOrderAddViewModel.VourcherCode != null)
@@ -251,15 +279,24 @@ namespace BirdCageShop.Controllers
                 List<OrderDetail> orderDetail = new List<OrderDetail>();
                 foreach (var x in shoppingCartss)
                 {
+                    decimal? price = 0;
+                    if(x.Product.PercentDiscount == 0 || x.Product.PercentDiscount == null)
+                    {
+                        price = x.Product.Price;
+                    }
+                    else
+                    {
+                        price = x.Product.PriceAfterDiscount;
+                    }
                     OrderDetail _orderDetail = new OrderDetail()
                     {
 
                         ProductId = x.ProductId,
                         Quantity = x.Count,
-                        Price = (x.Product.PriceAfterDiscount * x.Count)
-
-
-                    };
+                        //Price = (x.Product.PriceAfterDiscount * x.Count)
+                        //Price = x.Product.PriceAfterDiscount
+                        Price = price
+                };
                     orderDetail.Add(_orderDetail);
                     //await _unitOfWork.OrderDetailRepository.AddAsync(orderDetail);
 
@@ -325,6 +362,7 @@ namespace BirdCageShop.Controllers
                 //+delete shopping cart
                 await _unitOfWork.ShoppingCartRepository.DeleteShoppingCartsByUserIdAsync(_claimService.GetCurrentUserId());
 
+
                 await _unitOfWork.SaveChangesAsync();
 
                 //test
@@ -354,6 +392,14 @@ namespace BirdCageShop.Controllers
 
 
             //return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Check out from cart failed. Server Error." });
+        }
+
+        [HttpGet("Test")]
+        public string Test()
+        {
+            var service = new SessionService();
+            Session session = service.Get("cs_test_a1FuRo5LfrrO4mkRUlGqltJ2a6uTI8AR4toyXXQ7vligANG0eYH6KFsBuW");
+            return session.PaymentIntentId;
         }
 
         //[HttpGet("OrderConfirmation")]

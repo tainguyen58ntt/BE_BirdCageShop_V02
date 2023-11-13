@@ -32,10 +32,10 @@ namespace BirdCageShopService.Service
 
         }
 
-        public async Task<ProductWithReviewViewModel?> GetByIdAsync(int id)
+        public async Task<ProductViewModel?> GetByIdAsync(int id)
         {
             var result = await _unitOfWork.ProductRepository.GetByIdAsync(id);
-            return _mapper.Map<ProductWithReviewViewModel>(result);
+            return _mapper.Map<ProductViewModel>(result);
         }
 
         public async Task<ProductWithReviewViewModel?> GetFeedBackByProductId(int productId)
@@ -50,6 +50,11 @@ namespace BirdCageShopService.Service
             var result = await _unitOfWork.ProductRepository.GetPaginationAsync(pageIndex, pageSize);
             return _mapper.Map<Pagination<ProductViewModel>>(result);
         }
+        public async Task<Pagination<ProductViewModel>> GetAllPageAsync(int pageIndex, int pageSize)
+        {
+            var result = await _unitOfWork.ProductRepository.GetPaginationAllProductAsync(pageIndex, pageSize);
+            return _mapper.Map<Pagination<ProductViewModel>>(result);
+        }
 
         public async Task<Pagination<ProductViewModel>> GetByBirdCageTypePageAsync(int birdCageTypeId, int pageIndex, int pageSize)
         {
@@ -62,7 +67,7 @@ namespace BirdCageShopService.Service
         }
         public async Task<Pagination<ProductViewModel>> GetByCagegoryTypePageAsync(int categoryId, int pageIndex, int pageSize)
         {
-            var result = await _unitOfWork.ProductRepository.GetAllByConditionAsync(c => c.CategoryId == categoryId, pageIndex, pageSize);
+            var result = await _unitOfWork.ProductRepository.GetAllByConditionAsync(c => c.CategoryId == categoryId && c.isDelete == false && c.isEmpty == false, pageIndex, pageSize);
             return _mapper.Map<Pagination<ProductViewModel>>(result);
         }
 
@@ -71,15 +76,20 @@ namespace BirdCageShopService.Service
             var result = await _unitOfWork.ProductRepository.GetProductsByCategoryAsync(categoryId);
             return _mapper.Map<List<ProductViewModel>>(result);
         }
+        public async Task<IEnumerable<ProductViewModel>> GetProductForDesign()
+        {
+            var result = await _unitOfWork.ProductRepository.GetProductForDesign();
+            return _mapper.Map<List<ProductViewModel>>(result);
+        }
 
         public async Task<Product?> GetProductByIdAsync(int id)
         {
             return await _unitOfWork.ProductRepository.GetByIdAsync(id);
         }
 
-        public async Task<Product?> GetByIdInCludeProductDeletedAsync(int id)
+        public async Task<Product?> GetByIdProductDeletedAsync(int id)
         {
-            return await _unitOfWork.ProductRepository.GetByIdAsync(id);
+            return await _unitOfWork.ProductRepository.GetByIdProductDeletedAsync(id);
         }
 
         public async Task<IEnumerable<ProductViewModel>> GetProductsAsync()
@@ -136,6 +146,7 @@ namespace BirdCageShopService.Service
         public async Task<bool> RemoveAsync(Product product)
         {
             product.isDelete = true;
+            product.DeletedAt = _timeService.GetCurrentTimeInVietnam();
             _unitOfWork.ProductRepository.Update(product);
             return await _unitOfWork.SaveChangesAsync();
         }
@@ -144,6 +155,7 @@ namespace BirdCageShopService.Service
         {
            
             product.isDelete = false;
+            product.DeletedAt = null;
             _unitOfWork.ProductRepository.Update(product);
             return await _unitOfWork.SaveChangesAsync();
         }
@@ -182,7 +194,7 @@ namespace BirdCageShopService.Service
 
         public async Task<Pagination<ProductViewModel>> GetByTilePageAsync(string title, int pageIndex, int pageSize)
         {
-            var productList = await _unitOfWork.ProductRepository.GetAllByConditionAsync(c => c.Title.Contains(title), pageIndex, pageSize);
+            var productList = await _unitOfWork.ProductRepository.GetAllByConditionAsync(c => c.Title.Contains(title) && c.isDelete == false && c.isEmpty == false, pageIndex, pageSize);
             return _mapper.Map<Pagination<ProductViewModel>>(productList);
         }
 
@@ -336,6 +348,9 @@ namespace BirdCageShopService.Service
             {
                 product.PercentDiscount = requestBody.PercentDiscount / 100;
                 product.PriceAfterDiscount = product.Price - (product.Price * product.PercentDiscount);
+            }else if(requestBody.PercentDiscount == null)
+            {
+                product.PriceAfterDiscount = product.Price;
             }
 
             await _unitOfWork.ProductRepository.AddAsync(product);
@@ -345,7 +360,7 @@ namespace BirdCageShopService.Service
             {
                 var productSpecifications = await _unitOfWork.SpecificationRepository.FirstOrDefaultAsync(p => p.Id == item);
 
-                if (productSpecifications == null)
+                if (productSpecifications == null )
                 {
                     return new Microsoft.AspNetCore.Mvc.StatusCodeResult(404);
                 }
@@ -369,16 +384,13 @@ namespace BirdCageShopService.Service
                     {
                         return new Microsoft.AspNetCore.Mvc.StatusCodeResult(404);
                     }
-
                     ProductFeature productFeature = new ProductFeature
                     {
                         ProductId = product.Id,
                         FeatureId = productfeature.Id
                     };
-
                     await _unitOfWork.ProductFeatureRepository.AddAsync(productFeature);
                     await _unitOfWork.SaveChangesAsync();
-
                 }
             }
 
@@ -462,7 +474,7 @@ namespace BirdCageShopService.Service
                     SpecificationId = productSpecifications.Id
                 };
 
-                await _unitOfWork.ProductSpecificationsRepository.AddAsync(productSpecification);
+                 _unitOfWork.ProductSpecificationsRepository.Update(productSpecification);
                 await _unitOfWork.SaveChangesAsync();
             }
 
@@ -500,7 +512,7 @@ namespace BirdCageShopService.Service
                     IsMainImage = (file == firstFile)
                 };
 
-                await _unitOfWork.ProductImageRepository.AddAsync(imageItem);
+                _unitOfWork.ProductImageRepository.Update(imageItem);
             }
 
             await _unitOfWork.SaveChangesAsync();

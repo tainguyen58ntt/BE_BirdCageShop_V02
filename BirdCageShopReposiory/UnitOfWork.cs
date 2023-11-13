@@ -34,6 +34,7 @@ namespace BirdCageShopReposiory
         private IFeatureRepository _featureRepository;
         private IProductImageRepository _productImageRepository;
         private IProductFeatureRepository _productFeatureRepository;
+        private IDesignRepository _designRepository;
         //public UnitOfWork(BirdCageShopContext context, IVoucherRepository voucherRepository,
         //    IWishlistRepository wishlistRepository, IOrderRepository orderRepository,
         //    ICategoryRepository categoryRepository, IProductRepository productRepository, IShoppingCartRepository shoppingCartRepository, IStatusRepository statusRepository
@@ -61,7 +62,8 @@ namespace BirdCageShopReposiory
             , IOrderDetailRepository orderDetailRepository, IUserRepository userRepository, IFormulaRepository formulaRepository, IBirdCageTypeRepository birdCageTypeRepository,
             ISpecificationRepository specificationRepository, IFormulaSpecificationRepository formulaSpecificationRepository,
             IProductSpecificationsRepository productSpecificationsRepository,
-            IProductFeatureRepository productFeatureRepository, IFeatureRepository featureRepository, IProductImageRepository productImageRepository)
+            IProductFeatureRepository productFeatureRepository, IFeatureRepository featureRepository, IProductImageRepository productImageRepository,
+            IDesignRepository designRepository)
             {
            
             _context = context;
@@ -85,6 +87,7 @@ namespace BirdCageShopReposiory
             _specificationRepository = specificationRepository;
             _featureRepository = featureRepository;
             _productImageRepository = productImageRepository;
+            _designRepository = designRepository;
         }
 
         //public IRoleRepository RoleRepository => _roleRepository;
@@ -110,6 +113,7 @@ namespace BirdCageShopReposiory
         public IFeatureRepository FeatureRepository => _featureRepository;
         public IProductFeatureRepository ProductFeatureRepository => _productFeatureRepository;
         public IProductSpecificationsRepository ProductSpecificationsRepository => _productSpecificationsRepository;
+        public IDesignRepository DesignRepository => _designRepository;
 
         public async Task<bool> SaveChangesAsync()
         {

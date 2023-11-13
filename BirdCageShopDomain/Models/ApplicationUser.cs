@@ -38,6 +38,9 @@ namespace BirdCageShopDbContext.Models
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<ProductReview> ProductReviews { get; set; }
 		public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
-		
+
+
+        public virtual ICollection<Design> Designs { get; set; }
+
     }
 }

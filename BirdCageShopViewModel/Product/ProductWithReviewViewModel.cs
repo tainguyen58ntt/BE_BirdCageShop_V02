@@ -1,5 +1,7 @@
-﻿using BirdCageShopViewModel.ProductImage;
+﻿using BirdCageShopViewModel.Feature;
+using BirdCageShopViewModel.ProductImage;
 using BirdCageShopViewModel.ProductReviews;
+using BirdCageShopViewModel.Specification;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,5 +29,10 @@ namespace BirdCageShopViewModel.Product
 		public IEnumerable<ProductReviewsViewModel> ProductReviews { get; set; }
 
         public IEnumerable<ProductImageViewModel> ProductImages { get; set; }
+
+
+
+        public IEnumerable<SpecificationViewModel> Specifications { get; set; }
+        public IEnumerable<FeatureViewModel> Features { get; set; }
     }
 }

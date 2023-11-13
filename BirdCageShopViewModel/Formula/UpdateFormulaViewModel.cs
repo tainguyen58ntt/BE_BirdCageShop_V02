@@ -15,7 +15,7 @@ namespace BirdCageShopViewModel.Formula
         public int? MaxHeight { get; set; }
         public int? MinBars { get; set; }
         public int? MaxBars { get; set; }
-
+        public bool isDelete { get; set; }
         public decimal? Price { get; set; }
         public int BirdCageTypeId { get; set; }
         public int? ConstructionTime { get; set; }

@@ -20,5 +20,6 @@ namespace BirdCageShopDomain.Models
         public IEnumerable<Product> Products { get; set; }
 
         public IEnumerable<Formula> Formulas { get; set; }
+        public IEnumerable<Design> Designs { get; set; }
     }
 }

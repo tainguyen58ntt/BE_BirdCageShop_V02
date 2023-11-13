@@ -1,4 +1,5 @@
 ﻿using BirdCageShopInterface.IServices;
+using BirdCageShopViewModel.Feature;
 using BirdCageShopViewModel.Formula;
 using Microsoft.AspNetCore.Mvc;
 
@@ -42,17 +43,37 @@ namespace BirdCageShop.Controllers
                 });
             }
         }
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetPFById(int id)
+        [HttpGet]
+        [Route("get-all-formula")]
+        public async Task<IActionResult> GetAllFormula()
         {
             try
             {
-                List<FormulaViewModel> formulaViewModels = await _formulaService.GetByIdAsync(id);
+                List<FormulaViewModel> formulaViewModels = await _formulaService.GetAllFromulaAsync();
+                return Ok(new
+                {
+                    Data = formulaViewModels
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    Message = ex.Message
+                });
+            }
+        }
+
+        [HttpGet("get-by-birdcagetypeId/{id}")]
+        public async Task<IActionResult> GetPFById(int id)
+        {
+            try
+            { 
+                List<FormulaViewModel> formulaViewModels = await _formulaService.GetByIdAsync(id); // get by birdcagetype id
                 return Ok(new
                 {
                     Data = formulaViewModels.ToList()
-                });
+                }); 
             }
             catch (Exception ex)
             {
@@ -86,14 +107,67 @@ namespace BirdCageShop.Controllers
                 });
             }
         }
-
+        [HttpGet("get-by-formulaId/{formulaId}")] 
+        //[PermissionAuthorize("Admin")]
+        public async Task<IActionResult> GetFormulaById(int formulaId)
+        {
+            try
+            {
+                FormulaViewModel productFeature = await _formulaService.GetFormulaById(formulaId);
+                return Ok(new
+                {
+                    Data = productFeature
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    Message = ex.Message
+                });
+            }
+        }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdatePF(int id, [FromBody] UpdateFormulaViewModel updateFormulaViewModel)
+        public async Task<IActionResult> UpdatePF(int id, [FromForm] UpdateFormulaViewModel updateFormulaViewModel)
         {
             try
             {
                 await _formulaService.UpdateFormulaAsync(id, updateFormulaViewModel);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    Message = ex.Message
+                });
+            }
+        }
+        [HttpDelete("{id}")]
+        //[PermissionAuthorize("Admin")]
+        public async Task<IActionResult> DeleteFormula(int id)
+        {
+            try
+            {
+                await _formulaService.DeleteFormula(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    Message = ex.Message
+                });
+            }
+        }
+        [HttpPut("recover-formula/{id}")]
+        //[PermissionAuthorize("Admin")]
+        public async Task<IActionResult> RecoverFormula(int id)
+        {
+            try
+            {
+                await _formulaService.UpdateFormula(id);
                 return Ok();
             }
             catch (Exception ex)

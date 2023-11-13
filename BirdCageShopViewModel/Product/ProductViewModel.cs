@@ -27,7 +27,10 @@ namespace BirdCageShopViewModel.Product
 		public decimal Price { get; set; }
 		public string SKU { get; set; }
 		public int QuantityInStock { get; set; }
-		public string? EditedBy { get; set; }
+        public int BirdCageTypeId { get; set; }
+
+
+        public string? EditedBy { get; set; }
 		public decimal? PercentDiscount { get; set; }
 		public decimal PriceAfterDiscount { get; set; }
 

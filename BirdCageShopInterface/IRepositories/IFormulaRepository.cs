@@ -11,7 +11,7 @@ namespace BirdCageShopInterface.IRepositories
     public interface IFormulaRepository : IBaseRepository<Formula>
     {
         Task<IEnumerable<Formula>> GetFormulaByBirdCageTypeIdAsync(int birdCageTypeId);
-        Task<IEnumerable<Formula>> GetAllAsync();
+/*        Task<IEnumerable<Formula>> GetAllAsync();*/
         Task<Pagination<Formula>> GetPaginationAsync(int pageIndex, int pageSize);
     }
 }

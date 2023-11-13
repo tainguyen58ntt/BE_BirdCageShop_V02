@@ -5,6 +5,8 @@ using BirdCageShopInterface;
 using BirdCageShopInterface.IServices;
 using BirdCageShopInterface.IValidator;
 using BirdCageShopUtils;
+using BirdCageShopViewModel.BirdCageType;
+using BirdCageShopViewModel.Design;
 using BirdCageShopViewModel.Order;
 using BirdCageShopViewModel.Product;
 using BirdCageShopViewModel.ShoppingCart;
@@ -22,11 +24,15 @@ namespace BirdCageShopService.Service
     public class ShoppingCartService : BaseService, IShoppingCartService
     {
         private readonly IConfirmOrderValidator _confirmOrderValidator;
+        private IDesignService _designService;
+        private IBirdCageTypeService _birdCageTypeService;
 
 
-        public ShoppingCartService(IConfirmOrderValidator confirmOrderValidator, IClaimService claimService, ITimeService timeService, IUnitOfWork unitOfWork, IMapper mapper, IConfiguration configuration) : base(claimService, timeService, unitOfWork, mapper, configuration)
+        public ShoppingCartService(IBirdCageTypeService birdCageTypeService, IDesignService designService, IConfirmOrderValidator confirmOrderValidator, IClaimService claimService, ITimeService timeService, IUnitOfWork unitOfWork, IMapper mapper, IConfiguration configuration) : base(claimService, timeService, unitOfWork, mapper, configuration)
         {
             _confirmOrderValidator = confirmOrderValidator;
+            _designService = designService;
+            _birdCageTypeService = birdCageTypeService;
         }
 
 
@@ -200,7 +206,15 @@ namespace BirdCageShopService.Service
             decimal? beforeVoucherPrice = 0;
             foreach (var x in shoppingCarts)
             {
-                beforeVoucherPrice += (x.Product.PriceAfterDiscount * x.Count);
+                if (x.Product.PercentDiscount == null || x.Product.PercentDiscount == 0)
+                {
+                    beforeVoucherPrice += x.Product.Price * x.Count;
+                }
+                else
+                {
+
+                    beforeVoucherPrice += (x.Product.PriceAfterDiscount * x.Count);
+                }
             }
             //
             if (confirmOrderAddViewModel.VourcherCode != null)
@@ -221,14 +235,33 @@ namespace BirdCageShopService.Service
             {
                 if (x.PriceDesign == null)
                 {
-                    OrderDetail _orderDetail = new OrderDetail()
+                    if(x.Product.PercentDiscount == null || x.Product.PercentDiscount == 0)
                     {
-                        ProductId = x.ProductId,
-                        Quantity = x.Count,
-                        Price = (x.Product.PriceAfterDiscount * x.Count)
-                    };
-                    totalPrice = totalPrice + _orderDetail.Price;
-                    orderDetail.Add(_orderDetail);
+                        OrderDetail _orderDetail = new OrderDetail()
+                        {
+                            ProductId = x.ProductId,
+                            Quantity = x.Count,
+
+                            //Price = (x.Product.Price * x.Count)
+                            Price = x.Product.Price
+                        };
+                        //totalPrice = totalPrice + _orderDetail.Price;
+                        orderDetail.Add(_orderDetail);
+                    }
+                    else
+                    {
+                        OrderDetail _orderDetail = new OrderDetail()
+                        {
+                            ProductId = x.ProductId,
+                            Quantity = x.Count,
+
+                            //Price = (x.Product.PriceAfterDiscount * x.Count)
+                            Price = x.Product.PriceAfterDiscount
+                        };
+                        //totalPrice = totalPrice + _orderDetail.Price;
+                        orderDetail.Add(_orderDetail);
+                    }
+                
                     //await _unitOfWork.OrderDetailRepository.AddAsync(orderDetail);
                 }
                 else
@@ -237,14 +270,14 @@ namespace BirdCageShopService.Service
                     {
                         ProductId = x.ProductId,
                         Quantity = x.Count,
-                        Price = ((x.Product.PriceAfterDiscount + x.PriceDesign) * x.Count),
+                        Price = (x.Product.PriceAfterDiscount + x.PriceDesign),
                         Model = x.Model,
                         Width = x.Width,
                         Height = x.Height,
                         Material = x.Material,
                         Bars = x.Bars,
                     };
-                    totalPrice = totalPrice + _orderDetail.Price;
+                    //totalPrice = totalPrice + _orderDetail.Price;
                     orderDetail.Add(_orderDetail);
                 }
             }
@@ -275,7 +308,9 @@ namespace BirdCageShopService.Service
                         PaymentStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(6),  // cod
                         //VoucherId = vourcher.Id,
                         VoucherCode = confirmOrderAddViewModel.VourcherCode,
-                        Details = orderDetail
+                        Details = orderDetail,
+                        ShipCost = 30000
+                        
                     };
                 }
                 else
@@ -292,8 +327,8 @@ namespace BirdCageShopService.Service
                         StreetAddress = confirmOrderAddViewModel.StreetAddress,
                         City = confirmOrderAddViewModel.City,
                         PaymentStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(6),   // cod
-                        Details = orderDetail
-
+                        Details = orderDetail,
+                        ShipCost = 30000
 
                     };
                 }
@@ -314,7 +349,8 @@ namespace BirdCageShopService.Service
                         City = confirmOrderAddViewModel.City,
                         PaymentStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(7),   // PAYONLINE,
                         //VoucherId = vourcher.Id,
-                        Details = orderDetail
+                        Details = orderDetail,
+                        ShipCost = 30000
                     };
                 }
                 else
@@ -331,19 +367,16 @@ namespace BirdCageShopService.Service
                         StreetAddress = confirmOrderAddViewModel.StreetAddress,
                         City = confirmOrderAddViewModel.City,
                         PaymentStatus = await _unitOfWork.StatusRepository.GetStatusStateByIdAsync(7),   // PAYONLINE,,
-                        Details = orderDetail
+                        Details = orderDetail,
+                        ShipCost = 30000
 
 
                     };
                 }
-
-
             }
-
-
             foreach (var o in order.Details)
             {
-                var product = await _unitOfWork.ProductRepository.GetByIdAsync(o.ProductId);
+                var product = await _unitOfWork.ProductRepository.GetProductEmptyByIdAsync(o.ProductId);
                 product.QuantityInStock = product.QuantityInStock - orderDetail.Count;
                 _unitOfWork.ProductRepository.Update(product);
             }
@@ -353,18 +386,18 @@ namespace BirdCageShopService.Service
 
             //+delete shopping cart
             await _unitOfWork.ShoppingCartRepository.DeleteShoppingCartsByUserIdAsync(currentUserId);
-
+            await _designService.DeleteDesignAsync(currentUserId);
             return await _unitOfWork.SaveChangesAsync();
-        }
+         }
 
 
 
 
-        public async Task<bool> CreateOrUpdateAsync(int productId, int count, ShoppingCartDesignViewModel? shoppingCartDesignViewModel)
+        public async Task<bool> CreateOrUpdateAsync(int productId, int count)
         {
-            var currentUserId = _claimService.GetCurrentUserId();
+            string currentUserId = _claimService.GetCurrentUserId();
             if (currentUserId == null) return false;
-            var product = await _unitOfWork.ProductRepository.GetByIdAsync(productId);
+            var product = await _unitOfWork.ProductRepository.GetProductEmptyByIdAsync(productId);
             if (product.QuantityInStock < 1) return false;
             var cartItem = await _unitOfWork.ShoppingCartRepository.GetCartItemByUserIdAndProDIdAsync(currentUserId, productId);
             if (cartItem == null && product.isEmpty == false)
@@ -382,22 +415,29 @@ namespace BirdCageShopService.Service
             }
             if (cartItem == null && product.isEmpty == true)
             {
-                cartItem = new ShoppingCart
+                List<DesignViewModel> designs = await _designService.GetByIdAsync(currentUserId);
+                foreach (DesignViewModel design in designs)
                 {
-                    ProductId = productId,
-                    Count = count,
-                    ApplicationUserId = currentUserId,
-                    CreatedAt = _timeService.GetCurrentTimeInVietnam(),
-                    Model = shoppingCartDesignViewModel.Model,
-                    Width = shoppingCartDesignViewModel.Width,
-                    Height = shoppingCartDesignViewModel.Height,
-                    Material = shoppingCartDesignViewModel.Material,
-                    Bars = shoppingCartDesignViewModel.Bars,
-                    PriceDesign = shoppingCartDesignViewModel.PriceDesign
-                };
-                if (count > product.QuantityInStock) return false;
-                await _unitOfWork.ShoppingCartRepository.AddAsync(cartItem);
-                return await _unitOfWork.SaveChangesAsync();
+                    GetBirdCageType birdType = await _birdCageTypeService.GetAsync(design.BirdCageTypeId);
+                    var birdTypeName = birdType.TypeName;
+                    cartItem = new ShoppingCart
+                    {
+                        ProductId = productId,
+                        Count = count,
+                        ApplicationUserId = currentUserId,
+                        CreatedAt = _timeService.GetCurrentTimeInVietnam(),
+                        Model = design.Model,
+                        Width = design.Width,
+                        Height = design.Height,
+                        Material = design.Material,
+                        Bars = design.Bars,
+                        PriceDesign = design.PriceDesign,
+                        TypeName = birdTypeName,
+                    };
+                    if (count > product.QuantityInStock) return false;
+                    await _unitOfWork.ShoppingCartRepository.AddAsync(cartItem);
+                    return await _unitOfWork.SaveChangesAsync();
+                }
             }
             cartItem.Count += count;
             cartItem.ModifiedAt = _timeService.GetCurrentTimeInVietnam();
@@ -407,7 +447,7 @@ namespace BirdCageShopService.Service
 
         public async Task<ProductViewModel> ExistProductAsync(int productId)
         {
-            var result = await _unitOfWork.ProductRepository.GetByIdAsync(productId);
+            var result = await _unitOfWork.ProductRepository.GetProductEmptyByIdAsync(productId);
             return _mapper.Map<ProductViewModel>(result);
         }
 

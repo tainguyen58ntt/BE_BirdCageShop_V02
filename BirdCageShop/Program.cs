@@ -170,6 +170,7 @@ builder.Services.AddScoped<IProductFeatureRepository, ProductFeatureRepository>(
 builder.Services.AddScoped<IProductSpecificationsRepository, ProductSpecificationsRepository>();
 builder.Services.AddScoped<IFeatureRepository, FeatureRepository>();
 builder.Services.AddScoped<IProductImageRepository, ProductImageRepository>();
+builder.Services.AddScoped<IDesignRepository, DesignRepository>();
 
 
 
@@ -177,7 +178,7 @@ builder.Services.AddScoped<IProductImageRepository, ProductImageRepository>();
 ////builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IVourcherService, VourcherService>();
-//builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IProductService, BirdCageShopService.Service.ProductService>();
 builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
@@ -185,6 +186,11 @@ builder.Services.AddScoped<IStatusService, StatusService>();
 builder.Services.AddScoped<IProductReviewService, ProductReviewService>();
 builder.Services.AddScoped<IFormulaService, FormulaService>();
 builder.Services.AddScoped<IBirdCageTypeService, BirdCageTypeService>();
+builder.Services.AddScoped<IDesignService, DesignService>();
+builder.Services.AddScoped<IFeatureService, FeatureService>();
+builder.Services.AddScoped<ISpecificationService, SpecificationService>();
+
+
 
 
 builder.Services.AddScoped<IClaimService, ClaimService>();

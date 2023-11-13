@@ -4,6 +4,7 @@ using BirdCageShopInterface;
 using BirdCageShopInterface.IServices;
 using BirdCageShopReposiory;
 using BirdCageShopService.Service;
+using BirdCageShopUtils.Pagination;
 using BirdCageShopUtils.UtilMethod;
 using BirdCageShopViewModel.Auth;
 using BirdCageShopViewModel.User;
@@ -65,10 +66,35 @@ namespace BirdCageShop.Controllers
         //    if (result is null) return NotFound();
         //    return Ok(result);
         //}
+        //
+
+        //[HttpGet]
+        ////[Authorize(Roles = "Staff, Admin, Manager")]
+        //public async Task<IActionResult> Get()
+        //{
+        //    List<ApplicationUser> objUserList = await _db.ApplicationUser.ToListAsync();
+        //    foreach (var user in objUserList)
+        //    {
+
+        //        user.Role = _userManager.GetRolesAsync(user).GetAwaiter().GetResult().FirstOrDefault();
+
+
+        //    }
+        //    var rs = await _userManager.Users.ToListAsync();
+        //    return Ok(objUserList);
+
+
+        //}
+
+
         [HttpGet]
         //[Authorize(Roles = "Staff, Admin, Manager")]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetPageAsync([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
         {
+            if (pageIndex < 0) return BadRequest("Page index cannot be negative");
+            if (pageSize <= 0) return BadRequest("Page size must greater than 0");
+            //
+
             List<ApplicationUser> objUserList = await _db.ApplicationUser.ToListAsync();
             foreach (var user in objUserList)
             {
@@ -77,11 +103,27 @@ namespace BirdCageShop.Controllers
 
 
             }
-            var rs = await _userManager.Users.ToListAsync();
-            return Ok(objUserList);
+            //var rs = await _userManager.Users.ToListAsync();
+            //
+            var totalCount =  objUserList.Count();
+            var items =  objUserList
+                .Skip(pageSize * pageIndex)
+                .Take(pageSize)
+                .ToList();
+            var result = new Pagination<ApplicationUser>()
+            {
+                Items = items,
+                PageIndex = pageIndex,
+                PageSize = pageSize,
+                TotalItemsCount = totalCount
+            };
+
+          
+            return Ok(result);
 
 
         }
+
         [HttpGet("order-history")]
         [Authorize(Roles = "Customer")]
         public async Task<IActionResult> GetCustomerOrderHistory([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
@@ -171,12 +213,19 @@ namespace BirdCageShop.Controllers
         {
 
 
-            //check exists
-            var userExists = await _userManager.FindByEmailAsync(registerUser.Email);
-
-            if (userExists != null)
+            //check exists  email or username
+            var userExistsEmail = await _userManager.FindByEmailAsync(registerUser.Email);
+            
+            if (userExistsEmail != null)
             {
-                return StatusCode(StatusCodes.Status403Forbidden, new Response { Status = "Error", Message = "User already exists" });
+                return StatusCode(StatusCodes.Status403Forbidden, new Response { Status = "Error", Message = "User already exists that email" });
+            }
+
+            var userExistsUsername = await _userManager.FindByNameAsync(registerUser.UserName);
+
+            if (userExistsUsername != null)
+            {
+                return StatusCode(StatusCodes.Status403Forbidden, new Response { Status = "Error", Message = "User already exists that user name" });
             }
             // check password
             var validateResult = await _userService.ValidateUserSignUpAsync(registerUser);
